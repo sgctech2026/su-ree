@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&amp;family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Inter:wght@400;500;600;700&amp;display=swap&amp;subset=latin" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  x-dc { display: block; }
+  body { margin: 0; background: #fbfbff; color: oklch(0.129 0.042 264.695); font-family: ui-sans-serif, system-ui, sans-serif; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: #1b3456; }
+  @keyframes sr-sheen { 0% { transform: translateX(-160%) skewX(-18deg); } 55%, 100% { transform: translateX(320%) skewX(-18deg); } }
+  @keyframes sr-blob-breathe { 0%, 100% { transform: scale(1) rotate(0deg); } 50% { transform: scale(1.035) rotate(1.4deg); } }
+  @keyframes sr-float-b { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-22px) rotate(1.2deg); } }
+  @keyframes sr-float-a { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-14px) rotate(-1.1deg); } }
+  [data-sr-reveal] { opacity: 0; transform: translateY(56px) scale(0.985); filter: blur(6px); transition: opacity 1000ms cubic-bezier(0.16,1,0.3,1), transform 1000ms cubic-bezier(0.16,1,0.3,1), filter 900ms cubic-bezier(0.16,1,0.3,1); will-change: opacity, transform, filter; }
+  [data-sr-reveal="in"] { opacity: 1; transform: none; filter: none; }
+  [data-sr-reveal] > * > header, [data-sr-reveal] > * > h2, [data-sr-reveal] > * > p, [data-sr-reveal] > * > div, [data-sr-reveal] > * > ul, [data-sr-reveal] > * > ol, [data-sr-reveal] > * > a, [data-sr-reveal] > * > form { opacity: 0; transform: translateY(26px); transition: opacity 900ms cubic-bezier(0.16,1,0.3,1), transform 900ms cubic-bezier(0.16,1,0.3,1); }
+  [data-sr-reveal="in"] > * > header, [data-sr-reveal="in"] > * > h2, [data-sr-reveal="in"] > * > p, [data-sr-reveal="in"] > * > div, [data-sr-reveal="in"] > * > ul, [data-sr-reveal="in"] > * > ol, [data-sr-reveal="in"] > * > a, [data-sr-reveal="in"] > * > form { opacity: 1; transform: none; }
+  [data-sr-reveal="in"] > * > :nth-child(1) { transition-delay: 120ms; }
+  [data-sr-reveal="in"] > * > :nth-child(2) { transition-delay: 240ms; }
+  [data-sr-reveal="in"] > * > :nth-child(3) { transition-delay: 360ms; }
+  [data-sr-reveal="in"] > * > :nth-child(4) { transition-delay: 480ms; }
+  [data-sr-reveal="in"] > * > :nth-child(n+5) { transition-delay: 580ms; }
+  @media (prefers-reduced-motion: reduce) { [data-sr-reveal], [data-sr-reveal] > * > * { opacity: 1 !important; transform: none !important; filter: none !important; transition: none !important; } }
+
+
+  /* ---------- responsive (class based) ---------- */
+  .sr-nav-links { display: flex; }
+  @media (min-width: 981px) { .sr-nav-links { display: flex !important; } }
+
+  @media (max-width: 980px) {
+    body { overflow-x: clip; }
+    .r-2col, .r-foot { grid-template-columns: minmax(0, 1fr) !important; }
+    .r-cols { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+    .r-pull { transform: none !important; }
+    .r-minh { min-height: 0 !important; }
+    .r-lift { margin-top: 0 !important; margin-bottom: 0 !important; }
+    .r-pad40 { padding-left: 20px !important; padding-right: 20px !important; }
+    .sr-steps { grid-template-columns: minmax(0, 1fr) !important; }
+
+    .sr-burger { display: flex !important; order: 1; }
+    nav > a[aria-label="su-ree home"] { order: 2; margin: 0 auto; }
+    nav > div.sr-nav-icons { order: 3; }
+    nav .sr-nav-icons > button[aria-label="Search"],
+    nav .sr-nav-icons > a[aria-label="Account"] { display: none !important; }
+    .sr-nav-links {
+      order: 4; position: absolute; top: calc(100% + 10px); left: 0; right: 0;
+      flex-direction: column; align-items: stretch; gap: 4px !important;
+      padding: 10px !important; border-radius: 20px;
+      background: rgba(255,255,255,0.97); border: 0.5px solid rgba(18,38,58,0.08);
+      box-shadow: 0 24px 50px -22px rgba(18,38,58,0.45);
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    }
+    .sr-nav-links > a { text-align: left; }
+  }
+
+  @media (max-width: 760px) {
+    .r-cols { grid-template-columns: minmax(0, 1fr) !important; }
+    .r-stick { position: static !important; }
+    .r-orbit { display: none !important; }
+    .r-wm { display: none !important; }
+    .r-ring { max-width: 300px !important; margin: 10px auto 0 !important; }
+    .r-modal { background-image: none !important; background-color: #eef5fd !important; }
+    .r-modalcol { min-height: 0 !important; max-width: 100% !important;
+      padding: 26px 22px 28px !important; }
+    .sr-review-scroll { max-width: 100% !important; }
+    .sr-marq-tile { flex-basis: 150px !important; }
+    .sr-story { flex-basis: 220px !important; }
+    .sr-gal-thumbs { position: static !important; }
+  }
+
+  @media (max-width: 540px) {
+    .r-nowrap { white-space: normal !important; }
+    .r-pad40 { padding-left: 16px !important; padding-right: 16px !important; }
+    .r-ring { max-width: 240px !important; }
+    .sr-marq-tile { flex-basis: 132px !important; }
+    .sr-review-track > div { flex-basis: 84vw !important; }
+    .sr-gal-thumbs { flex-direction: row !important; flex-wrap: wrap !important; }
+    .sr-nav-links > a { font-size: 14px !important; padding: 9px 12px !important; }
+  }
+  @media (max-width: 980px) {
+    /* the hero paints over the dropdown unless the bar owns a higher layer */
+    .sr-navbar { z-index: 120 !important; }
+    .sr-nav-links { z-index: 121; background: #ffffff !important; }
+  }
+  @media (max-width: 760px) {
+    /* the wave is drawn with preserveAspectRatio=none, so a narrow
+       viewport squeezes it sideways and the curve turns severe */
+    svg.r-wave { height: 56px !important; }
+  }
+  @media (max-width: 460px) {
+    svg.r-wave { height: 42px !important; }
+  }
+  @media (max-width: 980px) {
+    .sr-navbar {
+      position: fixed !important;
+      top: 0 !important; left: 0 !important; right: 0 !important;
+      z-index: 200 !important;
+    }
+    main { padding-top: 84px !important; }
+  }
+  @media (max-width: 980px) {
+    /* navBg starts fully transparent and only turns white past 24px of
+       scroll. On a phone that reads as the bar vanishing, so here it is
+       solid from the start -- the bar never changes, it is just there. */
+    .sr-navbar > nav {
+      background: rgba(255,255,255,0.94) !important;
+      border-color: rgba(18,38,58,0.05) !important;
+      box-shadow: 0 10px 28px -18px rgba(18,38,58,0.3) !important;
+      backdrop-filter: blur(14px) !important;
+      -webkit-backdrop-filter: blur(14px) !important;
+      max-width: 100% !important;
+    }
+  }
+
+  @media (max-width: 980px) {
+    /* last line of defence: nothing may push the page sideways */
+    html, body { max-width: 100%; overflow-x: clip; }
+    main { max-width: 100%; overflow-x: clip; }
+    img, svg, video, iframe { max-width: 100%; }
+    .r-blob { display: none !important; }
+    section, header, footer { max-width: 100% !important; }
+    .sr-navbar { max-width: 100%; }
+  }
+</style>
+</helmet>
+
+<main id="top" style="min-height:100vh; background:#fbfbff">
+
+  <div class="sr-navbar" style="position:sticky; top:0; z-index:50; padding:14px 24px; margin:0">
+  <nav style="position:relative; display:flex; align-items:center; justify-content:space-between; gap:28px; width:100%; max-width: {{ navMax }}; margin:0 auto; padding: {{ navPad }}; border-radius:9999px; background: {{ navBg }}; border:0.5px solid {{ navBorder }}; box-shadow: {{ navShadow }}; backdrop-filter: {{ navBlur }}; -webkit-backdrop-filter: {{ navBlur }}; transition:max-width 460ms cubic-bezier(0.16,1,0.3,1), padding 460ms cubic-bezier(0.16,1,0.3,1), background 340ms ease, box-shadow 340ms ease, border-color 340ms ease">
+          <button type="button" class="sr-burger" onClick="{{ navToggle }}" aria-label="Menu" aria-expanded="{{ navOpenAria }}" style="flex-shrink:0; display:none; height:40px; width:40px; align-items:center; justify-content:center; border-radius:9999px; border:0.5px solid #d7e6f8; background:rgba(255,255,255,0.9); color:#1b3456; cursor:pointer; padding:0"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg></button>
+          <a href="Home.dc.html" aria-label="su-ree home" style="flex-shrink:0; display:flex; align-items:center"><img src="assets/logo.webp" alt="su-ree Skin Science" decoding="async" style="display:block; height:34px; width:auto" /></a>
+
+          <div class="sr-nav-links" style="flex-shrink:0; align-items:center; gap:2px; padding:5px; border-radius:9999px; background:transparent; display: {{ navLinks }}">
+            <a href="Home.dc.html" style="flex-shrink:0; white-space:nowrap; border-radius:9999px; padding:9px 15px; font-size:15px; font-weight:600; color:#3f5272; background:transparent" style-hover="color:#1b3456; background:#e7f3ff">Home</a>
+            <a href="Shop.dc.html" style="flex-shrink:0; white-space:nowrap; border-radius:9999px; padding:9px 15px; font-size:15px; font-weight:600; color:#3f5272; background:transparent" style-hover="color:#1b3456; background:#e7f3ff">Shop</a>
+            <a href="About.dc.html" style="flex-shrink:0; white-space:nowrap; border-radius:9999px; padding:9px 15px; font-size:15px; font-weight:600; color:#ffffff; background:#438fe0; box-shadow:0 6px 16px rgba(47,123,224,0.28)" style-hover="color:#ffffff; background:#438fe0">Our Story</a>
+            <a href="Science.dc.html" style="flex-shrink:0; white-space:nowrap; border-radius:9999px; padding:9px 15px; font-size:15px; font-weight:600; color:#3f5272; background:transparent" style-hover="color:#1b3456; background:#e7f3ff">Our Science</a>
+            <a href="FAQ.dc.html" style="flex-shrink:0; white-space:nowrap; border-radius:9999px; padding:9px 15px; font-size:15px; font-weight:600; color:#3f5272; background:transparent" style-hover="color:#1b3456; background:#e7f3ff">FAQ</a>
+          </div>
+
+          <div class="sr-nav-icons" style="flex-shrink:0; display:flex; align-items:center; gap:10px">
+            <button type="button" aria-label="Search" style="flex-shrink:0; display:flex; height:40px; width:40px; align-items:center; justify-content:center; border-radius:9999px; border:0.5px solid rgba(18,38,58,0.10); background:#fff; color:#1b3456; cursor:pointer" style-hover="background:#fff"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg></button>
+            <a href="Account.dc.html" aria-label="Account" style="flex-shrink:0; display:flex; height:40px; width:40px; align-items:center; justify-content:center; border-radius:9999px; border:0.5px solid rgba(18,38,58,0.10); background:#fff; color:#1b3456; cursor:pointer; transition:background 200ms" style-hover="color:#1b3456; background:#e7f3ff"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M5.5 21a7.5 7.5 0 0 1 13 0"></path></svg></a>
+            <a href="Cart.dc.html" aria-label="Cart" style="position:relative; flex-shrink:0; display:flex; height:40px; width:40px; align-items:center; justify-content:center; border-radius:9999px; border:none; background:#1b3456; color:#fff; cursor:pointer; box-shadow:0 6px 16px rgba(18,38,58,0.20)" style-hover="background:rgba(18,38,58,0.88); color:#fff"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 10a4 4 0 0 1-8 0"></path><path d="M3.103 6.034h17.794"></path><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"></path></svg><span class="r-blob" aria-hidden="true" style="position:absolute; top:-2px; right:-2px; display:flex; height:18px; min-width:18px; align-items:center; justify-content:center; border-radius:9999px; background:#3f7fc9; border:2px solid #fff; font-size:10px; font-weight:600; color:#fff; padding:0 4px">2</span></a>
+          </div>
+        </nav>
+  </div>
+
+  <section class="r-lift" data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:linear-gradient(180deg,#fbfbff 0%,#e7f3ff 34%,#e7f3ff 70%,#ffffff 100%); margin-top:-84px; padding:158px 24px clamp(34px,4.4vw,68px)">
+    <span class="r-blob" aria-hidden="true" style="position:absolute; left:-6%; top:24%; height:300px; width:300px; border-radius:9999px; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.80) 0%, rgba(255,255,255,0.20) 24%, rgba(255,255,255,0.04) 44%, rgba(163,199,233,0.20) 66%, rgba(255,255,255,0) 71%); border:1px solid rgba(255,255,255,0.40); animation:sr-float-a 13s ease-in-out 0s infinite; pointer-events:none"></span>
+    <span aria-hidden="true" style="position:absolute; left:78%; top:-8%; height:250px; width:250px; border-radius:9999px; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.80) 0%, rgba(255,255,255,0.20) 24%, rgba(255,255,255,0.04) 44%, rgba(163,199,233,0.20) 66%, rgba(255,255,255,0) 71%); border:1px solid rgba(255,255,255,0.40); animation:sr-float-b 15s ease-in-out 1.5s infinite; pointer-events:none"></span>
+    <div style="position:relative; z-index:2; margin:0 auto; width:100%; max-width:1140px; padding:0 16px 56px; box-sizing:border-box; text-align:center">
+      <p style="margin:0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; font-weight:500; color:#5f9ad8; letter-spacing:4.2px">ABOUT SU-REE</p>
+      <h1 style="margin:22px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-weight:600; color:#1b3456; font-size:clamp(32px,4.4vw,58px); line-height:1.08; letter-spacing:-0.6px">A small range, documented to death.</h1>
+      <p style="margin:18px auto 0; max-width:620px; font-size:15px; color:#44587c; line-height:1.8">We are a two-product skin science label working out of Singapore. Everything below is the short version of why we work this way.</p>
+    </div>
+
+    <div style="position:relative; z-index:2; margin:0 auto; width:100%; max-width:1140px; padding:0 16px; box-sizing:border-box">
+      <div style="position:relative; display:flex; justify-content:center">
+        <img src="assets/about-lineup.webp" alt="The su-ree GHK-Cu Serum and Capsule Cream with their cartons" loading="lazy" decoding="async" style="position:relative; z-index:1; display:block; width:100%; max-width:720px; height:auto; filter:drop-shadow(0 26px 34px rgba(18,38,58,0.2))" />
+      </div>
+    </div>
+  </section>
+
+
+  <section data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:linear-gradient(180deg,#ffffff 0%,#f5f9fc 36%,#e7f3ff 100%); padding:92px 24px">
+    <span aria-hidden="true" style="position:absolute; left:4%; top:58%; height:200px; width:200px; border-radius:9999px; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.80) 0%, rgba(255,255,255,0.20) 24%, rgba(255,255,255,0.04) 44%, rgba(163,199,233,0.20) 66%, rgba(255,255,255,0) 71%); border:1px solid rgba(255,255,255,0.40); animation:sr-float-b 12s ease-in-out 2.2s infinite; pointer-events:none"></span>
+    <div class="r-2col" style="position:relative; z-index:2; margin:0 auto; width:100%; max-width:1140px; padding:0 16px; box-sizing:border-box; display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr); gap:clamp(28px,4vw,60px); align-items:center">
+      <div style="min-width:0">
+        <p style="margin:0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; font-weight:500; color:#5f9ad8; letter-spacing:4.2px">OUR STORY</p>
+        <h2 style="margin:18px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-weight:600; color:#1b3456; font-size:clamp(26px,3.2vw,42px); line-height:1.14; letter-spacing:-0.4px">It started with a jar nobody could explain.</h2>
+        <p style="margin:22px 0 0; font-size:14.5px; color:#44587c; line-height:1.85; text-wrap:pretty">In 2023 our founder bought a peptide cream for the price of a week of groceries and asked the brand a simple question: what is in this batch? Three emails later there was still no answer &mdash; only a line about proprietary blends.</p>
+        <p style="margin:16px 0 0; font-size:14.5px; color:#44587c; line-height:1.85; text-wrap:pretty">su-ree was built around the answer that should have come back. Each jar carries a lot code. Each lot code opens a report with the assay, the fill date and the facility. You do not have to trust us &mdash; that is the entire point.</p>
+        <p style="margin:26px 0 0; font-family:'Caveat','Segoe Script',cursive; font-size:25px; color:#3b82d4">Sureerat P. &mdash; founder</p>
+      </div>
+      <div style="position:relative; width:100%; aspect-ratio:4 / 5; border-radius:20px; overflow:hidden; background:#e7f3ff; border:0.5px solid #d7e6f8">
+        <span role="img" aria-label="Placeholder for a founder portrait" style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:7px; border:1px dashed #a9c3da; background:rgba(255,255,255,0.5); text-align:center"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#9dbfe6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path><rect width="18" height="18" x="3" y="3" rx="2" ry="2"></rect><circle cx="9" cy="9" r="2"></circle></svg><span style="font-size:11.5px; line-height:1.3; color:#4e648a">founder portrait</span></span>
+      </div>
+    </div>
+  </section>
+
+
+  <section data-sr-reveal="out" style="width:100%; background:linear-gradient(180deg,#e7f3ff 0%,#e7f3ff 50%,#e7f3ff 100%); padding:0 24px">
+    <div style="margin:0 auto; width:100%; max-width:1140px; padding:0 16px; box-sizing:border-box">
+      <div style="position:relative; overflow:hidden; border-radius:22px; background:linear-gradient(120deg,#0b1a2b 0%,#1b3456 44%,#1b3b5c 82%,#2a5382 100%); box-shadow:0 34px 76px -34px rgba(18,38,58,0.55); padding:clamp(38px,4.6vw,64px) clamp(32px,4vw,56px)">
+        <span class="r-blob" aria-hidden="true" style="position:absolute; right:-8%; top:-40%; height:140%; width:50%; border-radius:9999px; background:radial-gradient(ellipse at center, rgba(120,170,225,0.28) 0%, rgba(120,170,225,0) 66%); pointer-events:none"></span>
+        <span aria-hidden="true" style="position:absolute; left:clamp(18px,2.4vw,34px); top:clamp(6px,1vw,14px); font-family:'Jost',ui-sans-serif,sans-serif; font-weight:700; font-size:clamp(90px,11vw,170px); line-height:1; color:rgba(157,191,230,0.16); pointer-events:none; user-select:none">&ldquo;</span>
+        <div style="position:relative; z-index:2; margin:0 auto; max-width:900px; text-align:center">
+          <p style="margin:0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; font-weight:500; color:#9dbfe6; letter-spacing:4.2px">IN HER WORDS</p>
+          <blockquote style="margin:26px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-weight:500; color:#ffffff; font-size:clamp(23px,2.9vw,40px); line-height:1.26; letter-spacing:-0.8px; text-wrap:pretty">You do not have to trust us &mdash; that is the entire point.</blockquote>
+          <p style="margin:26px 0 0; display:flex; align-items:center; justify-content:center; gap:14px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:12px; font-weight:500; color:#9dbfe6; letter-spacing:2.4px">
+            <span aria-hidden="true" style="display:block; height:1px; flex:0 1 48px; background:linear-gradient(270deg,rgba(157,191,230,0.7) 0%,rgba(157,191,230,0) 100%)"></span>
+            <span style="white-space:nowrap">SUREERAT P. &mdash; FOUNDER</span>
+            <span aria-hidden="true" style="display:block; height:1px; flex:0 1 48px; background:linear-gradient(90deg,rgba(157,191,230,0.7) 0%,rgba(157,191,230,0) 100%)"></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-sr-reveal="out" style="width:100%; background:linear-gradient(180deg,#e7f3ff 0%,#f8fafc 60%,#ffffff 100%); padding:84px 24px 96px">
+    <div style="margin:0 auto; width:100%; max-width:1140px; padding:0 16px; box-sizing:border-box; text-align:center">
+      <h2 style="margin:18px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-weight:600; color:#1b3456; font-size:clamp(24px,2.8vw,36px); line-height:1.14; letter-spacing:-0.4px">Questions we have not answered yet?</h2>
+      <p style="margin:14px auto 0; max-width:520px; font-size:14px; color:#44587c; line-height:1.8">The FAQ covers shipping, payment and returns. Anything else, our inbox is a real one.</p>
+      <div style="margin-top:26px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:12px">
+        <a href="Shop.dc.html" style="display:inline-flex; align-items:center; gap:10px; border-radius:9999px; background:#1b3456; padding:14px 26px; font-size:13.5px; font-weight:600; color:#fff; box-shadow:0 12px 28px rgba(18,38,58,0.22); transition:transform 220ms, box-shadow 220ms" style-hover="color:#fff; transform:translateY(-1px); box-shadow:0 18px 38px rgba(18,38,58,0.3)">See all questions</a>
+        <a href="mailto:hello@su-ree.com" style="display:inline-flex; align-items:center; gap:10px; border-radius:9999px; background:#fff; border:0.5px solid #cfe2f8; padding:14px 24px; font-size:13.5px; font-weight:600; color:#1b3456; transition:transform 220ms, background 220ms" style-hover="color:#1b3456; background:#f4f8fc; transform:translateY(-1px)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3f7fc9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><path d="M22 6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2z"></path></svg>hello@su-ree.com</a>
+      </div>
+    </div>
+  </section>
+
+  <div role="dialog" aria-modal="true" aria-label="Stay connected" onClick="{{ nlClose }}" style="position:fixed; inset:0; z-index:200; display: {{ nlOpen }}; align-items:center; justify-content:center; padding:24px; background:rgba(13,38,64,0.42); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px)">
+    <div class="r-modal" onClick="{{ nlStop }}" style="position:relative; width:100%; max-width:940px; overflow:hidden; border-radius:30px; border:1px solid rgba(255,255,255,0.9); box-shadow:0 46px 100px -44px rgba(13,38,64,0.8); background:#eaf3ff url(assets/modal-bg.webp) 72% center / cover no-repeat">
+      <span aria-hidden="true" style="position:absolute; inset:0; pointer-events:none; background:linear-gradient(100deg, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.93) 34%, rgba(255,255,255,0.72) 50%, rgba(255,255,255,0.12) 64%, rgba(255,255,255,0) 76%)"></span>
+      <button type="button" onClick="{{ nlClose }}" aria-label="Close" style="position:absolute; right:16px; top:16px; z-index:2; display:flex; height:34px; width:34px; align-items:center; justify-content:center; border-radius:9999px; border:1px solid rgba(23,70,117,0.1); background:rgba(255,255,255,0.9); color:#1b3456; cursor:pointer; transition:background 200ms" style-hover="background:#ffffff"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+      <div class="r-modalcol" style="position:relative; z-index:1; width:100%; max-width:520px; min-height:clamp(330px,38vw,420px); display:flex; flex-direction:column; justify-content:center; padding:clamp(28px,3.6vw,46px) clamp(24px,3vw,40px) clamp(26px,3.4vw,42px) clamp(28px,4vw,52px); box-sizing:border-box">
+        <div style="display:flex; align-items:center; gap:18px">
+          <img src="assets/logo.webp" alt="su-ree Skin Science" decoding="async" style="display:block; height:40px; width:auto; flex-shrink:0" />
+          <span aria-hidden="true" style="height:38px; width:1px; background:#b7d5f5"></span>
+        </div>
+
+        <p style="margin:24px 0 0; display:flex; align-items:center; gap:14px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; font-weight:600; color:#438fe0; letter-spacing:3.4px">STAY CONNECTED<span aria-hidden="true" style="flex:0 1 86px; height:1px; background:linear-gradient(90deg,#a8ccf0 0%,rgba(156,196,232,0) 100%)"></span></p>
+        <p style="margin:14px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:clamp(23px,2.9vw,34px); font-weight:600; color:#1b3456; line-height:1.18; letter-spacing:-1px; max-width:15ch">Get exclusive updates on new products and <em style="font-style:italic; font-weight:500; color:#438fe0">promotions</em>.</p>
+        <p style="margin:14px 0 0; max-width:40ch; font-size:13.5px; color:#5a7497; line-height:1.7">New batches, restocks and the occasional set price. No more than once a month.</p>
+        <form onSubmit="{{ nlSubmit }}" style="margin-top:24px; width:100%; max-width:430px">
+          <div style="display:flex; align-items:center; gap:10px; border-radius:999px; background:#ffffff; border:1px solid rgba(23,70,117,0.12); box-shadow:0 10px 26px -18px rgba(23,70,117,0.5); padding:7px 7px 7px 20px">
+            <span aria-hidden="true" style="flex-shrink:0; display:flex; color:#9db6d4"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="3"></rect><path d="m2.5 7 8.6 5.4a2 2 0 0 0 1.8 0L21.5 7"></path></svg></span>
+            <label for="sr-nl" style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap">Email address</label>
+            <input id="sr-nl" ref="{{ nlRef }}" type="email" name="email" autoComplete="email" placeholder="Enter your email address" style="flex:1; min-width:0; border:none; outline:none; background:transparent; font-family:inherit; font-size:14px; color:#1b3456" />
+            <button type="submit" aria-label="Subscribe" style="flex-shrink:0; display:flex; height:42px; width:42px; align-items:center; justify-content:center; border:none; border-radius:9999px; background:linear-gradient(135deg,#5ba0ea 0%,#438fe0 52%,#2d72c4 100%); color:#fff; cursor:pointer; box-shadow:0 10px 22px -10px rgba(47,123,224,0.9); transition:transform 220ms" style-hover="transform:translateY(-1px)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+          </div>
+          <p role="status" style="margin:12px 0 0; padding-left:20px; font-size:12.5px; color: {{ nlColor }}; min-height:17px">{{ nlMsg }}</p>
+        </form>
+        <button type="button" onClick="{{ nlClose }}" style="margin-top:4px; padding:6px 0; border:none; background:none; font-family:inherit; font-size:12.5px; color:#8295b4; cursor:pointer; transition:color 200ms" style-hover="color:#1b3456">No thanks</button>
+      </div>
+    </div>
+  </div>
+
+  <footer style="position:relative; width:100%; overflow:hidden; background:linear-gradient(180deg,#ffffff 0%,#dceeff 44%,#cfe7fb 88%,#cfe7fb 100%); padding:0 0 40px">
+    <div aria-hidden="true" style="position:absolute; inset:0; pointer-events:none; background:radial-gradient(circle at 5% 24%, rgba(255,255,255,0.9) 0 9px, rgba(255,255,255,0) 10px),radial-gradient(circle at 8% 19%, rgba(255,255,255,0.6) 0 20px, rgba(255,255,255,0) 21px),radial-gradient(circle at 94% 16%, rgba(255,255,255,0.7) 0 13px, rgba(255,255,255,0) 14px),radial-gradient(circle at 97% 27%, rgba(255,255,255,0.45) 0 7px, rgba(255,255,255,0) 8px),radial-gradient(circle at 78% 86%, rgba(255,255,255,0.35) 0 11px, rgba(255,255,255,0) 12px)"></div>
+    <div aria-hidden="true" style="position:relative; line-height:0">
+      <svg class="r-wave" viewBox="0 0 1440 200" preserveAspectRatio="none" style="display:block; width:100%; height:clamp(74px,8vw,124px); transform:scaleY(-1)">
+          <defs>
+            <linearGradient id="sr-wave-body-ft" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#ffffff" stop-opacity="0.9"></stop>
+              <stop offset="0.18" stop-color="#b7d5f5" stop-opacity="0.9"></stop>
+              <stop offset="0.6" stop-color="#d7e6f8" stop-opacity="0.6"></stop>
+              <stop offset="1" stop-color="#ffffff" stop-opacity="0"></stop>
+            </linearGradient>
+            <linearGradient id="sr-wave-fade-ft" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#b7d5f5" stop-opacity="0.05"></stop>
+              <stop offset="0.4" stop-color="#b7d5f5" stop-opacity="0.3"></stop>
+              <stop offset="0.75" stop-color="#b7d5f5" stop-opacity="0.7"></stop>
+              <stop offset="1" stop-color="#b7d5f5" stop-opacity="0.75"></stop>
+            </linearGradient>
+            <linearGradient id="sr-wave-crest-ft" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#ffffff" stop-opacity="0.7"></stop>
+              <stop offset="0.3" stop-color="#ffffff" stop-opacity="1"></stop>
+              <stop offset="0.6" stop-color="#e7f3ff" stop-opacity="0.9"></stop>
+              <stop offset="0.85" stop-color="#ffffff" stop-opacity="1"></stop>
+              <stop offset="1" stop-color="#ffffff" stop-opacity="0.7"></stop>
+            </linearGradient>
+            <filter id="sr-blur-soft-ft" filterUnits="userSpaceOnUse" x="-40" y="-80" width="1520" height="360">
+              <feGaussianBlur stdDeviation="10 16"></feGaussianBlur>
+            </filter>
+            <filter id="sr-blur-mid-ft" filterUnits="userSpaceOnUse" x="-40" y="-80" width="1520" height="360">
+              <feGaussianBlur stdDeviation="3 5"></feGaussianBlur>
+            </filter>
+            <filter id="sr-blur-fine-ft" filterUnits="userSpaceOnUse" x="-40" y="-80" width="1520" height="360">
+              <feGaussianBlur stdDeviation="1 1.6"></feGaussianBlur>
+            </filter>
+          </defs>
+
+          <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42 L1440,200 L0,200 Z" fill="#ffffff"></path>
+
+          <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42" fill="none" stroke="#ffffff" stroke-width="28" stroke-opacity="0.9" transform="translate(0,22)" filter="url(#sr-blur-soft-ft)"></path>
+
+          <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42" fill="none" stroke="url(#sr-wave-fade-ft)" stroke-width="22" transform="translate(0,11)" filter="url(#sr-blur-soft-ft)"></path>
+
+          <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42 L1440,72 C1395,80 1345,94 1290,116 C1180,162 1080,200 940,196 C780,192 660,132 520,92 C330,42 170,44 0,92 Z" fill="url(#sr-wave-body-ft)" filter="url(#sr-blur-fine-ft)"></path>
+
+          <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42" fill="none" stroke="#ffffff" stroke-width="5" stroke-opacity="0.95" transform="translate(0,-1.5)" filter="url(#sr-blur-mid-ft)"></path>
+
+          <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42" fill="none" stroke="url(#sr-wave-crest-ft)" stroke-width="2" filter="url(#sr-blur-fine-ft)"></path>
+          <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42" fill="none" stroke="#ffffff" stroke-width="1"></path>
+
+          <path d="M0,124 C150,86 320,64 520,82" fill="none" stroke="#b7d5f5" stroke-width="5" stroke-opacity="0.5" filter="url(#sr-blur-mid-ft)"></path>
+          <path d="M0,124 C150,86 320,64 520,82" fill="none" stroke="#ffffff" stroke-width="1.4" stroke-opacity="0.9" filter="url(#sr-blur-fine-ft)"></path>
+
+          <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42" fill="none" stroke="#cfe2f8" stroke-width="1" stroke-opacity="0.6" transform="translate(0,24)" filter="url(#sr-blur-fine-ft)"></path>
+        </svg>
+    </div>
+
+    <div style="position:relative; z-index:2; margin:0 auto; width:100%; max-width:1140px; padding:clamp(44px,5vw,70px) 24px 0; box-sizing:border-box">
+      <div class="r-foot" style="display:grid; grid-template-columns:minmax(0,1.25fr) repeat(3,minmax(0,1fr)) minmax(0,1.2fr); gap:clamp(24px,3.4vw,44px)">
+        <div style="min-width:0">
+          <p style="margin:0"><img src="assets/logo.webp" alt="su-ree Skin Science" loading="lazy" decoding="async" style="display:block; height:46px; width:auto" /></p>
+          <p style="margin:18px 0 0; max-width:30ch; font-size:13.5px; color:#44587c; line-height:1.75">Skin science you can verify. Science-backed skincare for healthier, more radiant skin.</p>
+          <div style="margin-top:22px; display:flex; flex-wrap:wrap; gap:10px">
+            <span role="img" aria-label="Facebook — link not set yet" style="display:flex; height:38px; width:38px; align-items:center; justify-content:center; border-radius:9999px; background:rgba(255,255,255,0.8); border:1px solid rgba(23,70,117,0.08); color:#438fe0; box-shadow:0 6px 16px -12px rgba(23,70,117,0.6)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
+            <span role="img" aria-label="Instagram — link not set yet" style="display:flex; height:38px; width:38px; align-items:center; justify-content:center; border-radius:9999px; background:rgba(255,255,255,0.8); border:1px solid rgba(23,70,117,0.08); color:#438fe0; box-shadow:0 6px 16px -12px rgba(23,70,117,0.6)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><path d="M17.5 6.5h.01"></path></svg></span>
+            <span role="img" aria-label="TikTok — link not set yet" style="display:flex; height:38px; width:38px; align-items:center; justify-content:center; border-radius:9999px; background:rgba(255,255,255,0.8); border:1px solid rgba(23,70,117,0.08); color:#438fe0; box-shadow:0 6px 16px -12px rgba(23,70,117,0.6)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg></span>
+            <span role="img" aria-label="YouTube — link not set yet" style="display:flex; height:38px; width:38px; align-items:center; justify-content:center; border-radius:9999px; background:rgba(255,255,255,0.8); border:1px solid rgba(23,70,117,0.08); color:#438fe0; box-shadow:0 6px 16px -12px rgba(23,70,117,0.6)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 17a24 24 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49 49 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24 24 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49 49 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></span>
+          </div>
+        </div>
+        <nav aria-label="Shop" style="min-width:0">
+          <h2 style="margin:0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; font-weight:600; color:#1b3456; letter-spacing:2.6px">SHOP</h2>
+          <ul style="margin:18px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:13px">
+            <li><a href="Shop.dc.html" style="font-size:13.5px; color:#44587c; transition:color 200ms" style-hover="color:#1b3456">All products</a></li>
+            <li><a href="Product.dc.html" style="font-size:13.5px; color:#44587c; transition:color 200ms" style-hover="color:#1b3456">Capsule Cream</a></li>
+            <li><a href="Product.dc.html" style="font-size:13.5px; color:#44587c; transition:color 200ms" style-hover="color:#1b3456">GHK-Cu+ Snap 8 Serum</a></li>
+            <li><a href="Product.dc.html" style="font-size:13.5px; color:#44587c; transition:color 200ms" style-hover="color:#1b3456">The Duo</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Company" style="min-width:0">
+          <h2 style="margin:0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; font-weight:600; color:#1b3456; letter-spacing:2.6px">COMPANY</h2>
+          <ul style="margin:18px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:13px">
+            <li><a href="About.dc.html" style="font-size:13.5px; color:#44587c; transition:color 200ms" style-hover="color:#1b3456">Our Story</a></li>
+            <li><a href="Science.dc.html" style="font-size:13.5px; color:#44587c; transition:color 200ms" style-hover="color:#1b3456">Our Science</a></li>
+            <li><a href="Account.dc.html" style="font-size:13.5px; color:#44587c; transition:color 200ms" style-hover="color:#1b3456">My account</a></li>
+            <li><a href="mailto:hello@su-ree.com" style="font-size:13.5px; color:#44587c; transition:color 200ms" style-hover="color:#1b3456">Contact us</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Support" style="min-width:0">
+          <h2 style="margin:0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; font-weight:600; color:#1b3456; letter-spacing:2.6px">SUPPORT</h2>
+          <ul style="margin:18px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:13px">
+            <li><a href="FAQ.dc.html" style="font-size:13.5px; color:#44587c; transition:color 200ms" style-hover="color:#1b3456">FAQ</a></li>
+            <li><a href="Shipping.dc.html" style="font-size:13.5px; color:#44587c; transition:color 200ms" style-hover="color:#1b3456">Shipping</a></li>
+            <li><a href="Returns.dc.html" style="font-size:13.5px; color:#44587c; transition:color 200ms" style-hover="color:#1b3456">Returns &amp; refunds</a></li>
+            <li><a href="Orders.dc.html" style="font-size:13.5px; color:#44587c; transition:color 200ms" style-hover="color:#1b3456">Track an order</a></li>
+          </ul>
+        </nav>
+        <div style="min-width:0; display:flex; flex-direction:column; gap:16px; padding-left:clamp(0px,2vw,24px); border-left:1px solid rgba(23,70,117,0.10)">
+          <a href="Privacy.dc.html" style="display:flex; align-items:flex-start; gap:13px" style-hover="color:#1b3456">
+            <span aria-hidden="true" style="flex-shrink:0; display:flex; height:38px; width:38px; align-items:center; justify-content:center; border-radius:12px; background:rgba(255,255,255,0.85); border:1px solid rgba(23,70,117,0.08); color:#438fe0; box-shadow:0 8px 18px -14px rgba(23,70,117,0.7)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="13" x="2" y="7" rx="2"></rect><path d="M7 7V5a5 5 0 0 1 10 0v2"></path><path d="M12 13v3"></path></svg></span>
+            <span style="display:flex; min-width:0; flex-direction:column; gap:3px"><span style="font-size:13px; font-weight:600; color:#1b3456">Your details stay yours</span><span style="font-size:12px; color:#8295b4; line-height:1.55">What we keep, and what we never sell.</span></span>
+          </a>
+          <a href="Shipping.dc.html" style="display:flex; align-items:flex-start; gap:13px" style-hover="color:#1b3456">
+            <span aria-hidden="true" style="flex-shrink:0; display:flex; height:38px; width:38px; align-items:center; justify-content:center; border-radius:12px; background:rgba(255,255,255,0.85); border:1px solid rgba(23,70,117,0.08); color:#438fe0; box-shadow:0 8px 18px -14px rgba(23,70,117,0.7)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 17h4V5H2v12h3"></path><path d="M20 17h2v-3.3a2 2 0 0 0-.6-1.4L18.3 9H14v8h2"></path><circle cx="7.5" cy="17.5" r="2.5"></circle><circle cx="17.5" cy="17.5" r="2.5"></circle></svg></span>
+            <span style="display:flex; min-width:0; flex-direction:column; gap:3px"><span style="font-size:13px; font-weight:600; color:#1b3456">Free over ₱1,500</span><span style="font-size:12px; color:#8295b4; line-height:1.55">Nationwide, same-day dispatch before 2pm.</span></span>
+          </a>
+          <a href="Returns.dc.html" style="display:flex; align-items:flex-start; gap:13px" style-hover="color:#1b3456">
+            <span aria-hidden="true" style="flex-shrink:0; display:flex; height:38px; width:38px; align-items:center; justify-content:center; border-radius:12px; background:rgba(255,255,255,0.85); border:1px solid rgba(23,70,117,0.08); color:#438fe0; box-shadow:0 8px 18px -14px rgba(23,70,117,0.7)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 2.6-6.4"></path><path d="M3 4v5h5"></path></svg></span>
+            <span style="display:flex; min-width:0; flex-direction:column; gap:3px"><span style="font-size:13px; font-weight:600; color:#1b3456">7-day returns</span><span style="font-size:12px; color:#8295b4; line-height:1.55">Unopened, full refund, no interrogation.</span></span>
+          </a>
+        </div>
+      </div>
+
+      <div style="margin-top:clamp(34px,4vw,52px); padding-top:22px; border-top:1px solid rgba(23,70,117,0.10); display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:16px">
+        <p style="margin:0; font-size:12.5px; color:#8295b4">&copy; 2026 su-ree Skin Science. All rights reserved. Designed in Singapore &middot; Made in PRC.</p>
+        <div style="display:flex; flex-wrap:wrap; align-items:center; gap:12px"><a href="Privacy.dc.html" style="font-size:12.5px; color:#44587c; transition:color 200ms" style-hover="color:#1b3456">Privacy policy</a><span aria-hidden="true" style="color:rgba(23,70,117,0.22)">|</span><a href="Terms.dc.html" style="font-size:12.5px; color:#44587c; transition:color 200ms" style-hover="color:#1b3456">Terms of service</a><span aria-hidden="true" style="color:rgba(23,70,117,0.22)">|</span><a href="mailto:hello@su-ree.com" style="font-size:12.5px; color:#44587c; transition:color 200ms" style-hover="color:#1b3456">Contact</a><a href="#top" aria-label="Back to top" style="margin-left:6px; display:flex; height:36px; width:36px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:rgba(255,255,255,0.9); border:1px solid rgba(23,70,117,0.1); color:#1b3456; box-shadow:0 8px 20px -14px rgba(23,70,117,0.8); transition:transform 220ms" style-hover="color:#1b3456; transform:translateY(-2px)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"></path></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { navOpen: false, navScrolled: false };
+
+  setupReveal(attempt = 0) {
+    const nodes = Array.from(document.querySelectorAll('[data-sr-reveal="out"]'));
+    if (!nodes.length) {
+      if (attempt < 20) this.revealRetry = setTimeout(() => this.setupReveal(attempt + 1), 150);
+      return;
+    }
+    const show = (n) => n.setAttribute("data-sr-reveal", "in");
+    const vh = () => window.innerHeight || document.documentElement.clientHeight;
+    const sweep = () => {
+      document.querySelectorAll('[data-sr-reveal="out"]').forEach((n) => {
+        const r = n.getBoundingClientRect();
+        if (r.top < vh() * 0.92 && r.bottom > 0) show(n);
+      });
+    };
+    sweep();
+    if ("IntersectionObserver" in window && !this.revealIO) {
+      this.revealIO = new IntersectionObserver((entries) => {
+        entries.forEach((e) => { if (e.isIntersecting) { show(e.target); this.revealIO.unobserve(e.target); } });
+      }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
+    }
+    if (this.revealIO) nodes.forEach((n) => this.revealIO.observe(n));
+    if (!this.onRevealScroll) {
+      this.onRevealScroll = () => { if (this.revealRaf) return; this.revealRaf = requestAnimationFrame(() => { this.revealRaf = 0; sweep(); }); };
+      window.addEventListener("scroll", this.onRevealScroll, { passive: true });
+      window.addEventListener("resize", this.onRevealScroll);
+    }
+    if (!this.revealSafety) {
+      this.revealSafety = setInterval(() => {
+        document.querySelectorAll('[data-sr-reveal="out"]').forEach((n) => {
+          const r = n.getBoundingClientRect();
+          if (r.top < vh() && r.bottom > 0) show(n);
+        });
+      }, 400);
+    }
+  }
+
+  toggle(group, i) {
+    return () =>
+      this.setState((s) => {
+        const next = [...s[group]];
+        next[i] = !next[i];
+        return { [group]: next };
+      });
+  }
+
+  componentDidMount() { this.setupReveal(); if (this.onMount) this.onMount(); }
+  componentWillUnmount() {
+    if (this.revealIO) this.revealIO.disconnect();
+    clearTimeout(this.revealRetry);
+    clearInterval(this.revealSafety);
+    if (this.onRevealScroll) { window.removeEventListener("scroll", this.onRevealScroll); window.removeEventListener("resize", this.onRevealScroll); }
+  }
+
+  nlVals() {
+    const st = this.state.nl || { msg: "", ok: null };
+    if (!this.nlBooted) {
+      this.nlBooted = true;
+      // let the page settle before asking for anything
+      setTimeout(() => this.setState({ nlShow: true }), 2200);
+      if (typeof window !== "undefined" && window.addEventListener) {
+        window.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && this.state.nlShow) this.setState({ nlShow: false });
+        });
+      }
+    }
+    return {
+      nlOpen: this.state.nlShow ? "flex" : "none",
+      nlClose: () => { if (this.state.nlShow) this.setState({ nlShow: false }); },
+      nlStop: (e) => { if (e && e.stopPropagation) e.stopPropagation(); },
+      nlRef: (el) => { this.nlInput = el; },
+      nlMsg: st.msg,
+      nlColor: st.ok === null ? "#8295b4" : st.ok ? "#1f7a4d" : "#b4432e",
+      nlSubmit: (e) => {
+        if (e && e.preventDefault) e.preventDefault();
+        const v = ((this.nlInput && this.nlInput.value) || "").trim();
+        if (!v) {
+          this.setState({ nl: { msg: "Enter an email address first.", ok: false } });
+          return;
+        }
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) {
+          this.setState({ nl: { msg: "That does not look like an email address.", ok: false } });
+          return;
+        }
+        this.setState({ nl: { msg: "Thanks \u2014 we will send the next one to " + v + ".", ok: true } });
+        if (this.nlInput) this.nlInput.value = "";
+        setTimeout(() => this.setState({ nlShow: false }), 1800);
+      }
+    };
+  }
+
+  navToggleVals() {
+    const on = !!this.state.navOpen;
+    return {
+      navLinks: on ? "flex" : "none",
+      navOpenAria: on ? "true" : "false",
+      navToggle: () => this.setState({ navOpen: !this.state.navOpen }),
+    };
+  }
+
+  navVals() {
+    if (!this.onNavScroll) {
+      this.onNavScroll = () => {
+        const y = window.scrollY || document.documentElement.scrollTop || 0;
+        const on = y > 24;
+        if (on !== !!this.state.navScrolled) this.setState({ navScrolled: on });
+      };
+      window.addEventListener("scroll", this.onNavScroll, { passive: true });
+      setTimeout(this.onNavScroll, 0);
+    }
+    const on = !!this.state.navScrolled;
+    return {
+      navMax: on ? "1240px" : "1800px",
+      navPad: on ? "8px 10px 8px 24px" : "8px 10px 8px 14px",
+      navBg: on ? "rgba(255,255,255,0.92)" : "rgba(255,255,255,0)",
+      navBorder: on ? "rgba(18,38,58,0.05)" : "rgba(18,38,58,0)",
+      navShadow: on ? "0 12px 34px rgba(18,38,58,0.10)" : "0 0 0 rgba(18,38,58,0)",
+      navBlur: on ? "blur(16px)" : "blur(0px)"
+    };
+  }
+
+  renderVals() {
+    return { ...this.navVals(), ...this.navToggleVals(), ...this.nlVals() };
+  }
+}
+</script>
+</body>
+</html>

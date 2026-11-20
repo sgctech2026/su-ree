@@ -1,0 +1,28 @@
+# working backups made while building — not part of the site
+*.bak
+*.bak[0-9]*
+*.prelot
+*.prenavy
+*.flipbak
+*.berry
+*.dragver
+
+# folder snapshots taken before big changes
+Suree-prelogo/
+Suree-preresponsive/
+Suree-prenav/
+Suree-prerfix/
+Suree-prehscroll/
+Suree-prewebp/
+
+# the PNGs the webp assets were made from
+assets-png-original/
+
+# unused, 7.2 MB
+assets/hero.mp4
+
+.DS_Store
+Thumbs.db
+
+# reference screenshots pasted while building; the site does not use them
+uploads/
