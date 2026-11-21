@@ -528,6 +528,15 @@
   @media (max-width: 980px) {
     .sr-rp-mark { font-size: 52px; }
   }
+  @media (max-width: 759px) {
+    /* the card stands portrait here: photo over words */
+    .sr-rp-full { grid-template-columns: minmax(0,1fr) !important; }
+    .sr-rp-panel { padding: 16px 18px 18px !important; }
+    .sr-rp-mark { font-size: 40px; right: 14px; top: 2px; }
+    .sr-rp-quote { margin-top: 12px !important; }
+    .sr-rp-div { margin: 16px 0 12px !important; }
+    .sr-rp-nav { height: 36px !important; width: 36px !important; }
+  }
   @media (prefers-reduced-motion: reduce) {
     .sr-rp-nav:hover { transform: translate(-50%,-50%) !important; }
   }
@@ -1263,7 +1272,7 @@
       <sc-for list="{{ slides }}" as="s" hint-placeholder-count="4">
         <div style="position:absolute; left:50%; top:50%; pointer-events: {{ s.events }}; transform-style:preserve-3d; transition:transform 720ms cubic-bezier(0.22,0.8,0.2,1), width 720ms cubic-bezier(0.22,0.8,0.2,1), height 720ms cubic-bezier(0.22,0.8,0.2,1), opacity 520ms ease, filter 520ms ease; transform: {{ s.transform }}; width: {{ s.width }}; height: {{ s.height }}; z-index: {{ s.z }}; opacity: {{ s.opacity }}; filter: {{ s.filter }}">
           <button type="button" class="sr-rp-card" onClick="{{ s.pick }}" aria-label="{{ s.aria }}" aria-current="{{ s.active }}" style="cursor: {{ s.cursor }}">
-            <div class="r-2col sr-rp-full" style="opacity: {{ s.fullOpacity }}; pointer-events: {{ s.fullEvents }}">
+            <div class="r-2col sr-rp-full" style="grid-template-rows: {{ fullRows }}; opacity: {{ s.fullOpacity }}; pointer-events: {{ s.fullEvents }}">
               <div style="position:relative; height:100%; width:100%; overflow:hidden; background:#e7f3ff"><img src="{{ s.photo }}" alt="{{ s.name }}" loading="lazy" decoding="async" style="display:block; height:100%; width:100%; object-fit:cover" /></div>
               <div class="sr-rp-panel">
                 <svg class="sr-rp-panelwave" viewBox="0 0 320 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0,96 C70,74 150,112 320,70 L320,120 L0,120 Z" fill="#e7f3ff" opacity="0.75"></path><path d="M0,110 C90,92 170,124 320,88 L320,120 L0,120 Z" fill="#d6e9fb" opacity="0.55"></path></svg>
@@ -1733,27 +1742,48 @@ class Component extends DCLogic {
   reviewVals() {
     const r = this.state.review;
     const n = 4;
-    // usable width: track minus arrow gutters (2 × 64px)
-    const tw = Math.max(320, (this.state.trackW || 1280) - 128);
-    const OVERLAP = Math.round(Math.min(22, tw * 0.018));
-    // composition = ACTIVE + 3 × SIDE − 3 × OVERLAP must fit tw
-    let SIDE_W = Math.round(Math.min(250, tw * 0.17));
-    let ACTIVE_W = Math.min(720, tw - 3 * SIDE_W + 3 * OVERLAP);
-    if (ACTIVE_W < SIDE_W * 2.4) { SIDE_W = Math.round((tw + 3 * OVERLAP) / (2.4 + 3)); ACTIVE_W = tw - 3 * SIDE_W + 3 * OVERLAP; }
-    // height must hold the longest quote: estimate lines from the quote column width
-    const qSize = ACTIVE_W >= 600 ? 19 : ACTIVE_W >= 480 ? 16 : 14;
-    const padX = Math.min(34, Math.max(18, ACTIVE_W * 0.04));
-    const colW = ACTIVE_W * 0.55 - padX * 2;
+    const TW = this.state.trackW || 1280;
     const longest = Math.max(...this.reviews.map((rv) => rv.quote.length));
-    const lines = Math.ceil(longest / Math.max(12, Math.floor(colW / (qSize * 0.5))));
-    const needH = Math.round(qSize * 1.5 * lines + 15 + 18 + 26 + 64 + 2 * Math.min(30, Math.max(16, ACTIVE_W * 0.035)));
-    const activeH = Math.max(Math.round(Math.min(380, ACTIVE_W * 0.53)), Math.min(needH, 440));
-    const sideH = Math.round(Math.min(300, SIDE_W * 1.4));
+    // A phone has no room to fan four cards side by side, so there the active
+    // card stands portrait -- the photo above, the words under it -- with a
+    // sliver of its neighbours either side and the arrows out at the edges.
+    const phone = TW < 760;
+    let ACTIVE_W, SIDE_W, OVERLAP, activeH, sideH, qSize, photoH;
+    if (phone) {
+      ACTIVE_W = Math.round(Math.min(304, TW * 0.68));
+      SIDE_W = Math.round(ACTIVE_W * 0.46);
+      OVERLAP = 6;
+      qSize = 14;
+      photoH = Math.round(ACTIVE_W * 0.88);
+      const colW = ACTIVE_W - 36;
+      const lines = Math.ceil(longest / Math.max(12, Math.floor(colW / (qSize * 0.5))));
+      activeH = photoH + Math.round(qSize * 1.55 * lines + 22 + 20 + 30 + 46);
+      sideH = Math.round(Math.min(270, SIDE_W * 1.6));
+    } else {
+      // usable width: track minus arrow gutters (2 x 64px)
+      const tw = Math.max(320, TW - 128);
+      OVERLAP = Math.round(Math.min(22, tw * 0.018));
+      // composition = ACTIVE + 3 x SIDE - 3 x OVERLAP must fit tw
+      SIDE_W = Math.round(Math.min(250, tw * 0.17));
+      ACTIVE_W = Math.min(720, tw - 3 * SIDE_W + 3 * OVERLAP);
+      if (ACTIVE_W < SIDE_W * 2.4) { SIDE_W = Math.round((tw + 3 * OVERLAP) / (2.4 + 3)); ACTIVE_W = tw - 3 * SIDE_W + 3 * OVERLAP; }
+      // height must hold the longest quote: estimate lines from the quote column width
+      qSize = ACTIVE_W >= 600 ? 19 : ACTIVE_W >= 480 ? 16 : 14;
+      photoH = 0;
+      const padX = Math.min(34, Math.max(18, ACTIVE_W * 0.04));
+      const colW = ACTIVE_W * 0.55 - padX * 2;
+      const lines = Math.ceil(longest / Math.max(12, Math.floor(colW / (qSize * 0.5))));
+      const needH = Math.round(qSize * 1.5 * lines + 15 + 18 + 26 + 64 + 2 * Math.min(30, Math.max(16, ACTIVE_W * 0.035)));
+      activeH = Math.max(Math.round(Math.min(380, ACTIVE_W * 0.53)), Math.min(needH, 440));
+      sideH = Math.round(Math.min(300, SIDE_W * 1.4));
+    }
     const x1 = ACTIVE_W / 2 + SIDE_W / 2 - OVERLAP;
     // the stack is capped well below the track width, so park the arrows just
     // outside the outermost card rather than out at the track edge
     const stackHalf = x1 + SIDE_W / 2;
-    const arrowAt = Math.round(Math.min(stackHalf + 34, (this.state.trackW || 1280) / 2 - 30));
+    const arrowAt = phone
+      ? Math.round(TW / 2 - 24)
+      : Math.round(Math.min(stackHalf + 34, TW / 2 - 30));
     // Four reviews cannot fan symmetrically with all four on show -- one side
     // always gets two. Keep one card either side of the active one and park the
     // fourth behind it, so the active card sits dead centre.
@@ -1796,7 +1826,8 @@ class Component extends DCLogic {
       arrowNext: "calc(50% + " + arrowAt + "px)",
       trackRef: this.trackRef,
       trackH: activeH + 40 + "px",
-      quoteSize: (ACTIVE_W >= 600 ? 20 : ACTIVE_W >= 480 ? 17 : 15) + "px",
+      quoteSize: (phone ? 14 : ACTIVE_W >= 600 ? 20 : ACTIVE_W >= 480 ? 17 : 15) + "px",
+      fullRows: phone ? photoH + "px minmax(0,1fr)" : "100%",
       prevReview: () => this.goReview(r - 1),
       nextReview: () => this.goReview(r + 1),
       pauseReviews: () => { this.reviewsPaused = true; clearInterval(this.reviewTimer); },
