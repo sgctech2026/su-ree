@@ -340,6 +340,19 @@
     .sr-bag2-prices { align-items: flex-start; }
     .sr-bag2-unit { margin-left: 0; }
   }
+
+  .sr-bag2-btns {
+    margin-top: 18px; display: flex; align-items: stretch; gap: 12px;
+  }
+  .sr-bag2-btns .sr-bagback { margin: 0 !important; flex: 0 0 auto; }
+  .sr-bag2-btns .sr-bagco { margin-top: 0 !important; flex: 1 1 auto; justify-content: center; }
+  /* the picture grows with the card so the two halves stay in balance */
+  .sr-bag2 { grid-template-columns: minmax(0,1.04fr) minmax(0,1fr); }
+  .sr-bag2-shot img { height: 92%; max-width: 92%; }
+  @media (max-width: 560px) {
+    .sr-bag2-btns { flex-direction: column-reverse; }
+    .sr-bag2-btns .sr-bagback { justify-content: center; }
+  }
 </style>
 </helmet>
 
@@ -378,7 +391,7 @@
   </section>
 
   <section data-sr-reveal="out" style="position:relative; width:100%; background:#fff; padding:72px 24px 96px">
-    <div style="margin:0 auto; width:100%; max-width:760px">
+    <div style="margin:0 auto; width:100%; max-width:1000px">
       <div>
       <div class="sr-bag2">
         <div class="sr-bag2-shot"><img src="{{ cImg }}" alt="{{ cName }}" loading="lazy" decoding="async" /></div>
@@ -389,8 +402,7 @@
           <div class="sr-sumrule" aria-hidden="true"></div>
           <div class="sr-bag2-rows"><div class="sr-sumrow"><span style="color:#5f7a9c">Subtotal</span><span style="color:#4e648a">{{ subtotal }}</span></div><div class="sr-sumrow"><span style="color:#5f7a9c">Shipping</span><span style="color:#4e648a">{{ shipLabel }}</span></div><div class="sr-sumrow"><span style="color:#5f7a9c">Bundle saving</span><span style="color:{{ saveFg }}">{{ saved }}</span></div><sc-if value="{{ showFreeShipHint }}" hint-placeholder-val="{{ false }}"><p style="margin:8px 0 0; font-size:12.5px; color:#3f7fc9; line-height:1.7">{{ freeShipHint }}</p></sc-if></div>
           <div class="sr-bag2-total"><span>Total</span><span>{{ total }}</span></div>
-          <a class="sr-bagco" href="{{ coHref }}"><span aria-hidden="true" class="sr-bagco-sheen"></span><span style="position:relative">Proceed to checkout</span><span aria-hidden="true" style="position:relative; display:flex"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
-          <a class="sr-bagback" href="Shop.dc.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>Back to shop</a>
+          <div class="sr-bag2-btns"><a class="sr-bagback" href="Shop.dc.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>Back to shop</a><a class="sr-bagco" href="{{ coHref }}"><span aria-hidden="true" class="sr-bagco-sheen"></span><span style="position:relative">Proceed to checkout</span><span aria-hidden="true" style="position:relative; display:flex"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a></div>
           <p class="sr-bagsecure"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Secure checkout &middot; COD available</p>
         </div>
       </div>
