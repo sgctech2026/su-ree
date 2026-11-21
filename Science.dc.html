@@ -202,6 +202,26 @@
   @media (max-width: 760px) {
     .sr-scihero { padding-top: 30px !important; }
   }
+  @media (max-width: 980px) {
+    /* like the routine on the home page: the pair keeps its two columns
+       on a phone and the product comes down a size instead */
+    .sr-inci {
+      grid-template-columns: minmax(0,1.15fr) minmax(0,0.85fr) !important;
+      gap: clamp(12px,3.4vw,34px) !important;
+      align-items: center;
+    }
+    .sr-inci img {
+      max-height: 170px !important; width: auto !important; max-width: 100% !important;
+    }
+  }
+  @media (max-width: 620px) {
+    .sr-inci h3 { font-size: 19px !important; letter-spacing: -0.6px !important; }
+    .sr-inci p { font-size: 12px !important; line-height: 1.7 !important; }
+    .sr-inci > div > p:first-child { font-size: 9.5px !important; letter-spacing: 2px !important; }
+    .sr-inci span { font-size: 11.5px !important; }
+    .sr-inci img { max-height: 132px !important; }
+    .sr-inci a { font-size: 12.5px !important; }
+  }
 </style>
 </helmet>
 
@@ -290,7 +310,7 @@
         </p>
       </header>
 
-      <div class="r-2col" data-sr-step="out" style="margin-top:44px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:center; gap:clamp(26px,4vw,64px)">
+      <div class="r-2col sr-inci" data-sr-step="out" style="margin-top:44px; display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:center; gap:clamp(26px,4vw,64px)">
         <div data-sr-slide="l" style="min-width:0; text-align:right; order:1">
           <p style="margin:0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; font-weight:500; color:#5f9ad8; letter-spacing:3px">FULL INCI</p>
           <h3 style="margin:14px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-weight:600; color:#1b3456; font-size:clamp(23px,2.5vw,32px); line-height:1.16; letter-spacing:-0.9px">Capsule Cream</h3>
@@ -306,7 +326,7 @@
           <img src="assets/inci-cream.webp" alt="su-ree Dual-Replenishing Capsule Cream jar with its carton" loading="lazy" decoding="async" style="display:block; max-height:300px; max-width:84%; width:auto; object-fit:contain; filter:drop-shadow(0 20px 28px rgba(18,38,58,0.22))" />
         </div>
       </div>
-      <div class="r-2col" data-sr-step="out" style="margin-top:clamp(20px,2.6vw,34px); display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:center; gap:clamp(26px,4vw,64px)">
+      <div class="r-2col sr-inci" data-sr-step="out" style="margin-top:clamp(20px,2.6vw,34px); display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:center; gap:clamp(26px,4vw,64px)">
         <div data-sr-slide="r" style="min-width:0; text-align:left; order:2">
           <p style="margin:0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; font-weight:500; color:#5f9ad8; letter-spacing:3px">KEY ACTIVES</p>
           <h3 style="margin:14px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-weight:600; color:#1b3456; font-size:clamp(23px,2.5vw,32px); line-height:1.16; letter-spacing:-0.9px">GHK-Cu+ Snap 8 Serum</h3>
