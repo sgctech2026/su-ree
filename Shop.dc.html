@@ -1040,94 +1040,9 @@
   @media (prefers-reduced-motion: reduce) {
     .sr-ad-choice:hover { transform: none !important; }
   }
-
-  .sr-pf-grid {
-    position: relative; z-index: 2; display: grid;
-    grid-template-columns: minmax(0,0.82fr) minmax(0,1fr);
-    gap: clamp(24px,3vw,46px); align-items: center;
-    padding: clamp(40px,4.4vw,64px) clamp(28px,3.4vw,54px);
-    box-sizing: border-box;
-  }
-  .sr-pf-waves {
-    position: absolute; right: 0; bottom: 0; z-index: 0;
-    height: 52%; width: 46%; pointer-events: none;
-  }
-  .sr-pf-badge {
-    display: inline-flex; align-items: center; gap: 9px;
-    border-radius: 9999px; border: 1.5px solid #b7d5f5; background: #ffffff;
-    padding: 9px 19px 9px 15px; color: #438fe0;
-    font-family: 'Inter',ui-sans-serif,sans-serif; font-size: 11px; font-weight: 600;
-    letter-spacing: 2.6px;
-  }
-  .sr-pf-accent {
-    display: block; font-style: italic; font-weight: 600; color: #438fe0;
-  }
-  .sr-pf-rule { display: block; margin: 2px 0 0; height: 16px; width: min(300px,86%); }
-  .sr-pf-cta {
-    position: relative; display: inline-flex; overflow: hidden; isolation: isolate;
-    align-items: center; gap: 10px; border-radius: 9999px;
-    background: linear-gradient(135deg,#5ba0ea 0%,#438fe0 52%,#2d72c4 100%);
-    padding: 17px 30px;
-    font-family: 'Inter',ui-sans-serif,sans-serif; font-size: 14.5px; font-weight: 600;
-    color: #ffffff; box-shadow: 0 18px 34px -16px rgba(67,143,224,0.8);
-    transition: transform 220ms ease, box-shadow 220ms ease;
-  }
-  .sr-pf-sheen {
-    position: absolute; top: 0; bottom: 0; left: 0; width: 32%; pointer-events: none;
-    background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 48%,
-                rgba(255,255,255,0) 100%);
-    animation: sr-sheen 6s ease-in-out 0.6s infinite;
-  }
-  .sr-pf-dl {
-    display: inline-flex; height: 54px; width: 54px; flex-shrink: 0;
-    align-items: center; justify-content: center; border-radius: 9999px;
-    background: #ffffff; border: 1.5px solid #b7d5f5; color: #438fe0;
-    transition: background 220ms ease, border-color 220ms ease;
-  }
-  .sr-pf-stage {
-    position: relative; min-width: 0; display: flex; align-items: center;
-    justify-content: flex-start; min-height: clamp(350px,29vw,460px);
-  }
-  /* she stands on the panel floor: the pull-down cancels the panel's own
-     bottom padding, and the panel's overflow clips her there */
-  /* she sits further out and a size smaller, so the certificate crosses her
-     shoulder and never her face */
-  .sr-pf-model {
-    position: absolute; right: -6%; z-index: 0; width: auto;
-    bottom: calc(-1 * clamp(40px,4.4vw,64px));
-    height: calc(90% + clamp(40px,4.4vw,64px));
-    object-fit: contain; object-position: bottom right; pointer-events: none;
-  }
-  .sr-pf-cert {
-    position: relative; z-index: 2; flex: 0 1 266px; min-width: 0; margin-left: -8%;
-    transform: rotate(2.5deg); transform-origin: center;
-  }
-  .sr-pf-certinner {
-    position: relative; overflow: hidden; border-radius: 16px; background: #ffffff;
-    border: 1px solid rgba(231,243,255,0.9);
-    box-shadow: 0 40px 80px -30px rgba(27,52,86,0.4), 0 10px 26px -18px rgba(27,52,86,0.3);
-  }
-  .sr-pf-certhead {
-    display: flex; align-items: center; gap: 11px; padding: 16px 18px 13px;
-    border-bottom: 1px solid #eaf3fd;
-  }
-  .sr-pf-row {
-    display: flex; align-items: center; justify-content: space-between; gap: 14px;
-    padding: 12px 0; border-bottom: 1px solid #eaf3fd;
-  }
-  .sr-pf-tick {
-    display: flex; height: 26px; width: 26px; flex-shrink: 0; align-items: center;
-    justify-content: center; border-radius: 9999px; background: #e7f3ff; color: #438fe0;
-  }
   .sr-sr-only {
     position: absolute; height: 1px; width: 1px; overflow: hidden;
     clip-path: inset(50%); white-space: nowrap;
-  }
-  @media (max-width: 980px) {
-    .sr-pf-cert { transform: none !important; flex-basis: 100% !important; }
-    .sr-pf-rule { width: 70% !important; }
-    .sr-pf-model { display: none !important; }
-    .sr-pf-stage { min-height: 0 !important; }
   }
 </style>
 </helmet>
@@ -1780,55 +1695,6 @@
     </div>
   </section>
 
-  <section data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:#ffffff; padding:0 24px 110px">
-    <div style="position:relative; margin:0 auto; width:100%; max-width:1180px; padding-top:72px">
-      <p style="margin:0 auto 22px; width:fit-content; display:flex; align-items:center; gap:14px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; font-weight:500; color:#42688f; letter-spacing:3.6px">
-        <span aria-hidden="true" style="display:block; height:1px; width:44px; background:linear-gradient(90deg, rgba(66,104,143,0) 0%, #42688f 100%)"></span>
-        AND THEN, THE PROOF
-        <span aria-hidden="true" style="display:block; height:1px; width:44px; background:linear-gradient(90deg, #42688f 0%, rgba(66,104,143,0) 100%)"></span>
-      </p>
-    </div>
-    <div class="sr-pf" style="position:relative; z-index:1; overflow:hidden; margin:0 auto; width:100%; max-width:1180px; border-radius:32px; background:linear-gradient(126deg,#ffffff 0%,#f8fbff 42%,#eef6ff 74%,#e7f3ff 100%); border:1px solid rgba(183,213,245,0.75); box-shadow:0 40px 86px -44px rgba(27,52,86,0.34), 0 0 60px -30px rgba(67,143,224,0.3); box-sizing:border-box">
-      <span class="r-blob" aria-hidden="true" style="position:absolute; right:40%; top:16%; height:270px; width:270px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 36% 28%, rgba(255,255,255,0.95) 0%, rgba(231,243,255,0.8) 34%, rgba(183,213,245,0.45) 62%, rgba(183,213,245,0) 78%); box-shadow:inset 0 0 0 1px rgba(255,255,255,0.6)"></span>
-      <span class="r-blob" aria-hidden="true" style="position:absolute; right:40%; bottom:14%; height:72px; width:72px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 32% 28%, rgba(255,255,255,0.85) 0%, rgba(214,233,251,0.45) 40%, rgba(120,170,225,0.12) 72%, rgba(120,170,225,0) 100%); box-shadow:inset 0 0 0 1px rgba(255,255,255,0.45); animation:sr-float-a 8s ease-in-out infinite"></span>
-      <svg class="r-blob sr-pf-waves" viewBox="0 0 520 280" preserveAspectRatio="none" aria-hidden="true"><path d="M70,280 C170,196 286,232 520,120 L520,280 Z" fill="#e7f3ff" opacity="0.75"></path><path d="M70,280 C170,196 286,232 520,120" fill="none" stroke="#d3e7fb" stroke-width="1.4"></path><path d="M168,280 C262,226 350,250 520,186 L520,280 Z" fill="#dcecfd" opacity="0.7"></path><path d="M168,280 C262,226 350,250 520,186" fill="none" stroke="#cbe1f8" stroke-width="1.2"></path></svg>
-
-      <div class="r-2col sr-pf-grid">
-
-        <div style="min-width:0; display:flex; flex-direction:column">
-          <div style="display:flex; flex-wrap:wrap; align-items:center; gap:18px">
-            <img src="assets/logo.webp" alt="su-ree Skin Science" decoding="async" style="display:block; flex-shrink:0; height:40px; width:auto" />
-            <span aria-hidden="true" style="height:34px; width:1px; background:#b7d5f5"></span>
-            <span class="sr-pf-badge"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6"></path><path d="M10 3v6.5L4.5 19A2 2 0 0 0 6.2 22h11.6a2 2 0 0 0 1.7-3L14 9.5V3"></path><path d="M7.5 15h9"></path></svg>LAB VERIFIED</span>
-          </div>
-          <h2 style="margin:26px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; color:#183456; font-size:clamp(32px,3.9vw,56px); line-height:1.02; letter-spacing:-2px"><span style="display:block; font-weight:700">Backed by</span><span class="sr-pf-accent">real results.</span></h2>
-          <svg class="sr-pf-rule" viewBox="0 0 300 16" fill="none" aria-hidden="true"><path d="M4,12 C78,2 222,2 296,10" stroke="url(#sr-pf-rule-g)" stroke-width="2.6" stroke-linecap="round"></path><defs><linearGradient id="sr-pf-rule-g" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#438fe0" stop-opacity="0"></stop><stop offset="46%" stop-color="#438fe0" stop-opacity="0.85"></stop><stop offset="100%" stop-color="#438fe0" stop-opacity="0"></stop></linearGradient></defs></svg>
-          <div style="margin-top:34px; display:flex; flex-wrap:wrap; align-items:center; gap:16px">
-            <span class="sr-pf-cta"><span aria-hidden="true" class="sr-pf-sheen"></span><span style="position:relative">View Lab Report</span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position:relative"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></span>
-            <span class="sr-pf-dl" role="img" aria-label="Download the certificate"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg></span>
-          </div>
-        </div>
-
-        <div class="sr-pf-stage">
-          <img class="sr-pf-model" src="assets/proof-model.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-          <div class="sr-pf-cert">
-            <div class="sr-pf-certinner">
-              <div class="sr-pf-certhead">
-                <img src="assets/logo.webp" alt="su-ree Skin Science" loading="lazy" decoding="async" style="display:block; flex-shrink:0; height:24px; width:auto" />
-                <span aria-hidden="true" style="height:30px; width:1px; flex-shrink:0; background:#e1edfa"></span>
-                <span style="min-width:0; flex:1; text-align:right; font-family:'Jost',ui-sans-serif,sans-serif; font-size:9px; color:#7a94ad; letter-spacing:1.9px; line-height:1.4">CERTIFICATE OF ANALYSIS</span>
-              </div>
-              <div style="padding:2px 18px 18px">
-                  <div class="sr-pf-row" style=""><span style="font-family:'Inter',ui-sans-serif,sans-serif; font-size:13px; font-weight:500; color:#183456; letter-spacing:-0.2px">PDRN</span><span class="sr-pf-tick" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span><span class="sr-sr-only">assayed and confirmed</span></div>
-                  <div class="sr-pf-row" style=""><span style="font-family:'Inter',ui-sans-serif,sans-serif; font-size:13px; font-weight:500; color:#183456; letter-spacing:-0.2px">GHK-Cu</span><span class="sr-pf-tick" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span><span class="sr-sr-only">assayed and confirmed</span></div>
-                  <div class="sr-pf-row" style="border-bottom:0;"><span style="font-family:'Inter',ui-sans-serif,sans-serif; font-size:13px; font-weight:500; color:#183456; letter-spacing:-0.2px">Hyaluronic Complex</span><span class="sr-pf-tick" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span><span class="sr-sr-only">assayed and confirmed</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <section data-sr-reveal="out" class="sr-ad" style="position:relative; width:100%; overflow:hidden; background:linear-gradient(180deg,#ffffff 0%,#f7fbff 30%,#eef6ff 62%,#f6fbff 86%,#ffffff 100%); padding:clamp(56px,6vw,96px) 24px clamp(64px,7vw,110px)">
     <div class="sr-ad-wrap">
