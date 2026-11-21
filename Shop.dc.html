@@ -311,34 +311,35 @@
     .sr-fm-b { gap: 0; padding: 11px 6px; font-size: 11.5px; letter-spacing: -0.3px; }
     .sr-fm-b svg { display: none; }
     .sr-qtys { grid-template-columns: minmax(0,1fr); }
-    /* the card reads as a row -- shot, name, price -- with what you get
-       written underneath across the whole width */
+    /* the card as the reference draws it: the name and what you get on
+       top, the set itself below, and the price beyond a hairline to the
+       right -- the saving riding the top corner */
     .sr-qty {
-      display: grid !important; grid-template-columns: auto minmax(0,1fr) auto;
-      align-items: center; gap: 4px 12px; text-align: left;
-      padding: 13px 13px 12px 38px;
+      display: grid !important; grid-template-columns: minmax(0,1fr) auto;
+      align-items: center; gap: 2px 10px; text-align: left;
+      padding: 14px 14px 14px 44px;
     }
+    .sr-qty-radio { left: 14px; top: 16px; height: 22px; width: 22px; }
+    .sr-qty-radio > span { height: 11px; width: 11px; }
+    .sr-qty-label { grid-column: 1 / -1; grid-row: 1; font-size: 20px; }
+    .sr-qty-sub { grid-column: 1 / -1; grid-row: 2; font-size: 12px; text-align: left !important; }
     .sr-qty-shots {
-      grid-column: 1; grid-row: 2; height: 88px; width: 94px; margin: 0;
-    }
-    .sr-qty-label {
-      grid-column: 1 / -1; grid-row: 1; justify-self: start;
-      font-size: 16px;
+      grid-column: 1; grid-row: 3; height: 92px; width: 100%; margin: 8px 0 0;
     }
     .sr-qty-price {
-      grid-column: 3; grid-row: 2; width: auto; margin: 0;
-      padding: 7px 10px; font-size: 15px; gap: 6px;
+      grid-column: 2; grid-row: 3; width: auto; margin: 8px 0 0;
+      flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+      border-radius: 0; background: transparent; border-left: 1px solid #dbe8f7;
+      padding: 4px 4px 4px 14px; font-size: 21px; letter-spacing: -0.8px;
     }
-    .sr-qty-was { font-size: 11.5px; }
-    .sr-qty-sub {
-      grid-column: 1 / -1; grid-row: 3; font-size: 11.5px;
-      text-align: center !important;
-    }
+    .sr-qty-was { font-size: 13px; }
     .sr-qty-x {
-      height: 24px; min-width: 24px; padding: 0 6px; font-size: 11.5px;
-      border-width: 1.5px; right: 0; bottom: -2px;
+      height: 26px; min-width: 26px; padding: 0 7px; font-size: 12px;
+      border-width: 2px; right: auto; left: 50%; bottom: -4px; transform: translateX(-50%);
     }
-    .sr-qty-flag { font-size: 10.5px; padding: 4px 10px; }
+    .sr-qty-flag {
+      font-size: 11.5px; padding: 5px 13px; border-radius: 0 18px 0 16px;
+    }
   }
   @media (prefers-reduced-motion: reduce) {
     .sr-buy:hover { transform: none !important; }
