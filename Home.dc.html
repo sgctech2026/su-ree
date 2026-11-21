@@ -621,6 +621,9 @@
     .sr-pf-stage { order: 1 !important; }
     .sr-pf-copy { order: 2 !important; align-items: center !important; text-align: center !important; }
     .sr-pf-copy > div { justify-content: center !important; }
+    /* the card already says it; only the two buttons follow it */
+    .sr-pf-copy > div:first-child, .sr-pf-copy h2, .sr-pf-rule { display: none !important; }
+    .sr-pf-copy > div:last-child { margin-top: 26px !important; }
     .sr-pf-copy h2 { text-align: center !important; }
     .sr-pf-rule { margin-left: auto !important; margin-right: auto !important; }
     .sr-pf-rule { width: 70% !important; }
