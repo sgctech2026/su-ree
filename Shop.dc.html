@@ -681,9 +681,24 @@
   }
   @media (max-width: 680px) {
     .sr-htu-head { grid-template-columns: minmax(0,1fr) !important; }
-    .sr-htu-steps { grid-template-columns: minmax(0,1fr) !important; gap: 14px; }
-    .sr-htu-step + .sr-htu-step { border-left: 0 !important; border-top: 1px solid #e7f0fb;
-      padding-top: 14px; }
+    .sr-htu-steps { grid-template-columns: minmax(0,1fr) !important; gap: 0; }
+    /* each step reads across: number, icon, then the instruction */
+    .sr-htu-step {
+      flex-direction: row !important; align-items: center; justify-content: flex-start;
+      text-align: left !important; gap: 12px; padding: 11px 2px;
+    }
+    .sr-htu-step + .sr-htu-step {
+      border-left: 0 !important; border-top: 1px solid #e7f0fb;
+    }
+    .sr-htu-num { flex-shrink: 0; height: 22px; width: 22px; font-size: 11.5px; }
+    .sr-htu-ico { flex-shrink: 0; }
+    .sr-htu-ico svg { width: 22px !important; height: 22px !important; }
+    .sr-htu-steptext { min-width: 0; font-size: 12.5px; }
+    /* the size has to stay inside the pill rail */
+    .sr-htu-bar { width: 100%; }
+    .sr-htu-pill { min-width: 0; flex: 1 1 auto; font-size: 12.5px; padding: 10px 14px; }
+    .sr-htu-pill > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+    .sr-htu-size { flex-shrink: 0; padding: 0 14px; font-size: 12px; }
   }
 
   .sr-faqcats { display: flex; flex-wrap: nowrap; gap: 7px; }
