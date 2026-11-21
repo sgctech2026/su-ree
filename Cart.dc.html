@@ -275,6 +275,71 @@
     padding-bottom: 20px; font-size: 11.5px; color: #8295b4;
   }
   @media (prefers-reduced-motion: reduce) { .sr-bagco:hover { transform: none !important; } }
+
+  .sr-bag2 {
+    display: grid; grid-template-columns: minmax(0,0.92fr) minmax(0,1fr);
+    gap: clamp(20px,3vw,40px); align-items: start;
+    border-radius: 24px; background: #ffffff; border: 1px solid #e7f0fb;
+    box-shadow: 0 18px 44px -30px rgba(18,38,58,0.5); padding: clamp(18px,2.4vw,28px);
+  }
+  .sr-bag2-shot {
+    display: flex; align-items: center; justify-content: center; aspect-ratio: 1 / 1;
+    border-radius: 18px; overflow: hidden;
+    background: linear-gradient(170deg,#f7fbff 0%,#eaf4ff 100%);
+  }
+  .sr-bag2-shot img {
+    display: block; height: 82%; width: auto; max-width: 86%; object-fit: contain;
+    filter: drop-shadow(0 18px 26px rgba(18,38,58,0.22));
+  }
+  .sr-bag2-side { min-width: 0; display: flex; flex-direction: column; padding-top: 6px; }
+  .sr-bag2-top {
+    margin-top: 10px; display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 18px;
+  }
+  .sr-bag2-name {
+    display: block; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: clamp(22px,2.4vw,30px);
+    font-weight: 700; color: #1b3456; letter-spacing: -0.8px; line-height: 1.12;
+  }
+  .sr-bag2-sub { margin: 7px 0 0; font-size: 13.5px; color: #5f7a9c; line-height: 1.5; }
+  .sr-bag2-prices {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 4px; flex-shrink: 0;
+  }
+  .sr-bag2-price {
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: clamp(20px,2.2vw,27px);
+    font-weight: 700; color: #1b3456; letter-spacing: -0.8px; white-space: nowrap;
+  }
+  .sr-bag2-qtyrow {
+    margin-top: 18px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px;
+  }
+  .sr-bag2-savepill {
+    border-radius: 9999px; background: #e7f3ff; color: #2f7bdc; padding: 7px 15px;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 12.5px; font-weight: 700;
+    white-space: nowrap;
+  }
+  .sr-bag2-unit { margin-left: auto; font-size: 12.5px; color: #8295b4; white-space: nowrap; }
+  .sr-bag2-rows { display: flex; flex-direction: column; }
+  .sr-bag2-total {
+    margin-top: 16px; display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; border-radius: 16px;
+    background: linear-gradient(135deg,#f4f9ff 0%,#e9f3ff 100%); padding: 16px 20px;
+  }
+  .sr-bag2-total > span:first-child {
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 17px; font-weight: 700;
+    color: #1b3456;
+  }
+  .sr-bag2-total > span:last-child {
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 27px; font-weight: 700;
+    color: #1b3456; letter-spacing: -1px;
+  }
+  .sr-bag2 .sr-bagco { margin-top: 16px; justify-content: center; }
+  .sr-bag2 .sr-bagback { margin: 12px auto 0; }
+  .sr-bag2 .sr-bagsecure { padding-top: 14px; padding-bottom: 0; }
+  @media (max-width: 760px) {
+    .sr-bag2 { grid-template-columns: minmax(0,1fr) !important; }
+    .sr-bag2-top { flex-direction: column; gap: 10px; }
+    .sr-bag2-prices { align-items: flex-start; }
+    .sr-bag2-unit { margin-left: 0; }
+  }
 </style>
 </helmet>
 
@@ -315,13 +380,21 @@
   <section data-sr-reveal="out" style="position:relative; width:100%; background:#fff; padding:72px 24px 96px">
     <div style="margin:0 auto; width:100%; max-width:760px">
       <div>
-      <div class="sr-bagcard">
-        <div class="sr-bagcard-head"><span class="sr-bagcard-title">Your <em>items</em></span><span class="sr-bagcard-count">{{ cCount }}</span></div>
-        <div class="sr-bag"><span class="sr-bag-shot"><img src="{{ cImg }}" alt="{{ cName }}" loading="lazy" decoding="async" /></span><div style="min-width:0"><span class="sr-bag-chip">{{ cChip }}</span><a class="sr-bag-name" href="Shop.dc.html">{{ cName }}</a><span class="sr-bag-bundle">{{ cBundle }}</span><p class="sr-bag-note"><span aria-hidden="true" style="display:flex; flex-shrink:0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 2.6 17.3A2 2 0 0 0 4.3 20.3h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path><path d="M12 9v4.4"></path><path d="M12 17h.01"></path></svg></span>{{ cNote }}</p><div class="sr-bag-qty" role="group" aria-label="Quantity"><button type="button" onClick="{{ decQ }}" aria-label="One fewer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button><span class="sr-bag-n">{{ qty }}</span><button type="button" onClick="{{ incQ }}" aria-label="One more"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></button></div></div><span class="sr-bag-price"><span>{{ cLine }}</span><span class="sr-bag-was" aria-hidden="{{ cWasHide }}" style="display: {{ cWasShow }}">{{ cWas }}</span><span class="sr-bag-unit">{{ cUnit }}</span></span></div>
-        <div class="sr-bagsum"><div class="sr-sumrow"><span style="color:#4e648a">Subtotal</span><span style="color:#4e648a">{{ subtotal }}</span></div><div class="sr-sumrow"><span style="color:#4e648a">Shipping</span><span style="color:#4e648a">{{ shipLabel }}</span></div><div class="sr-sumrow"><span style="color:#8295b4">Bundle saving</span><span style="color:{{ saveFg }}">{{ saved }}</span></div><div class="sr-save" aria-hidden="{{ saveHide }}" style="display: {{ saveShow }}"><span aria-hidden="true" style="display:flex; flex-shrink:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>{{ saveLine }}</div><div class="sr-sumrule" aria-hidden="true"></div><div class="sr-sumtotal"><span>Total</span><span>{{ total }}</span></div><sc-if value="{{ showFreeShipHint }}" hint-placeholder-val="{{ false }}"><p style="margin:12px 0 0; font-size:12.5px; color:#3f7fc9; line-height:1.7">{{ freeShipHint }}</p></sc-if></div>
-        <div class="sr-bagfoot"><a class="sr-bagback" href="Shop.dc.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>Back to shop</a><a class="sr-bagco" href="{{ coHref }}"><span aria-hidden="true" class="sr-bagco-sheen"></span><span style="position:relative">Proceed to checkout</span><span aria-hidden="true" style="position:relative; display:flex"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a></div>
-        <p class="sr-bagsecure"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Secure checkout &middot; COD available</p>
+      <div class="sr-bag2">
+        <div class="sr-bag2-shot"><img src="{{ cImg }}" alt="{{ cName }}" loading="lazy" decoding="async" /></div>
+        <div class="sr-bag2-side">
+          <span class="sr-bag-chip">{{ cChip }}</span>
+          <div class="sr-bag2-top"><div style="min-width:0"><a class="sr-bag2-name" href="Shop.dc.html">{{ cName }}</a><p class="sr-bag2-sub">{{ cSub }}</p></div><div class="sr-bag2-prices"><span class="sr-bag2-price">{{ cLine }}</span><span class="sr-bag-was" aria-hidden="{{ cWasHide }}" style="display: {{ cWasShow }}">{{ cWas }}</span></div></div>
+          <div class="sr-bag2-qtyrow"><div class="sr-bag-qty" role="group" aria-label="Quantity"><button type="button" onClick="{{ decQ }}" aria-label="One fewer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button><span class="sr-bag-n">{{ qty }}</span><button type="button" onClick="{{ incQ }}" aria-label="One more"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></button></div><span class="sr-bag2-savepill" aria-hidden="{{ saveHide }}" style="display: {{ saveShow }}">{{ cSave }}</span><span class="sr-bag2-unit">{{ cUnit }}</span></div>
+          <div class="sr-sumrule" aria-hidden="true"></div>
+          <div class="sr-bag2-rows"><div class="sr-sumrow"><span style="color:#5f7a9c">Subtotal</span><span style="color:#4e648a">{{ subtotal }}</span></div><div class="sr-sumrow"><span style="color:#5f7a9c">Shipping</span><span style="color:#4e648a">{{ shipLabel }}</span></div><div class="sr-sumrow"><span style="color:#5f7a9c">Bundle saving</span><span style="color:{{ saveFg }}">{{ saved }}</span></div><sc-if value="{{ showFreeShipHint }}" hint-placeholder-val="{{ false }}"><p style="margin:8px 0 0; font-size:12.5px; color:#3f7fc9; line-height:1.7">{{ freeShipHint }}</p></sc-if></div>
+          <div class="sr-bag2-total"><span>Total</span><span>{{ total }}</span></div>
+          <a class="sr-bagco" href="{{ coHref }}"><span aria-hidden="true" class="sr-bagco-sheen"></span><span style="position:relative">Proceed to checkout</span><span aria-hidden="true" style="position:relative; display:flex"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
+          <a class="sr-bagback" href="Shop.dc.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>Back to shop</a>
+          <p class="sr-bagsecure"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Secure checkout &middot; COD available</p>
+        </div>
       </div>
+
 
         
 
@@ -483,13 +556,13 @@ class Component extends DCLogic {
 
   // the same table Shop sells from: tier 1, 2 and 3 of each product
   PRODUCTS = [
-    { key: "cream", name: "Dual Regenerative Capsule Cream", unit: "jar", units: "jars",
+    { key: "cream", name: "Dual Regenerative Capsule Cream", sub: "PDRN + GHK-Cu capsule cream", unit: "jar", units: "jars",
       what: "30 g", img: "assets/hero-cream.webp",
       sell: [1890, 3400, 4820], list: [1890, 3780, 5670] },
-    { key: "serum", name: "GHK-Cu+ Snap 8 Triple Peptide Renewal Serum", unit: "bottle",
+    { key: "serum", name: "GHK-Cu+ Snap 8 Triple Peptide Renewal Serum", sub: "Triple peptide renewal serum", unit: "bottle",
       units: "bottles", what: "30ml", img: "assets/hero-serum.webp",
       sell: [1590, 2860, 4050], list: [1590, 3180, 4770] },
-    { key: "duo", name: "The Duo", unit: "set", units: "sets", what: "1 jar + 1 bottle",
+    { key: "duo", name: "The Duo", sub: "Capsule Cream + GHK-Cu Serum", unit: "set", units: "sets", what: "1 jar + 1 bottle",
       img: "assets/duo-pair.webp",
       sell: [3190, 6260, 8870], list: [3480, 6960, 10440] }
   ];
@@ -653,16 +726,9 @@ class Component extends DCLogic {
         cName: p.name,
         cLine: this.peso(sub),
         cChip: (qty === 1 ? p.unit : p.units).toUpperCase(),
-        cBundle: qty + " " + (qty === 1 ? p.unit : p.units) + " \u00b7 "
-          + (qty === 1 ? p.what : qty + " \u00d7 " + p.what),
-        cCount: qty + " " + (qty === 1 ? p.unit : p.units),
+        cSub: p.sub,
+        cSave: "You save " + this.peso(saved),
         cUnit: this.peso(Math.round(sub / qty)) + " / " + p.unit,
-        cNote: qty === 1
-          ? "One " + p.unit + " at " + this.peso(p.sell[0])
-            + ". Two or three come at a lower price each."
-          : "You are on the " + qty + "-" + p.unit + " price. Going back to one "
-            + p.unit + " charges " + this.peso(p.sell[0]) + " and drops the saving.",
-        saveLine: "You are saving " + this.peso(saved) + " on this order.",
         saveShow: saved > 0 ? "flex" : "none",
         saveHide: saved > 0 ? "false" : "true",
         cWas: this.peso(p.list[qty - 1]),
