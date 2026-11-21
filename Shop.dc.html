@@ -315,27 +315,37 @@
        top, the set itself below, and the price beyond a hairline to the
        right -- the saving riding the top corner */
     .sr-qty {
-      display: grid !important; grid-template-columns: minmax(0,1fr) auto;
-      align-items: center; gap: 2px 10px; text-align: left;
+      display: grid !important; grid-template-columns: auto minmax(0,1fr) auto;
+      align-items: center; gap: 2px 9px; text-align: left;
       padding: 14px 14px 14px 44px;
     }
     .sr-qty-radio { left: 14px; top: 16px; height: 22px; width: 22px; }
     .sr-qty-radio > span { height: 11px; width: 11px; }
-    .sr-qty-label { grid-column: 1 / -1; grid-row: 1; font-size: 20px; }
-    .sr-qty-sub { grid-column: 1 / -1; grid-row: 2; font-size: 12px; text-align: left !important; }
+    .sr-qty-label { grid-column: 1; grid-row: 1; font-size: 20px; }
+    /* what you get reads as an aside to the name, in brackets beside it */
+    .sr-qty-sub {
+      grid-column: 2; grid-row: 1; justify-self: start; align-self: baseline;
+      font-size: 11.5px; text-align: left !important;
+    }
+    .sr-qty-sub::before { content: "("; }
+    .sr-qty-sub::after { content: ")"; }
     .sr-qty-shots {
-      grid-column: 1; grid-row: 3; height: 92px; width: 100%; margin: 8px 0 0;
+      grid-column: 1 / 3; grid-row: 2; height: 92px; width: 100%; margin: 8px 0 0;
     }
     .sr-qty-price {
-      grid-column: 2; grid-row: 3; width: auto; margin: 8px 0 0;
+      grid-column: 3; grid-row: 1 / -1; width: auto; margin: 0;
       flex-direction: column; align-items: center; justify-content: center; gap: 2px;
       border-radius: 0; background: transparent; border-left: 1px solid #dbe8f7;
       padding: 4px 4px 4px 14px; font-size: 21px; letter-spacing: -0.8px;
     }
     .sr-qty-was { font-size: 13px; }
+    /* a soft disc resting against the side of the set */
     .sr-qty-x {
-      height: 26px; min-width: 26px; padding: 0 7px; font-size: 12px;
-      border-width: 2px; right: auto; left: 50%; bottom: -4px; transform: translateX(-50%);
+      height: 34px; width: 34px; min-width: 0; padding: 0; font-size: 13px;
+      right: 6px; bottom: 10px; left: auto; transform: none; border: none;
+      background: rgba(47,123,224,0.72);
+      backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
+      box-shadow: 0 6px 14px -8px rgba(18,38,58,0.7);
     }
     .sr-qty-flag {
       font-size: 11.5px; padding: 5px 13px; border-radius: 0 18px 0 16px;
