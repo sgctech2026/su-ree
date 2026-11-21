@@ -714,9 +714,11 @@
     border-color 240ms ease;
   }
   .sr-faqcount { flex-shrink: 0; font-size: 10.5px; font-weight: 500; opacity: 0.62; }
-  @media (max-width: 560px) {
-    .sr-faqcats { flex-wrap: wrap; }
-    .sr-faqcat { padding: 8px 13px; }
+  @media (max-width: 760px) {
+    /* four names only fit a row without their tallies */
+    .sr-faqcount { display: none; }
+    .sr-faqcats { flex-wrap: nowrap; gap: 5px; }
+    .sr-faqcat { padding: 9px 8px; font-size: 11.5px; letter-spacing: -0.2px; }
   }
 
   .sr-dif-h {
