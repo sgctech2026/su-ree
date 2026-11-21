@@ -1468,10 +1468,10 @@
           </div>
 
           <p style="margin:30px 0 0; display:flex; align-items:center; gap:10px"><span aria-hidden="true" style="display:inline-flex; height:21px; width:21px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:#1b3456; color:#fff; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11.5px; font-weight:600">2</span><span style="font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; font-weight:500; color:#44587c; letter-spacing:2.6px">CHOOSE YOUR SIZE</span></p>
-          <div class="sr-qtys">
-            <button type="button" class="sr-qty" onClick="{{ tPick0 }}" aria-pressed="{{ tSel0 }}" style="background: {{ tBg0 }}; border-color: {{ tBd0 }}; box-shadow: {{ tSh0 }}"><span class="sr-qty-radio" aria-hidden="true" style="border-color: {{ tDotBd0 }}"><span style="background: {{ tDot0 }}"></span></span><span class="sr-qty-flag" aria-hidden="{{ tFlagHide0 }}" style="display: {{ tFlagShow0 }}">{{ tFlag0 }}</span><span class="sr-qty-shots sr-n1"><span class="sr-qty-stack" style="display: {{ stackShow }}"><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /></span><span class="sr-qty-solo" style="display: {{ soloShow }}"><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /></span></span><span class="sr-qty-label">{{ tLabel0 }}</span><span class="sr-qty-sub">{{ tSupply0 }}</span><span class="sr-qty-price"><span style="color: {{ tPriceFg0 }}">{{ tPrice0 }}</span><span class="sr-qty-was" aria-hidden="{{ tWasHide0 }}" style="display: {{ tWasShow0 }}">{{ tWas0 }}</span></span></button>
-            <button type="button" class="sr-qty" onClick="{{ tPick1 }}" aria-pressed="{{ tSel1 }}" style="background: {{ tBg1 }}; border-color: {{ tBd1 }}; box-shadow: {{ tSh1 }}"><span class="sr-qty-radio" aria-hidden="true" style="border-color: {{ tDotBd1 }}"><span style="background: {{ tDot1 }}"></span></span><span class="sr-qty-flag" aria-hidden="{{ tFlagHide1 }}" style="display: {{ tFlagShow1 }}">{{ tFlag1 }}</span><span class="sr-qty-shots sr-n2"><span class="sr-qty-stack" style="display: {{ stackShow }}"><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /></span><span class="sr-qty-solo" style="display: {{ soloShow }}"><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /><span class="sr-qty-x">×2</span></span></span><span class="sr-qty-label">{{ tLabel1 }}</span><span class="sr-qty-sub">{{ tSupply1 }}</span><span class="sr-qty-price"><span style="color: {{ tPriceFg1 }}">{{ tPrice1 }}</span><span class="sr-qty-was" aria-hidden="{{ tWasHide1 }}" style="display: {{ tWasShow1 }}">{{ tWas1 }}</span></span></button>
-            <button type="button" class="sr-qty" onClick="{{ tPick2 }}" aria-pressed="{{ tSel2 }}" style="background: {{ tBg2 }}; border-color: {{ tBd2 }}; box-shadow: {{ tSh2 }}"><span class="sr-qty-radio" aria-hidden="true" style="border-color: {{ tDotBd2 }}"><span style="background: {{ tDot2 }}"></span></span><span class="sr-qty-flag" aria-hidden="{{ tFlagHide2 }}" style="display: {{ tFlagShow2 }}">{{ tFlag2 }}</span><span class="sr-qty-shots sr-n3"><span class="sr-qty-stack" style="display: {{ stackShow }}"><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /></span><span class="sr-qty-solo" style="display: {{ soloShow }}"><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /><span class="sr-qty-x">×3</span></span></span><span class="sr-qty-label">{{ tLabel2 }}</span><span class="sr-qty-sub">{{ tSupply2 }}</span><span class="sr-qty-price"><span style="color: {{ tPriceFg2 }}">{{ tPrice2 }}</span><span class="sr-qty-was" aria-hidden="{{ tWasHide2 }}" style="display: {{ tWasShow2 }}">{{ tWas2 }}</span></span></button>
+          <div class="sr-qtys" style="grid-template-columns: {{ qtyCols }}">
+            <button type="button" class="sr-qty" onClick="{{ tPick0 }}" aria-pressed="{{ tSel0 }}" style="display: {{ tShow0 }}; background: {{ tBg0 }}; border-color: {{ tBd0 }}; box-shadow: {{ tSh0 }}"><span class="sr-qty-radio" aria-hidden="true" style="border-color: {{ tDotBd0 }}"><span style="background: {{ tDot0 }}"></span></span><span class="sr-qty-flag" aria-hidden="{{ tFlagHide0 }}" style="display: {{ tFlagShow0 }}">{{ tFlag0 }}</span><span class="sr-qty-shots sr-n1"><span class="sr-qty-stack" style="display: {{ stackShow }}"><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /></span><span class="sr-qty-solo" style="display: {{ soloShow }}"><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /></span></span><span class="sr-qty-label">{{ tLabel0 }}</span><span class="sr-qty-sub">{{ tSupply0 }}</span><span class="sr-qty-price"><span style="color: {{ tPriceFg0 }}">{{ tPrice0 }}</span><span class="sr-qty-was" aria-hidden="{{ tWasHide0 }}" style="display: {{ tWasShow0 }}">{{ tWas0 }}</span></span></button>
+            <button type="button" class="sr-qty" onClick="{{ tPick1 }}" aria-pressed="{{ tSel1 }}" style="display: {{ tShow1 }}; background: {{ tBg1 }}; border-color: {{ tBd1 }}; box-shadow: {{ tSh1 }}"><span class="sr-qty-radio" aria-hidden="true" style="border-color: {{ tDotBd1 }}"><span style="background: {{ tDot1 }}"></span></span><span class="sr-qty-flag" aria-hidden="{{ tFlagHide1 }}" style="display: {{ tFlagShow1 }}">{{ tFlag1 }}</span><span class="sr-qty-shots sr-n2"><span class="sr-qty-stack" style="display: {{ stackShow }}"><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /></span><span class="sr-qty-solo" style="display: {{ soloShow }}"><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /><span class="sr-qty-x">×2</span></span></span><span class="sr-qty-label">{{ tLabel1 }}</span><span class="sr-qty-sub">{{ tSupply1 }}</span><span class="sr-qty-price"><span style="color: {{ tPriceFg1 }}">{{ tPrice1 }}</span><span class="sr-qty-was" aria-hidden="{{ tWasHide1 }}" style="display: {{ tWasShow1 }}">{{ tWas1 }}</span></span></button>
+            <button type="button" class="sr-qty" onClick="{{ tPick2 }}" aria-pressed="{{ tSel2 }}" style="display: {{ tShow2 }}; background: {{ tBg2 }}; border-color: {{ tBd2 }}; box-shadow: {{ tSh2 }}"><span class="sr-qty-radio" aria-hidden="true" style="border-color: {{ tDotBd2 }}"><span style="background: {{ tDot2 }}"></span></span><span class="sr-qty-flag" aria-hidden="{{ tFlagHide2 }}" style="display: {{ tFlagShow2 }}">{{ tFlag2 }}</span><span class="sr-qty-shots sr-n3"><span class="sr-qty-stack" style="display: {{ stackShow }}"><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /></span><span class="sr-qty-solo" style="display: {{ soloShow }}"><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /><span class="sr-qty-x">×3</span></span></span><span class="sr-qty-label">{{ tLabel2 }}</span><span class="sr-qty-sub">{{ tSupply2 }}</span><span class="sr-qty-price"><span style="color: {{ tPriceFg2 }}">{{ tPrice2 }}</span><span class="sr-qty-was" aria-hidden="{{ tWasHide2 }}" style="display: {{ tWasShow2 }}">{{ tWas2 }}</span></span></button>
           </div>
 
           <div style="margin-top:22px">
@@ -2136,7 +2136,6 @@
   </div>
 
   <footer style="position:relative; width:100%; overflow:hidden; background:linear-gradient(180deg,#ffffff 0%,#dceeff 44%,#cfe7fb 88%,#cfe7fb 100%); padding:0 0 40px">
-    <div aria-hidden="true" style="position:absolute; inset:0; pointer-events:none; background:radial-gradient(circle at 5% 24%, rgba(255,255,255,0.9) 0 9px, rgba(255,255,255,0) 10px),radial-gradient(circle at 8% 19%, rgba(255,255,255,0.6) 0 20px, rgba(255,255,255,0) 21px),radial-gradient(circle at 94% 16%, rgba(255,255,255,0.7) 0 13px, rgba(255,255,255,0) 14px),radial-gradient(circle at 97% 27%, rgba(255,255,255,0.45) 0 7px, rgba(255,255,255,0) 8px),radial-gradient(circle at 78% 86%, rgba(255,255,255,0.35) 0 11px, rgba(255,255,255,0) 12px)"></div>
     <div aria-hidden="true" style="position:relative; line-height:0">
       <svg class="r-wave" viewBox="0 0 1440 200" preserveAspectRatio="none" style="display:block; width:100%; height:clamp(74px,8vw,124px); transform:scaleY(-1)">
           <defs>
@@ -2256,13 +2255,15 @@
 <script type="text/x-dc" data-dc-script data-props="{&quot;freeShipMin&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:1500,&quot;min&quot;:0,&quot;max&quot;:10000,&quot;step&quot;:50,&quot;tsType&quot;:&quot;number | null&quot;,&quot;section&quot;:&quot;Store settings&quot;}}">
 class Component extends DCLogic {
 
+  // the catalogue: SR-CREAM, SR-CREAM2, SR-SERUM, SR-SERUM2, SR-DUO.
+  // list is what the same goods cost bought one at a time.
   VARIANTS = [
     { key: "cream", unit: "jar", units: "jars",
-      what: "30 g", list: [1890, 3780, 5670], sell: [1890, 3400, 4820] },
+      what: "30 g", list: [1699, 3398], sell: [1699, 2699] },
     { key: "serum", unit: "bottle", units: "bottles",
-      what: "30ml", list: [1590, 3180, 4770], sell: [1590, 2860, 4050] },
+      what: "30ml", list: [1499, 2998], sell: [1499, 2398] },
     { key: "duo", unit: "set", units: "sets",
-      what: "1 jar + 1 bottle", list: [3480, 6960, 10440], sell: [3190, 6260, 8870] }
+      what: "1 jar + 1 bottle", list: [3198], sell: [2899] }
   ];
 
   peso(n) {
@@ -2280,7 +2281,7 @@ class Component extends DCLogic {
     for (let i = 0; i < this.VARIANTS.length; i++) {
       const on = i === vi;
       out["vPick" + i] = () => {
-        if (this.state.variant !== i) this.setState({ variant: i, shot: 0 });
+        if (this.state.variant !== i) this.setState({ variant: i, shot: 0, tier: 0 });
       };
       out["vSel" + i] = on ? "true" : "false";
       out["vBg" + i] = on
@@ -2290,11 +2291,15 @@ class Component extends DCLogic {
       out["vSh" + i] = on ? "0 12px 26px -12px rgba(47,123,224,0.85)" : "0 0 0 rgba(18,38,58,0)";
     }
 
+    const tiers = v.sell.length;
+    const t = Math.min(ti, tiers - 1);
     for (let i = 0; i < 3; i++) {
       const qty = i + 1;
-      const on = i === ti;
-      const sell = v.sell[i];
-      const list = v.list[i];
+      const has = i < tiers;
+      const on = i === t;
+      const sell = has ? v.sell[i] : 0;
+      const list = has ? v.list[i] : 0;
+      out["tShow" + i] = has ? "flex" : "none";
       const saved = list - sell;
       out["tPick" + i] = () => { if (this.state.tier !== i) this.setState({ tier: i }); };
       out["tSel" + i] = on ? "true" : "false";
@@ -2306,7 +2311,7 @@ class Component extends DCLogic {
       out["tLabel" + i] = qty + " " + (qty === 1 ? v.unit : v.units);
       out["tSupply" + i] = qty === 1 ? v.what : qty + " \u00d7 " + v.what;
       out["tPrice" + i] = this.peso(sell);
-      const pct = Math.round((saved / list) * 100);
+      const pct = list > 0 ? Math.round((saved / list) * 100) : 0;
       out["tFlag" + i] = "Save " + pct + "%";
       out["tFlagShow" + i] = saved > 0 ? "inline-block" : "none";
       out["tFlagHide" + i] = saved > 0 ? "false" : "true";
@@ -2316,10 +2321,9 @@ class Component extends DCLogic {
       out["tPriceFg" + i] = on ? "#438fe0" : "#1b3456";
     }
 
-    const sell = v.sell[ti];
-    const list = v.list[ti];
-    const saved = list - sell;
-    const qty = ti + 1;
+    const sell = v.sell[t];
+    const qty = t + 1;
+    out.qtyCols = "repeat(" + tiers + ",minmax(0,1fr))";
     out.tShot = SHOTS[vi];
     // a set is already two objects; stacking three of them is six
     out.stackShow = vi === 2 ? "none" : "flex";

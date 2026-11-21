@@ -508,7 +508,6 @@
   </div>
 
   <footer style="position:relative; width:100%; overflow:hidden; background:linear-gradient(180deg,#ffffff 0%,#dceeff 44%,#cfe7fb 88%,#cfe7fb 100%); padding:0 0 40px">
-    <div aria-hidden="true" style="position:absolute; inset:0; pointer-events:none; background:radial-gradient(circle at 5% 24%, rgba(255,255,255,0.9) 0 9px, rgba(255,255,255,0) 10px),radial-gradient(circle at 8% 19%, rgba(255,255,255,0.6) 0 20px, rgba(255,255,255,0) 21px),radial-gradient(circle at 94% 16%, rgba(255,255,255,0.7) 0 13px, rgba(255,255,255,0) 14px),radial-gradient(circle at 97% 27%, rgba(255,255,255,0.45) 0 7px, rgba(255,255,255,0) 8px),radial-gradient(circle at 78% 86%, rgba(255,255,255,0.35) 0 11px, rgba(255,255,255,0) 12px)"></div>
     <div aria-hidden="true" style="position:relative; line-height:0">
       <svg class="r-wave" viewBox="0 0 1440 200" preserveAspectRatio="none" style="display:block; width:100%; height:clamp(74px,8vw,124px); transform:scaleY(-1)">
           <defs>
@@ -633,13 +632,13 @@ class Component extends DCLogic {
   PRODUCTS = [
     { key: "cream", name: "Dual Regenerative Capsule Cream", sub: "PDRN + GHK-Cu capsule cream", unit: "jar", units: "jars",
       what: "30 g", img: "assets/hero-cream.webp",
-      sell: [1890, 3400, 4820], list: [1890, 3780, 5670] },
+      sell: [1699, 2699], list: [1699, 3398] },
     { key: "serum", name: "GHK-Cu+ Snap 8 Triple Peptide Renewal Serum", sub: "Triple peptide renewal serum", unit: "bottle",
       units: "bottles", what: "30ml", img: "assets/hero-serum.webp",
-      sell: [1590, 2860, 4050], list: [1590, 3180, 4770] },
+      sell: [1499, 2398], list: [1499, 2998] },
     { key: "duo", name: "The Duo", sub: "Capsule Cream + GHK-Cu Serum", unit: "set", units: "sets", what: "1 jar + 1 bottle",
       img: "assets/duo-pair.webp",
-      sell: [3190, 6260, 8870], list: [3480, 6960, 10440] }
+      sell: [2899], list: [3198] }
   ];
   WORDS = ["One", "Two", "Three"];
 
@@ -653,7 +652,7 @@ class Component extends DCLogic {
     if (typeof window === "undefined" || !window.location) return;
     const q = window.location.search || "";
     const p = /[?&]p=([a-z]+)/.exec(q);
-    const n = /[?&]q=([1-3])/.exec(q);
+    const n = /[?&]q=([1-9])/.exec(q);
     const i = p ? this.PRODUCTS.findIndex((x) => x.key === p[1]) : -1;
     if (i >= 0 || n) this.setState({ prod: i >= 0 ? i : 0, qty: n ? Number(n[1]) : 1 });
   }
@@ -784,7 +783,8 @@ class Component extends DCLogic {
 
   renderVals() {
     const p = this.PRODUCTS[this.state.prod] || this.PRODUCTS[0];
-    const qty = Math.max(1, Math.min(3, this.state.qty || 1));
+    // a product carries only the sizes the catalogue stocks
+    const qty = Math.max(1, Math.min(p.sell.length, this.state.qty || 1));
     const sub = p.sell[qty - 1];
     const saved = p.list[qty - 1] - sub;
       const min = this.props.freeShipMin;
