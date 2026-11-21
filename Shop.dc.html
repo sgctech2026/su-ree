@@ -455,7 +455,8 @@
     /* the same phone layout the home page uses: the copy reads from the
        middle, the jar grows, and the four notes clear it -- two above with
        their words over the icon, two below with their words under it */
-    .sr-in-pad { padding: 40px 20px 20px !important; }
+    .sr-in-pad { padding: 20px 20px 8px !important; }
+    .sr-in-wrap { padding-top: 48px !important; padding-bottom: 24px !important; }
     .sr-in-head { text-align: center; }
     .sr-in-head p { margin-left: auto !important; margin-right: auto !important; }
     .sr-in-head .sr-swap { margin-left: auto; margin-right: auto; }
@@ -1746,7 +1747,7 @@
   </section>
 
 
-  <section data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:linear-gradient(180deg,#eaf3fd 0%,#f0f6fb 22%,#e7f3ff 60%,#ffffff 100%); padding-top:clamp(96px,10vw,150px); padding-bottom:64px">
+  <section class="sr-in-wrap" data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:linear-gradient(180deg,#eaf3fd 0%,#f0f6fb 22%,#e7f3ff 60%,#ffffff 100%); padding-top:clamp(96px,10vw,150px); padding-bottom:64px">
     <div aria-hidden="true" style="position:absolute; z-index:3; right:0; top:-1px; left:0; line-height:0; pointer-events:none">
       <svg class="r-wave" viewBox="0 0 1440 200" preserveAspectRatio="none" style="display:block; width:100%; height:clamp(74px,8vw,124px); transform:scaleY(-1)">
           <defs>
