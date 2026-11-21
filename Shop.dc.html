@@ -337,6 +337,10 @@
   }
 
   .sr-gal { display: flex; gap: 14px; }
+  @media (max-width: 980px) {
+    /* stacked, the buy column needs air between it and the batch button */
+    .sr-buygrid { gap: 46px !important; }
+  }
   @media (max-width: 760px) {
     /* the note is a line of type and a batch code, not a paragraph: on a
        narrow card the tick moves to the top and the type comes down a size */
@@ -1174,7 +1178,7 @@
     <div aria-hidden="true" style="position:absolute; inset:0; overflow:hidden; pointer-events:none">
     </div>
     <div style="position:relative; z-index:2; margin:0 auto; width:100%; max-width:1140px; padding:0 16px; box-sizing:border-box">
-      <div class="r-2col" style="display:grid; grid-template-columns:minmax(0,0.95fr) minmax(0,1.05fr); gap:clamp(26px,4.4vw,60px); align-items:start">
+      <div class="r-2col sr-buygrid" style="display:grid; grid-template-columns:minmax(0,0.95fr) minmax(0,1.05fr); gap:clamp(26px,4.4vw,60px); align-items:start">
 
         <div class="r-stick" style="position:sticky; top:106px; min-width:0">
           <div class="sr-gal" onMouseEnter="{{ galHold }}" onMouseLeave="{{ galPlay }}">
