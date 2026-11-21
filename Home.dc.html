@@ -791,6 +791,31 @@
     .sr-ing-bl, [data-sr-step="in"] .sr-ing-bl { left: 20% !important; top: 74% !important; }
     .sr-ing-br, [data-sr-step="in"] .sr-ing-br { left: 80% !important; top: 74% !important; }
   }
+  @media (max-width: 760px) {
+    /* one column turned the footer into a long scroll: the brand leads,
+       centred, then the link lists pair off and the promise runs full width */
+    .r-foot {
+      grid-template-columns: repeat(2,minmax(0,1fr)) !important;
+      gap: 28px 16px !important;
+    }
+    .r-foot > div:first-child { grid-column: 1 / -1; text-align: center; }
+    .r-foot > div:first-child img { margin-left: auto; margin-right: auto; }
+    .r-foot > div:first-child p { margin-left: auto !important; margin-right: auto !important; }
+    .r-foot > div:first-child > div { justify-content: center !important; }
+    .r-foot nav ul { gap: 11px !important; }
+    .r-foot > nav:last-of-type { grid-column: 1 / -1; }
+    .r-foot > nav:last-of-type ul {
+      display: grid !important; grid-template-columns: repeat(2,minmax(0,1fr));
+    }
+    .r-foot > div:last-child {
+      grid-column: 1 / -1; padding-left: 0 !important;
+    }
+    .r-foot + div {
+      justify-content: center !important; text-align: center;
+      margin-top: 28px !important;
+    }
+    .r-foot + div > div { justify-content: center !important; }
+  }
 </style>
 </helmet>
 
