@@ -712,7 +712,10 @@
     }
     .sr-ing-txt { align-items: center !important; text-align: center !important; }
     .sr-ing-txt > span { max-width: none !important; }
-    .sr-ing-tl, .sr-ing-tr { flex-direction: column-reverse !important; }
+    .sr-ing-tl > span:first-child, .sr-ing-tr > span:first-child { order: 2 !important; }
+    .sr-ing-tl > .sr-ing-txt, .sr-ing-tr > .sr-ing-txt { order: 1 !important; }
+    .sr-ing-bl > span:first-child, .sr-ing-br > span:first-child { order: 1 !important; }
+    .sr-ing-bl > .sr-ing-txt, .sr-ing-br > .sr-ing-txt { order: 2 !important; }
     .sr-ing { max-width: 40% !important; }
     .sr-ing-tl, [data-sr-step="in"] .sr-ing-tl { left: 20% !important; top: 26% !important; }
     .sr-ing-tr, [data-sr-step="in"] .sr-ing-tr { left: 80% !important; top: 26% !important; }
