@@ -541,6 +541,24 @@
     .sr-rp-nav:hover { transform: translate(-50%,-50%) !important; }
   }
 
+  @media (max-width: 980px) {
+    /* the three steps keep their two columns; only the product shrinks */
+    .sr-step-row {
+      grid-template-columns: minmax(0,1.18fr) minmax(0,0.82fr) !important;
+      gap: clamp(14px,3.4vw,40px) !important;
+    }
+    .sr-step-row img, .sr-step-row .sr-tod {
+      height: auto !important; width: auto !important;
+      max-width: 100% !important; max-height: 190px !important;
+    }
+  }
+  @media (max-width: 620px) {
+    .sr-step-row h3 { font-size: 19px !important; letter-spacing: -0.7px !important; }
+    .sr-step-row p { font-size: 12px !important; line-height: 1.7 !important; }
+    .sr-step-row > div > span:first-child { font-size: 9.5px !important; letter-spacing: 2px !important; }
+    .sr-step-row img, .sr-step-row .sr-tod { max-height: 136px !important; }
+  }
+
   .sr-pf-grid {
     position: relative; z-index: 2; display: grid;
     grid-template-columns: minmax(0,0.82fr) minmax(0,1fr);
@@ -1187,7 +1205,7 @@
       </header>
 
       <div style="margin-top:clamp(26px,3vw,44px)">
-      <div class="r-2col" data-sr-step="out" style="display:grid; grid-template-columns:minmax(0,350px) minmax(0,330px); justify-content:center; align-items:center; gap:clamp(28px,5vw,88px); padding:clamp(20px,2.6vw,34px) 0">
+      <div class="r-2col sr-step-row" data-sr-step="out" style="display:grid; grid-template-columns:minmax(0,350px) minmax(0,330px); justify-content:center; align-items:center; gap:clamp(28px,5vw,88px); padding:clamp(20px,2.6vw,34px) 0">
         <div data-sr-slide="l" style="order:1; min-width:0; text-align:right">
           <span style="font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; font-weight:600; color:#8295b4; letter-spacing:3px">STEP 01</span>
           <h3 style="margin:12px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-weight:600; color:#1b3456; font-size:clamp(24px,2.7vw,36px); line-height:1.1; letter-spacing:-1.2px">Serum first</h3>
@@ -1198,7 +1216,7 @@
         </div>
       </div>
       <span aria-hidden="true" style="display:block; height:1px; background:linear-gradient(90deg, rgba(183,213,245,0) 0%, #b7d5f5 18%, #b7d5f5 82%, rgba(183,213,245,0) 100%)"></span>
-      <div class="r-2col" data-sr-step="out" style="display:grid; grid-template-columns:minmax(0,350px) minmax(0,330px); justify-content:center; align-items:center; gap:clamp(28px,5vw,88px); padding:clamp(20px,2.6vw,34px) 0">
+      <div class="r-2col sr-step-row" data-sr-step="out" style="display:grid; grid-template-columns:minmax(0,350px) minmax(0,330px); justify-content:center; align-items:center; gap:clamp(28px,5vw,88px); padding:clamp(20px,2.6vw,34px) 0">
         <div data-sr-slide="r" style="order:2; min-width:0; text-align:left">
           <span style="font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; font-weight:600; color:#8295b4; letter-spacing:3px">STEP 02</span>
           <h3 style="margin:12px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-weight:600; color:#1b3456; font-size:clamp(24px,2.7vw,36px); line-height:1.1; letter-spacing:-1.2px">Then the cream</h3>
@@ -1209,7 +1227,7 @@
         </div>
       </div>
       <span aria-hidden="true" style="display:block; height:1px; background:linear-gradient(90deg, rgba(183,213,245,0) 0%, #b7d5f5 18%, #b7d5f5 82%, rgba(183,213,245,0) 100%)"></span>
-      <div class="r-2col" data-sr-step="out" style="display:grid; grid-template-columns:minmax(0,350px) minmax(0,330px); justify-content:center; align-items:center; gap:clamp(28px,5vw,88px); padding:clamp(20px,2.6vw,34px) 0">
+      <div class="r-2col sr-step-row" data-sr-step="out" style="display:grid; grid-template-columns:minmax(0,350px) minmax(0,330px); justify-content:center; align-items:center; gap:clamp(28px,5vw,88px); padding:clamp(20px,2.6vw,34px) 0">
         <div data-sr-slide="l" style="order:1; min-width:0; text-align:right">
           <span style="font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; font-weight:600; color:#8295b4; letter-spacing:3px">STEP 03</span>
           <h3 style="margin:12px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-weight:600; color:#1b3456; font-size:clamp(24px,2.7vw,36px); line-height:1.1; letter-spacing:-1.2px">Morning and evening</h3>
