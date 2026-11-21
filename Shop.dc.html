@@ -238,6 +238,24 @@
   }
   /* a size the catalogue does not stock is not offered */
   .sr-qty[aria-hidden="true"] { display: none !important; }
+  /* one size on offer: the card reads across, like it does on a phone */
+  [data-sr-one="true"] .sr-qty {
+    display: grid; grid-template-columns: auto minmax(0,1fr) auto;
+    align-items: center; gap: 2px 16px; text-align: left;
+    padding: 16px 18px 16px 48px;
+  }
+  [data-sr-one="true"] .sr-qty-radio { left: 16px; top: 50%; transform: translateY(-50%); }
+  [data-sr-one="true"] .sr-qty-shots {
+    grid-column: 1; grid-row: 1 / -1; height: 96px; width: 120px; margin: 0;
+  }
+  [data-sr-one="true"] .sr-qty-label { grid-column: 2; grid-row: 1; align-self: end; }
+  [data-sr-one="true"] .sr-qty-sub { grid-column: 2; grid-row: 2; align-self: start; }
+  [data-sr-one="true"] .sr-qty-price {
+    grid-column: 3; grid-row: 1 / -1; width: auto; margin: 0;
+    flex-direction: column; align-items: center; gap: 2px;
+    border-radius: 0; background: transparent; border-left: 1px solid #dbe8f7;
+    padding: 4px 6px 4px 18px; font-size: 22px; letter-spacing: -0.8px;
+  }
   .sr-qtys {
     margin-top: 20px; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px;
   }
@@ -1507,7 +1525,7 @@
           </div>
 
           <p style="margin:30px 0 0; display:flex; align-items:center; gap:10px"><span aria-hidden="true" style="display:inline-flex; height:21px; width:21px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:#1b3456; color:#fff; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11.5px; font-weight:600">2</span><span style="font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; font-weight:500; color:#44587c; letter-spacing:2.6px">CHOOSE YOUR SIZE</span></p>
-          <div class="sr-qtys" style="grid-template-columns: {{ qtyCols }}">
+          <div class="sr-qtys" data-sr-one="{{ qtyOne }}" style="grid-template-columns: {{ qtyCols }}">
             <button type="button" class="sr-qty" onClick="{{ tPick0 }}" aria-pressed="{{ tSel0 }}" aria-hidden="{{ tGone0 }}" style="background: {{ tBg0 }}; border-color: {{ tBd0 }}; box-shadow: {{ tSh0 }}"><span class="sr-qty-radio" aria-hidden="true" style="border-color: {{ tDotBd0 }}"><span style="background: {{ tDot0 }}"></span></span><span class="sr-qty-flag" aria-hidden="{{ tFlagHide0 }}" style="display: {{ tFlagShow0 }}">{{ tFlag0 }}</span><span class="sr-qty-shots sr-n1"><span class="sr-qty-stack" style="display: {{ stackShow }}"><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /></span><span class="sr-qty-solo" style="display: {{ soloShow }}"><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /></span></span><span class="sr-qty-label">{{ tLabel0 }}</span><span class="sr-qty-sub">{{ tSupply0 }}</span><span class="sr-qty-price"><span style="color: {{ tPriceFg0 }}">{{ tPrice0 }}</span><span class="sr-qty-was" aria-hidden="{{ tWasHide0 }}" style="display: {{ tWasShow0 }}">{{ tWas0 }}</span></span></button>
             <button type="button" class="sr-qty" onClick="{{ tPick1 }}" aria-pressed="{{ tSel1 }}" aria-hidden="{{ tGone1 }}" style="background: {{ tBg1 }}; border-color: {{ tBd1 }}; box-shadow: {{ tSh1 }}"><span class="sr-qty-radio" aria-hidden="true" style="border-color: {{ tDotBd1 }}"><span style="background: {{ tDot1 }}"></span></span><span class="sr-qty-flag" aria-hidden="{{ tFlagHide1 }}" style="display: {{ tFlagShow1 }}">{{ tFlag1 }}</span><span class="sr-qty-shots sr-n2"><span class="sr-qty-stack" style="display: {{ stackShow }}"><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /></span><span class="sr-qty-solo" style="display: {{ soloShow }}"><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /><span class="sr-qty-x">×2</span></span></span><span class="sr-qty-label">{{ tLabel1 }}</span><span class="sr-qty-sub">{{ tSupply1 }}</span><span class="sr-qty-price"><span style="color: {{ tPriceFg1 }}">{{ tPrice1 }}</span><span class="sr-qty-was" aria-hidden="{{ tWasHide1 }}" style="display: {{ tWasShow1 }}">{{ tWas1 }}</span></span></button>
             <button type="button" class="sr-qty" onClick="{{ tPick2 }}" aria-pressed="{{ tSel2 }}" aria-hidden="{{ tGone2 }}" style="background: {{ tBg2 }}; border-color: {{ tBd2 }}; box-shadow: {{ tSh2 }}"><span class="sr-qty-radio" aria-hidden="true" style="border-color: {{ tDotBd2 }}"><span style="background: {{ tDot2 }}"></span></span><span class="sr-qty-flag" aria-hidden="{{ tFlagHide2 }}" style="display: {{ tFlagShow2 }}">{{ tFlag2 }}</span><span class="sr-qty-shots sr-n3"><span class="sr-qty-stack" style="display: {{ stackShow }}"><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /></span><span class="sr-qty-solo" style="display: {{ soloShow }}"><img src="{{ tShot }}" alt="" loading="lazy" decoding="async" /><span class="sr-qty-x">×3</span></span></span><span class="sr-qty-label">{{ tLabel2 }}</span><span class="sr-qty-sub">{{ tSupply2 }}</span><span class="sr-qty-price"><span style="color: {{ tPriceFg2 }}">{{ tPrice2 }}</span><span class="sr-qty-was" aria-hidden="{{ tWasHide2 }}" style="display: {{ tWasShow2 }}">{{ tWas2 }}</span></span></button>
@@ -2363,6 +2381,8 @@ class Component extends DCLogic {
     const sell = v.sell[t];
     const qty = t + 1;
     out.qtyCols = "repeat(" + tiers + ",minmax(0,1fr))";
+    // a lone card has the width to read across instead of down
+    out.qtyOne = tiers === 1 ? "true" : "false";
     out.tShot = SHOTS[vi];
     // a set is already two objects; stacking three of them is six
     out.stackShow = vi === 2 ? "none" : "flex";
