@@ -318,10 +318,13 @@
   @media (prefers-reduced-motion: reduce) { .sr-heronext { transition: none !important; } }
 
   /* the concerns read as one row under a centred heading */
-  .sr-cc-head { text-align: center; max-width: 620px; margin: 0 auto; }
+  .sr-cc-head { text-align: center; max-width: 720px; margin: 0 auto; }
   .sr-cc-head br { display: none; }
   .sr-cc-head em { margin-left: 0.28em; }
-  .sr-cc-head p:last-of-type { margin-left: auto !important; margin-right: auto !important; }
+  .sr-cc-head p:last-of-type {
+    margin-left: auto !important; margin-right: auto !important;
+    max-width: none !important;
+  }
   .sr-cc-head > span { margin-left: auto; margin-right: auto; }
   .sr-cc-track {
     display: grid !important; grid-template-columns: repeat(6,minmax(0,1fr));
