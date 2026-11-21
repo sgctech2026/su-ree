@@ -334,6 +334,15 @@
   }
 
   .sr-gal { display: flex; gap: 14px; }
+  @media (max-width: 760px) {
+    /* the note is a line of type and a batch code, not a paragraph: on a
+       narrow card the tick moves to the top and the type comes down a size */
+    .sr-lab { align-items: flex-start !important; gap: 11px !important; padding: 12px 14px !important; }
+    .sr-lab > span:first-child { height: 28px !important; width: 28px !important; }
+    .sr-lab > span:first-child svg { width: 13px !important; height: 13px !important; }
+    .sr-lab > span:last-child > span:first-child { font-size: 12px !important; gap: 7px !important; }
+    .sr-lab > span:last-child > span:last-child { font-size: 11px !important; line-height: 1.5 !important; }
+  }
   @media (max-width: 980px) {
     /* the pair only reads side by side, so it keeps its two columns and
        the frames come down a size instead */
@@ -1186,7 +1195,7 @@
             </div>
           </div>
 
-          <div style="margin-top:16px; display:flex; align-items:center; gap:14px; border-radius:16px; background:#ffffff; border:0.5px solid #e7f0fb; padding:14px 16px">
+          <div class="sr-lab" style="margin-top:16px; display:flex; align-items:center; gap:14px; border-radius:16px; background:#ffffff; border:0.5px solid #e7f0fb; padding:14px 16px">
             <span aria-hidden="true" style="flex-shrink:0; display:flex; height:34px; width:34px; align-items:center; justify-content:center; border-radius:10px; background:#e7f0fb; color:#438fe0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg></span>
             <span style="display:flex; min-width:0; flex-direction:column; gap:3px">
               <span style="display:flex; flex-wrap:wrap; align-items:center; gap:9px; font-size:13px; font-weight:600; color:#1b3456">Assayed by an accredited third-party lab<span style="border-radius:7px; background:#f2f6fa; padding:3px 9px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:10.5px; font-weight:600; color:#44587c; letter-spacing:1.2px">BATCH SR2604A</span></span>
@@ -2287,7 +2296,8 @@ class Component extends DCLogic {
   nudgeStrip(dir) {
     const el = this.stripEl;
     if (!el) return;
-    const step = el.firstChild ? el.firstChild.offsetWidth + 10 : 80;
+    const th = el.querySelector("button");
+    const step = th ? th.offsetWidth + 10 : 80;
     el.scrollBy({ left: dir * step * 2, behavior: "smooth" });
   }
 
