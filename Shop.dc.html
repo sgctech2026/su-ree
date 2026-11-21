@@ -384,6 +384,19 @@
     box-shadow: 0 8px 16px -8px rgba(18,38,58,0.8);
   }
 
+  .sr-vids-wrap { display: contents; }
+  @media (max-width: 760px) {
+    /* three tall cards stacked ran the length of the screen; here they are
+       a strip you swipe, two and a bit in view */
+    .sr-vids-wrap { display: flex !important; align-items: center; gap: 8px; }
+    .sr-vids {
+      display: flex !important; grid-template-columns: none !important;
+      flex: 1; min-width: 0; gap: 10px; overflow-x: auto;
+      scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none;
+    }
+    .sr-vids::-webkit-scrollbar { display: none; }
+    .sr-vids > li { flex: 0 0 44% !important; scroll-snap-align: start; }
+  }
   .sr-gal { display: flex; gap: 14px; }
   @media (max-width: 980px) {
     /* stacked, the buy column needs air between it and the batch button */
@@ -1308,7 +1321,9 @@
           <h2 style="margin:0; font-family:'Jost',ui-sans-serif,sans-serif; font-weight:600; color:#1b3456; font-size:clamp(21px,2.2vw,28px); line-height:1.2; letter-spacing:-0.3px">Every review came with <em style="font-style:italic; color:#3b82d4">a lot code.</em></h2>
           <p style="margin:9px 0 0; font-size:13.5px; color:#4e648a; line-height:1.75; max-width:62ch">Each of these was left by someone who checked their batch before they wrote it.</p>
           
-          <ul class="r-cols" style="margin:0; padding:0; list-style:none; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px">
+          <div class="sr-vids-wrap">
+            <button type="button" class="sr-gal-arrow" onClick="{{ vidBack }}" aria-label="Earlier stories"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
+            <ul class="r-cols sr-vids" ref="{{ vidRef }}" style="margin:0; padding:0; list-style:none; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px">
             <li style="position:relative; display:block; width:100%; aspect-ratio:3 / 4; overflow:hidden; border-radius:14px; background:linear-gradient(168deg,#e9f1f9 0%,#d8e6f3 58%,#cadeef 100%); border:0.5px solid #e7f0fb" aria-label="Video story from Mikaela Reyes" data-video="assets/story-mikaela.mp4">
               <span aria-hidden="true" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center"><span style="display:flex; height:46px; width:46px; align-items:center; justify-content:center; border-radius:9999px; background:rgba(255,255,255,0.92); color:#438fe0; box-shadow:0 10px 24px -10px rgba(18,38,58,0.5); padding-left:3px"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.53.85l10.72-6.86a1 1 0 0 0 0-1.7L9.53 4.29A1 1 0 0 0 8 5.14z"></path></svg></span></span>
               <span style="position:absolute; left:10px; top:10px; border-radius:7px; background:rgba(255,255,255,0.9); padding:4px 9px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:9.5px; font-weight:600; color:#44587c; letter-spacing:1.4px">VIDEO</span>
@@ -1321,7 +1336,9 @@
               <span aria-hidden="true" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center"><span style="display:flex; height:46px; width:46px; align-items:center; justify-content:center; border-radius:9999px; background:rgba(255,255,255,0.92); color:#438fe0; box-shadow:0 10px 24px -10px rgba(18,38,58,0.5); padding-left:3px"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.53.85l10.72-6.86a1 1 0 0 0 0-1.7L9.53 4.29A1 1 0 0 0 8 5.14z"></path></svg></span></span>
               <span style="position:absolute; left:10px; top:10px; border-radius:7px; background:rgba(255,255,255,0.9); padding:4px 9px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:9.5px; font-weight:600; color:#44587c; letter-spacing:1.4px">VIDEO</span>
             </li>
-          </ul>
+            </ul>
+            <button type="button" class="sr-gal-arrow" onClick="{{ vidFwd }}" aria-label="More stories"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
+          </div>
         </div>
 
         <div role="tabpanel" aria-label="What's inside" style="display: {{ xShow1 }}">
@@ -2208,6 +2225,9 @@ class Component extends DCLogic {
     const at = this.state.gal || 0;
     const out = {
       stripRef: this.stripRef,
+      vidRef: this.vidRef,
+      vidBack: () => this.nudge(this.vidEl, -1, 1),
+      vidFwd: () => this.nudge(this.vidEl, 1, 1),
       galBack: () => this.nudgeStrip(-1),
       galFwd: () => this.nudgeStrip(1),
       galHold: () => { this.galPaused = true; },
@@ -2347,14 +2367,16 @@ class Component extends DCLogic {
   ];
 
   stripRef = (el) => { this.stripEl = el; };
+  vidRef = (el) => { this.vidEl = el; };
 
-  nudgeStrip(dir) {
-    const el = this.stripEl;
+  nudge(el, dir, each) {
     if (!el) return;
-    const th = el.querySelector("button");
-    const step = th ? th.offsetWidth + 10 : 80;
-    el.scrollBy({ left: dir * step * 2, behavior: "smooth" });
+    const one = el.firstElementChild;
+    const step = one ? one.offsetWidth + 10 : 80;
+    el.scrollBy({ left: dir * step * each, behavior: "smooth" });
   }
+
+  nudgeStrip(dir) { this.nudge(this.stripEl, dir, 2); }
 
   trackRef = (el) => {
     if (!el || this.trackEl === el) return;
