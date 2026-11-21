@@ -185,6 +185,12 @@
   @media (max-width: 760px) {
     .sr-abouthero { padding-top: 30px !important; }
   }
+  /* the lab picture ends in air rather than against a line */
+  .sr-labshot { border: 0 !important; }
+  .sr-labshot img {
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 56%, rgba(0,0,0,0.35) 82%, rgba(0,0,0,0) 100%);
+    mask-image: linear-gradient(180deg, #000 0%, #000 56%, rgba(0,0,0,0.35) 82%, rgba(0,0,0,0) 100%);
+  }
 </style>
 </helmet>
 
@@ -239,7 +245,7 @@
         <p style="margin:16px 0 0; font-size:14.5px; color:#44587c; line-height:1.85; text-wrap:pretty">su-ree was built around the answer that should have come back. Each jar carries a lot code. Each lot code opens a report with the assay, the fill date and the facility. You do not have to trust us &mdash; that is the entire point.</p>
         <p style="margin:26px 0 0; font-family:'Caveat','Segoe Script',cursive; font-size:25px; color:#3b82d4">Sureerat P. &mdash; founder</p>
       </div>
-      <div style="position:relative; width:100%; aspect-ratio:1 / 1; border-radius:20px; overflow:hidden; background:#e7f3ff; border:0.5px solid #d7e6f8">
+      <div class="sr-labshot" style="position:relative; width:100%; aspect-ratio:1 / 1; border-radius:20px; overflow:hidden; background:transparent">
         <img src="assets/story-lab.webp" alt="su-ree Dual Regenerative Capsule Cream and the GHK-Cu + SNAP 8 Renewal Serum on a glass tray in the lab" loading="lazy" decoding="async" style="position:absolute; inset:0; height:100%; width:100%; object-fit:cover" />
       </div>
     </div>
