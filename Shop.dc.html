@@ -350,6 +350,19 @@
     .sr-qty-flag {
       font-size: 11.5px; padding: 5px 13px; border-radius: 0 18px 0 16px;
     }
+    /* the label has to clear the arrow disc, so the padding is asymmetric
+       and the type comes down enough to hold one line */
+    .sr-buy { padding: 15px 58px 15px 20px; font-size: 14.5px; gap: 9px; }
+    .sr-buy > span { white-space: nowrap; }
+    .sr-buy-arrow { height: 34px; width: 34px; right: 9px; }
+    .sr-buy svg { width: 16px; height: 16px; }
+    /* both marks stay on one line */
+    .sr-chips { flex-wrap: nowrap !important; gap: 7px; }
+    .sr-chip {
+      min-width: 0; padding: 8px 11px; font-size: 10.5px; gap: 6px;
+      white-space: nowrap;
+    }
+    .sr-chip svg { width: 13px !important; height: 13px !important; }
   }
   @media (prefers-reduced-motion: reduce) {
     .sr-buy:hover { transform: none !important; }
