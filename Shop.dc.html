@@ -560,7 +560,12 @@
   @media (max-width: 620px) {
     .sr-ing2-head { grid-template-columns: minmax(0,1fr) !important; }
     .sr-ing2-art { height: 150px; }
-    .sr-ing2-grid { grid-template-columns: minmax(0,1fr) !important; }
+    /* two across; the odd third keeps a card's width and sits centred
+       under them rather than hugging the left */
+    .sr-ing2-grid { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
+    .sr-ing2-grid > li:last-child:nth-child(odd) {
+      grid-column: 1 / -1; justify-self: center; width: calc(50% - 5px);
+    }
   }
 
   .sr-htu-head {
