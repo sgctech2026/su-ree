@@ -619,15 +619,15 @@
   .sr-htu-tabs > button { flex: 1 1 0; min-width: 0; justify-content: center; }
   .sr-htu-card { margin-top: 10px !important; }
   .sr-htu-card {
-    margin-top: 12px; border-radius: 18px; overflow: hidden;
+    position: relative; margin-top: 12px; border-radius: 18px; overflow: hidden;
     background: linear-gradient(180deg,#ffffff 0%,#f6fbff 100%);
     border: 1px solid #eaf3fd; box-shadow: 0 10px 26px -20px rgba(18,38,58,0.4);
-    padding: 14px;
+    padding: 40px 14px 14px;
   }
-  .sr-htu-bar {
-    display: inline-flex; align-items: stretch; border-radius: 9999px;
-    background: #eaf3fd; overflow: hidden; max-width: 100%;
-  }
+  /* the tabs above already name the formula, so the card only carries
+     the size, resting on its top corner */
+  .sr-htu-bar { display: contents; }
+  .sr-htu-pill { display: none !important; }
   .sr-htu-pill {
     display: inline-flex; align-items: center; gap: 9px; border-radius: 9999px;
     background: linear-gradient(135deg,#5ba0ea 0%,#2f85e0 52%,#1f6ec9 100%);
@@ -635,13 +635,14 @@
     font-weight: 700; color: #ffffff; letter-spacing: -0.2px; white-space: nowrap;
   }
   .sr-htu-size {
-    display: inline-flex; align-items: center; padding: 0 18px;
-    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 13px; font-weight: 600;
-    color: #2f5d8e; white-space: nowrap;
+    position: absolute; right: 14px; top: 14px; z-index: 2;
+    display: inline-flex; align-items: center; border-radius: 9999px;
+    padding: 6px 14px; background: linear-gradient(135deg,#ff7ab4 0%,#f2609e 100%);
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 12.5px; font-weight: 600;
+    color: #ffffff; white-space: nowrap;
+    box-shadow: 0 10px 20px -14px rgba(224,96,158,0.95);
   }
-  .sr-htu-body {
-    margin-top: 14px;
-  }
+  .sr-htu-body { margin-top: 0; }
   .sr-htu-steps {
     margin: 0; padding: 0; list-style: none; display: grid;
     grid-template-columns: repeat(3,minmax(0,1fr));
@@ -700,11 +701,7 @@
     .sr-htu-ico { flex-shrink: 0; }
     .sr-htu-ico svg { width: 22px !important; height: 22px !important; }
     .sr-htu-steptext { min-width: 0; font-size: 12.5px; }
-    /* the size has to stay inside the pill rail */
-    .sr-htu-bar { width: 100%; }
-    .sr-htu-pill { min-width: 0; flex: 1 1 auto; font-size: 12.5px; padding: 10px 14px; }
-    .sr-htu-pill > span { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
-    .sr-htu-size { flex-shrink: 0; padding: 0 14px; font-size: 12px; }
+    .sr-htu-size { right: 12px; top: 12px; font-size: 11.5px; padding: 5px 12px; }
   }
 
   .sr-faqcats { display: flex; flex-wrap: nowrap; gap: 7px; }
@@ -1466,8 +1463,8 @@
           </div>
 
           <div class="sr-htu-tabs" role="tablist" aria-label="Choose a formula">
-            <button type="button" class="sr-ing2-tab" role="tab" onClick="{{ ingPick0 }}" aria-selected="{{ ingSel0 }}" style="background: {{ ingBg0 }}; color: {{ ingFg0 }}; box-shadow: {{ ingSh0 }}">Capsule Cream</button>
-            <button type="button" class="sr-ing2-tab" role="tab" onClick="{{ ingPick1 }}" aria-selected="{{ ingSel1 }}" style="background: {{ ingBg1 }}; color: {{ ingFg1 }}; box-shadow: {{ ingSh1 }}">GHK-Cu+ SNAP 8 Serum</button>
+            <button type="button" class="sr-ing2-tab" role="tab" onClick="{{ ingPick0 }}" aria-selected="{{ ingSel0 }}" style="background: {{ ingBg0 }}; color: {{ ingFg0 }}; box-shadow: {{ ingSh0 }}">{{ htuName0 }}</button>
+            <button type="button" class="sr-ing2-tab" role="tab" onClick="{{ ingPick1 }}" aria-selected="{{ ingSel1 }}" style="background: {{ ingBg1 }}; color: {{ ingFg1 }}; box-shadow: {{ ingSh1 }}">{{ htuName1 }}</button>
           </div>
           <div class="sr-htu-card" style="display: {{ ingShow0 }}">
             <div class="sr-htu-bar"><span class="sr-htu-pill"><span aria-hidden="true" style="display:flex"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9h12v9.5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 6 18.5z"></path><path d="M7.6 6h8.8a1 1 0 0 1 1 1v2H6.6V7a1 1 0 0 1 1-1z"></path></svg></span>Capsule Cream</span><span class="sr-htu-size">30 g</span></div>
@@ -2255,6 +2252,11 @@ class Component extends DCLogic {
         ? "0 10px 22px -12px rgba(47,123,224,0.85)"
         : "0 0 0 rgba(18,38,58,0)";
       out["ingShow" + i] = on ? "block" : "none";
+      // the routine tabs spell the formula out only while it is the one
+      // on show; the other keeps a short name so both fit a phone
+      out["htuName" + i] = on
+        ? ["Capsule Cream", "GHK-Cu+ SNAP 8 Serum"][i]
+        : ["Cream", "Serum"][i];
     }
     return out;
   }
