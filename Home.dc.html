@@ -12,6 +12,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&amp;family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Inter:wght@400;500&amp;display=swap&amp;subset=latin" />
 <style>
+  /* A content-box element with width:100% and side padding is wider than its
+     parent by that padding -- at 390px that is what pushed these pages
+     sideways under the clip. */
+  section, header, footer, nav { box-sizing: border-box; }
+
   *, *::before, *::after { box-sizing: border-box; }
   x-dc { display: block; }
   body { margin: 0; background: #fbfbff; color: oklch(0.129 0.042 264.695); font-family: ui-sans-serif, system-ui, sans-serif; }
@@ -798,7 +803,7 @@
   </sc-if>
 
   <div class="r-lift sr-navbar" style="position:sticky; top:0; z-index:50; padding:14px 24px; margin:0 0 -84px">
-  <nav style="position:relative; display:flex; align-items:center; justify-content:space-between; gap:28px; width:100%; max-width: {{ navMax }}; margin:0 auto; padding: {{ navPad }}; border-radius:9999px; background: {{ navBg }}; border:0.5px solid {{ navBorder }}; box-shadow: {{ navShadow }}; backdrop-filter: {{ navBlur }}; -webkit-backdrop-filter: {{ navBlur }}; transition:max-width 460ms cubic-bezier(0.16,1,0.3,1), padding 460ms cubic-bezier(0.16,1,0.3,1), background 340ms ease, box-shadow 340ms ease, border-color 340ms ease">
+  <nav style="position:relative; display:flex; align-items:center; justify-content:space-between; gap:28px; width:100%; max-width: {{ navMax }}; margin:0 auto; padding: {{ navPad }}; border-radius:9999px; background: {{ navBg }}; border:0.5px solid {{ navBorder }}; box-shadow: {{ navShadow }}; backdrop-filter: {{ navBlur }}; -webkit-backdrop-filter: {{ navBlur }}; transition:max-width 460ms cubic-bezier(0.16,1,0.3,1), padding 460ms cubic-bezier(0.16,1,0.3,1), background 340ms ease, box-shadow 340ms ease, border-color 340ms ease; box-sizing:border-box">
           <button type="button" class="sr-burger" onClick="{{ navToggle }}" aria-label="Menu" aria-expanded="{{ navOpenAria }}" style="flex-shrink:0; display:none; height:40px; width:40px; align-items:center; justify-content:center; border-radius:9999px; border:0.5px solid #d7e6f8; background:rgba(255,255,255,0.9); color:#1b3456; cursor:pointer; padding:0"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg></button>
           <a href="Home.dc.html" aria-label="su-ree home" style="flex-shrink:0; display:flex; align-items:center"><img src="assets/logo.webp" alt="su-ree Skin Science" decoding="async" style="display:block; height:34px; width:auto" /></a>
 
@@ -824,7 +829,7 @@
       <div aria-hidden="true" style="position:absolute; inset:0 0 auto 0; height:150px; background:linear-gradient(180deg, rgba(243,250,255,0.62) 0%, rgba(243,250,255,0.32) 60%, rgba(243,250,255,0) 100%)"></div>
 
 
-      <div class="r-pad40 r-heropad" onMouseEnter="{{ holdHero }}" onMouseLeave="{{ playHero }}" style="position:relative; z-index:2; width:100%; padding:112px 40px 182px max(40px, calc((100% - 1120px) / 2))">
+      <div class="r-pad40 r-heropad" onMouseEnter="{{ holdHero }}" onMouseLeave="{{ playHero }}" style="position:relative; z-index:2; width:100%; padding:112px 40px 182px max(40px, calc((100% - 1120px) / 2)); box-sizing:border-box">
       <div style="position:relative; display:grid">
         <span class="r-wm r-blob" aria-hidden="true" style="position:absolute; z-index:0; left:-18px; top:33%; transform:translateY(-50%); font-family:'Jost',ui-sans-serif,sans-serif; font-weight:700; font-size:clamp(104px,14vw,220px); line-height:1; letter-spacing:-7px; color:#dcecfc; white-space:nowrap; pointer-events:none; user-select:none">SU-REE</span>
         <div class="r-2col r-minh" style="position:relative; z-index:1; grid-area:1 / 1 / 2 / 2; display:grid; grid-template-columns:minmax(0,800px) minmax(0,1fr); align-items:center; gap:clamp(28px,4.5vw,76px); min-height:470px; opacity: {{ s0Op }}; visibility: {{ s0Vis }}; transform: {{ s0Tr }}; pointer-events: {{ s0Pe }}; transition:opacity 560ms ease, transform 560ms ease">
@@ -1167,7 +1172,7 @@
     </div>
   </section>
 
-  <section data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:#ffffff; padding:0 24px 110px">
+  <section data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:#ffffff; padding:0 24px 110px; box-sizing:border-box">
     <div style="position:relative; margin:0 auto; width:100%; max-width:1180px; padding-top:72px">
       <p style="margin:0 auto 22px; width:fit-content; display:flex; align-items:center; gap:14px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; font-weight:500; color:#42688f; letter-spacing:3.6px">
         <span aria-hidden="true" style="display:block; height:1px; width:44px; background:linear-gradient(90deg, rgba(66,104,143,0) 0%, #42688f 100%)"></span>
@@ -1361,7 +1366,7 @@
 
         <div style="margin-top:36px; display:flex; flex-direction:column; gap:14px; text-align:left">
           <div style="border-radius:34px; background:rgba(255,255,255,0.92); border:0.5px solid rgba(185,207,230,0.7); box-shadow:0 8px 22px rgba(18,38,58,0.06); overflow:hidden">
-            <button type="button" onClick="{{ tF0 }}" aria-expanded="{{ f0 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit">
+            <button type="button" onClick="{{ tF0 }}" aria-expanded="{{ f0 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; box-sizing:border-box">
               <span aria-hidden="true" style="display:flex; height:48px; width:52px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:#e7f3ff; font-size:16px; font-weight:600; color:#3f7fc9; letter-spacing:0.4px">01</span>
               <span style="flex:1; min-width:0; font-size:17px; font-weight:500; color:#1b3456; letter-spacing:-0.1px">How long does shipping take?</span>
               <span style="display:flex; flex-shrink:0; color:#3f7fc9; transition:transform 260ms ease; transform: {{ rF0 }}">
@@ -1375,7 +1380,7 @@
             </div>
           </div>
           <div style="border-radius:34px; background:rgba(255,255,255,0.92); border:0.5px solid rgba(185,207,230,0.7); box-shadow:0 8px 22px rgba(18,38,58,0.06); overflow:hidden">
-            <button type="button" onClick="{{ tF1 }}" aria-expanded="{{ f1 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit">
+            <button type="button" onClick="{{ tF1 }}" aria-expanded="{{ f1 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; box-sizing:border-box">
               <span aria-hidden="true" style="display:flex; height:48px; width:52px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:#e7f3ff; font-size:16px; font-weight:600; color:#3f7fc9; letter-spacing:0.4px">02</span>
               <span style="flex:1; min-width:0; font-size:17px; font-weight:500; color:#1b3456; letter-spacing:-0.1px">Do you offer cash on delivery?</span>
               <span style="display:flex; flex-shrink:0; color:#3f7fc9; transition:transform 260ms ease; transform: {{ rF1 }}">
@@ -1389,7 +1394,7 @@
             </div>
           </div>
           <div style="border-radius:34px; background:rgba(255,255,255,0.92); border:0.5px solid rgba(185,207,230,0.7); box-shadow:0 8px 22px rgba(18,38,58,0.06); overflow:hidden">
-            <button type="button" onClick="{{ tF2 }}" aria-expanded="{{ f2 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit">
+            <button type="button" onClick="{{ tF2 }}" aria-expanded="{{ f2 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; box-sizing:border-box">
               <span aria-hidden="true" style="display:flex; height:48px; width:52px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:#e7f3ff; font-size:16px; font-weight:600; color:#3f7fc9; letter-spacing:0.4px">03</span>
               <span style="flex:1; min-width:0; font-size:17px; font-weight:500; color:#1b3456; letter-spacing:-0.1px">Can I pay by card?</span>
               <span style="display:flex; flex-shrink:0; color:#3f7fc9; transition:transform 260ms ease; transform: {{ rF2 }}">
@@ -1403,7 +1408,7 @@
             </div>
           </div>
           <div style="border-radius:34px; background:rgba(255,255,255,0.92); border:0.5px solid rgba(185,207,230,0.7); box-shadow:0 8px 22px rgba(18,38,58,0.06); overflow:hidden">
-            <button type="button" onClick="{{ tF3 }}" aria-expanded="{{ f3 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit">
+            <button type="button" onClick="{{ tF3 }}" aria-expanded="{{ f3 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; box-sizing:border-box">
               <span aria-hidden="true" style="display:flex; height:48px; width:52px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:#e7f3ff; font-size:16px; font-weight:600; color:#3f7fc9; letter-spacing:0.4px">04</span>
               <span style="flex:1; min-width:0; font-size:17px; font-weight:500; color:#1b3456; letter-spacing:-0.1px">What is your returns policy?</span>
               <span style="display:flex; flex-shrink:0; color:#3f7fc9; transition:transform 260ms ease; transform: {{ rF3 }}">
@@ -1417,7 +1422,7 @@
             </div>
           </div>
           <div style="border-radius:34px; background:rgba(255,255,255,0.92); border:0.5px solid rgba(185,207,230,0.7); box-shadow:0 8px 22px rgba(18,38,58,0.06); overflow:hidden">
-            <button type="button" onClick="{{ tF4 }}" aria-expanded="{{ f4 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit">
+            <button type="button" onClick="{{ tF4 }}" aria-expanded="{{ f4 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; box-sizing:border-box">
               <span aria-hidden="true" style="display:flex; height:48px; width:52px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:#e7f3ff; font-size:16px; font-weight:600; color:#3f7fc9; letter-spacing:0.4px">05</span>
               <span style="flex:1; min-width:0; font-size:17px; font-weight:500; color:#1b3456; letter-spacing:-0.1px">Are the products FDA-notified?</span>
               <span style="display:flex; flex-shrink:0; color:#3f7fc9; transition:transform 260ms ease; transform: {{ rF4 }}">
@@ -1440,7 +1445,7 @@
     </div>
   </section>
 
-  <section data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:#ffffff; padding:clamp(48px,6vw,84px) clamp(16px,4vw,48px)">
+  <section data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:#ffffff; padding:clamp(48px,6vw,84px) clamp(16px,4vw,48px); box-sizing:border-box">
     <div class="sr-cta">
       <span class="sr-cta-wash" aria-hidden="true"></span>
       <img class="sr-cta-shot" src="assets/cta-podium.webp" alt="su-ree GHK-Cu Snap 8 Serum and Dual-Replenishing Capsule Cream with their cartons" loading="lazy" decoding="async" />

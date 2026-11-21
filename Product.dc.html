@@ -12,6 +12,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Inter:wght@400;500&amp;display=swap&amp;subset=latin" />
 <style>
+  /* A content-box element with width:100% and side padding is wider than its
+     parent by that padding -- at 390px that is what pushed these pages
+     sideways under the clip. */
+  section, header, footer, nav { box-sizing: border-box; }
+
   x-dc { display: block; }
   body { margin: 0; background: #fbfbff; color: oklch(0.129 0.042 264.695); font-family: ui-sans-serif, system-ui, sans-serif; }
   a { color: inherit; text-decoration: none; }
@@ -121,7 +126,7 @@
 <main id="top" style="min-height:100vh; background:#fbfbff">
 
   <div class="sr-navbar" style="position:sticky; top:0; z-index:50; padding:14px 24px; margin:0">
-  <nav style="position:relative; display:flex; align-items:center; justify-content:space-between; gap:28px; width:100%; max-width: {{ navMax }}; margin:0 auto; padding: {{ navPad }}; border-radius:9999px; background: {{ navBg }}; border:0.5px solid {{ navBorder }}; box-shadow: {{ navShadow }}; backdrop-filter: {{ navBlur }}; -webkit-backdrop-filter: {{ navBlur }}; transition:max-width 460ms cubic-bezier(0.16,1,0.3,1), padding 460ms cubic-bezier(0.16,1,0.3,1), background 340ms ease, box-shadow 340ms ease, border-color 340ms ease">
+  <nav style="position:relative; display:flex; align-items:center; justify-content:space-between; gap:28px; width:100%; max-width: {{ navMax }}; margin:0 auto; padding: {{ navPad }}; border-radius:9999px; background: {{ navBg }}; border:0.5px solid {{ navBorder }}; box-shadow: {{ navShadow }}; backdrop-filter: {{ navBlur }}; -webkit-backdrop-filter: {{ navBlur }}; transition:max-width 460ms cubic-bezier(0.16,1,0.3,1), padding 460ms cubic-bezier(0.16,1,0.3,1), background 340ms ease, box-shadow 340ms ease, border-color 340ms ease; box-sizing:border-box">
           <button type="button" class="sr-burger" onClick="{{ navToggle }}" aria-label="Menu" aria-expanded="{{ navOpenAria }}" style="flex-shrink:0; display:none; height:40px; width:40px; align-items:center; justify-content:center; border-radius:9999px; border:0.5px solid #d7e6f8; background:rgba(255,255,255,0.9); color:#1b3456; cursor:pointer; padding:0"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg></button>
           <a href="Home.dc.html" aria-label="su-ree home" style="flex-shrink:0; display:flex; align-items:center"><img src="assets/logo.webp" alt="su-ree Skin Science" decoding="async" style="display:block; height:34px; width:auto" /></a>
 
@@ -182,7 +187,7 @@
           <legend style="padding:0; font-size:12px; color:#5b6a77">Choose an option</legend>
           <div style="margin-top:12px; display:flex; flex-direction:column; gap:12px">
 
-            <button type="button" onClick="{{ sel0 }}" aria-pressed="{{ v0 }}" style="display:flex; width:100%; align-items:center; justify-content:space-between; border-radius:18px; background:#fff; padding:16px; text-align:left; cursor:pointer; font-family:inherit; border:1px solid; border-color: {{ vb0 }}" style-hover="background:#f6fafd">
+            <button type="button" onClick="{{ sel0 }}" aria-pressed="{{ v0 }}" style="display:flex; width:100%; align-items:center; justify-content:space-between; border-radius:18px; background:#fff; padding:16px; text-align:left; cursor:pointer; font-family:inherit; border:1px solid; border-color: {{ vb0 }}; box-sizing:border-box" style-hover="background:#f6fafd">
               <span>
                 <span style="display:block; font-size:14px; color:#1b3456">1 jar · 30 g</span>
                 <span style="display:block; font-size:11px; color:#5b6a77">Dual Regenerative Capsule Cream</span>
@@ -190,7 +195,7 @@
               <span style="font-size:16px; font-weight:500; color:#1b3456">₱1,890</span>
             </button>
 
-            <button type="button" onClick="{{ sel1 }}" aria-pressed="{{ v1 }}" style="display:flex; width:100%; align-items:center; justify-content:space-between; border-radius:18px; background:#fff; padding:16px; text-align:left; cursor:pointer; font-family:inherit; border:1px solid; border-color: {{ vb1 }}" style-hover="background:#f6fafd">
+            <button type="button" onClick="{{ sel1 }}" aria-pressed="{{ v1 }}" style="display:flex; width:100%; align-items:center; justify-content:space-between; border-radius:18px; background:#fff; padding:16px; text-align:left; cursor:pointer; font-family:inherit; border:1px solid; border-color: {{ vb1 }}; box-sizing:border-box" style-hover="background:#f6fafd">
               <span>
                 <span style="display:block; font-size:14px; color:#1b3456">2 jars · 60 g</span>
                 <span style="display:block; font-size:11px; color:#5b6a77">Dual Regenerative Capsule Cream</span>

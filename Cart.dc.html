@@ -12,6 +12,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&amp;family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Inter:wght@400;500;600;700&amp;display=swap&amp;subset=latin" />
 <style>
+  /* A content-box element with width:100% and side padding is wider than its
+     parent by that padding -- at 390px that is what pushed these pages
+     sideways under the clip. */
+  section, header, footer, nav { box-sizing: border-box; }
+
   *, *::before, *::after { box-sizing: border-box; }
   x-dc { display: block; }
   body { margin: 0; background: #fbfbff; color: oklch(0.129 0.042 264.695); font-family: ui-sans-serif, system-ui, sans-serif; }
@@ -375,7 +380,7 @@
 <main id="top" style="min-height:100vh; background:#fbfbff">
 
   <div class="sr-navbar" style="position:sticky; top:0; z-index:50; padding:14px 24px; margin:0">
-  <nav style="position:relative; display:flex; align-items:center; justify-content:space-between; gap:28px; width:100%; max-width: {{ navMax }}; margin:0 auto; padding: {{ navPad }}; border-radius:9999px; background: {{ navBg }}; border:0.5px solid {{ navBorder }}; box-shadow: {{ navShadow }}; backdrop-filter: {{ navBlur }}; -webkit-backdrop-filter: {{ navBlur }}; transition:max-width 460ms cubic-bezier(0.16,1,0.3,1), padding 460ms cubic-bezier(0.16,1,0.3,1), background 340ms ease, box-shadow 340ms ease, border-color 340ms ease">
+  <nav style="position:relative; display:flex; align-items:center; justify-content:space-between; gap:28px; width:100%; max-width: {{ navMax }}; margin:0 auto; padding: {{ navPad }}; border-radius:9999px; background: {{ navBg }}; border:0.5px solid {{ navBorder }}; box-shadow: {{ navShadow }}; backdrop-filter: {{ navBlur }}; -webkit-backdrop-filter: {{ navBlur }}; transition:max-width 460ms cubic-bezier(0.16,1,0.3,1), padding 460ms cubic-bezier(0.16,1,0.3,1), background 340ms ease, box-shadow 340ms ease, border-color 340ms ease; box-sizing:border-box">
           <button type="button" class="sr-burger" onClick="{{ navToggle }}" aria-label="Menu" aria-expanded="{{ navOpenAria }}" style="flex-shrink:0; display:none; height:40px; width:40px; align-items:center; justify-content:center; border-radius:9999px; border:0.5px solid #d7e6f8; background:rgba(255,255,255,0.9); color:#1b3456; cursor:pointer; padding:0"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg></button>
           <a href="Home.dc.html" aria-label="su-ree home" style="flex-shrink:0; display:flex; align-items:center"><img src="assets/logo.webp" alt="su-ree Skin Science" decoding="async" style="display:block; height:34px; width:auto" /></a>
 
@@ -395,7 +400,7 @@
   </div>
 
 
-  <section data-sr-reveal="out" style="overflow:clip; position:relative; width:100%; background:linear-gradient(180deg,#f7fbff 0%,#ffffff 34%,#ffffff 76%,#f7fbff 100%); padding:clamp(74px,5.4vw,92px) 24px 96px">
+  <section data-sr-reveal="out" style="overflow:clip; position:relative; width:100%; background:linear-gradient(180deg,#f7fbff 0%,#ffffff 34%,#ffffff 76%,#f7fbff 100%); padding:clamp(74px,5.4vw,92px) 24px 96px; box-sizing:border-box">
     <span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; left:-6%; top:12%; height:260px; width:260px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.85) 0%, rgba(231,243,255,0.75) 34%, rgba(183,213,245,0.30) 64%, rgba(183,213,245,0) 76%); animation:sr-float-a 11s ease-in-out infinite"></span><span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; right:-5%; top:30%; height:210px; width:210px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.8) 0%, rgba(255,222,236,0.62) 34%, rgba(251,62,148,0.14) 64%, rgba(251,62,148,0) 78%)"></span><span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; left:8%; bottom:10%; height:180px; width:180px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.75) 0%, rgba(214,233,251,0.6) 32%, rgba(143,186,235,0.26) 62%, rgba(143,186,235,0) 76%); animation:sr-float-a 9s ease-in-out 1.4s infinite"></span>
 
     <div style="margin:0 auto; width:100%; max-width:1000px">

@@ -12,6 +12,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&amp;family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Inter:wght@400;500;600;700&amp;display=swap&amp;subset=latin" />
 <style>
+  /* A content-box element with width:100% and side padding is wider than its
+     parent by that padding -- at 390px that is what pushed these pages
+     sideways under the clip. */
+  section, header, footer, nav { box-sizing: border-box; }
+
   *, *::before, *::after { box-sizing: border-box; }
   x-dc { display: block; }
   body { margin: 0; background: #fbfbff; color: oklch(0.129 0.042 264.695); font-family: ui-sans-serif, system-ui, sans-serif; }
@@ -144,7 +149,7 @@
 <main id="top" style="min-height:100vh; background:linear-gradient(180deg,#fbfbff 0%,#f4f9ff 9%,#e7f3ff 34%,#e2eefb 58%,#eef5fd 80%,#ffffff 100%)">
 
   <div class="sr-navbar" style="position:sticky; top:0; z-index:50; padding:14px 24px; margin:0">
-  <nav style="position:relative; display:flex; align-items:center; justify-content:space-between; gap:28px; width:100%; max-width: {{ navMax }}; margin:0 auto; padding: {{ navPad }}; border-radius:9999px; background: {{ navBg }}; border:0.5px solid {{ navBorder }}; box-shadow: {{ navShadow }}; backdrop-filter: {{ navBlur }}; -webkit-backdrop-filter: {{ navBlur }}; transition:max-width 460ms cubic-bezier(0.16,1,0.3,1), padding 460ms cubic-bezier(0.16,1,0.3,1), background 340ms ease, box-shadow 340ms ease, border-color 340ms ease">
+  <nav style="position:relative; display:flex; align-items:center; justify-content:space-between; gap:28px; width:100%; max-width: {{ navMax }}; margin:0 auto; padding: {{ navPad }}; border-radius:9999px; background: {{ navBg }}; border:0.5px solid {{ navBorder }}; box-shadow: {{ navShadow }}; backdrop-filter: {{ navBlur }}; -webkit-backdrop-filter: {{ navBlur }}; transition:max-width 460ms cubic-bezier(0.16,1,0.3,1), padding 460ms cubic-bezier(0.16,1,0.3,1), background 340ms ease, box-shadow 340ms ease, border-color 340ms ease; box-sizing:border-box">
           <button type="button" class="sr-burger" onClick="{{ navToggle }}" aria-label="Menu" aria-expanded="{{ navOpenAria }}" style="flex-shrink:0; display:none; height:40px; width:40px; align-items:center; justify-content:center; border-radius:9999px; border:0.5px solid #d7e6f8; background:rgba(255,255,255,0.9); color:#1b3456; cursor:pointer; padding:0"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg></button>
           <a href="Home.dc.html" aria-label="su-ree home" style="flex-shrink:0; display:flex; align-items:center"><img src="assets/logo.webp" alt="su-ree Skin Science" decoding="async" style="display:block; height:34px; width:auto" /></a>
 
@@ -163,7 +168,7 @@
         </nav>
   </div>
 
-  <section class="r-lift" style="position:relative; width:100%; overflow:hidden; background:transparent; margin-top:-84px; padding:164px 24px 48px">
+  <section class="r-lift" style="position:relative; width:100%; overflow:hidden; background:transparent; margin-top:-84px; padding:164px 24px 48px; box-sizing:border-box">
     <span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; left:-8%; top:12%; height:160px; width:160px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.85) 0%, rgba(231,243,255,0.75) 34%, rgba(183,213,245,0.30) 64%, rgba(183,213,245,0) 76%); animation:sr-float-a 11s ease-in-out infinite"></span><span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; right:-5%; top:38%; height:160px; width:160px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.8) 0%, rgba(255,222,236,0.62) 34%, rgba(251,62,148,0.14) 64%, rgba(251,62,148,0) 78%)"></span><span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; left:12%; bottom:16%; height:160px; width:160px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.75) 0%, rgba(214,233,251,0.6) 32%, rgba(143,186,235,0.26) 62%, rgba(143,186,235,0) 76%); animation:sr-float-a 9s ease-in-out 1.2s infinite"></span>
     <div aria-hidden="true" style="position:absolute; top:-180px; left:50%; width:760px; height:420px; transform:translateX(-50%); border-radius:9999px; background:radial-gradient(60% 60% at 50% 50%, rgba(167,202,236,0.38) 0%, rgba(167,202,236,0) 72%); animation:sr-blob-breathe 11s ease-in-out infinite; pointer-events:none"></div>
     <div style="position:relative; margin:0 auto; width:100%; max-width:1140px; text-align:center">
@@ -173,24 +178,24 @@
     </div>
   </section>
 
-  <section data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:transparent; padding:8px 24px 16px">
+  <section data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:transparent; padding:8px 24px 16px; box-sizing:border-box">
     <span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; right:-7%; top:10%; height:240px; width:240px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.75) 0%, rgba(214,233,251,0.6) 32%, rgba(143,186,235,0.26) 62%, rgba(143,186,235,0) 76%)"></span><span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; left:-4%; bottom:16%; height:160px; width:160px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.85) 0%, rgba(231,243,255,0.75) 34%, rgba(183,213,245,0.30) 64%, rgba(183,213,245,0) 76%); animation:sr-float-a 12s ease-in-out .6s infinite"></span>
     <div style="margin:0 auto; width:100%; max-width:1140px">
       <div class="r-2col" style="display:grid; grid-template-columns:minmax(0,250px) minmax(0,1fr); gap:clamp(24px,4vw,54px); align-items:start; padding-top:28px">
         <div class="r-stick" role="tablist" aria-orientation="vertical" aria-label="Question categories" style="position:sticky; top:106px; display:flex; flex-direction:column; gap:6px">
-          <button type="button" role="tab" onClick="{{ qPick0 }}" aria-selected="{{ qSel0 }}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; border-radius:12px; padding:13px 15px; font-size:14px; font-weight:600; letter-spacing:-0.1px; cursor:pointer; font-family:inherit; background: {{ qBg0 }}; color: {{ qFg0 }}; border:0.5px solid {{ qBd0 }}; transition:background 240ms ease, color 240ms ease, border-color 240ms ease">
+          <button type="button" role="tab" onClick="{{ qPick0 }}" aria-selected="{{ qSel0 }}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; border-radius:12px; padding:13px 15px; font-size:14px; font-weight:600; letter-spacing:-0.1px; cursor:pointer; font-family:inherit; background: {{ qBg0 }}; color: {{ qFg0 }}; border:0.5px solid {{ qBd0 }}; transition:background 240ms ease, color 240ms ease, border-color 240ms ease; box-sizing:border-box">
             <span style="min-width:0">Ordering &amp; delivery</span>
             <span aria-hidden="true" style="flex-shrink:0; font-size:12px; font-weight:500; opacity:0.65">4</span>
           </button>
-          <button type="button" role="tab" onClick="{{ qPick1 }}" aria-selected="{{ qSel1 }}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; border-radius:12px; padding:13px 15px; font-size:14px; font-weight:600; letter-spacing:-0.1px; cursor:pointer; font-family:inherit; background: {{ qBg1 }}; color: {{ qFg1 }}; border:0.5px solid {{ qBd1 }}; transition:background 240ms ease, color 240ms ease, border-color 240ms ease">
+          <button type="button" role="tab" onClick="{{ qPick1 }}" aria-selected="{{ qSel1 }}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; border-radius:12px; padding:13px 15px; font-size:14px; font-weight:600; letter-spacing:-0.1px; cursor:pointer; font-family:inherit; background: {{ qBg1 }}; color: {{ qFg1 }}; border:0.5px solid {{ qBd1 }}; transition:background 240ms ease, color 240ms ease, border-color 240ms ease; box-sizing:border-box">
             <span style="min-width:0">The products</span>
             <span aria-hidden="true" style="flex-shrink:0; font-size:12px; font-weight:500; opacity:0.65">4</span>
           </button>
-          <button type="button" role="tab" onClick="{{ qPick2 }}" aria-selected="{{ qSel2 }}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; border-radius:12px; padding:13px 15px; font-size:14px; font-weight:600; letter-spacing:-0.1px; cursor:pointer; font-family:inherit; background: {{ qBg2 }}; color: {{ qFg2 }}; border:0.5px solid {{ qBd2 }}; transition:background 240ms ease, color 240ms ease, border-color 240ms ease">
+          <button type="button" role="tab" onClick="{{ qPick2 }}" aria-selected="{{ qSel2 }}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; border-radius:12px; padding:13px 15px; font-size:14px; font-weight:600; letter-spacing:-0.1px; cursor:pointer; font-family:inherit; background: {{ qBg2 }}; color: {{ qFg2 }}; border:0.5px solid {{ qBd2 }}; transition:background 240ms ease, color 240ms ease, border-color 240ms ease; box-sizing:border-box">
             <span style="min-width:0">Batches &amp; verification</span>
             <span aria-hidden="true" style="flex-shrink:0; font-size:12px; font-weight:500; opacity:0.65">3</span>
           </button>
-          <button type="button" role="tab" onClick="{{ qPick3 }}" aria-selected="{{ qSel3 }}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; border-radius:12px; padding:13px 15px; font-size:14px; font-weight:600; letter-spacing:-0.1px; cursor:pointer; font-family:inherit; background: {{ qBg3 }}; color: {{ qFg3 }}; border:0.5px solid {{ qBd3 }}; transition:background 240ms ease, color 240ms ease, border-color 240ms ease">
+          <button type="button" role="tab" onClick="{{ qPick3 }}" aria-selected="{{ qSel3 }}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; border-radius:12px; padding:13px 15px; font-size:14px; font-weight:600; letter-spacing:-0.1px; cursor:pointer; font-family:inherit; background: {{ qBg3 }}; color: {{ qFg3 }}; border:0.5px solid {{ qBd3 }}; transition:background 240ms ease, color 240ms ease, border-color 240ms ease; box-sizing:border-box">
             <span style="min-width:0">Returns &amp; support</span>
             <span aria-hidden="true" style="flex-shrink:0; font-size:12px; font-weight:500; opacity:0.65">3</span>
           </button>
@@ -201,7 +206,7 @@
         <p style="margin:0 0 20px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; color:#3f7fc9; letter-spacing:1.8px; text-transform:uppercase">Ordering & delivery</p>
         <div style="display:flex; flex-direction:column; gap:14px">
           <div style="border-radius:26px; background:rgba(255,255,255,0.92); border:0.5px solid rgba(185,207,230,0.7); box-shadow:0 8px 22px rgba(18,38,58,0.06); overflow:hidden; transition:box-shadow 260ms ease, border-color 260ms ease">
-            <button type="button" onClick="{{ tF0 }}" aria-expanded="{{ f0 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit">
+            <button type="button" onClick="{{ tF0 }}" aria-expanded="{{ f0 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; box-sizing:border-box">
               <span aria-hidden="true" style="display:flex; height:48px; width:52px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:#e7f3ff; font-size:16px; font-weight:600; color:#3f7fc9; letter-spacing:0.4px">01</span>
               <span style="flex:1; min-width:0; font-size:17px; font-weight:500; color:#1b3456; letter-spacing:-0.1px">How long does delivery take?</span>
               <span style="display:flex; flex-shrink:0; color:#3f7fc9; transition:transform 260ms ease; transform: {{ rF0 }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
@@ -213,7 +218,7 @@
             </div>
           </div>
           <div style="border-radius:26px; background:rgba(255,255,255,0.92); border:0.5px solid rgba(185,207,230,0.7); box-shadow:0 8px 22px rgba(18,38,58,0.06); overflow:hidden; transition:box-shadow 260ms ease, border-color 260ms ease">
-            <button type="button" onClick="{{ tF1 }}" aria-expanded="{{ f1 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit">
+            <button type="button" onClick="{{ tF1 }}" aria-expanded="{{ f1 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; box-sizing:border-box">
               <span aria-hidden="true" style="display:flex; height:48px; width:52px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:#e7f3ff; font-size:16px; font-weight:600; color:#3f7fc9; letter-spacing:0.4px">02</span>
               <span style="flex:1; min-width:0; font-size:17px; font-weight:500; color:#1b3456; letter-spacing:-0.1px">Do you offer cash on delivery?</span>
               <span style="display:flex; flex-shrink:0; color:#3f7fc9; transition:transform 260ms ease; transform: {{ rF1 }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
@@ -225,7 +230,7 @@
             </div>
           </div>
           <div style="border-radius:26px; background:rgba(255,255,255,0.92); border:0.5px solid rgba(185,207,230,0.7); box-shadow:0 8px 22px rgba(18,38,58,0.06); overflow:hidden; transition:box-shadow 260ms ease, border-color 260ms ease">
-            <button type="button" onClick="{{ tF2 }}" aria-expanded="{{ f2 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit">
+            <button type="button" onClick="{{ tF2 }}" aria-expanded="{{ f2 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; box-sizing:border-box">
               <span aria-hidden="true" style="display:flex; height:48px; width:52px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:#e7f3ff; font-size:16px; font-weight:600; color:#3f7fc9; letter-spacing:0.4px">03</span>
               <span style="flex:1; min-width:0; font-size:17px; font-weight:500; color:#1b3456; letter-spacing:-0.1px">Can I pay by card?</span>
               <span style="display:flex; flex-shrink:0; color:#3f7fc9; transition:transform 260ms ease; transform: {{ rF2 }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
@@ -237,7 +242,7 @@
             </div>
           </div>
           <div style="border-radius:26px; background:rgba(255,255,255,0.92); border:0.5px solid rgba(185,207,230,0.7); box-shadow:0 8px 22px rgba(18,38,58,0.06); overflow:hidden; transition:box-shadow 260ms ease, border-color 260ms ease">
-            <button type="button" onClick="{{ tF3 }}" aria-expanded="{{ f3 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit">
+            <button type="button" onClick="{{ tF3 }}" aria-expanded="{{ f3 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; box-sizing:border-box">
               <span aria-hidden="true" style="display:flex; height:48px; width:52px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:#e7f3ff; font-size:16px; font-weight:600; color:#3f7fc9; letter-spacing:0.4px">04</span>
               <span style="flex:1; min-width:0; font-size:17px; font-weight:500; color:#1b3456; letter-spacing:-0.1px">Do you ship outside the Philippines?</span>
               <span style="display:flex; flex-shrink:0; color:#3f7fc9; transition:transform 260ms ease; transform: {{ rF3 }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
@@ -255,7 +260,7 @@
         <p style="margin:0 0 20px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; color:#3f7fc9; letter-spacing:1.8px; text-transform:uppercase">The products</p>
         <div style="display:flex; flex-direction:column; gap:14px">
           <div style="border-radius:26px; background:rgba(255,255,255,0.92); border:0.5px solid rgba(185,207,230,0.7); box-shadow:0 8px 22px rgba(18,38,58,0.06); overflow:hidden; transition:box-shadow 260ms ease, border-color 260ms ease">
-            <button type="button" onClick="{{ tF4 }}" aria-expanded="{{ f4 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit">
+            <button type="button" onClick="{{ tF4 }}" aria-expanded="{{ f4 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; box-sizing:border-box">
               <span aria-hidden="true" style="display:flex; height:48px; width:52px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:#e7f3ff; font-size:16px; font-weight:600; color:#3f7fc9; letter-spacing:0.4px">05</span>
               <span style="flex:1; min-width:0; font-size:17px; font-weight:500; color:#1b3456; letter-spacing:-0.1px">Which one should I start with?</span>
               <span style="display:flex; flex-shrink:0; color:#3f7fc9; transition:transform 260ms ease; transform: {{ rF4 }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
@@ -267,7 +272,7 @@
             </div>
           </div>
           <div style="border-radius:26px; background:rgba(255,255,255,0.92); border:0.5px solid rgba(185,207,230,0.7); box-shadow:0 8px 22px rgba(18,38,58,0.06); overflow:hidden; transition:box-shadow 260ms ease, border-color 260ms ease">
-            <button type="button" onClick="{{ tF5 }}" aria-expanded="{{ f5 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit">
+            <button type="button" onClick="{{ tF5 }}" aria-expanded="{{ f5 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; box-sizing:border-box">
               <span aria-hidden="true" style="display:flex; height:48px; width:52px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:#e7f3ff; font-size:16px; font-weight:600; color:#3f7fc9; letter-spacing:0.4px">06</span>
               <span style="flex:1; min-width:0; font-size:17px; font-weight:500; color:#1b3456; letter-spacing:-0.1px">Can I use both together?</span>
               <span style="display:flex; flex-shrink:0; color:#3f7fc9; transition:transform 260ms ease; transform: {{ rF5 }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
@@ -279,7 +284,7 @@
             </div>
           </div>
           <div style="border-radius:26px; background:rgba(255,255,255,0.92); border:0.5px solid rgba(185,207,230,0.7); box-shadow:0 8px 22px rgba(18,38,58,0.06); overflow:hidden; transition:box-shadow 260ms ease, border-color 260ms ease">
-            <button type="button" onClick="{{ tF6 }}" aria-expanded="{{ f6 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit">
+            <button type="button" onClick="{{ tF6 }}" aria-expanded="{{ f6 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; box-sizing:border-box">
               <span aria-hidden="true" style="display:flex; height:48px; width:52px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:#e7f3ff; font-size:16px; font-weight:600; color:#3f7fc9; letter-spacing:0.4px">07</span>
               <span style="flex:1; min-width:0; font-size:17px; font-weight:500; color:#1b3456; letter-spacing:-0.1px">Is it safe while pregnant?</span>
               <span style="display:flex; flex-shrink:0; color:#3f7fc9; transition:transform 260ms ease; transform: {{ rF6 }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
@@ -291,7 +296,7 @@
             </div>
           </div>
           <div style="border-radius:26px; background:rgba(255,255,255,0.92); border:0.5px solid rgba(185,207,230,0.7); box-shadow:0 8px 22px rgba(18,38,58,0.06); overflow:hidden; transition:box-shadow 260ms ease, border-color 260ms ease">
-            <button type="button" onClick="{{ tF7 }}" aria-expanded="{{ f7 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit">
+            <button type="button" onClick="{{ tF7 }}" aria-expanded="{{ f7 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; box-sizing:border-box">
               <span aria-hidden="true" style="display:flex; height:48px; width:52px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:#e7f3ff; font-size:16px; font-weight:600; color:#3f7fc9; letter-spacing:0.4px">08</span>
               <span style="flex:1; min-width:0; font-size:17px; font-weight:500; color:#1b3456; letter-spacing:-0.1px">How long until I see a change?</span>
               <span style="display:flex; flex-shrink:0; color:#3f7fc9; transition:transform 260ms ease; transform: {{ rF7 }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
@@ -309,7 +314,7 @@
         <p style="margin:0 0 20px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; color:#3f7fc9; letter-spacing:1.8px; text-transform:uppercase">Batches & verification</p>
         <div style="display:flex; flex-direction:column; gap:14px">
           <div style="border-radius:26px; background:rgba(255,255,255,0.92); border:0.5px solid rgba(185,207,230,0.7); box-shadow:0 8px 22px rgba(18,38,58,0.06); overflow:hidden; transition:box-shadow 260ms ease, border-color 260ms ease">
-            <button type="button" onClick="{{ tF8 }}" aria-expanded="{{ f8 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit">
+            <button type="button" onClick="{{ tF8 }}" aria-expanded="{{ f8 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; box-sizing:border-box">
               <span aria-hidden="true" style="display:flex; height:48px; width:52px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:#e7f3ff; font-size:16px; font-weight:600; color:#3f7fc9; letter-spacing:0.4px">09</span>
               <span style="flex:1; min-width:0; font-size:17px; font-weight:500; color:#1b3456; letter-spacing:-0.1px">What is a lot code?</span>
               <span style="display:flex; flex-shrink:0; color:#3f7fc9; transition:transform 260ms ease; transform: {{ rF8 }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
@@ -321,7 +326,7 @@
             </div>
           </div>
           <div style="border-radius:26px; background:rgba(255,255,255,0.92); border:0.5px solid rgba(185,207,230,0.7); box-shadow:0 8px 22px rgba(18,38,58,0.06); overflow:hidden; transition:box-shadow 260ms ease, border-color 260ms ease">
-            <button type="button" onClick="{{ tF9 }}" aria-expanded="{{ f9 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit">
+            <button type="button" onClick="{{ tF9 }}" aria-expanded="{{ f9 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; box-sizing:border-box">
               <span aria-hidden="true" style="display:flex; height:48px; width:52px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:#e7f3ff; font-size:16px; font-weight:600; color:#3f7fc9; letter-spacing:0.4px">10</span>
               <span style="flex:1; min-width:0; font-size:17px; font-weight:500; color:#1b3456; letter-spacing:-0.1px">What does the batch report show?</span>
               <span style="display:flex; flex-shrink:0; color:#3f7fc9; transition:transform 260ms ease; transform: {{ rF9 }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
@@ -333,7 +338,7 @@
             </div>
           </div>
           <div style="border-radius:26px; background:rgba(255,255,255,0.92); border:0.5px solid rgba(185,207,230,0.7); box-shadow:0 8px 22px rgba(18,38,58,0.06); overflow:hidden; transition:box-shadow 260ms ease, border-color 260ms ease">
-            <button type="button" onClick="{{ tF10 }}" aria-expanded="{{ f10 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit">
+            <button type="button" onClick="{{ tF10 }}" aria-expanded="{{ f10 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; box-sizing:border-box">
               <span aria-hidden="true" style="display:flex; height:48px; width:52px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:#e7f3ff; font-size:16px; font-weight:600; color:#3f7fc9; letter-spacing:0.4px">11</span>
               <span style="flex:1; min-width:0; font-size:17px; font-weight:500; color:#1b3456; letter-spacing:-0.1px">My code will not verify. What now?</span>
               <span style="display:flex; flex-shrink:0; color:#3f7fc9; transition:transform 260ms ease; transform: {{ rF10 }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
@@ -351,7 +356,7 @@
         <p style="margin:0 0 20px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; color:#3f7fc9; letter-spacing:1.8px; text-transform:uppercase">Returns & support</p>
         <div style="display:flex; flex-direction:column; gap:14px">
           <div style="border-radius:26px; background:rgba(255,255,255,0.92); border:0.5px solid rgba(185,207,230,0.7); box-shadow:0 8px 22px rgba(18,38,58,0.06); overflow:hidden; transition:box-shadow 260ms ease, border-color 260ms ease">
-            <button type="button" onClick="{{ tF11 }}" aria-expanded="{{ f11 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit">
+            <button type="button" onClick="{{ tF11 }}" aria-expanded="{{ f11 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; box-sizing:border-box">
               <span aria-hidden="true" style="display:flex; height:48px; width:52px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:#e7f3ff; font-size:16px; font-weight:600; color:#3f7fc9; letter-spacing:0.4px">12</span>
               <span style="flex:1; min-width:0; font-size:17px; font-weight:500; color:#1b3456; letter-spacing:-0.1px">What is your returns policy?</span>
               <span style="display:flex; flex-shrink:0; color:#3f7fc9; transition:transform 260ms ease; transform: {{ rF11 }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
@@ -363,7 +368,7 @@
             </div>
           </div>
           <div style="border-radius:26px; background:rgba(255,255,255,0.92); border:0.5px solid rgba(185,207,230,0.7); box-shadow:0 8px 22px rgba(18,38,58,0.06); overflow:hidden; transition:box-shadow 260ms ease, border-color 260ms ease">
-            <button type="button" onClick="{{ tF12 }}" aria-expanded="{{ f12 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit">
+            <button type="button" onClick="{{ tF12 }}" aria-expanded="{{ f12 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; box-sizing:border-box">
               <span aria-hidden="true" style="display:flex; height:48px; width:52px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:#e7f3ff; font-size:16px; font-weight:600; color:#3f7fc9; letter-spacing:0.4px">13</span>
               <span style="flex:1; min-width:0; font-size:17px; font-weight:500; color:#1b3456; letter-spacing:-0.1px">What if the product arrived damaged?</span>
               <span style="display:flex; flex-shrink:0; color:#3f7fc9; transition:transform 260ms ease; transform: {{ rF12 }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
@@ -375,7 +380,7 @@
             </div>
           </div>
           <div style="border-radius:26px; background:rgba(255,255,255,0.92); border:0.5px solid rgba(185,207,230,0.7); box-shadow:0 8px 22px rgba(18,38,58,0.06); overflow:hidden; transition:box-shadow 260ms ease, border-color 260ms ease">
-            <button type="button" onClick="{{ tF13 }}" aria-expanded="{{ f13 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit">
+            <button type="button" onClick="{{ tF13 }}" aria-expanded="{{ f13 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; box-sizing:border-box">
               <span aria-hidden="true" style="display:flex; height:48px; width:52px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:#e7f3ff; font-size:16px; font-weight:600; color:#3f7fc9; letter-spacing:0.4px">14</span>
               <span style="flex:1; min-width:0; font-size:17px; font-weight:500; color:#1b3456; letter-spacing:-0.1px">How do I reach a human?</span>
               <span style="display:flex; flex-shrink:0; color:#3f7fc9; transition:transform 260ms ease; transform: {{ rF13 }}"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></span>
@@ -393,7 +398,7 @@
     </div>
   </section>
 
-  <section data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:transparent; padding:8px 24px 76px">
+  <section data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:transparent; padding:8px 24px 76px; box-sizing:border-box">
     <span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; left:-6%; top:14%; height:230px; width:230px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.8) 0%, rgba(255,222,236,0.62) 34%, rgba(251,62,148,0.14) 64%, rgba(251,62,148,0) 78%)"></span><span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; right:-6%; bottom:14%; height:170px; width:170px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.85) 0%, rgba(231,243,255,0.75) 34%, rgba(183,213,245,0.30) 64%, rgba(183,213,245,0) 76%); animation:sr-float-a 10s ease-in-out 1.6s infinite"></span><span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; right:18%; top:10%; height:140px; width:140px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.75) 0%, rgba(214,233,251,0.6) 32%, rgba(143,186,235,0.26) 62%, rgba(143,186,235,0) 76%)"></span>
     <span aria-hidden="true" style="position:absolute; z-index:0; right:0; bottom:0; left:0; height:260px; pointer-events:none; background:linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.55) 46%, rgba(255,255,255,0.88) 76%, #ffffff 100%)"></span>
     <div style="position:relative; z-index:1; margin:0 auto; width:100%; max-width:980px; border-radius:24px; background:linear-gradient(150deg,#ffffff 0%,#f4f9ff 46%,#e7f3ff 100%); border:1px solid rgba(255,255,255,0.95); box-shadow:0 34px 76px -42px rgba(27,52,86,0.45); padding:clamp(34px,4.6vw,58px) clamp(24px,4vw,48px); box-sizing:border-box">

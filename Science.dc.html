@@ -12,6 +12,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&amp;family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Inter:wght@400;500;600;700&amp;display=swap&amp;subset=latin" />
 <style>
+  /* A content-box element with width:100% and side padding is wider than its
+     parent by that padding -- at 390px that is what pushed these pages
+     sideways under the clip. */
+  section, header, footer, nav { box-sizing: border-box; }
+
   *, *::before, *::after { box-sizing: border-box; }
   x-dc { display: block; }
   body { margin: 0; background: #fbfbff; color: oklch(0.129 0.042 264.695); font-family: ui-sans-serif, system-ui, sans-serif; }
@@ -153,7 +158,7 @@
 <main id="top" style="min-height:100vh; background:#fbfbff">
 
   <div class="sr-navbar" style="position:sticky; top:0; z-index:50; padding:14px 24px; margin:0">
-  <nav style="position:relative; display:flex; align-items:center; justify-content:space-between; gap:28px; width:100%; max-width: {{ navMax }}; margin:0 auto; padding: {{ navPad }}; border-radius:9999px; background: {{ navBg }}; border:0.5px solid {{ navBorder }}; box-shadow: {{ navShadow }}; backdrop-filter: {{ navBlur }}; -webkit-backdrop-filter: {{ navBlur }}; transition:max-width 460ms cubic-bezier(0.16,1,0.3,1), padding 460ms cubic-bezier(0.16,1,0.3,1), background 340ms ease, box-shadow 340ms ease, border-color 340ms ease">
+  <nav style="position:relative; display:flex; align-items:center; justify-content:space-between; gap:28px; width:100%; max-width: {{ navMax }}; margin:0 auto; padding: {{ navPad }}; border-radius:9999px; background: {{ navBg }}; border:0.5px solid {{ navBorder }}; box-shadow: {{ navShadow }}; backdrop-filter: {{ navBlur }}; -webkit-backdrop-filter: {{ navBlur }}; transition:max-width 460ms cubic-bezier(0.16,1,0.3,1), padding 460ms cubic-bezier(0.16,1,0.3,1), background 340ms ease, box-shadow 340ms ease, border-color 340ms ease; box-sizing:border-box">
           <button type="button" class="sr-burger" onClick="{{ navToggle }}" aria-label="Menu" aria-expanded="{{ navOpenAria }}" style="flex-shrink:0; display:none; height:40px; width:40px; align-items:center; justify-content:center; border-radius:9999px; border:0.5px solid #d7e6f8; background:rgba(255,255,255,0.9); color:#1b3456; cursor:pointer; padding:0"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg></button>
           <a href="Home.dc.html" aria-label="su-ree home" style="flex-shrink:0; display:flex; align-items:center"><img src="assets/logo.webp" alt="su-ree Skin Science" decoding="async" style="display:block; height:34px; width:auto" /></a>
 
@@ -172,7 +177,7 @@
         </nav>
   </div>
 
-  <section class="r-lift" style="position:relative; width:100%; overflow:hidden; background:linear-gradient(180deg,#fbfbff 0%,#f0f6fb 26%,#e7f3ff 62%,#dce9fb 100%); margin-top:-84px; padding:164px 24px 150px">
+  <section class="r-lift" style="position:relative; width:100%; overflow:hidden; background:linear-gradient(180deg,#fbfbff 0%,#f0f6fb 26%,#e7f3ff 62%,#dce9fb 100%); margin-top:-84px; padding:164px 24px 150px; box-sizing:border-box">
     <span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; left:-8%; top:12%; height:160px; width:160px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.85) 0%, rgba(231,243,255,0.75) 34%, rgba(183,213,245,0.30) 64%, rgba(183,213,245,0) 76%); animation:sr-float-a 11s ease-in-out infinite"></span><span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; right:-5%; top:38%; height:160px; width:160px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.8) 0%, rgba(255,222,236,0.62) 34%, rgba(251,62,148,0.14) 64%, rgba(251,62,148,0) 78%)"></span><span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; left:12%; bottom:16%; height:160px; width:160px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.75) 0%, rgba(214,233,251,0.6) 32%, rgba(143,186,235,0.26) 62%, rgba(143,186,235,0) 76%); animation:sr-float-a 9s ease-in-out 1.2s infinite"></span>
     <div aria-hidden="true" style="position:absolute; top:-180px; left:50%; width:760px; height:420px; transform:translateX(-50%); border-radius:9999px; background:radial-gradient(60% 60% at 50% 50%, rgba(167,202,236,0.38) 0%, rgba(167,202,236,0) 72%); animation:sr-blob-breathe 11s ease-in-out infinite; pointer-events:none"></div>
     <div style="position:relative; margin:0 auto; width:100%; max-width:1140px; text-align:center">
@@ -186,7 +191,7 @@
     </div>
   </section>
 
-  <section data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:#fff; padding:96px 24px">
+  <section data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:#fff; padding:96px 24px; box-sizing:border-box">
     <span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; right:-7%; top:10%; height:240px; width:240px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.75) 0%, rgba(214,233,251,0.6) 32%, rgba(143,186,235,0.26) 62%, rgba(143,186,235,0) 76%)"></span><span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; left:-4%; bottom:16%; height:160px; width:160px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.85) 0%, rgba(231,243,255,0.75) 34%, rgba(183,213,245,0.30) 64%, rgba(183,213,245,0) 76%); animation:sr-float-a 12s ease-in-out .6s infinite"></span>
     <div style="margin:0 auto; width:100%; max-width:1140px">
       <h2 style="margin:0; font-family:'Inter',ui-sans-serif,sans-serif; font-weight:700; color:#1b3456; font-size:clamp(26px,3vw,40px); line-height:1.1; letter-spacing:-1.2px; text-align:left">Three actives. Each one earns its place.</h2>
@@ -268,7 +273,7 @@
 
 
 
-  <section data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:#1b3456; padding:96px 24px">
+  <section data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:#1b3456; padding:96px 24px; box-sizing:border-box">
     <div aria-hidden="true" data-sr-nofx style="position:absolute; z-index:3; right:0; left:0; top:-1px; line-height:0; pointer-events:none; transform:scaleY(-1);"><svg class="r-wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" style="display:block; width:100%; height:clamp(38px,4.4vw,74px)"><path d="M0,120 Q720,0 1440,120 Z" fill="#fbfbff"></path><path d="M0,120 Q720,0 1440,120" fill="none" stroke="#fbfbff" stroke-width="6" stroke-opacity="0.85"></path><path d="M0,120 Q720,0 1440,120" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.2" transform="translate(0,7)"></path></svg></div>
     <div aria-hidden="true" data-sr-nofx style="position:absolute; z-index:3; right:0; left:0; bottom:-1px; line-height:0; pointer-events:none;"><svg class="r-wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" style="display:block; width:100%; height:clamp(38px,4.4vw,74px)"><path d="M0,120 Q720,0 1440,120 Z" fill="#ffffff"></path><path d="M0,120 Q720,0 1440,120" fill="none" stroke="#ffffff" stroke-width="6" stroke-opacity="0.85"></path><path d="M0,120 Q720,0 1440,120" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="1.2" transform="translate(0,7)"></path></svg></div>
     <div style="margin:0 auto; width:100%; max-width:1140px">
@@ -298,7 +303,7 @@
     </div>
   </section>
 
-  <section data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:linear-gradient(180deg,#ffffff 0%,#f4f8fc 32%,#e8f0f8 66%,#f4f9fd 86%,#ffffff 100%); padding:96px 24px">
+  <section data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:linear-gradient(180deg,#ffffff 0%,#f4f8fc 32%,#e8f0f8 66%,#f4f9fd 86%,#ffffff 100%); padding:96px 24px; box-sizing:border-box">
     <span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; left:-9%; bottom:16%; height:170px; width:170px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.85) 0%, rgba(231,243,255,0.75) 34%, rgba(183,213,245,0.30) 64%, rgba(183,213,245,0) 76%)"></span><span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; right:-4%; top:16%; height:170px; width:170px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.75) 0%, rgba(214,233,251,0.6) 32%, rgba(143,186,235,0.26) 62%, rgba(143,186,235,0) 76%); animation:sr-float-a 13s ease-in-out .9s infinite"></span>
     <div style="margin:0 auto; width:100%; max-width:1140px">
       <h2 style="margin:0; font-family:'Inter',ui-sans-serif,sans-serif; font-weight:700; color:#1b3456; font-size:clamp(26px,3vw,40px); line-height:1.1; letter-spacing:-1.2px; text-align:left">How a jar gets made.</h2>
