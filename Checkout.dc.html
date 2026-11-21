@@ -129,6 +129,83 @@
     section, header, footer { max-width: 100% !important; }
     .sr-navbar { max-width: 100%; }
   }
+
+  .sr-co-head { margin: 0 auto 22px; width: 100%; max-width: 1140px; }
+  .sr-co-eyebrow {
+    margin: 0; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 10.5px;
+    font-weight: 600; color: #7fa8d6; letter-spacing: 3.4px;
+  }
+  .sr-co-title {
+    margin: 10px 0 0; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-size: clamp(28px,3.4vw,44px); font-weight: 700; color: #1b3456;
+    letter-spacing: -1.4px; line-height: 1.05;
+  }
+  .sr-co-title em { font-style: italic; font-weight: 600; color: #2f7bdc; }
+  .sr-co-grid {
+    position: relative; z-index: 2; margin: 0 auto; width: 100%; max-width: 1140px;
+    grid-template-columns: minmax(0,1.5fr) minmax(0,0.9fr); gap: 26px; align-items: start;
+  }
+  .sr-co-form {
+    display: flex; flex-direction: column; gap: 34px; border-radius: 22px;
+    background: #ffffff; border: 1px solid #e7f0fb;
+    box-shadow: 0 18px 44px -30px rgba(18,38,58,0.5); padding: clamp(22px,2.6vw,34px);
+  }
+  .sr-co-sum {
+    position: sticky; top: 104px; border-radius: 22px; background: #ffffff;
+    border: 1px solid #e7f0fb; box-shadow: 0 18px 44px -30px rgba(18,38,58,0.5);
+    padding: clamp(20px,2.4vw,28px);
+  }
+  .sr-co-sumtitle {
+    margin: 0 0 16px; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 16px;
+    font-weight: 700; color: #1b3456; letter-spacing: -0.3px;
+  }
+  .sr-co-line { display: flex; align-items: center; gap: 13px; }
+  .sr-co-shot {
+    position: relative; display: flex; height: 64px; width: 64px; flex-shrink: 0;
+    align-items: center; justify-content: center; border-radius: 14px;
+    background: linear-gradient(170deg,#f7fbff 0%,#eaf4ff 100%);
+  }
+  .sr-co-shot img { display: block; height: 78%; width: auto; object-fit: contain; }
+  .sr-co-qty {
+    position: absolute; right: -7px; top: -7px; display: flex; height: 23px; min-width: 23px;
+    align-items: center; justify-content: center; border-radius: 9999px; padding: 0 6px;
+    background: #1b3456; color: #ffffff; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-size: 11.5px; font-weight: 700;
+  }
+  .sr-co-name {
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 14px; font-weight: 600;
+    color: #1b3456; line-height: 1.3;
+  }
+  .sr-co-sub { font-size: 11.5px; color: #8295b4; line-height: 1.4; }
+  .sr-co-price {
+    margin-left: auto; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 15px;
+    font-weight: 700; color: #1b3456; white-space: nowrap;
+  }
+  .sr-co-total {
+    margin-top: 14px; display: flex; align-items: center; justify-content: space-between;
+    gap: 14px; border-radius: 14px;
+    background: linear-gradient(135deg,#f4f9ff 0%,#e9f3ff 100%); padding: 14px 16px;
+  }
+  .sr-co-total > span:first-child {
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 15px; font-weight: 700;
+    color: #1b3456;
+  }
+  .sr-co-total > span:last-child {
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 23px; font-weight: 700;
+    color: #1b3456; letter-spacing: -0.8px;
+  }
+  .sr-co-cod {
+    margin: 14px 0 0; display: flex; align-items: flex-start; gap: 9px; font-size: 12px;
+    color: #4e648a; line-height: 1.55;
+  }
+  .sr-co-back {
+    margin-top: 16px; display: inline-flex; align-items: center; gap: 8px; font-size: 13px;
+    font-weight: 600; color: #2f7bdc;
+  }
+  @media (max-width: 860px) {
+    .sr-co-grid { grid-template-columns: minmax(0,1fr) !important; }
+    .sr-co-sum { position: static; }
+  }
 </style>
 </helmet>
 
@@ -154,20 +231,15 @@
         </nav>
   </div>
 
-  <section class="r-lift" style="position:relative; width:100%; overflow:hidden; background:linear-gradient(180deg,#fbfbff 0%,#f0f6fb 26%,#e7f3ff 62%,#dce9fb 100%); margin-top:-84px; padding:164px 24px 78px">
-    <div aria-hidden="true" style="position:absolute; top:-180px; left:50%; width:760px; height:420px; transform:translateX(-50%); border-radius:9999px; background:radial-gradient(60% 60% at 50% 50%, rgba(167,202,236,0.38) 0%, rgba(167,202,236,0) 72%); animation:sr-blob-breathe 11s ease-in-out infinite; pointer-events:none"></div>
-    <div style="position:relative; margin:0 auto; width:100%; max-width:1140px; text-align:center">
-      <p style="margin:0; display:inline-block; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; color:#1b3456; background:rgba(255,255,255,0.72); border:0.5px solid #b7d5f5; border-radius:9999px; padding:7px 16px; letter-spacing:1.6px">CHECKOUT</p>
-      <h1 style="margin:18px 0 0; font-family:'Inter',ui-sans-serif,sans-serif; font-weight:700; color:#1b3456; font-size:clamp(32px,3.6vw,52px); line-height:1.04; letter-spacing:-1.6px">Where should it go?</h1>
-      <p style="margin:16px auto 0; max-width:62ch; font-size:14px; color:#4e648a; line-height:1.85; text-wrap:pretty">Delivery is free nationwide on this order. Cash on delivery is available if you would rather pay the courier.</p>
-    </div>
-  </section>
 
-  <section data-sr-reveal="out" style="position:relative; width:100%; background:#fff; padding:64px 24px 96px">
+  <section data-sr-reveal="out" style="overflow:clip; position:relative; width:100%; background:linear-gradient(180deg,#f7fbff 0%,#ffffff 32%,#ffffff 78%,#f7fbff 100%); padding:clamp(120px,13vw,164px) 24px 96px">
+    <span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; left:-6%; top:10%; height:250px; width:250px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.85) 0%, rgba(231,243,255,0.75) 34%, rgba(183,213,245,0.30) 64%, rgba(183,213,245,0) 76%); animation:sr-float-a 11s ease-in-out infinite"></span><span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; right:-5%; top:26%; height:200px; width:200px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.8) 0%, rgba(255,222,236,0.62) 34%, rgba(251,62,148,0.14) 64%, rgba(251,62,148,0) 78%)"></span><span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; left:6%; bottom:12%; height:180px; width:180px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.75) 0%, rgba(214,233,251,0.6) 32%, rgba(143,186,235,0.26) 62%, rgba(143,186,235,0) 76%); animation:sr-float-a 9s ease-in-out 1.4s infinite"></span>
+    <div class="sr-co-head"><p class="sr-co-eyebrow">CHECKOUT</p><h1 class="sr-co-title">Where should it <em>go?</em></h1></div>
+
     <div style="margin:0 auto; width:100%; max-width:1140px">
       
-      <div style="display: {{ doneShow }}; max-width:620px; margin:0 auto; text-align:center"><span aria-hidden="true" style="display:inline-flex; height:68px; width:68px; align-items:center; justify-content:center; border-radius:9999px; background:linear-gradient(140deg,#6cb0f2 0%,#2f85e0 52%,#1f6ec9 100%); color:#fff; box-shadow:0 18px 34px -16px rgba(23,83,155,0.9)"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span><h2 style="margin:22px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:clamp(26px,3vw,38px); font-weight:700; color:#1b3456; letter-spacing:-1.2px">Thank you.</h2><p style="margin:14px auto 0; max-width:48ch; font-size:14px; color:#4e648a; line-height:1.85">Your details are in. We pack in the order they arrive, and the courier collects payment when it reaches you.</p><p style="margin:16px auto 0; max-width:52ch; border-radius:14px; background:#fdf6e7; border:1px solid #f3e4c2; padding:13px 16px; font-size:12.5px; color:#7a6132; line-height:1.7">This site is a demo. No order was placed, nothing was charged, and no details were sent anywhere.</p><a href="Shop.dc.html" style="display:inline-flex; align-items:center; gap:10px; margin-top:26px; border-radius:9999px; background:linear-gradient(135deg,#5ba0ea 0%,#2f85e0 52%,#1f6ec9 100%); padding:14px 28px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:14.5px; font-weight:600; color:#fff; box-shadow:0 16px 30px -14px rgba(47,133,224,0.9)" style-hover="color:#fff">Back to Shop</a></div><div class="r-2col" style="display: {{ formShow }}; grid-template-columns:minmax(0,1.55fr) minmax(0,0.85fr); gap:48px; align-items:start">
-        <form onSubmit="{{ noop }}" style="display:flex; flex-direction:column; gap:36px">
+      <div style="display: {{ doneShow }}; max-width:620px; margin:0 auto; text-align:center"><span aria-hidden="true" style="display:inline-flex; height:68px; width:68px; align-items:center; justify-content:center; border-radius:9999px; background:linear-gradient(140deg,#6cb0f2 0%,#2f85e0 52%,#1f6ec9 100%); color:#fff; box-shadow:0 18px 34px -16px rgba(23,83,155,0.9)"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span><h2 style="margin:22px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:clamp(26px,3vw,38px); font-weight:700; color:#1b3456; letter-spacing:-1.2px">Thank you.</h2><p style="margin:14px auto 0; max-width:48ch; font-size:14px; color:#4e648a; line-height:1.85">Your details are in. We pack in the order they arrive, and the courier collects payment when it reaches you.</p><p style="margin:16px auto 0; max-width:52ch; border-radius:14px; background:#fdf6e7; border:1px solid #f3e4c2; padding:13px 16px; font-size:12.5px; color:#7a6132; line-height:1.7">This site is a demo. No order was placed, nothing was charged, and no details were sent anywhere.</p><a href="Shop.dc.html" style="display:inline-flex; align-items:center; gap:10px; margin-top:26px; border-radius:9999px; background:linear-gradient(135deg,#5ba0ea 0%,#2f85e0 52%,#1f6ec9 100%); padding:14px 28px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:14.5px; font-weight:600; color:#fff; box-shadow:0 16px 30px -14px rgba(47,133,224,0.9)" style-hover="color:#fff">Back to Shop</a></div><div class="r-2col sr-co-grid" style="display: {{ formShow }}">
+        <form class="sr-co-form" onSubmit="{{ noop }}">
 
           <div>
             <p style="margin:0 0 18px; display:flex; align-items:center; gap:10px; font-size:17px; font-weight:600; color:#1b3456"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3f7fc9" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Contact</p>
@@ -216,7 +288,7 @@
           </div>
 
           <div><p style="margin:0 0 18px; display:flex; align-items:center; gap:10px; font-size:17px; font-weight:600; color:#1b3456"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3f7fc9" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2.6"></rect><path d="M2.5 9.6h19"></path></svg> Payment</p><div style="display:flex; align-items:center; gap:14px; border-radius:16px; border:1.5px solid #3f7fc9; background:#f7fbff; padding:16px 18px"><span aria-hidden="true" style="display:flex; height:22px; width:22px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:#3f7fc9; color:#ffffff"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span><span aria-hidden="true" style="display:flex; flex-shrink:0; color:#3f7fc9"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 10.5 9-4.2a2 2 0 0 1 2.8 1.8V9"></path><rect x="3" y="8.5" width="18" height="11" rx="2.4"></rect><circle cx="16.5" cy="14" r="1.6"></circle></svg></span><span style="display:flex; min-width:0; flex-direction:column; gap:2px"><span style="font-size:14px; font-weight:600; color:#1b3456">Cash on delivery</span><span style="font-size:12.5px; color:#4e648a">Pay the courier on arrival. No card needed.</span></span></div>
-        </form>
+        </form><aside class="sr-co-sum"><p class="sr-co-sumtitle">Order summary</p><div class="sr-co-line"><span class="sr-co-shot"><img src="{{ cImg }}" alt="" loading="lazy" decoding="async" /><span class="sr-co-qty">{{ qty }}</span></span><span style="display:flex; min-width:0; flex-direction:column; gap:3px"><span class="sr-co-name">{{ cName }}</span><span class="sr-co-sub">{{ cSub }}</span></span><span class="sr-co-price">{{ cLine }}</span></div><div class="sr-sumrule" aria-hidden="true"></div><div class="sr-sumrow"><span style="color:#5f7a9c">Subtotal</span><span style="color:#4e648a">{{ subtotal }}</span></div><div class="sr-sumrow"><span style="color:#5f7a9c">Shipping</span><span style="color:#4e648a">{{ shipLabel }}</span></div><div class="sr-sumrow"><span style="color:#5f7a9c">Bundle saving</span><span style="color:{{ saveFg }}">{{ saved }}</span></div><div class="sr-co-total"><span>Total</span><span>{{ total }}</span></div><p class="sr-co-cod"><span aria-hidden="true" style="display:flex; flex-shrink:0; color:#2f7bdc"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Cash on delivery. You pay the courier when it arrives.</p><a class="sr-co-back" href="Cart.dc.html"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>Back to cart</a></aside>
 
         <aside style="position:sticky; top:104px; border-radius:20px; background:#fff; border:0.5px solid #e7f0fb; padding:28px; box-shadow:0 8px 24px rgba(18,38,58,0.05)">
           <p style="margin:0 0 20px; font-size:17px; font-weight:600; color:#1b3456; letter-spacing:-0.2px">Your order</p>
@@ -414,7 +486,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{}">
 class Component extends DCLogic {
-  state = { done: false, navOpen: false, navScrolled: false };
+  state = { done: false, navOpen: false, navScrolled: false, prod: 0, qty: 1 };
 
   setupReveal(attempt = 0) {
     const nodes = Array.from(document.querySelectorAll('[data-sr-reveal="out"]'));
@@ -461,7 +533,8 @@ class Component extends DCLogic {
       });
   }
 
-  componentDidMount() { this.setupReveal(); if (this.onMount) this.onMount(); }
+  componentDidMount() {
+    this.readChoice(); this.setupReveal(); if (this.onMount) this.onMount(); }
   componentWillUnmount() {
     if (this.revealIO) this.revealIO.disconnect();
     clearTimeout(this.revealRetry);
@@ -536,10 +609,51 @@ class Component extends DCLogic {
     };
   }
 
+  // the same table Shop and the cart price from
+  PRODUCTS = [
+    { key: "cream", name: "Dual Regenerative Capsule Cream",
+      sub: "PDRN + GHK-Cu capsule cream", unit: "jar", units: "jars",
+      img: "assets/hero-cream.webp", sell: [1890, 3400, 4820], list: [1890, 3780, 5670] },
+    { key: "serum", name: "GHK-Cu+ Snap 8 Serum", sub: "Triple peptide renewal serum",
+      unit: "bottle", units: "bottles", img: "assets/hero-serum.webp",
+      sell: [1590, 2860, 4050], list: [1590, 3180, 4770] },
+    { key: "duo", name: "The Duo", sub: "Capsule Cream + GHK-Cu Serum", unit: "set",
+      units: "sets", img: "assets/duo-pair.webp",
+      sell: [3190, 6260, 8870], list: [3480, 6960, 10440] }
+  ];
+
+  peso(n) { return "\u20B1" + Number(n).toLocaleString("en-PH"); }
+
+  readChoice() {
+    if (typeof window === "undefined" || !window.location) return;
+    const q = window.location.search || "";
+    const p = /[?&]p=([a-z]+)/.exec(q);
+    const n = /[?&]q=([1-3])/.exec(q);
+    const i = p ? this.PRODUCTS.findIndex((x) => x.key === p[1]) : -1;
+    if (i >= 0 || n) this.setState({ prod: i >= 0 ? i : 0, qty: n ? Number(n[1]) : 1 });
+  }
+
   renderVals() {
     const done = !!this.state.done;
+    const p = this.PRODUCTS[this.state.prod] || this.PRODUCTS[0];
+    const qty = Math.max(1, Math.min(3, this.state.qty || 1));
+    const sub = p.sell[qty - 1];
+    const saved = p.list[qty - 1] - sub;
+    const min = this.props.freeShipMin;
+    const hasMin = !(min === null || min === undefined || min === "");
+    const freeShip = !hasMin || sub >= Number(min);
     return {
       done,
+      cImg: p.img,
+      cName: p.name,
+      cSub: p.sub,
+      cLine: this.peso(sub),
+      qty: String(qty),
+      subtotal: this.peso(sub),
+      shipLabel: freeShip ? "Free" : this.peso(150),
+      saved: saved > 0 ? "\u2212" + this.peso(saved) : this.peso(0),
+      saveFg: saved > 0 ? "#2f7bdc" : "#8295b4",
+      total: this.peso(sub + (freeShip ? 0 : 150)),
       doneShow: done ? "block" : "none",
       formShow: done ? "none" : "grid",
       place: () => this.setState({ done: true }),
