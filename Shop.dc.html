@@ -395,7 +395,9 @@
       scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none;
     }
     .sr-vids::-webkit-scrollbar { display: none; }
-    .sr-vids > li { flex: 0 0 44% !important; scroll-snap-align: start; }
+    .sr-vids > li {
+      flex: 0 0 100% !important; scroll-snap-align: center; cursor: pointer;
+    }
   }
   .sr-gal { display: flex; gap: 14px; }
   @media (max-width: 980px) {
@@ -894,6 +896,32 @@
   }
   @media (max-width: 420px) { .sr-chip { padding: 8px 14px; font-size: 11.5px; } }
 
+  .sr-vm {
+    position: relative; width: 100%; max-width: 420px; box-sizing: border-box;
+    border-radius: 24px; padding: 16px;
+    background: linear-gradient(140deg,#ffffff 0%,#f8fbff 52%,#eef6ff 100%);
+    border: 1px solid rgba(183,213,245,0.85);
+    box-shadow: 0 40px 90px -40px rgba(13,38,64,0.8);
+  }
+  .sr-vm-stage {
+    position: relative; display: flex; align-items: center; justify-content: center;
+    width: 100%; aspect-ratio: 3 / 4; overflow: hidden; border-radius: 16px;
+    background: linear-gradient(168deg,#e9f1f9 0%,#d8e6f3 58%,#cadeef 100%);
+  }
+  .sr-vm-play {
+    display: flex; height: 64px; width: 64px; align-items: center; justify-content: center;
+    border-radius: 9999px; background: #ffffff; color: #2f7bdc;
+    box-shadow: 0 16px 30px -16px rgba(18,38,58,0.7);
+  }
+  .sr-vm-tag {
+    position: absolute; left: 14px; top: 14px; border-radius: 8px;
+    background: rgba(255,255,255,0.9); padding: 5px 11px;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 10.5px; font-weight: 600;
+    color: #1b3456; letter-spacing: 1.4px;
+  }
+  .sr-vm-note {
+    margin: 12px 2px 2px; font-size: 12.5px; color: #8295b4; text-align: center;
+  }
   .sr-pm-wrap {
     position: fixed; inset: 0; z-index: 210; align-items: center; justify-content: center;
     padding: 24px; background: rgba(13,38,64,0.44);
@@ -1324,15 +1352,15 @@
           <div class="sr-vids-wrap">
             <button type="button" class="sr-gal-arrow" onClick="{{ vidBack }}" aria-label="Earlier stories"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
             <ul class="r-cols sr-vids" ref="{{ vidRef }}" style="margin:0; padding:0; list-style:none; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px">
-            <li style="position:relative; display:block; width:100%; aspect-ratio:3 / 4; overflow:hidden; border-radius:14px; background:linear-gradient(168deg,#e9f1f9 0%,#d8e6f3 58%,#cadeef 100%); border:0.5px solid #e7f0fb" aria-label="Video story from Mikaela Reyes" data-video="assets/story-mikaela.mp4">
+            <li onClick="{{ vTap0 }}" style="position:relative; display:block; width:100%; aspect-ratio:3 / 4; overflow:hidden; border-radius:14px; background:linear-gradient(168deg,#e9f1f9 0%,#d8e6f3 58%,#cadeef 100%); border:0.5px solid #e7f0fb" aria-label="Video story from Mikaela Reyes" data-video="assets/story-mikaela.mp4">
               <span aria-hidden="true" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center"><span style="display:flex; height:46px; width:46px; align-items:center; justify-content:center; border-radius:9999px; background:rgba(255,255,255,0.92); color:#438fe0; box-shadow:0 10px 24px -10px rgba(18,38,58,0.5); padding-left:3px"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.53.85l10.72-6.86a1 1 0 0 0 0-1.7L9.53 4.29A1 1 0 0 0 8 5.14z"></path></svg></span></span>
               <span style="position:absolute; left:10px; top:10px; border-radius:7px; background:rgba(255,255,255,0.9); padding:4px 9px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:9.5px; font-weight:600; color:#44587c; letter-spacing:1.4px">VIDEO</span>
             </li>
-            <li style="position:relative; display:block; width:100%; aspect-ratio:3 / 4; overflow:hidden; border-radius:14px; background:linear-gradient(168deg,#e9f1f9 0%,#d8e6f3 58%,#cadeef 100%); border:0.5px solid #e7f0fb" aria-label="Video story from Danielle Ong" data-video="assets/story-danielle.mp4">
+            <li onClick="{{ vTap1 }}" style="position:relative; display:block; width:100%; aspect-ratio:3 / 4; overflow:hidden; border-radius:14px; background:linear-gradient(168deg,#e9f1f9 0%,#d8e6f3 58%,#cadeef 100%); border:0.5px solid #e7f0fb" aria-label="Video story from Danielle Ong" data-video="assets/story-danielle.mp4">
               <span aria-hidden="true" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center"><span style="display:flex; height:46px; width:46px; align-items:center; justify-content:center; border-radius:9999px; background:rgba(255,255,255,0.92); color:#438fe0; box-shadow:0 10px 24px -10px rgba(18,38,58,0.5); padding-left:3px"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.53.85l10.72-6.86a1 1 0 0 0 0-1.7L9.53 4.29A1 1 0 0 0 8 5.14z"></path></svg></span></span>
               <span style="position:absolute; left:10px; top:10px; border-radius:7px; background:rgba(255,255,255,0.9); padding:4px 9px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:9.5px; font-weight:600; color:#44587c; letter-spacing:1.4px">VIDEO</span>
             </li>
-            <li style="position:relative; display:block; width:100%; aspect-ratio:3 / 4; overflow:hidden; border-radius:14px; background:linear-gradient(168deg,#e9f1f9 0%,#d8e6f3 58%,#cadeef 100%); border:0.5px solid #e7f0fb" aria-label="Video story from Joanna Cruz" data-video="assets/story-joanna.mp4">
+            <li onClick="{{ vTap2 }}" style="position:relative; display:block; width:100%; aspect-ratio:3 / 4; overflow:hidden; border-radius:14px; background:linear-gradient(168deg,#e9f1f9 0%,#d8e6f3 58%,#cadeef 100%); border:0.5px solid #e7f0fb" aria-label="Video story from Joanna Cruz" data-video="assets/story-joanna.mp4">
               <span aria-hidden="true" style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center"><span style="display:flex; height:46px; width:46px; align-items:center; justify-content:center; border-radius:9999px; background:rgba(255,255,255,0.92); color:#438fe0; box-shadow:0 10px 24px -10px rgba(18,38,58,0.5); padding-left:3px"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.14v13.72a1 1 0 0 0 1.53.85l10.72-6.86a1 1 0 0 0 0-1.7L9.53 4.29A1 1 0 0 0 8 5.14z"></path></svg></span></span>
               <span style="position:absolute; left:10px; top:10px; border-radius:7px; background:rgba(255,255,255,0.9); padding:4px 9px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:9.5px; font-weight:600; color:#44587c; letter-spacing:1.4px">VIDEO</span>
             </li>
@@ -1892,6 +1920,16 @@
   </section>
 
 
+  <div role="dialog" aria-modal="true" aria-label="Story" onClick="{{ vClose }}" class="sr-pm-wrap sr-vm-wrap" style="display: {{ vOpen }}">
+    <div class="sr-vm" onClick="{{ pmStop }}">
+      <button type="button" class="sr-pm-x" onClick="{{ vClose }}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+      <div class="sr-vm-stage">
+        <span aria-hidden="true" class="sr-vm-play"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"></path></svg></span>
+        <span class="sr-vm-tag">VIDEO</span>
+      </div>
+      <p class="sr-vm-note">This story has no clip attached yet.</p>
+    </div>
+  </div>
   <div role="dialog" aria-modal="true" aria-label="Product information" onClick="{{ pmClose }}" class="sr-pm-wrap" style="display: {{ pmOpen }}">
     <div class="sr-pm" onClick="{{ pmStop }}">
       <span class="sr-pm-orb" aria-hidden="true"></span>
@@ -2226,6 +2264,11 @@ class Component extends DCLogic {
     const out = {
       stripRef: this.stripRef,
       vidRef: this.vidRef,
+      vOpen: this.state.vidAt >= 0 ? "flex" : "none",
+      vClose: () => this.setState({ vidAt: -1 }),
+      vTap0: () => this.setState({ vidAt: 0 }),
+      vTap1: () => this.setState({ vidAt: 1 }),
+      vTap2: () => this.setState({ vidAt: 2 }),
       vidBack: () => this.nudge(this.vidEl, -1, 1),
       vidFwd: () => this.nudge(this.vidEl, 1, 1),
       galBack: () => this.nudgeStrip(-1),
@@ -2276,7 +2319,7 @@ class Component extends DCLogic {
 
   componentWillUnmount() { clearInterval(this.galTimer); clearInterval(this.reviewTimer); clearInterval(this.baTimer); if (this.stepIO) this.stepIO.disconnect(); clearTimeout(this.stepTry); if (this.onResize) window.removeEventListener("resize", this.onResize); }
 
-  state = { navOpen: false, inside: 0, insidePop: "a", ba: 0, review: 1, pmOpen: false, pmProd: 0, pmTab: 0, trackW: 1280, navScrolled: false, faqCat: 0, variant: 2, tier: 0, formula: 0, shot: 0, gal: 0, tell: 0, answers: {} };
+  state = { navOpen: false, vidAt: -1, inside: 0, insidePop: "a", ba: 0, review: 1, pmOpen: false, pmProd: 0, pmTab: 0, trackW: 1280, navScrolled: false, faqCat: 0, variant: 2, tier: 0, formula: 0, shot: 0, gal: 0, tell: 0, answers: {} };
 
 
   PM_TABS = 3;
