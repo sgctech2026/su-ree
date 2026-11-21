@@ -166,7 +166,7 @@
   <section data-sr-reveal="out" style="position:relative; width:100%; background:#fff; padding:64px 24px 96px">
     <div style="margin:0 auto; width:100%; max-width:1140px">
       
-      <div class="r-2col" style="display:grid; grid-template-columns:minmax(0,1.55fr) minmax(0,0.85fr); gap:48px; align-items:start">
+      <div style="display: {{ doneShow }}; max-width:620px; margin:0 auto; text-align:center"><span aria-hidden="true" style="display:inline-flex; height:68px; width:68px; align-items:center; justify-content:center; border-radius:9999px; background:linear-gradient(140deg,#6cb0f2 0%,#2f85e0 52%,#1f6ec9 100%); color:#fff; box-shadow:0 18px 34px -16px rgba(23,83,155,0.9)"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span><h2 style="margin:22px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:clamp(26px,3vw,38px); font-weight:700; color:#1b3456; letter-spacing:-1.2px">Thank you.</h2><p style="margin:14px auto 0; max-width:48ch; font-size:14px; color:#4e648a; line-height:1.85">Your details are in. We pack in the order they arrive, and the courier collects payment when it reaches you.</p><p style="margin:16px auto 0; max-width:52ch; border-radius:14px; background:#fdf6e7; border:1px solid #f3e4c2; padding:13px 16px; font-size:12.5px; color:#7a6132; line-height:1.7">This site is a demo. No order was placed, nothing was charged, and no details were sent anywhere.</p><a href="Shop.dc.html" style="display:inline-flex; align-items:center; gap:10px; margin-top:26px; border-radius:9999px; background:linear-gradient(135deg,#5ba0ea 0%,#2f85e0 52%,#1f6ec9 100%); padding:14px 28px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:14.5px; font-weight:600; color:#fff; box-shadow:0 16px 30px -14px rgba(47,133,224,0.9)" style-hover="color:#fff">Back to Shop</a></div><div class="r-2col" style="display: {{ formShow }}; grid-template-columns:minmax(0,1.55fr) minmax(0,0.85fr); gap:48px; align-items:start">
         <form onSubmit="{{ noop }}" style="display:flex; flex-direction:column; gap:36px">
 
           <div>
@@ -259,7 +259,7 @@
             <span style="font-family:'Inter',ui-sans-serif,sans-serif; font-size:26px; font-weight:700; color:#1b3456; letter-spacing:-1px">&#8369;3,280</span>
           </div>
           <p style="margin:22px 0 0">
-            <a href="Order.dc.html" style="position:relative; display:inline-block; overflow:hidden; isolation:isolate; border-radius:0 16px 16px 16px; background:linear-gradient(160deg,#1d3a55 0%,#1b3456 46%,#0c1c2c 100%); font-size:14px; font-weight:700; color:#fff; padding:15px 28px; letter-spacing:0.2px; border-top:0.5px solid rgba(255,255,255,0.22); box-shadow:inset 0 1px 0 rgba(255,255,255,0.14), 0 10px 26px rgba(18,38,58,0.24); transition:transform 220ms, box-shadow 220ms; display:block; width:100%; text-align:center; border-radius:14px" style-hover="color:#fff; transform:translateY(-1px); box-shadow:inset 0 1px 0 rgba(255,255,255,0.2), 0 14px 34px rgba(18,38,58,0.3)"><span aria-hidden="true" style="position:absolute; top:0; bottom:0; left:0; width:34%; background:linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.42) 48%, rgba(255,255,255,0) 100%); animation:sr-sheen 5.5s ease-in-out infinite; pointer-events:none"></span><span style="position:relative">Place order</span></a>
+            <button type="button" onClick="{{ place }}" style="cursor:pointer; border:0; font-family:inherit; position:relative; display:inline-block; overflow:hidden; isolation:isolate; border-radius:0 16px 16px 16px; background:linear-gradient(160deg,#1d3a55 0%,#1b3456 46%,#0c1c2c 100%); font-size:14px; font-weight:700; color:#fff; padding:15px 28px; letter-spacing:0.2px; border-top:0.5px solid rgba(255,255,255,0.22); box-shadow:inset 0 1px 0 rgba(255,255,255,0.14), 0 10px 26px rgba(18,38,58,0.24); transition:transform 220ms, box-shadow 220ms; display:block; width:100%; text-align:center; border-radius:14px" style-hover="color:#fff; transform:translateY(-1px); box-shadow:inset 0 1px 0 rgba(255,255,255,0.2), 0 14px 34px rgba(18,38,58,0.3)"><span aria-hidden="true" style="position:absolute; top:0; bottom:0; left:0; width:34%; background:linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.42) 48%, rgba(255,255,255,0) 100%); animation:sr-sheen 5.5s ease-in-out infinite; pointer-events:none"></span><span style="position:relative">Place order</span></button>
           </p>
           <p style="margin:16px 0 0; font-size:11.5px; color:#8295b4; line-height:1.75; text-align:center">By placing this order you agree to our <a href="Terms.dc.html" style="color:#3f7fc9; text-decoration:underline">Terms</a> and <a href="Returns.dc.html" style="color:#3f7fc9; text-decoration:underline">Returns policy</a>.</p>
         </aside>
@@ -384,7 +384,6 @@
             <li><a href="FAQ.dc.html" style="font-size:13.5px; color:#44587c; transition:color 200ms" style-hover="color:#1b3456">FAQ</a></li>
             <li><a href="Shipping.dc.html" style="font-size:13.5px; color:#44587c; transition:color 200ms" style-hover="color:#1b3456">Shipping</a></li>
             <li><a href="Returns.dc.html" style="font-size:13.5px; color:#44587c; transition:color 200ms" style-hover="color:#1b3456">Returns &amp; refunds</a></li>
-            <li><a href="Orders.dc.html" style="font-size:13.5px; color:#44587c; transition:color 200ms" style-hover="color:#1b3456">Track an order</a></li>
           </ul>
         </nav>
         <div style="min-width:0; display:flex; flex-direction:column; gap:16px; padding-left:clamp(0px,2vw,24px); border-left:1px solid rgba(23,70,117,0.10)">
@@ -415,7 +414,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{}">
 class Component extends DCLogic {
-  state = { navOpen: false, navScrolled: false };
+  state = { done: false, navOpen: false, navScrolled: false };
 
   setupReveal(attempt = 0) {
     const nodes = Array.from(document.querySelectorAll('[data-sr-reveal="out"]'));
@@ -538,7 +537,13 @@ class Component extends DCLogic {
   }
 
   renderVals() {
+    const done = !!this.state.done;
     return {
+      done,
+      doneShow: done ? "block" : "none",
+      formShow: done ? "none" : "grid",
+      place: () => this.setState({ done: true }),
+
       ...this.navVals(), ...this.navToggleVals(),
       ...this.nlVals(),
       noop: (e) => e.preventDefault()
