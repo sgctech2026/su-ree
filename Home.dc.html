@@ -615,7 +615,9 @@
     clip-path: inset(50%); white-space: nowrap;
   }
   @media (max-width: 980px) {
-    .sr-pf-cert { transform: none !important; flex-basis: 100% !important; }
+    .sr-pf-cert { transform: none !important; flex-basis: 100% !important;
+                  margin-left: 0 !important; }
+    .sr-pf-stage { justify-content: center !important; }
     /* the heading reads from the middle once the card drops below it */
     /* the certificate leads, the heading follows it */
     .sr-pf-stage { order: 1 !important; }
