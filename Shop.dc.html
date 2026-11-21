@@ -1316,7 +1316,13 @@
   }
   @media (max-width: 900px) {
     .sr-ad-wrap { grid-template-columns: minmax(0,1fr) !important; }
-    .sr-ad-stage { padding: 14px 44px 14px 28px; max-width: 420px; margin: 0 auto; }
+    /* auto side margins cancel a grid item's stretch, so the stage was
+       sizing to its contents -- and its contents are all absolute, which
+       left the frame 2px wide and the photo nowhere to go */
+    .sr-ad-stage {
+      box-sizing: border-box; width: 100%; max-width: 420px; margin: 0 auto;
+      padding: 14px 44px 14px 28px;
+    }
     .sr-ad-bubimg { height: 82px; width: 82px; }
   }
   @media (prefers-reduced-motion: reduce) {
