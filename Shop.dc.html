@@ -612,6 +612,12 @@
     position: relative; height: 82%; width: auto; max-width: 88%; object-fit: contain;
     filter: drop-shadow(0 14px 22px rgba(18,38,58,0.2));
   }
+  .sr-htu-tabs {
+    margin-top: 14px; display: flex; gap: 7px; border-radius: 9999px;
+    background: #eef5fd; border: 1px solid #e0edfb; padding: 5px;
+  }
+  .sr-htu-tabs > button { flex: 1 1 0; min-width: 0; justify-content: center; }
+  .sr-htu-card { margin-top: 10px !important; }
   .sr-htu-card {
     margin-top: 12px; border-radius: 18px; overflow: hidden;
     background: linear-gradient(180deg,#ffffff 0%,#f6fbff 100%);
@@ -1446,14 +1452,18 @@
             <div class="sr-htu-art"><span class="sr-htu-glow" aria-hidden="true"></span><img src="assets/duo-pair.webp" alt="su-ree Capsule Cream jar beside the GHK-Cu Serum bottle" loading="lazy" decoding="async" /></div>
           </div>
 
-          <div class="sr-htu-card">
+          <div class="sr-htu-tabs" role="tablist" aria-label="Choose a formula">
+            <button type="button" class="sr-ing2-tab" role="tab" onClick="{{ ingPick0 }}" aria-selected="{{ ingSel0 }}" style="background: {{ ingBg0 }}; color: {{ ingFg0 }}; box-shadow: {{ ingSh0 }}">Capsule Cream</button>
+            <button type="button" class="sr-ing2-tab" role="tab" onClick="{{ ingPick1 }}" aria-selected="{{ ingSel1 }}" style="background: {{ ingBg1 }}; color: {{ ingFg1 }}; box-shadow: {{ ingSh1 }}">GHK-Cu+ SNAP 8 Serum</button>
+          </div>
+          <div class="sr-htu-card" style="display: {{ ingShow0 }}">
             <div class="sr-htu-bar"><span class="sr-htu-pill"><span aria-hidden="true" style="display:flex"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9h12v9.5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 6 18.5z"></path><path d="M7.6 6h8.8a1 1 0 0 1 1 1v2H6.6V7a1 1 0 0 1 1-1z"></path></svg></span>Capsule Cream</span><span class="sr-htu-size">30 g</span></div>
             <div class="sr-htu-body">
               <ol class="sr-htu-steps"><li class="sr-htu-step"><span class="sr-htu-num" aria-hidden="true">1</span><span class="sr-htu-ico" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16.5c0-3 2.4-4.4 4.2-5.6C10.4 9.4 12.6 7 16 6.6c2.6-.3 4 1.2 4 2.8 0 2.2-2.4 3.2-4.4 4.2-2.6 1.3-4.6 3.9-7.4 3.9-2.4 0-4.2-.4-4.2-1z"></path></svg></span><span class="sr-htu-steptext">Take a small amount</span></li><li class="sr-htu-step"><span class="sr-htu-num" aria-hidden="true">2</span><span class="sr-htu-ico" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5c4 0 6.5 3 6.5 7.2 0 4.6-3 8.3-6.5 8.3s-6.5-3.7-6.5-8.3C5.5 6.5 8 3.5 12 3.5z"></path><path d="M9.3 10.6h.01"></path><path d="M14.7 10.6h.01"></path><path d="M10 14.6c1.3.9 2.7.9 4 0"></path><path d="M3 11.4c1.2-.9 1.9-.9 3-.2"></path><path d="M21 11.4c-1.2-.9-1.9-.9-3-.2"></path></svg></span><span class="sr-htu-steptext">Apply evenly to cleansed face and neck</span></li><li class="sr-htu-step"><span class="sr-htu-num" aria-hidden="true">3</span><span class="sr-htu-ico" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5c4 0 6.5 3 6.5 7.2 0 4.6-3 8.3-6.5 8.3s-6.5-3.7-6.5-8.3C5.5 6.5 8 3.5 12 3.5z"></path><path d="M9.3 10.6h.01"></path><path d="M14.7 10.6h.01"></path><path d="M10 14.6c1.3.9 2.7.9 4 0"></path><path d="m20.4 4.2.7 1.6 1.6.7-1.6.7-.7 1.6-.7-1.6-1.6-.7 1.6-.7z"></path></svg></span><span class="sr-htu-steptext">Massage gently until fully absorbed</span></li></ol>
             </div>
           </div>
 
-          <div class="sr-htu-card">
+          <div class="sr-htu-card" style="display: {{ ingShow1 }}">
             <div class="sr-htu-bar"><span class="sr-htu-pill"><span aria-hidden="true" style="display:flex"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 3h4v3h-4z"></path><path d="M9 6h6l1.4 3.2a4 4 0 0 1 .35 1.6V19a2 2 0 0 1-2 2h-5.5a2 2 0 0 1-2-2v-8.2a4 4 0 0 1 .35-1.6z"></path><path d="M8 14h8"></path></svg></span>GHK-Cu+ SNAP 8 Serum</span><span class="sr-htu-size">30 ml</span></div>
             <div class="sr-htu-body">
               <ol class="sr-htu-steps"><li class="sr-htu-step"><span class="sr-htu-num" aria-hidden="true">1</span><span class="sr-htu-ico" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16.5c0-3 2.4-4.4 4.2-5.6C10.4 9.4 12.6 7 16 6.6c2.6-.3 4 1.2 4 2.8 0 2.2-2.4 3.2-4.4 4.2-2.6 1.3-4.6 3.9-7.4 3.9-2.4 0-4.2-.4-4.2-1z"></path></svg></span><span class="sr-htu-steptext">Take a small amount</span></li><li class="sr-htu-step"><span class="sr-htu-num" aria-hidden="true">2</span><span class="sr-htu-ico" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5c4 0 6.5 3 6.5 7.2 0 4.6-3 8.3-6.5 8.3s-6.5-3.7-6.5-8.3C5.5 6.5 8 3.5 12 3.5z"></path><path d="M9.3 10.6h.01"></path><path d="M14.7 10.6h.01"></path><path d="M10 14.6c1.3.9 2.7.9 4 0"></path><path d="M3 11.4c1.2-.9 1.9-.9 3-.2"></path><path d="M21 11.4c-1.2-.9-1.9-.9-3-.2"></path></svg></span><span class="sr-htu-steptext">Apply to face and neck</span></li><li class="sr-htu-step"><span class="sr-htu-num" aria-hidden="true">3</span><span class="sr-htu-ico" aria-hidden="true"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5c4 0 6.5 3 6.5 7.2 0 4.6-3 8.3-6.5 8.3s-6.5-3.7-6.5-8.3C5.5 6.5 8 3.5 12 3.5z"></path><path d="M9.3 10.6h.01"></path><path d="M14.7 10.6h.01"></path><path d="M10 14.6c1.3.9 2.7.9 4 0"></path><path d="m20.4 4.2.7 1.6 1.6.7-1.6.7-.7 1.6-.7-1.6-1.6-.7 1.6-.7z"></path></svg></span><span class="sr-htu-steptext">Until fully absorbed</span></li></ol>
