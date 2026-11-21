@@ -215,6 +215,66 @@
     background: #ecf8f1; border: 1px solid #c9e9d8; padding: 11px 14px; font-size: 12.5px;
     font-weight: 600; color: #2e7d55; line-height: 1.5;
   }
+
+  .sr-bagsum { margin-top: 4px; padding: 20px 0 22px; border-top: 1px solid #eef5fd; }
+  .sr-bagfoot {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 14px; padding: 0 0 20px;
+  }
+  .sr-bagback {
+    display: inline-flex; align-items: center; gap: 9px; border-radius: 9999px;
+    border: 1px solid #d7e6f8; background: #ffffff; padding: 13px 22px;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 13.5px; font-weight: 600;
+    color: #2f7bdc; transition: border-color 200ms ease, background 200ms ease;
+  }
+  .sr-bagback:hover { border-color: #2f7bdc; background: #f7fbff; color: #2f7bdc; }
+  .sr-bag-name { display: block; margin-top: 2px; }
+  .sr-bag-bundle { display: inline-flex !important; margin-top: 10px; }
+  .sr-bag-chip { display: inline-block; }
+  @media (max-width: 620px) {
+    .sr-bagfoot { flex-direction: column-reverse; align-items: stretch; }
+    .sr-bagback { justify-content: center; }
+  }
+
+  .sr-sumrow {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    font-size: 13.5px; padding: 6px 0;
+  }
+  .sr-sumrule { margin: 16px 0; height: 1px; background: #eef5fd; }
+  .sr-sumtotal {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  }
+  .sr-sumtotal > span:first-child { font-size: 15px; font-weight: 600; color: #1b3456; }
+  .sr-sumtotal > span:last-child {
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 27px; font-weight: 700;
+    color: #1b3456; letter-spacing: -1px;
+  }
+  .sr-bagco {
+    position: relative; display: inline-flex; overflow: hidden; isolation: isolate;
+    align-items: center; gap: 11px; border-radius: 14px;
+    background: linear-gradient(160deg,#1d3a55 0%,#1b3456 46%,#0c1c2c 100%);
+    padding: 15px 26px; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 14.5px;
+    font-weight: 700; color: #ffffff; letter-spacing: 0.2px;
+    border-top: 0.5px solid rgba(255,255,255,0.22);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.14), 0 10px 26px rgba(18,38,58,0.24);
+    transition: transform 220ms ease, box-shadow 220ms ease;
+  }
+  .sr-bagco, .sr-bagco:hover { color: #ffffff; }
+  .sr-bagco:hover {
+    transform: translateY(-1px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2), 0 14px 34px rgba(18,38,58,0.3);
+  }
+  .sr-bagco-sheen {
+    position: absolute; top: 0; bottom: 0; left: 0; width: 34%; pointer-events: none;
+    background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.42) 48%,
+                rgba(255,255,255,0) 100%);
+    animation: sr-sheen 5.5s ease-in-out infinite;
+  }
+  .sr-bagsecure {
+    margin: 0; display: flex; align-items: center; justify-content: center; gap: 7px;
+    padding-bottom: 20px; font-size: 11.5px; color: #8295b4;
+  }
+  @media (prefers-reduced-motion: reduce) { .sr-bagco:hover { transform: none !important; } }
 </style>
 </helmet>
 
@@ -253,46 +313,22 @@
   </section>
 
   <section data-sr-reveal="out" style="position:relative; width:100%; background:#fff; padding:72px 24px 96px">
-    <div class="r-2col" style="margin:0 auto; width:100%; max-width:1140px; display:grid; grid-template-columns:minmax(0,1.55fr) minmax(0,0.85fr); gap:48px; align-items:start">
+    <div style="margin:0 auto; width:100%; max-width:760px">
       <div>
-        <div class="sr-bagcard"><div class="sr-bagcard-head"><span class="sr-bagcard-title">Your <em>items</em></span><span class="sr-bagcard-count">{{ cCount }}</span></div><div class="sr-bag"><span class="sr-bag-shot"><img src="{{ cImg }}" alt="{{ cName }}" loading="lazy" decoding="async" /></span><div style="min-width:0"><span class="sr-bag-chip">{{ cChip }}</span><a class="sr-bag-name" href="Shop.dc.html">{{ cName }}</a><span class="sr-bag-bundle">{{ cBundle }}</span><p class="sr-bag-note"><span aria-hidden="true" style="display:flex; flex-shrink:0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 2.6 17.3A2 2 0 0 0 4.3 20.3h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path><path d="M12 9v4.4"></path><path d="M12 17h.01"></path></svg></span>{{ cNote }}</p><div class="sr-bag-qty" role="group" aria-label="Quantity"><button type="button" onClick="{{ decQ }}" aria-label="One fewer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button><span class="sr-bag-n">{{ qty }}</span><button type="button" onClick="{{ incQ }}" aria-label="One more"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></button></div></div><span class="sr-bag-price"><span>{{ cLine }}</span><span class="sr-bag-was" aria-hidden="{{ cWasHide }}" style="display: {{ cWasShow }}">{{ cWas }}</span><span class="sr-bag-unit">{{ cUnit }}</span></span></div></div>
-        <div style="margin-top:28px; display:flex; align-items:center; justify-content:space-between; gap:16px">
-          <a href="Shop.dc.html" style="display:flex; align-items:center; gap:8px; font-size:13.5px; color:#3f7fc9" style-hover="color:#1b3456"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg> Continue shopping</a>
-          <span style="font-size:12.5px; color:#8295b4">Prices include VAT</span>
-        </div>
+      <div class="sr-bagcard">
+        <div class="sr-bagcard-head"><span class="sr-bagcard-title">Your <em>items</em></span><span class="sr-bagcard-count">{{ cCount }}</span></div>
+        <div class="sr-bag"><span class="sr-bag-shot"><img src="{{ cImg }}" alt="{{ cName }}" loading="lazy" decoding="async" /></span><div style="min-width:0"><span class="sr-bag-chip">{{ cChip }}</span><a class="sr-bag-name" href="Shop.dc.html">{{ cName }}</a><span class="sr-bag-bundle">{{ cBundle }}</span><p class="sr-bag-note"><span aria-hidden="true" style="display:flex; flex-shrink:0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 2.6 17.3A2 2 0 0 0 4.3 20.3h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path><path d="M12 9v4.4"></path><path d="M12 17h.01"></path></svg></span>{{ cNote }}</p><div class="sr-bag-qty" role="group" aria-label="Quantity"><button type="button" onClick="{{ decQ }}" aria-label="One fewer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button><span class="sr-bag-n">{{ qty }}</span><button type="button" onClick="{{ incQ }}" aria-label="One more"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></button></div></div><span class="sr-bag-price"><span>{{ cLine }}</span><span class="sr-bag-was" aria-hidden="{{ cWasHide }}" style="display: {{ cWasShow }}">{{ cWas }}</span><span class="sr-bag-unit">{{ cUnit }}</span></span></div>
+        <div class="sr-bagsum"><div class="sr-sumrow"><span style="color:#4e648a">Subtotal</span><span style="color:#4e648a">{{ subtotal }}</span></div><div class="sr-sumrow"><span style="color:#4e648a">Shipping</span><span style="color:#4e648a">{{ shipLabel }}</span></div><div class="sr-sumrow"><span style="color:#8295b4">Bundle saving</span><span style="color:{{ saveFg }}">{{ saved }}</span></div><div class="sr-save" aria-hidden="{{ saveHide }}" style="display: {{ saveShow }}"><span aria-hidden="true" style="display:flex; flex-shrink:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>{{ saveLine }}</div><div class="sr-sumrule" aria-hidden="true"></div><div class="sr-sumtotal"><span>Total</span><span>{{ total }}</span></div><sc-if value="{{ showFreeShipHint }}" hint-placeholder-val="{{ false }}"><p style="margin:12px 0 0; font-size:12.5px; color:#3f7fc9; line-height:1.7">{{ freeShipHint }}</p></sc-if></div>
+        <div class="sr-bagfoot"><a class="sr-bagback" href="Shop.dc.html"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg>Back to shop</a><a class="sr-bagco" href="{{ coHref }}"><span aria-hidden="true" class="sr-bagco-sheen"></span><span style="position:relative">Proceed to checkout</span><span aria-hidden="true" style="position:relative; display:flex"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a></div>
+        <p class="sr-bagsecure"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Secure checkout &middot; COD available</p>
+      </div>
+
+        
 
         
       </div>
 
-      <aside style="position:sticky; top:104px; border-radius:20px; background:#fff; border:0.5px solid #e7f0fb; padding:28px; box-shadow:0 8px 24px rgba(18,38,58,0.05)">
-        <p style="margin:0 0 20px; font-size:17px; font-weight:600; color:#1b3456; letter-spacing:-0.2px">Order summary</p>
-        <div style="display:flex; flex-direction:column; gap:13px">
-          <div style="display:flex; align-items:center; justify-content:space-between; gap:16px">
-            <span style="font-size:13.5px; color:#4e648a">Subtotal</span>
-            <span style="font-size:13.5px; font-weight:400; color:#4e648a">{{ subtotal }}</span>
-          </div>
-          <div style="display:flex; align-items:center; justify-content:space-between; gap:16px">
-            <span style="font-size:13.5px; color:#4e648a">Shipping</span>
-            <span style="font-size:13.5px; font-weight:400; color:#4e648a">{{ shipLabel }}</span>
-          </div>
-          <div style="display:flex; align-items:center; justify-content:space-between; gap:16px">
-            <span style="font-size:13.5px; color:#8295b4">Bundle saving</span>
-            <span style="font-size:13px; color: {{ saveFg }}">{{ saved }}</span>
-          </div><div class="sr-save" aria-hidden="{{ saveHide }}" style="display: {{ saveShow }}"><span aria-hidden="true" style="display:flex; flex-shrink:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>{{ saveLine }}</div>
-        </div>
-        <div style="margin:20px 0; height:0.5px; background:#e7f0fb"></div>
-        <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px">
-          <span style="font-size:15px; font-weight:600; color:#1b3456">Total</span>
-          <span style="font-family:'Inter',ui-sans-serif,sans-serif; font-size:26px; font-weight:700; color:#1b3456; letter-spacing:-1px">{{ total }}</span>
-        </div>
-        <sc-if value="{{ showFreeShipHint }}" hint-placeholder-val="{{ false }}">
-          <p style="margin:14px 0 0; font-size:12.5px; color:#3f7fc9; line-height:1.7">{{ freeShipHint }}</p>
-        </sc-if>
-        <p style="margin:22px 0 0">
-          <a href="{{ coHref }}" style="position:relative; display:inline-block; overflow:hidden; isolation:isolate; border-radius:0 16px 16px 16px; background:linear-gradient(160deg,#1d3a55 0%,#1b3456 46%,#0c1c2c 100%); font-size:14px; font-weight:700; color:#fff; padding:15px 28px; letter-spacing:0.2px; border-top:0.5px solid rgba(255,255,255,0.22); box-shadow:inset 0 1px 0 rgba(255,255,255,0.14), 0 10px 26px rgba(18,38,58,0.24); transition:transform 220ms, box-shadow 220ms; display:block; width:100%; text-align:center; border-radius:14px" style-hover="color:#fff; transform:translateY(-1px); box-shadow:inset 0 1px 0 rgba(255,255,255,0.2), 0 14px 34px rgba(18,38,58,0.3)"><span aria-hidden="true" style="position:absolute; top:0; bottom:0; left:0; width:34%; background:linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.42) 48%, rgba(255,255,255,0) 100%); animation:sr-sheen 5.5s ease-in-out infinite; pointer-events:none"></span><span style="position:relative">Proceed to checkout</span></a>
-        </p>
-        <p style="margin:16px 0 0; display:flex; align-items:center; justify-content:center; gap:7px; font-size:11.5px; color:#8295b4"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Secure checkout &middot; COD available</p>
-      </aside>
+      
     </div>
   </section>
 
