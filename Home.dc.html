@@ -741,10 +741,14 @@
     }
     .sr-cta-copy { max-width: 100% !important; }
     .sr-cta-wash { display: none !important; }
-    .sr-cta-shot {
-      display: block !important; margin: 26px 0 0; width: 100%; height: auto;
-      border-radius: 20px;
+    /* the podium shot is the hero's work; here the words carry it alone */
+    .sr-cta-shot { display: none !important; }
+    .sr-cta-copy { text-align: center !important; }
+    .sr-cta-copy > div:first-child { justify-content: center !important; }
+    .sr-cta-copy h2, .sr-cta-copy p {
+      margin-left: auto !important; margin-right: auto !important;
     }
+    .sr-cta-rule { margin-left: auto !important; margin-right: auto !important; }
     .sr-cta-btn { width: 100%; justify-content: center; }
   }
   @media (prefers-reduced-motion: reduce) {
