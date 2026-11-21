@@ -705,6 +705,10 @@
        two above, two below, each with its words over or under its icon */
     .sr-in-stage { aspect-ratio: 1 / 1.16 !important; }
     .sr-in-shot { width: 58% !important; }
+    /* smaller discs, and the section ends sooner under them */
+    .sr-ing > [aria-hidden] { height: 46px !important; width: 46px !important; }
+    .sr-ing > [aria-hidden] svg { width: 20px !important; height: 20px !important; }
+    .sr-in-sec { padding-bottom: 52px !important; }
     .sr-ing-lines { display: none !important; }
     .sr-ing {
       flex-direction: column !important; gap: 7px !important;
@@ -1023,7 +1027,7 @@
     </div>
   </section>
 
-  <section data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:linear-gradient(180deg,#fbfbff 0%,#f0f6fb 26%,#e7f3ff 62%,#ffffff 100%); padding-bottom:100px">
+  <section class="sr-in-sec" data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:linear-gradient(180deg,#fbfbff 0%,#f0f6fb 26%,#e7f3ff 62%,#ffffff 100%); padding-bottom:100px">
 
     <div style="position:relative; margin:0 auto; width:100%; max-width:1240px; padding:94px 40px 48px; box-sizing:border-box">
       <div style="position:relative; z-index:3; display:flex; flex-direction:column; align-items:center; margin-bottom:34px" class="sr-sciline">
