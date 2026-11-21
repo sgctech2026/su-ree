@@ -172,6 +172,49 @@
     .sr-bag-shot { height: 92px; }
     .sr-bag-price { grid-column: 1 / -1; align-items: flex-start; }
   }
+
+  .sr-bagcard {
+    border-radius: 22px; background: #ffffff; border: 1px solid #e7f0fb;
+    box-shadow: 0 14px 34px -26px rgba(18,38,58,0.5); padding: 22px 24px 8px;
+  }
+  .sr-bagcard-head {
+    display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    padding-bottom: 16px; border-bottom: 1px solid #eef5fd;
+  }
+  .sr-bagcard-title {
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 17px; font-weight: 700;
+    color: #1b3456; letter-spacing: -0.3px;
+  }
+  .sr-bagcard-title em { font-style: italic; font-weight: 600; color: #2f7bdc; }
+  .sr-bagcard-count {
+    border-radius: 9999px; background: #e7f3ff; color: #2f7bdc; padding: 5px 13px;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 10.5px; font-weight: 700;
+    letter-spacing: 1.6px; text-transform: uppercase; white-space: nowrap;
+  }
+  .sr-bag { border-top: 0 !important; border-bottom: 0 !important; }
+  .sr-bag-chip {
+    display: inline-block; margin-bottom: 8px; border-radius: 9999px; background: #f4f9ff;
+    border: 1px solid #dcebfb; color: #5f7a9c; padding: 4px 11px;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 9.5px; font-weight: 700;
+    letter-spacing: 1.6px;
+  }
+  .sr-bag-bundle {
+    display: inline-flex; align-items: center; gap: 7px; margin-top: 8px; border-radius: 9999px;
+    background: #eef6ff; border: 1px solid #cfe4fc; color: #2f7bdc; padding: 6px 14px;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 11.5px; font-weight: 700;
+    letter-spacing: 0.4px;
+  }
+  .sr-bag-note {
+    margin: 12px 0 0; display: flex; align-items: flex-start; gap: 9px; border-radius: 12px;
+    background: #fdf6e7; border: 1px solid #f3e4c2; padding: 10px 13px; font-size: 12px;
+    color: #7a6132; line-height: 1.6;
+  }
+  .sr-bag-unit { font-size: 11.5px; font-weight: 500; color: #8295b4; }
+  .sr-save {
+    margin-top: 14px; display: flex; align-items: center; gap: 10px; border-radius: 12px;
+    background: #ecf8f1; border: 1px solid #c9e9d8; padding: 11px 14px; font-size: 12.5px;
+    font-weight: 600; color: #2e7d55; line-height: 1.5;
+  }
 </style>
 </helmet>
 
@@ -212,16 +255,13 @@
   <section data-sr-reveal="out" style="position:relative; width:100%; background:#fff; padding:72px 24px 96px">
     <div class="r-2col" style="margin:0 auto; width:100%; max-width:1140px; display:grid; grid-template-columns:minmax(0,1.55fr) minmax(0,0.85fr); gap:48px; align-items:start">
       <div>
-        <div class="sr-bag"><span class="sr-bag-shot"><img src="{{ cImg }}" alt="{{ cName }}" loading="lazy" decoding="async" /></span><div style="min-width:0"><a class="sr-bag-name" href="Shop.dc.html">{{ cName }}</a><p class="sr-bag-meta">{{ cMeta }}</p><div class="sr-bag-qty" role="group" aria-label="Quantity"><button type="button" onClick="{{ decQ }}" aria-label="One fewer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button><span class="sr-bag-n">{{ qty }}</span><button type="button" onClick="{{ incQ }}" aria-label="One more"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></button></div></div><span class="sr-bag-price"><span>{{ cLine }}</span><span class="sr-bag-was" aria-hidden="{{ cWasHide }}" style="display: {{ cWasShow }}">{{ cWas }}</span></span></div>
+        <div class="sr-bagcard"><div class="sr-bagcard-head"><span class="sr-bagcard-title">Your <em>items</em></span><span class="sr-bagcard-count">{{ cCount }}</span></div><div class="sr-bag"><span class="sr-bag-shot"><img src="{{ cImg }}" alt="{{ cName }}" loading="lazy" decoding="async" /></span><div style="min-width:0"><span class="sr-bag-chip">{{ cChip }}</span><a class="sr-bag-name" href="Shop.dc.html">{{ cName }}</a><span class="sr-bag-bundle">{{ cBundle }}</span><p class="sr-bag-note"><span aria-hidden="true" style="display:flex; flex-shrink:0"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 2.6 17.3A2 2 0 0 0 4.3 20.3h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path><path d="M12 9v4.4"></path><path d="M12 17h.01"></path></svg></span>{{ cNote }}</p><div class="sr-bag-qty" role="group" aria-label="Quantity"><button type="button" onClick="{{ decQ }}" aria-label="One fewer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button><span class="sr-bag-n">{{ qty }}</span><button type="button" onClick="{{ incQ }}" aria-label="One more"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></button></div></div><span class="sr-bag-price"><span>{{ cLine }}</span><span class="sr-bag-was" aria-hidden="{{ cWasHide }}" style="display: {{ cWasShow }}">{{ cWas }}</span><span class="sr-bag-unit">{{ cUnit }}</span></span></div></div>
         <div style="margin-top:28px; display:flex; align-items:center; justify-content:space-between; gap:16px">
           <a href="Shop.dc.html" style="display:flex; align-items:center; gap:8px; font-size:13.5px; color:#3f7fc9" style-hover="color:#1b3456"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"></path><path d="m12 19-7-7 7-7"></path></svg> Continue shopping</a>
           <span style="font-size:12.5px; color:#8295b4">Prices include VAT</span>
         </div>
 
-        <div style="margin-top:36px; border-radius:20px; background:#fbfbff; border:0.5px solid #e7f0fb; padding:26px; display:flex; gap:18px; align-items:flex-start">
-          <span aria-hidden="true" style="display:flex; height:48px; width:48px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; background:#e7f3ff; color:#3f7fc9"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"></path><path d="M20 3v4"></path><path d="M22 5h-4"></path><path d="M4 17v2"></path><path d="M5 18H3"></path></svg></span>
-          
-        </div>
+        
       </div>
 
       <aside style="position:sticky; top:104px; border-radius:20px; background:#fff; border:0.5px solid #e7f0fb; padding:28px; box-shadow:0 8px 24px rgba(18,38,58,0.05)">
@@ -238,7 +278,7 @@
           <div style="display:flex; align-items:center; justify-content:space-between; gap:16px">
             <span style="font-size:13.5px; color:#8295b4">Bundle saving</span>
             <span style="font-size:13px; color: {{ saveFg }}">{{ saved }}</span>
-          </div>
+          </div><div class="sr-save" aria-hidden="{{ saveHide }}" style="display: {{ saveShow }}"><span aria-hidden="true" style="display:flex; flex-shrink:0"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>{{ saveLine }}</div>
         </div>
         <div style="margin:20px 0; height:0.5px; background:#e7f0fb"></div>
         <div style="display:flex; align-items:baseline; justify-content:space-between; gap:16px">
@@ -575,9 +615,20 @@ class Component extends DCLogic {
           + ", ready when you are.",
         cImg: p.img,
         cName: p.name,
-        cMeta: qty + " " + (qty === 1 ? p.unit : p.units) + " \u00b7 "
-          + (qty === 1 ? p.what : qty + " \u00d7 " + p.what),
         cLine: this.peso(sub),
+        cChip: (qty === 1 ? p.unit : p.units).toUpperCase(),
+        cBundle: qty + " " + (qty === 1 ? p.unit : p.units) + " \u00b7 "
+          + (qty === 1 ? p.what : qty + " \u00d7 " + p.what),
+        cCount: qty + " " + (qty === 1 ? p.unit : p.units),
+        cUnit: this.peso(Math.round(sub / qty)) + " / " + p.unit,
+        cNote: qty === 1
+          ? "One " + p.unit + " at " + this.peso(p.sell[0])
+            + ". Two or three come at a lower price each."
+          : "You are on the " + qty + "-" + p.unit + " price. Going back to one "
+            + p.unit + " charges " + this.peso(p.sell[0]) + " and drops the saving.",
+        saveLine: "You are saving " + this.peso(saved) + " on this order.",
+        saveShow: saved > 0 ? "flex" : "none",
+        saveHide: saved > 0 ? "false" : "true",
         cWas: this.peso(p.list[qty - 1]),
         cWasShow: saved > 0 ? "block" : "none",
         cWasHide: saved > 0 ? "false" : "true",
