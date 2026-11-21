@@ -1465,8 +1465,8 @@
           </div>
 
           <div class="sr-htu-tabs" role="tablist" aria-label="Choose a formula">
-            <button type="button" class="sr-ing2-tab" role="tab" onClick="{{ ingPick0 }}" aria-selected="{{ ingSel0 }}" style="background: {{ ingBg0 }}; color: {{ ingFg0 }}; box-shadow: {{ ingSh0 }}">{{ htuName0 }}</button>
-            <button type="button" class="sr-ing2-tab" role="tab" onClick="{{ ingPick1 }}" aria-selected="{{ ingSel1 }}" style="background: {{ ingBg1 }}; color: {{ ingFg1 }}; box-shadow: {{ ingSh1 }}">{{ htuName1 }}</button>
+            <button type="button" class="sr-ing2-tab" role="tab" onClick="{{ ingPick0 }}" aria-selected="{{ ingSel0 }}" style="background: {{ ingBg0 }}; color: {{ ingFg0 }}; box-shadow: {{ ingSh0 }}; flex: {{ htuFlex0 }}">{{ htuName0 }}</button>
+            <button type="button" class="sr-ing2-tab" role="tab" onClick="{{ ingPick1 }}" aria-selected="{{ ingSel1 }}" style="background: {{ ingBg1 }}; color: {{ ingFg1 }}; box-shadow: {{ ingSh1 }}; flex: {{ htuFlex1 }}">{{ htuName1 }}</button>
           </div>
           <div class="sr-htu-card" style="display: {{ ingShow0 }}">
             <div class="sr-htu-bar"><span class="sr-htu-pill"><span aria-hidden="true" style="display:flex"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9h12v9.5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 6 18.5z"></path><path d="M7.6 6h8.8a1 1 0 0 1 1 1v2H6.6V7a1 1 0 0 1 1-1z"></path></svg></span>Capsule Cream</span><span class="sr-htu-size">30 g</span></div>
@@ -2259,6 +2259,8 @@ class Component extends DCLogic {
       out["htuName" + i] = on
         ? ["Capsule Cream", "GHK-Cu+ SNAP 8 Serum"][i]
         : ["Cream", "Serum"][i];
+      // the one on show takes seven tenths of the rail
+      out["htuFlex" + i] = on ? "7 1 0" : "3 1 0";
     }
     return out;
   }
