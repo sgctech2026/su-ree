@@ -172,6 +172,11 @@
     }
     .r-foot > nav:nth-of-type(2) { grid-column: 1; }
     .r-foot > nav:nth-of-type(3) { grid-column: 2; }
+    /* everything reads down the middle here */
+    .r-foot nav { text-align: center; }
+    .r-foot nav ul { align-items: center; }
+    .r-foot > div:last-child { align-items: center; }
+    .r-foot > div:last-child > a { width: fit-content; }
     .r-foot > div:last-child {
       grid-column: 1 / -1; padding-left: 0 !important;
     }
