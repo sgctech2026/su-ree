@@ -259,8 +259,10 @@
     /* parked at the right edge they land beside the product; on a phone
        they belong under the whole hero, centred */
     .r-herodots {
-      right: 0 !important; left: 0 !important;
+      right: auto !important; left: 50% !important;
+      transform: translateX(-50%);
       bottom: 26px !important;
+      width: max-content !important;
       justify-content: center !important;
     }
   }
