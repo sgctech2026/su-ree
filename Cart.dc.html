@@ -353,6 +353,22 @@
     .sr-bag2-btns { flex-direction: column-reverse; }
     .sr-bag2-btns .sr-bagback { justify-content: center; }
   }
+
+  .sr-cart-head {
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 16px;
+    margin: 0 auto 20px; width: 100%; max-width: 1000px;
+  }
+  .sr-cart-eyebrow {
+    margin: 0; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 10.5px;
+    font-weight: 600; color: #7fa8d6; letter-spacing: 3.4px;
+  }
+  .sr-cart-title {
+    margin: 10px 0 0; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-size: clamp(28px,3.4vw,44px); font-weight: 700; color: #1b3456;
+    letter-spacing: -1.4px; line-height: 1.05;
+  }
+  .sr-cart-title em { font-style: italic; font-weight: 600; color: #2f7bdc; }
+  .sr-bag2, .sr-cart-head { position: relative; z-index: 2; }
 </style>
 </helmet>
 
@@ -378,21 +394,13 @@
         </nav>
   </div>
 
-  <section class="r-lift" style="position:relative; width:100%; overflow:hidden; background:linear-gradient(180deg,#fbfbff 0%,#f0f6fb 26%,#e7f3ff 62%,#dce9fb 100%); margin-top:-84px; padding:164px 24px 78px">
-    <div aria-hidden="true" style="position:absolute; top:-180px; left:50%; width:760px; height:420px; transform:translateX(-50%); border-radius:9999px; background:radial-gradient(60% 60% at 50% 50%, rgba(167,202,236,0.38) 0%, rgba(167,202,236,0) 72%); animation:sr-blob-breathe 11s ease-in-out infinite; pointer-events:none"></div>
-    <div style="position:relative; margin:0 auto; width:100%; max-width:1140px; text-align:center">
-      <p style="margin:0; display:inline-block; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; color:#1b3456; background:rgba(255,255,255,0.72); border:0.5px solid #b7d5f5; border-radius:9999px; padding:7px 16px; letter-spacing:1.6px">YOUR BAG</p>
-      <h1 style="margin:18px 0 0; font-family:'Inter',ui-sans-serif,sans-serif; font-weight:700; color:#1b3456; font-size:clamp(32px,3.6vw,52px); line-height:1.04; letter-spacing:-1.6px">{{ bagTitle }}</h1>
-      <p style="margin:16px auto 0; max-width:62ch; font-size:14px; color:#4e648a; line-height:1.85; text-wrap:pretty">Quantities update the totals live. Nothing is charged until you confirm on the next screen.</p>
-    </div>
-      <div aria-hidden="true" data-sr-nofx style="position:absolute; z-index:3; right:0; left:0; bottom:-1px; line-height:0; pointer-events:none">
-      <svg class="r-wave" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true" style="display:block; width:100%; height:clamp(38px,4.4vw,74px)"><path d="M0,120 Q720,0 1440,120 Z" fill="#ffffff"></path><path d="M0,120 Q720,0 1440,120" fill="none" stroke="#ffffff" stroke-width="6" stroke-opacity="0.85"></path><path d="M0,120 Q720,0 1440,120" fill="none" stroke="#b7d5f5" stroke-width="1.2" stroke-opacity="0.55" transform="translate(0,7)"></path></svg>
-    </div>
-  </section>
 
-  <section data-sr-reveal="out" style="position:relative; width:100%; background:#fff; padding:72px 24px 96px">
+  <section data-sr-reveal="out" style="overflow:clip; position:relative; width:100%; background:linear-gradient(180deg,#f7fbff 0%,#ffffff 34%,#ffffff 76%,#f7fbff 100%); padding:clamp(120px,13vw,164px) 24px 96px">
+    <span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; left:-6%; top:12%; height:260px; width:260px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.85) 0%, rgba(231,243,255,0.75) 34%, rgba(183,213,245,0.30) 64%, rgba(183,213,245,0) 76%); animation:sr-float-a 11s ease-in-out infinite"></span><span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; right:-5%; top:30%; height:210px; width:210px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.8) 0%, rgba(255,222,236,0.62) 34%, rgba(251,62,148,0.14) 64%, rgba(251,62,148,0) 78%)"></span><span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; left:8%; bottom:10%; height:180px; width:180px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.75) 0%, rgba(214,233,251,0.6) 32%, rgba(143,186,235,0.26) 62%, rgba(143,186,235,0) 76%); animation:sr-float-a 9s ease-in-out 1.4s infinite"></span>
+
     <div style="margin:0 auto; width:100%; max-width:1000px">
       <div>
+        <div class="sr-cart-head"><div><p class="sr-cart-eyebrow">YOUR BAG</p><h1 class="sr-cart-title">Your <em>cart</em></h1></div><span class="sr-bagcard-count">{{ cCount2 }}</span></div>
       <div class="sr-bag2">
         <div class="sr-bag2-shot"><img src="{{ cImg }}" alt="{{ cName }}" loading="lazy" decoding="async" /></div>
         <div class="sr-bag2-side">
@@ -732,13 +740,12 @@ class Component extends DCLogic {
       return {
         ...this.navVals(), ...this.navToggleVals(),
       ...this.nlVals(),
-        bagTitle: this.WORDS[qty - 1] + " " + (qty === 1 ? p.unit : p.units)
-          + ", ready when you are.",
         cImg: p.img,
         cName: p.name,
         cLine: this.peso(sub),
         cChip: (qty === 1 ? p.unit : p.units).toUpperCase(),
         cSub: p.sub,
+        cCount2: qty + " " + (qty === 1 ? p.unit : p.units),
         cSave: "You save " + this.peso(saved),
         cUnit: this.peso(Math.round(sub / qty)) + " / " + p.unit,
         saveShow: saved > 0 ? "flex" : "none",
