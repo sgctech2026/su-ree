@@ -803,10 +803,14 @@
     .r-foot > div:first-child p { margin-left: auto !important; margin-right: auto !important; }
     .r-foot > div:first-child > div { justify-content: center !important; }
     .r-foot nav ul { gap: 11px !important; }
-    .r-foot > nav:last-of-type { grid-column: 1 / -1; }
-    .r-foot > nav:last-of-type ul {
+    /* Shop runs the width with its links two across; Company and
+       Support share the row under it */
+    .r-foot > nav:nth-of-type(1) { grid-column: 1 / -1; }
+    .r-foot > nav:nth-of-type(1) ul {
       display: grid !important; grid-template-columns: repeat(2,minmax(0,1fr));
     }
+    .r-foot > nav:nth-of-type(2) { grid-column: 1; }
+    .r-foot > nav:nth-of-type(3) { grid-column: 2; }
     .r-foot > div:last-child {
       grid-column: 1 / -1; padding-left: 0 !important;
     }
