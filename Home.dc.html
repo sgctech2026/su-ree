@@ -704,19 +704,20 @@
     /* a taller stage, a bigger jar, and the four notes moved clear of it:
        two above, two below, each with its words over or under its icon */
     .sr-in-stage { aspect-ratio: 1 / 1.16 !important; }
-    .sr-in-shot { width: 64% !important; }
+    .sr-in-shot { width: 58% !important; }
     .sr-ing-lines { display: none !important; }
     .sr-ing {
       flex-direction: column !important; gap: 7px !important;
-      max-width: 44% !important; text-align: center !important;
+      text-align: center !important;
     }
     .sr-ing-txt { align-items: center !important; text-align: center !important; }
     .sr-ing-txt > span { max-width: none !important; }
     .sr-ing-tl, .sr-ing-tr { flex-direction: column-reverse !important; }
-    .sr-ing-tl, [data-sr-step="in"] .sr-ing-tl { left: 25% !important; top: 11% !important; }
-    .sr-ing-tr, [data-sr-step="in"] .sr-ing-tr { left: 75% !important; top: 11% !important; }
-    .sr-ing-bl, [data-sr-step="in"] .sr-ing-bl { left: 25% !important; top: 88% !important; }
-    .sr-ing-br, [data-sr-step="in"] .sr-ing-br { left: 75% !important; top: 88% !important; }
+    .sr-ing { max-width: 40% !important; }
+    .sr-ing-tl, [data-sr-step="in"] .sr-ing-tl { left: 20% !important; top: 26% !important; }
+    .sr-ing-tr, [data-sr-step="in"] .sr-ing-tr { left: 80% !important; top: 26% !important; }
+    .sr-ing-bl, [data-sr-step="in"] .sr-ing-bl { left: 20% !important; top: 74% !important; }
+    .sr-ing-br, [data-sr-step="in"] .sr-ing-br { left: 80% !important; top: 74% !important; }
   }
 </style>
 </helmet>
