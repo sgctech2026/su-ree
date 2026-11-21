@@ -111,8 +111,7 @@
     .sr-burger { display: flex !important; order: 1; }
     nav > a[aria-label="su-ree home"] { order: 2; margin: 0 auto; }
     nav > div.sr-nav-icons { order: 3; }
-    nav .sr-nav-icons > button[aria-label="Search"],
-    nav .sr-nav-icons > a[aria-label="Account"] { display: none !important; }
+    nav .sr-nav-icons > button[aria-label="Search"] { display: none !important; }
     .sr-nav-links {
       order: 4; position: absolute; top: calc(100% + 10px); left: 0; right: 0;
       flex-direction: column; align-items: stretch; gap: 4px !important;
@@ -845,6 +844,319 @@
     .sr-cm-cta:hover { transform: none !important; }
     .sr-cm-cta:hover .sr-cm-arrow { transform: none !important; }
   }
+
+  .sr-chips {
+    margin-top: 14px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;
+  }
+  .sr-chip {
+    display: inline-flex; align-items: center; gap: 9px; border-radius: 9999px;
+    background: #ffffff; border: 1.5px solid #f6c3da; padding: 9px 18px;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 12.5px; font-weight: 600;
+    color: #1b3456; letter-spacing: -0.1px; white-space: nowrap;
+    box-shadow: 0 8px 18px -14px rgba(224,96,158,0.9);
+  }
+  @media (max-width: 420px) { .sr-chip { padding: 8px 14px; font-size: 11.5px; } }
+
+  .sr-pm-wrap {
+    position: fixed; inset: 0; z-index: 210; align-items: center; justify-content: center;
+    padding: 24px; background: rgba(13,38,64,0.44);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  }
+  .sr-pm {
+    position: relative; width: 100%; max-width: 980px; max-height: 88vh; overflow: auto;
+    border-radius: 28px; box-sizing: border-box;
+    background: linear-gradient(140deg,#ffffff 0%,#f8fbff 52%,#eef6ff 100%);
+    border: 1px solid rgba(183,213,245,0.85);
+    box-shadow: 0 50px 110px -46px rgba(13,38,64,0.75);
+    padding: clamp(22px,2.6vw,36px);
+  }
+  .sr-pm-orb {
+    position: absolute; right: -60px; top: -70px; height: 240px; width: 240px;
+    border-radius: 9999px; pointer-events: none;
+    background: radial-gradient(circle at 36% 30%, rgba(255,255,255,0.9) 0%,
+                rgba(231,243,255,0.8) 38%, rgba(183,213,245,0.35) 66%,
+                rgba(183,213,245,0) 78%);
+  }
+  .sr-pm-arc {
+    position: absolute; left: 0; bottom: 0; height: 46%; width: 42%; pointer-events: none;
+    opacity: 0.8;
+  }
+  .sr-pm-x {
+    position: absolute; right: 16px; top: 16px; z-index: 3; display: flex; height: 36px;
+    width: 36px; align-items: center; justify-content: center; border-radius: 9999px;
+    border: 1px solid rgba(23,70,117,0.1); background: rgba(255,255,255,0.92);
+    color: #1b3456; cursor: pointer; transition: background 200ms ease;
+  }
+  .sr-pm-x:hover { background: #ffffff; }
+  .sr-pm-grid {
+    position: relative; z-index: 2; display: grid;
+    grid-template-columns: minmax(0,0.54fr) minmax(0,1fr);
+    gap: clamp(18px,2.4vw,34px); align-items: start;
+  }
+  .sr-pm-left { min-width: 0; }
+  .sr-pm-side {
+    position: relative; flex-direction: column; align-items: center; text-align: center;
+  }
+  .sr-pm-disc {
+    position: absolute; left: 50%; top: 104px; transform: translate(-50%,-50%);
+    height: 190px; width: 190px; border-radius: 9999px; pointer-events: none;
+    background: radial-gradient(circle at 40% 34%, #ffffff 0%, #eaf4ff 44%, #d9eafb 100%);
+    box-shadow: inset 0 -10px 24px rgba(18,38,58,0.06);
+  }
+  .sr-pm-side img {
+    position: relative; display: block; height: 200px; width: auto; max-width: 100%;
+    object-fit: contain; margin: 0 auto;
+    filter: drop-shadow(0 20px 26px rgba(18,38,58,0.24));
+  }
+  .sr-pm-pname {
+    display: block; margin-top: 20px; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-size: 18px; font-weight: 700; color: #183456; letter-spacing: -0.4px;
+    line-height: 1.2;
+  }
+  .sr-pm-pkind { display: block; margin-top: 6px; font-size: 12.5px; color: #5f7a9c; }
+  .sr-pm-psize {
+    display: inline-block; margin-top: 10px; border-radius: 9999px; background: #e7f3ff;
+    color: #2f7bdc; padding: 5px 14px; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-size: 11.5px; font-weight: 700; letter-spacing: 0.6px;
+  }
+  .sr-pm-right { min-width: 0; }
+  .sr-pm-eyebrow {
+    margin: 0; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 10.5px;
+    font-weight: 600; color: #7fa8d6; letter-spacing: 3.6px;
+  }
+  .sr-pm-head {
+    margin: 10px 0 0; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 25px;
+    font-weight: 700; color: #183456; letter-spacing: -0.8px; line-height: 1.15;
+  }
+  .sr-pm-picks {
+    margin-top: 18px; display: inline-flex; gap: 5px; border-radius: 9999px; padding: 5px;
+    background: rgba(255,255,255,0.8); border: 1px solid #d7e6f8;
+  }
+  .sr-pm-pick {
+    border: 0; cursor: pointer; border-radius: 9999px; padding: 10px 20px;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 13px; font-weight: 600;
+    white-space: nowrap;
+    transition: background 260ms ease, color 260ms ease, box-shadow 260ms ease;
+  }
+  .sr-pm-tabs {
+    margin-top: 18px; display: flex; gap: 22px; border-bottom: 1px solid #e3eefb;
+  }
+  .sr-pm-tab {
+    position: relative; border: 0; background: transparent; cursor: pointer;
+    padding: 0 0 11px; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 13.5px;
+    font-weight: 600; transition: color 240ms ease; white-space: nowrap;
+  }
+  .sr-pm-rule {
+    position: absolute; right: 0; bottom: -1px; left: 0; height: 2.5px; border-radius: 9999px;
+    transition: background 240ms ease;
+  }
+  .sr-pm-panel { animation: sr-pm-in 260ms ease-out both; padding-top: 16px; }
+  @keyframes sr-pm-in { from { opacity: 0; transform: translateY(6px); } }
+  .sr-pm-h {
+    margin: 0 0 14px; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 15.5px;
+    font-weight: 700; color: #183456; letter-spacing: -0.3px;
+  }
+  .sr-pm-cards { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 9px; }
+  .sr-pm-card {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 4px;
+    border-radius: 15px; background: #ffffff; border: 1px solid #eaf3fd;
+    box-shadow: 0 8px 20px -18px rgba(18,38,58,0.4); padding: 13px 14px 14px;
+  }
+  .sr-pm-ico {
+    display: flex; height: 34px; width: 34px; align-items: center; justify-content: center;
+    border-radius: 11px; background: #e7f3ff; color: #2f7bdc; margin-bottom: 4px;
+  }
+  .sr-pm-cname {
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 14.5px; font-weight: 700;
+    color: #183456; overflow-wrap: anywhere;
+  }
+  .sr-pm-csub { font-size: 11.5px; color: #8295b4; line-height: 1.45; }
+  .sr-pm-dose {
+    margin-top: 7px; border-radius: 9999px; background: #eef6ff; color: #2f7bdc;
+    padding: 4px 10px; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 10.5px;
+    font-weight: 700;
+  }
+  .sr-pm-sup {
+    margin: 16px 0 8px; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 11px;
+    font-weight: 600; color: #7fa8d6; letter-spacing: 2.2px; text-transform: uppercase;
+  }
+  .sr-pm-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+  .sr-pm-chip {
+    border-radius: 9999px; background: #ffffff; border: 1px solid #dcebfb; color: #44587c;
+    padding: 7px 13px; font-size: 11.5px;
+  }
+  .sr-pm-steps {
+    margin: 0; padding: 0; list-style: none; display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr)); gap: 10px;
+  }
+  .sr-pm-step {
+    display: flex; flex-direction: column; gap: 5px; border-radius: 15px; background: #ffffff;
+    border: 1px solid #eaf3fd; box-shadow: 0 8px 20px -18px rgba(18,38,58,0.4);
+    padding: 13px 14px 14px;
+  }
+  .sr-pm-num {
+    display: flex; height: 26px; width: 26px; align-items: center; justify-content: center;
+    border-radius: 9999px; background: #e7f3ff; color: #2f7bdc;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 11.5px; font-weight: 700;
+  }
+  .sr-pm-slabel {
+    margin-top: 3px; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 13.5px;
+    font-weight: 700; color: #183456;
+  }
+  .sr-pm-stext { font-size: 12px; color: #4e648a; line-height: 1.5; }
+  .sr-pm-bens { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 9px; }
+  .sr-pm-ben {
+    display: flex; align-items: flex-start; gap: 11px; border-radius: 14px; background: #ffffff;
+    border: 1px solid #eaf3fd; box-shadow: 0 8px 20px -18px rgba(18,38,58,0.4);
+    padding: 12px 14px;
+  }
+  .sr-pm-bico {
+    display: flex; height: 32px; width: 32px; flex-shrink: 0; align-items: center;
+    justify-content: center; border-radius: 10px; background: #e7f3ff; color: #2f7bdc;
+  }
+  .sr-pm-bname {
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 13.5px; font-weight: 700;
+    color: #183456;
+  }
+  .sr-pm-btext { font-size: 11.5px; color: #4e648a; line-height: 1.5; }
+  .sr-pm-note {
+    margin: 14px 0 0; display: flex; align-items: flex-start; gap: 9px; font-size: 12px;
+    color: #4e648a; line-height: 1.6;
+  }
+  .sr-pm-caution {
+    margin: 10px 0 0; display: flex; align-items: flex-start; gap: 9px; border-radius: 13px;
+    background: #fdf6e7; border: 1px solid #f3e4c2; padding: 11px 14px; font-size: 11.5px;
+    color: #7a6132; line-height: 1.6;
+  }
+  .sr-pm-foot {
+    margin-top: 20px; padding-top: 14px; border-top: 1px solid #e3eefb; display: flex;
+    flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px;
+    font-size: 12px; color: #8295b4;
+  }
+  .sr-pm-foot a {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 12.5px; font-weight: 600;
+    color: #2f7bdc;
+  }
+  .sr-pm-foot a:hover { color: #1f6ec9; }
+  .sr-pm-open {
+    margin-top: 20px; display: inline-flex; align-items: center; gap: 10px;
+    border-radius: 9999px; background: #ffffff; border: 1.5px solid #b7d5f5; cursor: pointer;
+    padding: 11px 20px; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 13px;
+    font-weight: 600; color: #2f7bdc;
+    transition: background 220ms ease, border-color 220ms ease;
+  }
+  .sr-pm-open:hover { background: #f4faff; border-color: #2f7bdc; }
+  @media (max-width: 760px) {
+    .sr-pm-grid { grid-template-columns: minmax(0,1fr) !important; }
+    .sr-pm-side img { height: 150px; }
+    .sr-pm-disc { height: 150px; width: 150px; top: 80px; }
+    .sr-pm-cards, .sr-pm-steps, .sr-pm-bens { grid-template-columns: minmax(0,1fr) !important; }
+    .sr-pm-tabs { gap: 16px; overflow-x: auto; }
+    .sr-pm { max-height: 92vh; }
+  }
+  @media (prefers-reduced-motion: reduce) { .sr-pm-panel { animation: none !important; } }
+
+  .sr-ad-wrap {
+    position: relative; margin: 0 auto; width: 100%; max-width: 1180px; display: grid;
+    grid-template-columns: minmax(0,1fr) minmax(0,1fr); align-items: center;
+    gap: clamp(28px,4vw,72px);
+  }
+  .sr-ad-stage { position: relative; min-width: 0; padding: 14px 54px 14px 34px; }
+  .sr-ad-glow {
+    position: absolute; left: 44%; top: 50%; transform: translate(-50%,-50%);
+    height: 112%; width: 92%; border-radius: 9999px; pointer-events: none;
+    background: radial-gradient(circle at 42% 38%, rgba(255,255,255,0.95) 0%,
+                rgba(231,243,255,0.85) 40%, rgba(183,213,245,0.35) 68%,
+                rgba(183,213,245,0) 80%);
+  }
+  .sr-ad-frame {
+    position: relative; overflow: hidden; border-radius: 18px; background: #ffffff;
+    border: 1px solid #e7f0fb; box-shadow: 0 34px 70px -36px rgba(18,38,58,0.5);
+    aspect-ratio: 4 / 5;
+  }
+  .sr-ad-bar {
+    position: absolute; left: 0; right: 0; top: 0; z-index: 2; display: flex; gap: 6px;
+    align-items: center; height: 34px; padding: 0 14px;
+    background: rgba(255,255,255,0.92); border-bottom: 1px solid #eef5fd;
+  }
+  .sr-ad-bar > span {
+    height: 8px; width: 8px; border-radius: 9999px; background: #dbe8f6;
+  }
+  .sr-ad-bar > span:first-child { background: #f6c3da; }
+  .sr-ad-bar > span:nth-child(2) { background: #cfe4fc; }
+  .sr-ad-face {
+    position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
+    height: 92%; width: auto; max-width: 112%; object-fit: contain; object-position: bottom;
+  }
+  .sr-ad-bub {
+    position: absolute; z-index: 3; display: flex; flex-direction: column; align-items: center;
+    gap: 7px;
+  }
+  .sr-ad-bubimg {
+    display: flex; height: 104px; width: 104px; align-items: center; justify-content: center;
+    border-radius: 9999px; background: #ffffff; border: 1px solid #eaf3fd;
+    box-shadow: 0 18px 34px -18px rgba(18,38,58,0.55);
+  }
+  .sr-ad-bubimg img { display: block; height: 74%; width: auto; object-fit: contain; }
+  .sr-ad-bublabel {
+    border-radius: 9999px; background: #ffffff; border: 1px solid #e7f0fb; padding: 5px 14px;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 10.5px; font-weight: 700;
+    color: #1b3456; letter-spacing: 2.2px;
+    box-shadow: 0 10px 20px -14px rgba(18,38,58,0.6);
+  }
+  .sr-ad-b1 { left: -4px; top: 26%; }
+  .sr-ad-b2 { right: -6px; bottom: 16%; }
+  .sr-ad-copy { min-width: 0; }
+  .sr-ad-row { margin: 0; display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; }
+  .sr-ad-script {
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-style: italic; font-weight: 300;
+    font-size: clamp(22px,2.4vw,30px); color: #1b3456; letter-spacing: -0.4px;
+  }
+  .sr-ad-eyebrow {
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 10.5px; font-weight: 600;
+    color: #93aecb; letter-spacing: 3.4px;
+  }
+  .sr-ad-h {
+    margin: 2px 0 0; font-family: 'Jost',ui-sans-serif,sans-serif; font-weight: 700;
+    color: #10253f; font-size: clamp(34px,5vw,64px); line-height: 1; letter-spacing: -1.6px;
+  }
+  .sr-ad-stroke { display: block; margin: 4px 0 0; height: 20px; width: min(320px,74%); }
+  .sr-ad-lead {
+    margin: 20px 0 0; max-width: 46ch; font-size: 14px; color: #4e648a; line-height: 1.8;
+  }
+  .sr-ad-choices { margin-top: 24px; display: flex; flex-direction: column; gap: 9px; }
+  .sr-ad-choice {
+    display: flex; align-items: center; gap: 14px; border-radius: 9999px; background: #ffffff;
+    border: 1px solid #dcebfb; padding: 13px 14px 13px 24px;
+    box-shadow: 0 10px 24px -20px rgba(18,38,58,0.5);
+    transition: border-color 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+  }
+  .sr-ad-choice:hover {
+    border-color: #2f85e0; transform: translateX(3px);
+    box-shadow: 0 16px 30px -20px rgba(47,133,224,0.9);
+  }
+  .sr-ad-cl {
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 14.5px; font-weight: 600;
+    color: #10253f;
+  }
+  .sr-ad-cp { margin-left: auto; font-size: 12.5px; color: #5f7a9c; white-space: nowrap; }
+  .sr-ad-carrow {
+    display: flex; height: 34px; width: 34px; flex-shrink: 0; align-items: center;
+    justify-content: center; border-radius: 9999px; color: #ffffff;
+    background: linear-gradient(135deg,#5ba0ea 0%,#2f85e0 52%,#1f6ec9 100%);
+  }
+  .sr-ad-foot {
+    margin: 18px 0 0; max-width: 52ch; font-size: 11.5px; color: #93a8c2; line-height: 1.65;
+  }
+  @media (max-width: 900px) {
+    .sr-ad-wrap { grid-template-columns: minmax(0,1fr) !important; }
+    .sr-ad-stage { padding: 14px 44px 14px 28px; max-width: 420px; margin: 0 auto; }
+    .sr-ad-bubimg { height: 82px; width: 82px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sr-ad-choice:hover { transform: none !important; }
+  }
 </style>
 </helmet>
 
@@ -865,7 +1177,6 @@
 
           <div class="sr-nav-icons" style="flex-shrink:0; display:flex; align-items:center; gap:10px">
             <button type="button" aria-label="Search" style="flex-shrink:0; display:flex; height:40px; width:40px; align-items:center; justify-content:center; border-radius:9999px; border:0.5px solid rgba(18,38,58,0.10); background:#fff; color:#1b3456; cursor:pointer" style-hover="background:#fff"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg></button>
-            <a href="Account.dc.html" aria-label="Account" style="flex-shrink:0; display:flex; height:40px; width:40px; align-items:center; justify-content:center; border-radius:9999px; border:0.5px solid rgba(18,38,58,0.10); background:#fff; color:#1b3456; cursor:pointer; transition:background 200ms" style-hover="color:#1b3456; background:#e7f3ff"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M5.5 21a7.5 7.5 0 0 1 13 0"></path></svg></a>
             <a href="Cart.dc.html" aria-label="Cart" style="position:relative; flex-shrink:0; display:flex; height:40px; width:40px; align-items:center; justify-content:center; border-radius:9999px; border:none; background:#1b3456; color:#fff; cursor:pointer; box-shadow:0 6px 16px rgba(18,38,58,0.20)" style-hover="background:rgba(18,38,58,0.88); color:#fff"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 10a4 4 0 0 1-8 0"></path><path d="M3.103 6.034h17.794"></path><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"></path></svg><span class="r-blob" aria-hidden="true" style="position:absolute; top:-2px; right:-2px; display:flex; height:18px; min-width:18px; align-items:center; justify-content:center; border-radius:9999px; background:#3f7fc9; border:2px solid #fff; font-size:10px; font-weight:600; color:#fff; padding:0 4px">2</span></a>
           </div>
         </nav>
@@ -938,7 +1249,8 @@
           </div>
 
           <div style="margin-top:22px">
-            <a class="sr-buy" href="Cart.dc.html"><span aria-hidden="true" style="display:inline-flex"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span><span>{{ ctaLabel }}</span><span class="sr-buy-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
+            <a class="sr-buy" href="{{ bagHref }}"><span aria-hidden="true" style="display:inline-flex"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span><span>{{ ctaLabel }}</span><span class="sr-buy-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
+            <div class="sr-chips"><span class="sr-chip"><span aria-hidden="true" style="display:flex; flex-shrink:0; color:#e0609e"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.6"></rect><path d="M2.5 9.6h19"></path><path d="M6 14.6h3.4"></path></svg></span>COD Available</span><span class="sr-chip"><span aria-hidden="true" style="display:flex; flex-shrink:0; color:#e0609e"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v5.2a5 5 0 0 0 10 0V3"></path><path d="M5.2 3h3.2"></path><path d="M15.6 3h3.2"></path><path d="M12 13.2v2.4a4.2 4.2 0 0 0 8.4 0v-1.2"></path><circle cx="20.4" cy="12.6" r="1.9"></circle></svg></span>Dermatologist patch tested</span></div>
           </div>
 
           <div aria-hidden="true" style="margin:34px 0 22px; height:0.5px; width:100%; background:linear-gradient(90deg,#d7e6f8 0%,rgba(215,228,240,0) 100%)"></div>
@@ -1353,6 +1665,7 @@
           <h2 style="margin:20px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; color:#1b3456; font-size:clamp(30px,3.6vw,50px); line-height:1.04; letter-spacing:-1.8px"><span style="display:block; font-weight:700">What’s inside</span><span style="display:block; font-weight:400; color:#6ba6e8">matters.</span></h2>
           <p style="margin:18px 0 0; font-size:13.5px; color:#4e648a; line-height:1.8; max-width:300px; text-wrap:pretty">Each active with the dose printed on the carton beside it. The complete INCI for both formulas is on Our Science.</p>
           <div class="sr-swap" role="group" aria-label="Choose a formula"><span class="sr-swap-halo" aria-hidden="true"></span><span class="sr-swap-pill"><button type="button" class="sr-swap-seg" onClick="{{ pin0 }}" aria-pressed="{{ pin0On }}" style="background: {{ pin0Bg }}; color: {{ pin0Fg }}">Capsule Cream</button><button type="button" class="sr-swap-btn" onClick="{{ pinSwap }}" aria-label="Switch formula" style="color: {{ swapFg }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h14"></path><path d="M14 5l4 4-4 4"></path><path d="M20 15H6"></path><path d="M10 11l-4 4 4 4"></path></svg></button><button type="button" class="sr-swap-seg" onClick="{{ pin1 }}" aria-pressed="{{ pin1On }}" style="background: {{ pin1Bg }}; color: {{ pin1Fg }}">Snap 8 Serum</button></span></div>
+          <button type="button" class="sr-pm-open" onClick="{{ pmShow }}">See the full formula<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
         </header>
 
         <div data-sr-step="out" data-sr-pop="{{ insidePop }}" style="position:relative; min-width:0; width:100%; aspect-ratio:1000 / 660">
@@ -1526,6 +1839,60 @@
     </div>
   </section>
 
+  <section data-sr-reveal="out" class="sr-ad" style="position:relative; width:100%; overflow:hidden; background:linear-gradient(180deg,#ffffff 0%,#f7fbff 46%,#eef6ff 100%); padding:clamp(56px,6vw,96px) 24px clamp(64px,7vw,110px)">
+    <div class="sr-ad-wrap">
+      <div class="sr-ad-stage">
+        <span class="sr-ad-glow" aria-hidden="true"></span>
+        <div class="sr-ad-frame">
+          <span class="sr-ad-bar" aria-hidden="true"><span></span><span></span><span></span></span>
+          <img class="sr-ad-face" src="assets/proof-model.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        </div>
+        <span class="sr-ad-bub sr-ad-b1"><span class="sr-ad-bubimg"><img src="assets/hero-cream.webp" alt="su-ree Dual Regenerative Capsule Cream" loading="lazy" decoding="async" /></span><span class="sr-ad-bublabel">CREAM</span></span>
+        <span class="sr-ad-bub sr-ad-b2"><span class="sr-ad-bubimg"><img src="assets/hero-serum.webp" alt="su-ree GHK-Cu+ Snap 8 Triple Peptide Renewal Serum" loading="lazy" decoding="async" /></span><span class="sr-ad-bublabel">SERUM</span></span>
+      </div>
+
+      <div class="sr-ad-copy">
+        <p class="sr-ad-row"><span class="sr-ad-script">start here</span><span class="sr-ad-eyebrow">NO QUIZ, NO SIGN-IN</span></p>
+        <h2 class="sr-ad-h">ROUTINE FINDER</h2>
+        <svg class="sr-ad-stroke" viewBox="0 0 320 20" fill="none" aria-hidden="true"><path d="M8,14 C70,4 190,2 268,9 C288,11 300,13 312,16" stroke="#2f85e0" stroke-width="3.4" stroke-linecap="round"></path></svg>
+        <p class="sr-ad-lead">Two formulas and one set. Pick what you want to work on first and this page opens on the one that matches.</p>
+        <div class="sr-ad-choices">
+          <a class="sr-ad-choice" href="Shop.dc.html?p=cream"><span class="sr-ad-cl">Texture &amp; firmness</span><span class="sr-ad-cp">Capsule Cream</span><span class="sr-ad-carrow" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
+          <a class="sr-ad-choice" href="Shop.dc.html?p=serum"><span class="sr-ad-cl">Tone &amp; fine lines</span><span class="sr-ad-cp">GHK-Cu Serum</span><span class="sr-ad-carrow" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
+          <a class="sr-ad-choice" href="Shop.dc.html?p=duo"><span class="sr-ad-cl">Both</span><span class="sr-ad-cp">The Duo</span><span class="sr-ad-carrow" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
+        </div>
+        <p class="sr-ad-foot">su-ree&#8217;s own rule, printed on this page: texture and firmness to the cream, tone and fine lines to the serum. Nothing is measured or analysed.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <div role="dialog" aria-modal="true" aria-label="Product information" onClick="{{ pmClose }}" class="sr-pm-wrap" style="display: {{ pmOpen }}">
+    <div class="sr-pm" onClick="{{ pmStop }}">
+      <span class="sr-pm-orb" aria-hidden="true"></span>
+      <svg class="sr-pm-arc" viewBox="0 0 320 200" fill="none" aria-hidden="true"><path d="M-10,186 C60,96 190,48 330,26" stroke="#cfe4fc" stroke-width="1.6"></path></svg>
+      <button type="button" class="sr-pm-x" onClick="{{ pmClose }}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+      <div class="sr-pm-grid">
+        <div class="sr-pm-left">
+          <div class="sr-pm-side" style="display: {{ pmSide0 }}"><span class="sr-pm-disc" aria-hidden="true"></span><img src="assets/hero-cream.webp" alt="su-ree Dual Regenerative Capsule Cream jar" loading="lazy" decoding="async" /><span class="sr-pm-pname">Dual Regenerative Capsule Cream</span><span class="sr-pm-pkind">PDRN + GHK-Cu capsule cream</span><span class="sr-pm-psize">30 g</span></div>
+          <div class="sr-pm-side" style="display: {{ pmSide1 }}"><span class="sr-pm-disc" aria-hidden="true"></span><img src="assets/hero-serum.webp" alt="su-ree GHK-Cu+ Snap 8 Triple Peptide Renewal Serum bottle" loading="lazy" decoding="async" /><span class="sr-pm-pname">GHK-Cu+ Snap 8</span><span class="sr-pm-pkind">Triple Peptide Renewal Serum</span><span class="sr-pm-psize">30 ml</span></div>
+        </div>
+        <div class="sr-pm-right">
+          <p class="sr-pm-eyebrow">DISCOVER THE FORMULA</p>
+          <h3 class="sr-pm-head">Science behind your skincare.</h3>
+          <div class="sr-pm-picks" role="group" aria-label="Choose a product"><button type="button" class="sr-pm-pick" onClick="{{ pmPick0 }}" aria-pressed="{{ pmPSel0 }}" style="background: {{ pmPBg0 }}; color: {{ pmPFg0 }}; box-shadow: {{ pmPSh0 }}">Capsule Cream</button><button type="button" class="sr-pm-pick" onClick="{{ pmPick1 }}" aria-pressed="{{ pmPSel1 }}" style="background: {{ pmPBg1 }}; color: {{ pmPFg1 }}; box-shadow: {{ pmPSh1 }}">GHK-Cu Serum</button></div>
+          <div class="sr-pm-tabs" role="tablist" aria-label="Product information"><button type="button" class="sr-pm-tab" role="tab" onClick="{{ pmTab0 }}" aria-selected="{{ pmTSel0 }}" style="color: {{ pmTFg0 }}">What&#8217;s Inside<span aria-hidden="true" class="sr-pm-rule" style="background: {{ pmTRule0 }}"></span></button><button type="button" class="sr-pm-tab" role="tab" onClick="{{ pmTab1 }}" aria-selected="{{ pmTSel1 }}" style="color: {{ pmTFg1 }}">How to Use<span aria-hidden="true" class="sr-pm-rule" style="background: {{ pmTRule1 }}"></span></button><button type="button" class="sr-pm-tab" role="tab" onClick="{{ pmTab2 }}" aria-selected="{{ pmTSel2 }}" style="color: {{ pmTFg2 }}">Product Benefits<span aria-hidden="true" class="sr-pm-rule" style="background: {{ pmTRule2 }}"></span></button></div>
+          <div class="sr-pm-panel" role="tabpanel" style="display: {{ pmShow00 }}"><h4 class="sr-pm-h">Two actives. A unique capsule experience.</h4><div class="sr-pm-cards"><div class="sr-pm-card"><span class="sr-pm-ico" aria-hidden="true"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c0 4 10 5 10 9s-10 5-10 9"></path><path d="M17 3c0 4-10 5-10 9s10 5 10 9"></path><path d="M8.5 7h7"></path><path d="M8.5 17h7"></path></svg></span><span class="sr-pm-cname">PDRN</span><span class="sr-pm-csub">Sodium DNA, in the pink particles</span><span class="sr-pm-dose">2400 mg</span></div><div class="sr-pm-card"><span class="sr-pm-ico" aria-hidden="true"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2.6"></circle><circle cx="12" cy="4.4" r="2"></circle><circle cx="5" cy="17" r="2"></circle><circle cx="19" cy="17" r="2"></circle><path d="M12 6.4v3"></path><path d="m9.8 13.4-3 2.2"></path><path d="m14.2 13.4 3 2.2"></path></svg></span><span class="sr-pm-cname">GHK-Cu</span><span class="sr-pm-csub">Copper Tripeptide-1, in the blue particles</span><span class="sr-pm-dose">2400 mg</span></div><div class="sr-pm-card"><span class="sr-pm-ico" aria-hidden="true"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.5a6.5 6.5 0 0 0 6.5-6.5c0-2-1-3.7-2.8-5.2S12.5 6.3 12 4c-.5 2.3-2 4.3-3.7 5.8S5.5 13 5.5 15a6.5 6.5 0 0 0 6.5 6.5z"></path></svg></span><span class="sr-pm-cname">Clear gel base</span><span class="sr-pm-csub">Water, Glycerin, Carbomer</span><span class="sr-pm-dose">base</span></div></div><p class="sr-pm-note"><span aria-hidden="true" style="display:flex; flex-shrink:0; color:#2f7bdc"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8c1.5 1.4 3 1.4 4.5 0S9.5 6.6 11 8s3 1.4 4.5 0 3-1.4 4.5 0"></path><path d="M2 14c1.5 1.4 3 1.4 4.5 0s3-1.4 4.5 0 3 1.4 4.5 0 3-1.4 4.5 0"></path></svg></span>Pink and blue particles suspended in a clear gel, not pre-mixed. The doses are the ones printed on the carton.</p></div>
+          <div class="sr-pm-panel" role="tabpanel" style="display: {{ pmShow01 }}"><h4 class="sr-pm-h">Three simple steps to your skincare ritual.</h4><ol class="sr-pm-steps"><li class="sr-pm-step"><span class="sr-pm-num" aria-hidden="true">01</span><span class="sr-pm-slabel">Take</span><span class="sr-pm-stext">Take a small amount.</span></li><li class="sr-pm-step"><span class="sr-pm-num" aria-hidden="true">02</span><span class="sr-pm-slabel">Apply</span><span class="sr-pm-stext">Apply evenly to cleansed face and neck.</span></li><li class="sr-pm-step"><span class="sr-pm-num" aria-hidden="true">03</span><span class="sr-pm-slabel">Massage</span><span class="sr-pm-stext">Massage gently until fully absorbed.</span></li></ol><p class="sr-pm-note"><span aria-hidden="true" style="display:flex; flex-shrink:0; color:#2f7bdc"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2.6v2.2"></path><path d="M12 19.2v2.2"></path><path d="m4.6 4.6 1.6 1.6"></path><path d="m17.8 17.8 1.6 1.6"></path><path d="M2.6 12h2.2"></path><path d="M19.2 12h2.2"></path><path d="m4.6 19.4 1.6-1.6"></path><path d="m17.8 6.2 1.6-1.6"></path></svg></span>Use morning and evening. Apply sunscreen during the day.</p><p class="sr-pm-caution"><span aria-hidden="true" style="display:flex; flex-shrink:0; color:#b4821f"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9 2.6 17.3A2 2 0 0 0 4.3 20.3h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path><path d="M12 9v4.4"></path><path d="M12 17h.01"></path></svg></span>For external use only. Avoid contact with eyes. Discontinue use if irritation occurs. Keep out of reach of children. Store in a cool, dry place away from direct sunlight.</p></div>
+          <div class="sr-pm-panel" role="tabpanel" style="display: {{ pmShow02 }}"><h4 class="sr-pm-h">Care designed around your skin.</h4><div class="sr-pm-bens"><div class="sr-pm-ben"><span class="sr-pm-bico" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 13.9 8l4.8 1.9-4.8 1.9L12 16.6l-1.9-4.8L5.3 9.9 10.1 8z"></path><path d="M18.4 16.2l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"></path></svg></span><span style="display:flex; flex-direction:column; gap:3px"><span class="sr-pm-bname">Skin renewal</span><span class="sr-pm-btext">Supports a skin-renewal-focused routine.</span></span></div><div class="sr-pm-ben"><span class="sr-pm-bico" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.5a6.5 6.5 0 0 0 6.5-6.5c0-2-1-3.7-2.8-5.2S12.5 6.3 12 4c-.5 2.3-2 4.3-3.7 5.8S5.5 13 5.5 15a6.5 6.5 0 0 0 6.5 6.5z"></path></svg></span><span style="display:flex; flex-direction:column; gap:3px"><span class="sr-pm-bname">Deep hydration</span><span class="sr-pm-btext">Helps maintain moisturised skin.</span></span></div><div class="sr-pm-ben"><span class="sr-pm-bico" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20V5"></path><path d="m6.5 10.5 5.5-5.5 5.5 5.5"></path></svg></span><span style="display:flex; flex-direction:column; gap:3px"><span class="sr-pm-bname">Firming &amp; elasticity</span><span class="sr-pm-btext">Supports firmer-looking skin.</span></span></div><div class="sr-pm-ben"><span class="sr-pm-bico" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2.6v2.2"></path><path d="M12 19.2v2.2"></path><path d="m4.6 4.6 1.6 1.6"></path><path d="m17.8 17.8 1.6 1.6"></path><path d="M2.6 12h2.2"></path><path d="M19.2 12h2.2"></path><path d="m4.6 19.4 1.6-1.6"></path><path d="m17.8 6.2 1.6-1.6"></path></svg></span><span style="display:flex; flex-direction:column; gap:3px"><span class="sr-pm-bname">Radiant glow</span><span class="sr-pm-btext">Promotes a more radiant appearance.</span></span></div><div class="sr-pm-ben"><span class="sr-pm-bico" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.3-2.9 7.6-7 8.5-4.1-.9-7-4.2-7-8.5V6z"></path><path d="m9.2 12.2 2 2 3.6-3.9"></path></svg></span><span style="display:flex; flex-direction:column; gap:3px"><span class="sr-pm-bname">Barrier strength</span><span class="sr-pm-btext">Supports the skin&#8217;s moisture barrier.</span></span></div></div><p class="sr-pm-note"><span aria-hidden="true" style="display:flex; flex-shrink:0; color:#2f7bdc"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8c1.5 1.4 3 1.4 4.5 0S9.5 6.6 11 8s3 1.4 4.5 0 3-1.4 4.5 0"></path><path d="M2 14c1.5 1.4 3 1.4 4.5 0s3-1.4 4.5 0 3 1.4 4.5 0 3-1.4 4.5 0"></path></svg></span>As printed on the carton.</p></div>
+          <div class="sr-pm-panel" role="tabpanel" style="display: {{ pmShow10 }}"><h4 class="sr-pm-h">Three targeted peptides. One thoughtful formula.</h4><div class="sr-pm-cards"><div class="sr-pm-card"><span class="sr-pm-ico" aria-hidden="true"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2.6"></circle><circle cx="12" cy="4.4" r="2"></circle><circle cx="5" cy="17" r="2"></circle><circle cx="19" cy="17" r="2"></circle><path d="M12 6.4v3"></path><path d="m9.8 13.4-3 2.2"></path><path d="m14.2 13.4 3 2.2"></path></svg></span><span class="sr-pm-cname">GHK-Cu</span><span class="sr-pm-csub">Copper peptide</span><span class="sr-pm-dose">1200 mg</span></div><div class="sr-pm-card"><span class="sr-pm-ico" aria-hidden="true"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2.6"></circle><circle cx="12" cy="4.4" r="2"></circle><circle cx="5" cy="17" r="2"></circle><circle cx="19" cy="17" r="2"></circle><path d="M12 6.4v3"></path><path d="m9.8 13.4-3 2.2"></path><path d="m14.2 13.4 3 2.2"></path></svg></span><span class="sr-pm-cname">SNAP-8&#8482;</span><span class="sr-pm-csub">Acetyl octapeptide</span><span class="sr-pm-dose">10,000 mcg</span></div><div class="sr-pm-card"><span class="sr-pm-ico" aria-hidden="true"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2.6"></circle><circle cx="12" cy="4.4" r="2"></circle><circle cx="5" cy="17" r="2"></circle><circle cx="19" cy="17" r="2"></circle><path d="M12 6.4v3"></path><path d="m9.8 13.4-3 2.2"></path><path d="m14.2 13.4 3 2.2"></path></svg></span><span class="sr-pm-cname">Argireline&#174;</span><span class="sr-pm-csub">Acetyl hexapeptide, in complex</span></div></div><p class="sr-pm-sup">Hydration and barrier complex</p><div class="sr-pm-chips"><span class="sr-pm-chip">Hyaluronic Acid</span><span class="sr-pm-chip">Panthenol</span><span class="sr-pm-chip">Ceramide NP</span><span class="sr-pm-chip">Centella Actives</span></div><p class="sr-pm-note"><span aria-hidden="true" style="display:flex; flex-shrink:0; color:#2f7bdc"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8c1.5 1.4 3 1.4 4.5 0S9.5 6.6 11 8s3 1.4 4.5 0 3-1.4 4.5 0"></path><path d="M2 14c1.5 1.4 3 1.4 4.5 0s3-1.4 4.5 0 3 1.4 4.5 0 3-1.4 4.5 0"></path></svg></span>The two amounts are the ones printed on the carton.</p></div>
+          <div class="sr-pm-panel" role="tabpanel" style="display: {{ pmShow11 }}"><h4 class="sr-pm-h">Your daily serum ritual.</h4><ol class="sr-pm-steps"><li class="sr-pm-step"><span class="sr-pm-num" aria-hidden="true">01</span><span class="sr-pm-slabel">Apply</span><span class="sr-pm-stext">Apply a small amount to face and neck.</span></li><li class="sr-pm-step"><span class="sr-pm-num" aria-hidden="true">02</span><span class="sr-pm-slabel">Absorb</span><span class="sr-pm-stext">Massage gently until fully absorbed.</span></li><li class="sr-pm-step"><span class="sr-pm-num" aria-hidden="true">03</span><span class="sr-pm-slabel">Repeat</span><span class="sr-pm-stext">Use morning and evening.</span></li></ol><p class="sr-pm-note"><span aria-hidden="true" style="display:flex; flex-shrink:0; color:#2f7bdc"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2.6v2.2"></path><path d="M12 19.2v2.2"></path><path d="m4.6 4.6 1.6 1.6"></path><path d="m17.8 17.8 1.6 1.6"></path><path d="M2.6 12h2.2"></path><path d="M19.2 12h2.2"></path><path d="m4.6 19.4 1.6-1.6"></path><path d="m17.8 6.2 1.6-1.6"></path></svg></span>Apply sunscreen during the day.</p><p class="sr-pm-caution"><span aria-hidden="true" style="display:flex; flex-shrink:0; color:#b4821f"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9 2.6 17.3A2 2 0 0 0 4.3 20.3h15.4a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"></path><path d="M12 9v4.4"></path><path d="M12 17h.01"></path></svg></span>For external use only. Avoid contact with eyes. Discontinue use if irritation occurs. Keep out of reach of children. Store in a cool, dry place away from direct sunlight.</p></div>
+          <div class="sr-pm-panel" role="tabpanel" style="display: {{ pmShow12 }}"><h4 class="sr-pm-h">Targeted care for everyday confidence.</h4><div class="sr-pm-bens"><div class="sr-pm-ben"><span class="sr-pm-bico" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8c1.5 1.4 3 1.4 4.5 0S9.5 6.6 11 8s3 1.4 4.5 0 3-1.4 4.5 0"></path><path d="M2 14c1.5 1.4 3 1.4 4.5 0s3-1.4 4.5 0 3 1.4 4.5 0 3-1.4 4.5 0"></path></svg></span><span style="display:flex; flex-direction:column; gap:3px"><span class="sr-pm-bname">Fine-line care</span><span class="sr-pm-btext">Helps soften the appearance of fine lines.</span></span></div><div class="sr-pm-ben"><span class="sr-pm-bico" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21.5a6.5 6.5 0 0 0 6.5-6.5c0-2-1-3.7-2.8-5.2S12.5 6.3 12 4c-.5 2.3-2 4.3-3.7 5.8S5.5 13 5.5 15a6.5 6.5 0 0 0 6.5 6.5z"></path></svg></span><span style="display:flex; flex-direction:column; gap:3px"><span class="sr-pm-bname">Deep hydration</span><span class="sr-pm-btext">Helps replenish moisture for smoother-looking skin.</span></span></div><div class="sr-pm-ben"><span class="sr-pm-bico" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.3-2.9 7.6-7 8.5-4.1-.9-7-4.2-7-8.5V6z"></path><path d="m9.2 12.2 2 2 3.6-3.9"></path></svg></span><span style="display:flex; flex-direction:column; gap:3px"><span class="sr-pm-bname">Barrier support</span><span class="sr-pm-btext">Supports the skin&#8217;s moisture barrier.</span></span></div></div><p class="sr-pm-note"><span aria-hidden="true" style="display:flex; flex-shrink:0; color:#2f7bdc"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8c1.5 1.4 3 1.4 4.5 0S9.5 6.6 11 8s3 1.4 4.5 0 3-1.4 4.5 0"></path><path d="M2 14c1.5 1.4 3 1.4 4.5 0s3-1.4 4.5 0 3 1.4 4.5 0 3-1.4 4.5 0"></path></svg></span>As printed on the carton.</p></div>
+          <div class="sr-pm-foot"><span>su-ree Skin Science</span><a href="Science.dc.html">View full ingredients<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></a></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div role="dialog" aria-modal="true" aria-label="Stay connected" onClick="{{ nlClose }}" style="position:fixed; inset:0; z-index:200; display: {{ nlOpen }}; align-items:center; justify-content:center; padding:24px; background:rgba(13,38,64,0.42); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px)">
     <div class="r-modal" onClick="{{ nlStop }}" style="position:relative; width:100%; max-width:940px; overflow:hidden; border-radius:30px; border:1px solid rgba(255,255,255,0.9); box-shadow:0 46px 100px -44px rgba(13,38,64,0.8); background:#eaf3ff url(assets/modal-bg.webp) 72% center / cover no-repeat">
@@ -1635,7 +2002,6 @@
           <ul style="margin:18px 0 0; padding:0; list-style:none; display:flex; flex-direction:column; gap:13px">
             <li><a href="About.dc.html" style="font-size:13.5px; color:#44587c; transition:color 200ms" style-hover="color:#1b3456">Our Story</a></li>
             <li><a href="Science.dc.html" style="font-size:13.5px; color:#44587c; transition:color 200ms" style-hover="color:#1b3456">Our Science</a></li>
-            <li><a href="Account.dc.html" style="font-size:13.5px; color:#44587c; transition:color 200ms" style-hover="color:#1b3456">My account</a></li>
             <li><a href="mailto:hello@su-ree.com" style="font-size:13.5px; color:#44587c; transition:color 200ms" style-hover="color:#1b3456">Contact us</a></li>
           </ul>
         </nav>
@@ -1745,6 +2111,7 @@ class Component extends DCLogic {
     // a set is already two objects; stacking three of them is six
     out.stackShow = vi === 2 ? "none" : "flex";
     out.soloShow = vi === 2 ? "flex" : "none";
+    out.bagHref = "Cart.dc.html?p=" + v.key + "&q=" + qty;
     out.ctaLabel = "Add to Cart \u2014 " + this.peso(sell);
     return out;
   }
@@ -1879,7 +2246,44 @@ class Component extends DCLogic {
 
   componentWillUnmount() { clearInterval(this.galTimer); clearInterval(this.reviewTimer); clearInterval(this.baTimer); if (this.stepIO) this.stepIO.disconnect(); clearTimeout(this.stepTry); if (this.onResize) window.removeEventListener("resize", this.onResize); }
 
-  state = { navOpen: false, inside: 0, insidePop: "a", ba: 0, review: 1, trackW: 1280, navScrolled: false, faqCat: 0, variant: 2, tier: 0, formula: 0, shot: 0, gal: 0, tell: 0, answers: {} };
+  state = { navOpen: false, inside: 0, insidePop: "a", ba: 0, review: 1, pmOpen: false, pmProd: 0, pmTab: 0, trackW: 1280, navScrolled: false, faqCat: 0, variant: 2, tier: 0, formula: 0, shot: 0, gal: 0, tell: 0, answers: {} };
+
+
+  PM_TABS = 3;
+
+  pmVals() {
+    const open = !!this.state.pmOpen;
+    const p = this.state.pmProd || 0;
+    const t = this.state.pmTab || 0;
+    const out = {
+      pmOpen: open ? "flex" : "none",
+      pmShow: () => this.setState({ pmOpen: true }),
+      pmClose: () => this.setState({ pmOpen: false }),
+      pmStop: (e) => { if (e && e.stopPropagation) e.stopPropagation(); },
+    };
+    for (let i = 0; i < 2; i++) {
+      const on = i === p;
+      out["pmPick" + i] = () => { if (this.state.pmProd !== i) this.setState({ pmProd: i }); };
+      out["pmPSel" + i] = on ? "true" : "false";
+      out["pmPBg" + i] = on
+        ? "linear-gradient(135deg,#5ba0ea 0%,#2f85e0 52%,#1f6ec9 100%)"
+        : "rgba(255,255,255,0)";
+      out["pmPFg" + i] = on ? "#ffffff" : "#183456";
+      out["pmPSh" + i] = on ? "0 10px 22px -12px rgba(47,123,224,0.85)" : "0 0 0 rgba(0,0,0,0)";
+      out["pmSide" + i] = on ? "flex" : "none";
+      for (let k = 0; k < this.PM_TABS; k++) {
+        out["pmShow" + i + k] = (on && k === t) ? "block" : "none";
+      }
+    }
+    for (let k = 0; k < this.PM_TABS; k++) {
+      const on = k === t;
+      out["pmTab" + k] = () => { if (this.state.pmTab !== k) this.setState({ pmTab: k }); };
+      out["pmTSel" + k] = on ? "true" : "false";
+      out["pmTFg" + k] = on ? "#183456" : "#7f93ae";
+      out["pmTRule" + k] = on ? "#2f85e0" : "rgba(47,133,224,0)";
+    }
+    return out;
+  }
 
   nlVals() {
     const st = this.state.nl || { msg: "", ok: null };
@@ -2154,6 +2558,7 @@ class Component extends DCLogic {
       ...this.insideVals(),
       ...this.baVals(),
       ...this.nlVals(),
+      ...this.pmVals(),
       ...this.buyVals(),
       ...this.galVals(),
       ...this.ingVals(),
