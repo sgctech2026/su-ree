@@ -617,7 +617,9 @@
   @media (max-width: 980px) {
     .sr-pf-cert { transform: none !important; flex-basis: 100% !important; }
     /* the heading reads from the middle once the card drops below it */
-    .sr-pf-copy { align-items: center !important; text-align: center !important; }
+    /* the certificate leads, the heading follows it */
+    .sr-pf-stage { order: 1 !important; }
+    .sr-pf-copy { order: 2 !important; align-items: center !important; text-align: center !important; }
     .sr-pf-copy > div { justify-content: center !important; }
     .sr-pf-copy h2 { text-align: center !important; }
     .sr-pf-rule { margin-left: auto !important; margin-right: auto !important; }
