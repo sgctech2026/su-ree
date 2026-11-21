@@ -158,8 +158,14 @@
     /* everything reads down the middle here */
     .r-foot nav { text-align: center; }
     .r-foot nav ul { align-items: center; }
-    .r-foot > div:last-child { align-items: center; }
-    .r-foot > div:last-child > a { width: fit-content; }
+    /* the three promises sit together in one card, read from the left */
+    .r-foot > div:last-child {
+      align-items: stretch; text-align: left; gap: 13px !important;
+      border-radius: 18px; background: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.9); padding: 15px 16px;
+      box-shadow: 0 12px 28px -24px rgba(18,38,58,0.55);
+    }
+    .r-foot > div:last-child > a { width: auto; }
     .r-foot > div:last-child {
       grid-column: 1 / -1; padding-left: 0 !important;
     }
