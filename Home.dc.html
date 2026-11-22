@@ -343,16 +343,25 @@
   @media (max-width: 1100px) { .sr-cc-track { grid-template-columns: repeat(3,minmax(0,1fr)); } }
   .sr-cc-arrow { display: none; }
   @media (max-width: 620px) {
-    /* one concern fills the screen; the rest are a swipe or an arrow away */
-    .sr-cc-rail { overflow: visible !important; }
+    /* one concern at a time, and only that one: the rail is as wide as a
+       single card and clips, so no neighbour shows at the edges */
+    .sr-cc-rail {
+      position: relative; width: 70%; max-width: 250px; margin: 0 auto;
+      overflow: hidden !important;
+    }
     .sr-cc-track {
       display: flex !important; grid-template-columns: none !important;
-      gap: 12px; overflow-x: auto; scroll-snap-type: x mandatory;
+      gap: 0; overflow-x: auto; scroll-snap-type: x mandatory;
       scrollbar-width: none; -ms-overflow-style: none;
-      padding: 16px 34px 26px !important;
+      padding: 10px 0 18px !important;
     }
     .sr-cc-track::-webkit-scrollbar { display: none; }
     .sr-cc-tile { flex: 0 0 100% !important; scroll-snap-align: center; }
+    /* the oval is narrower here, so the words come down with it */
+    .sr-cc-panel { padding: 0 18px 14px !important; gap: 3px !important; }
+    .sr-cc-name { font-size: 15px !important; letter-spacing: -0.3px !important; }
+    .sr-cc-desc { font-size: 11px !important; line-height: 1.35 !important; max-width: 18ch; }
+    .sr-cc-badge { height: 38px !important; width: 38px !important; }
     .sr-cc-arrow {
       position: absolute; top: 50%; z-index: 4; transform: translateY(-50%);
       display: flex !important; height: 34px; width: 34px; align-items: center;
@@ -360,8 +369,9 @@
       color: #2f7bdc; background: rgba(255,255,255,0.92); border: 1px solid #dceafa;
       box-shadow: 0 8px 20px -12px rgba(18,38,58,0.8);
     }
-    .sr-cc-arrow-l { left: 0; }
-    .sr-cc-arrow-r { right: 0; }
+    .sr-cc-arrow { height: 30px; width: 30px; }
+    .sr-cc-arrow-l { left: -14px; }
+    .sr-cc-arrow-r { right: -14px; }
   }
   .sr-cc-rail {
     -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 72px, #000 calc(100% - 72px), transparent 100%);
