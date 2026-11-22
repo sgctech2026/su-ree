@@ -246,39 +246,39 @@
   .sr-qty[aria-hidden="true"] { display: none !important; }
   @media (min-width: 561px) {
     /* one size on offer: the card reads across, like it does on a phone */
-    [data-sr-one="true"] .sr-qty {
+    .sr-qtys .sr-qty {
       display: grid; grid-template-columns: auto minmax(0,1fr) auto;
       align-items: center; gap: 2px 16px; text-align: left;
       padding: 16px 18px 16px 48px;
     }
-    [data-sr-one="true"] .sr-qty-radio { left: 16px; top: 50%; transform: translateY(-50%); }
-    [data-sr-one="true"] .sr-qty-shots {
+    .sr-qtys .sr-qty-radio { left: 16px; top: 50%; transform: translateY(-50%); }
+    .sr-qtys .sr-qty-shots {
       grid-column: 1; grid-row: 1 / -1; height: 112px; width: 150px; margin: 0;
     }
     /* name and line sit as one block in the middle of the card */
-    [data-sr-one="true"] .sr-qty {
+    .sr-qtys .sr-qty {
       grid-template-rows: 1fr 1fr; align-content: stretch; row-gap: 0;
     }
-    [data-sr-one="true"] .sr-qty-label {
+    .sr-qtys .sr-qty-label {
       grid-column: 2; grid-row: 1; align-self: end; font-size: 22px;
       line-height: 1.1;
     }
-    [data-sr-one="true"] .sr-qty-sub {
+    .sr-qtys .sr-qty-sub {
       grid-column: 2; grid-row: 2; align-self: start; font-size: 13px;
       line-height: 1.3;
     }
-    [data-sr-one="true"] .sr-qty-shots, [data-sr-one="true"] .sr-qty-price {
+    .sr-qtys .sr-qty-shots, .sr-qty-price {
       align-self: center;
     }
     /* the price sits on its own tinted panel, not behind a hairline */
-    [data-sr-one="true"] .sr-qty-price {
+    .sr-qtys .sr-qty-price {
       grid-column: 3; grid-row: 1 / -1; width: auto; margin: 0;
       flex-direction: column; align-items: center; gap: 1px;
       border-left: 0; border-radius: 16px;
       background: rgba(231,243,255,0.9); padding: 14px 22px;
       font-size: 24px; letter-spacing: -0.9px;
     }
-    [data-sr-one="true"] .sr-qty-was { font-size: 14px; }
+    .sr-qtys .sr-qty-was { font-size: 14px; }
   }
   @media (max-width: 560px) {
   }
@@ -2437,7 +2437,8 @@ class Component extends DCLogic {
 
     const sell = v.sell[t];
     const qty = t + 1;
-    out.qtyCols = "repeat(" + tiers + ",minmax(0,1fr))";
+    // the cards read across, so they stack rather than sit side by side
+    out.qtyCols = "minmax(0,1fr)";
     // a lone card has the width to read across instead of down
     out.qtyOne = tiers === 1 ? "true" : "false";
     out.tShot = SHOTS[vi];
