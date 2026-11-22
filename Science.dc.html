@@ -215,11 +215,21 @@
     }
   }
   @media (max-width: 620px) {
+    /* the product leads, the ingredients read under it across the width */
+    .sr-inci {
+      grid-template-columns: minmax(0,1fr) !important; gap: 16px !important;
+    }
+    .sr-inci > div:nth-child(1) { order: 2; text-align: left !important; }
+    .sr-inci > div:nth-child(2) { order: 1; justify-content: center !important; }
+    .sr-inci > div:nth-child(1) > span {
+      margin-left: 0 !important; max-width: none !important;
+    }
+    .sr-inci > div:nth-child(1) > span > span { flex-direction: row !important; }
     .sr-inci h3 { font-size: 19px !important; letter-spacing: -0.6px !important; }
     .sr-inci p { font-size: 12px !important; line-height: 1.7 !important; }
     .sr-inci > div > p:first-child { font-size: 9.5px !important; letter-spacing: 2px !important; }
     .sr-inci span { font-size: 11.5px !important; }
-    .sr-inci img { max-height: 132px !important; }
+    .sr-inci img { max-height: 200px !important; }
     .sr-inci a { font-size: 12.5px !important; }
   }
   /* the floating circles are gone; the waves and the watermark stay */
