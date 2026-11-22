@@ -280,6 +280,41 @@
     }
     .sr-test-fold > div > p { padding-top: 12px; }
   }
+  @media (max-width: 620px) {
+    /* the eyebrow becomes a pill, as the reference draws it */
+    .sr-inci > div:nth-child(1) > p:first-child {
+      display: inline-block; border-radius: 9999px; padding: 6px 16px;
+      background: rgba(231,243,255,0.9); color: #3f7fc9;
+      font-size: 10.5px !important; letter-spacing: 2.4px !important;
+    }
+    /* the lines sit in a card, read as a table */
+    .sr-inci-table {
+      margin: 16px auto 0 !important; max-width: none !important;
+      border-radius: 20px; background: rgba(255,255,255,0.86);
+      border: 1px solid #e7f0fb; padding: 4px 14px;
+      box-shadow: 0 12px 30px -26px rgba(18,38,58,0.6);
+    }
+    .sr-inci-row {
+      flex-direction: row !important; align-items: center !important;
+      justify-content: flex-start !important; gap: 12px !important;
+      padding: 11px 0 !important; text-align: left;
+      border-top: 0 !important;
+    }
+    .sr-inci-row + .sr-inci-row { border-top: 1px solid rgba(18,38,58,0.07) !important; }
+    .sr-inci-row > span:first-child {
+      border-radius: 9999px; padding: 5px 11px; background: rgba(231,243,255,0.9);
+      font-size: 9.5px !important; letter-spacing: 1.2px !important;
+    }
+    .sr-inci-row > span:last-child { flex: 1; min-width: 0; text-align: left; }
+    /* the serum's list takes the same card */
+    .sr-inci-actives {
+      margin: 16px auto 0 !important; max-width: none !important;
+      border-radius: 20px; background: rgba(255,255,255,0.86);
+      border: 1px solid #e7f0fb; padding: 16px 18px;
+      box-shadow: 0 12px 30px -26px rgba(18,38,58,0.6);
+      font-size: 13px !important; text-align: center;
+    }
+  }
 </style>
 </helmet>
 
@@ -372,10 +407,10 @@
         <div data-sr-slide="l" style="min-width:0; text-align:right; order:1">
           <p style="margin:0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; font-weight:500; color:#5f9ad8; letter-spacing:3px">FULL INCI</p>
           <h3 style="margin:14px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-weight:600; color:#1b3456; font-size:clamp(23px,2.5vw,32px); line-height:1.16; letter-spacing:-0.9px">Capsule Cream</h3>
-          <span style="margin:18px 0 0; margin-left:auto; display:flex; flex-direction:column; max-width:34ch">
-            <span style="display:flex; flex-direction:row-reverse; align-items:baseline; gap:10px; padding:7px 0; border-top:0.5px solid rgba(18,38,58,0.08)"><span style="flex-shrink:0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:10.5px; font-weight:600; color:#5f9ad8; letter-spacing:1.4px; white-space:nowrap">CLEAR GEL</span><span style="font-size:13px; color:#4e648a; line-height:1.6">Water, glycerin, carbomer</span></span>
-            <span style="display:flex; flex-direction:row-reverse; align-items:baseline; gap:10px; padding:7px 0; border-top:0.5px solid rgba(18,38,58,0.08)"><span style="flex-shrink:0; display:inline-flex; align-items:center; gap:7px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:10.5px; font-weight:600; color:#c4749b; letter-spacing:1.4px; white-space:nowrap"><span aria-hidden="true" style="display:inline-block; height:7px; width:7px; border-radius:9999px; background:#f4b7d2"></span>PINK PARTICLES</span><span style="font-size:13px; color:#4e648a; line-height:1.6">Sodium DNA — the PDRN</span></span>
-            <span style="display:flex; flex-direction:row-reverse; align-items:baseline; gap:10px; padding:7px 0; border-top:0.5px solid rgba(18,38,58,0.08)"><span style="flex-shrink:0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:10.5px; font-weight:600; color:#5f9ad8; letter-spacing:1.4px; white-space:nowrap">BLUE PARTICLES</span><span style="font-size:13px; color:#4e648a; line-height:1.6">Copper Tripeptide-1 — the GHK-Cu</span></span>
+          <span class="sr-inci-table" style="margin:18px 0 0; margin-left:auto; display:flex; flex-direction:column; max-width:34ch">
+            <span class="sr-inci-row" style="display:flex; flex-direction:row-reverse; align-items:baseline; gap:10px; padding:7px 0; border-top:0.5px solid rgba(18,38,58,0.08)"><span style="flex-shrink:0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:10.5px; font-weight:600; color:#5f9ad8; letter-spacing:1.4px; white-space:nowrap">CLEAR GEL</span><span style="font-size:13px; color:#4e648a; line-height:1.6">Water, glycerin, carbomer</span></span>
+            <span class="sr-inci-row" style="display:flex; flex-direction:row-reverse; align-items:baseline; gap:10px; padding:7px 0; border-top:0.5px solid rgba(18,38,58,0.08)"><span style="flex-shrink:0; display:inline-flex; align-items:center; gap:7px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:10.5px; font-weight:600; color:#c4749b; letter-spacing:1.4px; white-space:nowrap"><span aria-hidden="true" style="display:inline-block; height:7px; width:7px; border-radius:9999px; background:#f4b7d2"></span>PINK PARTICLES</span><span style="font-size:13px; color:#4e648a; line-height:1.6">Sodium DNA — the PDRN</span></span>
+            <span class="sr-inci-row" style="display:flex; flex-direction:row-reverse; align-items:baseline; gap:10px; padding:7px 0; border-top:0.5px solid rgba(18,38,58,0.08)"><span style="flex-shrink:0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:10.5px; font-weight:600; color:#5f9ad8; letter-spacing:1.4px; white-space:nowrap">BLUE PARTICLES</span><span style="font-size:13px; color:#4e648a; line-height:1.6">Copper Tripeptide-1 — the GHK-Cu</span></span>
             <span style="margin-top:10px; font-size:11.5px; color:#8295b4">Full INCI printed on every carton.</span>
           </span>
           <a href="Shop.dc.html?p=cream" style="margin-top:20px; display:inline-flex; align-items:center; gap:9px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:14px; font-weight:600; color:#438fe0; transition:gap 220ms ease" style-hover="color:#2d72c4; gap:14px">View the product</a>
@@ -388,7 +423,7 @@
         <div data-sr-slide="r" style="min-width:0; text-align:left; order:2">
           <p style="margin:0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; font-weight:500; color:#5f9ad8; letter-spacing:3px">KEY ACTIVES</p>
           <h3 style="margin:14px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-weight:600; color:#1b3456; font-size:clamp(23px,2.5vw,32px); line-height:1.16; letter-spacing:-0.9px">GHK-Cu+ Snap 8 Serum</h3>
-          <p style="margin:16px 0 0; font-size:13.5px; color:#4e648a; line-height:1.8; text-wrap:pretty; margin-left:0; max-width:40ch">GHK-Cu, SNAP-8™, Argireline®, Hyaluronic Acid, Panthenol, Ceramide NP, Centella Actives.</p>
+          <p class="sr-inci-actives" style="margin:16px 0 0; font-size:13.5px; color:#4e648a; line-height:1.8; text-wrap:pretty; margin-left:0; max-width:40ch">GHK-Cu, SNAP-8™, Argireline®, Hyaluronic Acid, Panthenol, Ceramide NP, Centella Actives.</p>
           <a href="Shop.dc.html?p=serum" style="margin-top:20px; display:inline-flex; align-items:center; gap:9px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:14px; font-weight:600; color:#438fe0; transition:gap 220ms ease" style-hover="color:#2d72c4; gap:14px">View the product</a>
         </div>
         <div data-sr-slide="l" style="position:relative; min-width:0; display:flex; align-items:center; justify-content:flex-end; order:1">
