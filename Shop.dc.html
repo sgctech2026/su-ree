@@ -238,23 +238,33 @@
   }
   /* a size the catalogue does not stock is not offered */
   .sr-qty[aria-hidden="true"] { display: none !important; }
-  /* one size on offer: the card reads across, like it does on a phone */
-  [data-sr-one="true"] .sr-qty {
-    display: grid; grid-template-columns: auto minmax(0,1fr) auto;
-    align-items: center; gap: 2px 16px; text-align: left;
-    padding: 16px 18px 16px 48px;
+  @media (min-width: 561px) {
+    /* one size on offer: the card reads across, like it does on a phone */
+    [data-sr-one="true"] .sr-qty {
+      display: grid; grid-template-columns: auto minmax(0,1fr) auto;
+      align-items: center; gap: 2px 16px; text-align: left;
+      padding: 16px 18px 16px 48px;
+    }
+    [data-sr-one="true"] .sr-qty-radio { left: 16px; top: 50%; transform: translateY(-50%); }
+    [data-sr-one="true"] .sr-qty-shots {
+      grid-column: 1; grid-row: 1 / -1; height: 96px; width: 120px; margin: 0;
+    }
+    [data-sr-one="true"] .sr-qty-label { grid-column: 2; grid-row: 1; align-self: end; }
+    [data-sr-one="true"] .sr-qty-sub { grid-column: 2; grid-row: 2; align-self: start; }
+    [data-sr-one="true"] .sr-qty-price {
+      grid-column: 3; grid-row: 1 / -1; width: auto; margin: 0;
+      flex-direction: column; align-items: center; gap: 2px;
+      border-radius: 0; background: transparent; border-left: 1px solid #dbe8f7;
+      padding: 4px 6px 4px 18px; font-size: 22px; letter-spacing: -0.8px;
+    }
   }
-  [data-sr-one="true"] .sr-qty-radio { left: 16px; top: 50%; transform: translateY(-50%); }
-  [data-sr-one="true"] .sr-qty-shots {
-    grid-column: 1; grid-row: 1 / -1; height: 96px; width: 120px; margin: 0;
-  }
-  [data-sr-one="true"] .sr-qty-label { grid-column: 2; grid-row: 1; align-self: end; }
-  [data-sr-one="true"] .sr-qty-sub { grid-column: 2; grid-row: 2; align-self: start; }
-  [data-sr-one="true"] .sr-qty-price {
-    grid-column: 3; grid-row: 1 / -1; width: auto; margin: 0;
-    flex-direction: column; align-items: center; gap: 2px;
-    border-radius: 0; background: transparent; border-left: 1px solid #dbe8f7;
-    padding: 4px 6px 4px 18px; font-size: 22px; letter-spacing: -0.8px;
+  @media (max-width: 560px) {
+    /* on a phone the buy column reads as one card, not loose parts */
+    .sr-buycol {
+      border-radius: 22px; background: rgba(255,255,255,0.78);
+      border: 1px solid #e7f0fb; padding: 20px 16px 22px;
+      box-shadow: 0 16px 36px -30px rgba(18,38,58,0.6);
+    }
   }
   .sr-qtys {
     margin-top: 20px; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px;
@@ -1505,7 +1515,7 @@
           <a href="Science.dc.html" style="margin-top:12px; display:flex; align-items:center; justify-content:center; gap:11px; border-radius:14px; background:linear-gradient(135deg,#1d3a55 0%,#1b3456 52%,#0c1c2c 100%); padding:16px 22px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:13.5px; font-weight:600; color:#fff; letter-spacing:1.4px; box-shadow:0 14px 30px -14px rgba(18,38,58,0.6); transition:transform 220ms, box-shadow 220ms" style-hover="color:#fff; transform:translateY(-2px); box-shadow:0 20px 40px -16px rgba(18,38,58,0.7)">READ THE BATCH REPORT</a>
         </div>
 
-        <div style="min-width:0">
+        <div class="sr-buycol" style="min-width:0">
           <p style="margin:0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; font-weight:500; color:#5f9ad8; letter-spacing:4.2px">THE SHOP</p>
           <h1 style="margin:16px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-weight:600; color:#1b3456; font-size:clamp(30px,3.9vw,50px); line-height:1.08; letter-spacing:-0.5px">Shop the range.</h1>
           <p style="margin:16px 0 0; max-width:480px; font-size:14px; color:#44587c; line-height:1.8">Two formulas and one set. Every jar carries its own batch code you can check before you open it. {{ shipLine }}</p>
