@@ -206,7 +206,7 @@
       flex: 1 1 0; min-width: 0; justify-content: center !important;
       padding: 10px 6px !important; font-size: 12px !important;
     }
-    .sr-cats > button > span[aria-hidden="true"] { display: none !important; }
+    .sr-cats > button > span[aria-hidden="true"]:not(.sr-cat-ico) { display: none !important; }
     .sr-cat-long { display: none; }
     .sr-cat-short { display: inline !important; }
     /* the questions read lighter, and the numbers go */
@@ -216,6 +216,35 @@
     .sr-qalist button svg { width: 18px !important; height: 18px !important; }
     .sr-qalist p { font-size: 13px !important; padding-left: 18px !important;
                    padding-right: 18px !important; }
+  }
+  .sr-cat-ico { display: none; }
+  .sr-grouphead { display: none; }
+  @media (max-width: 760px) {
+    /* the categories read as cards: a mark over a short name */
+    .sr-cats > button {
+      flex-direction: column !important; gap: 7px !important;
+      padding: 12px 4px !important; border-radius: 16px !important;
+    }
+    .sr-cat-ico { display: flex !important; justify-content: center; }
+    .sr-cat-ico svg { width: 20px; height: 20px; }
+    /* the panel says what the group covers before the questions */
+    .sr-grouphead {
+      display: flex !important; align-items: center; gap: 12px;
+      margin: 0 0 16px; padding: 14px 14px;
+      border-radius: 18px; background: rgba(255,255,255,0.72);
+      border: 1px solid #e3eefb;
+    }
+    .sr-grouphead-ico {
+      display: flex; height: 40px; width: 40px; flex-shrink: 0; align-items: center;
+      justify-content: center; border-radius: 13px; color: #ffffff;
+      background: linear-gradient(140deg,#6aa9ec 0%,#2f85e0 100%);
+    }
+    .sr-grouphead-words { display: flex; min-width: 0; flex-direction: column; gap: 2px; }
+    .sr-grouphead-name {
+      font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 15px; font-weight: 700;
+      color: #1b3456; letter-spacing: -0.3px;
+    }
+    .sr-grouphead-desc { font-size: 11.5px; color: #6a84a6; line-height: 1.45; }
   }
 </style>
 </helmet>
@@ -258,26 +287,26 @@
       <div class="r-2col" style="display:grid; grid-template-columns:minmax(0,250px) minmax(0,1fr); gap:clamp(24px,4vw,54px); align-items:start; padding-top:28px">
         <div class="r-stick sr-cats" role="tablist" aria-orientation="vertical" aria-label="Question categories" style="position:sticky; top:106px; display:flex; flex-direction:column; gap:6px">
           <button type="button" role="tab" onClick="{{ qPick0 }}" aria-selected="{{ qSel0 }}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; border-radius:12px; padding:13px 15px; font-size:14px; font-weight:600; letter-spacing:-0.1px; cursor:pointer; font-family:inherit; background: {{ qBg0 }}; color: {{ qFg0 }}; border:0.5px solid {{ qBd0 }}; transition:background 240ms ease, color 240ms ease, border-color 240ms ease; box-sizing:border-box">
-            <span class="sr-cat-long" style="min-width:0">Ordering &amp; delivery</span><span class="sr-cat-short" style="min-width:0">Ordering</span>
+            <span class="sr-cat-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8l9 5z"></path><path d="M3 8v8l9 5 9-5V8"></path><path d="M12 13v8"></path></svg></span><span class="sr-cat-long" style="min-width:0">Ordering &amp; delivery</span><span class="sr-cat-short" style="min-width:0">Ordering</span>
             <span aria-hidden="true" style="flex-shrink:0; font-size:12px; font-weight:500; opacity:0.65">4</span>
           </button>
           <button type="button" role="tab" onClick="{{ qPick1 }}" aria-selected="{{ qSel1 }}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; border-radius:12px; padding:13px 15px; font-size:14px; font-weight:600; letter-spacing:-0.1px; cursor:pointer; font-family:inherit; background: {{ qBg1 }}; color: {{ qFg1 }}; border:0.5px solid {{ qBd1 }}; transition:background 240ms ease, color 240ms ease, border-color 240ms ease; box-sizing:border-box">
-            <span class="sr-cat-long" style="min-width:0">The products</span><span class="sr-cat-short" style="min-width:0">Products</span>
+            <span class="sr-cat-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"></path><path d="M9.5 6h5l.9 12.3a2 2 0 0 1-2 2.1h-2.8a2 2 0 0 1-2-2.1z"></path><path d="M9 3v3"></path><path d="M15 3v3"></path></svg></span><span class="sr-cat-long" style="min-width:0">The products</span><span class="sr-cat-short" style="min-width:0">Products</span>
             <span aria-hidden="true" style="flex-shrink:0; font-size:12px; font-weight:500; opacity:0.65">4</span>
           </button>
           <button type="button" role="tab" onClick="{{ qPick2 }}" aria-selected="{{ qSel2 }}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; border-radius:12px; padding:13px 15px; font-size:14px; font-weight:600; letter-spacing:-0.1px; cursor:pointer; font-family:inherit; background: {{ qBg2 }}; color: {{ qFg2 }}; border:0.5px solid {{ qBd2 }}; transition:background 240ms ease, color 240ms ease, border-color 240ms ease; box-sizing:border-box">
-            <span class="sr-cat-long" style="min-width:0">Batches &amp; verification</span><span class="sr-cat-short" style="min-width:0">Batches</span>
+            <span class="sr-cat-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 4.5-9 4.5-9-4.5z"></path><path d="m3 13 9 4.5L21 13"></path></svg></span><span class="sr-cat-long" style="min-width:0">Batches &amp; verification</span><span class="sr-cat-short" style="min-width:0">Batches</span>
             <span aria-hidden="true" style="flex-shrink:0; font-size:12px; font-weight:500; opacity:0.65">3</span>
           </button>
           <button type="button" role="tab" onClick="{{ qPick3 }}" aria-selected="{{ qSel3 }}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; border-radius:12px; padding:13px 15px; font-size:14px; font-weight:600; letter-spacing:-0.1px; cursor:pointer; font-family:inherit; background: {{ qBg3 }}; color: {{ qFg3 }}; border:0.5px solid {{ qBd3 }}; transition:background 240ms ease, color 240ms ease, border-color 240ms ease; box-sizing:border-box">
-            <span class="sr-cat-long" style="min-width:0">Returns &amp; support</span><span class="sr-cat-short" style="min-width:0">Returns</span>
+            <span class="sr-cat-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a9 9 0 1 1 1.5 9"></path><path d="M3 4v5h5"></path></svg></span><span class="sr-cat-long" style="min-width:0">Returns &amp; support</span><span class="sr-cat-short" style="min-width:0">Returns</span>
             <span aria-hidden="true" style="flex-shrink:0; font-size:12px; font-weight:500; opacity:0.65">3</span>
           </button>
         </div>
 
         <div style="min-width:0; min-height:460px">
         <div role="tabpanel" aria-label="Ordering &amp; delivery" style="display: {{ gShow0 }}">
-        <p style="margin:0 0 20px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; color:#3f7fc9; letter-spacing:1.8px; text-transform:uppercase">Ordering & delivery</p>
+        <div class="sr-grouphead"><span class="sr-grouphead-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8l9 5z"></path><path d="M3 8v8l9 5 9-5V8"></path><path d="M12 13v8"></path></svg></span><span class="sr-grouphead-words"><span class="sr-grouphead-name">Ordering &amp; delivery</span><span class="sr-grouphead-desc">Delivery times, payment and where we ship.</span></span></div>
         <div class="sr-qalist" style="display:flex; flex-direction:column; gap:14px">
           <div style="border-radius:26px; background:rgba(255,255,255,0.92); border:0.5px solid rgba(185,207,230,0.7); box-shadow:0 8px 22px rgba(18,38,58,0.06); overflow:hidden; transition:box-shadow 260ms ease, border-color 260ms ease">
             <button type="button" onClick="{{ tF0 }}" aria-expanded="{{ f0 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; box-sizing:border-box">
@@ -331,7 +360,7 @@
         </div>
 
         <div role="tabpanel" aria-label="The products" style="display: {{ gShow1 }}">
-        <p style="margin:0 0 20px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; color:#3f7fc9; letter-spacing:1.8px; text-transform:uppercase">The products</p>
+        <div class="sr-grouphead"><span class="sr-grouphead-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"></path><path d="M9.5 6h5l.9 12.3a2 2 0 0 1-2 2.1h-2.8a2 2 0 0 1-2-2.1z"></path><path d="M9 3v3"></path><path d="M15 3v3"></path></svg></span><span class="sr-grouphead-words"><span class="sr-grouphead-name">The products</span><span class="sr-grouphead-desc">What is in each formula and how to use it.</span></span></div>
         <div class="sr-qalist" style="display:flex; flex-direction:column; gap:14px">
           <div style="border-radius:26px; background:rgba(255,255,255,0.92); border:0.5px solid rgba(185,207,230,0.7); box-shadow:0 8px 22px rgba(18,38,58,0.06); overflow:hidden; transition:box-shadow 260ms ease, border-color 260ms ease">
             <button type="button" onClick="{{ tF4 }}" aria-expanded="{{ f4 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; box-sizing:border-box">
@@ -385,7 +414,7 @@
         </div>
 
         <div role="tabpanel" aria-label="Batches &amp; verification" style="display: {{ gShow2 }}">
-        <p style="margin:0 0 20px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; color:#3f7fc9; letter-spacing:1.8px; text-transform:uppercase">Batches & verification</p>
+        <div class="sr-grouphead"><span class="sr-grouphead-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 4.5-9 4.5-9-4.5z"></path><path d="m3 13 9 4.5L21 13"></path></svg></span><span class="sr-grouphead-words"><span class="sr-grouphead-name">Batches &amp; verification</span><span class="sr-grouphead-desc">Lot codes, batch reports and what they show.</span></span></div>
         <div class="sr-qalist" style="display:flex; flex-direction:column; gap:14px">
           <div style="border-radius:26px; background:rgba(255,255,255,0.92); border:0.5px solid rgba(185,207,230,0.7); box-shadow:0 8px 22px rgba(18,38,58,0.06); overflow:hidden; transition:box-shadow 260ms ease, border-color 260ms ease">
             <button type="button" onClick="{{ tF8 }}" aria-expanded="{{ f8 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; box-sizing:border-box">
@@ -427,7 +456,7 @@
         </div>
 
         <div role="tabpanel" aria-label="Returns &amp; support" style="display: {{ gShow3 }}">
-        <p style="margin:0 0 20px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; color:#3f7fc9; letter-spacing:1.8px; text-transform:uppercase">Returns & support</p>
+        <div class="sr-grouphead"><span class="sr-grouphead-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a9 9 0 1 1 1.5 9"></path><path d="M3 4v5h5"></path></svg></span><span class="sr-grouphead-words"><span class="sr-grouphead-name">Returns &amp; support</span><span class="sr-grouphead-desc">Returns, refunds and reaching a person.</span></span></div>
         <div class="sr-qalist" style="display:flex; flex-direction:column; gap:14px">
           <div style="border-radius:26px; background:rgba(255,255,255,0.92); border:0.5px solid rgba(185,207,230,0.7); box-shadow:0 8px 22px rgba(18,38,58,0.06); overflow:hidden; transition:box-shadow 260ms ease, border-color 260ms ease">
             <button type="button" onClick="{{ tF11 }}" aria-expanded="{{ f11 }}" style="display:flex; width:100%; align-items:center; gap:22px; padding:10px 28px 10px 10px; text-align:left; background:none; border:none; cursor:pointer; font-family:inherit; box-sizing:border-box">
