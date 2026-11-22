@@ -351,7 +351,7 @@
        and its shadow survive */
     .sr-cc-stage {
       display: block !important; position: relative;
-      width: 74%; max-width: 276px; margin: 0 auto;
+      width: 60%; max-width: 224px; margin: 0 auto;
     }
     .sr-cc-rail { position: relative; width: 100%; overflow: visible !important; }
     .sr-cc-track {
@@ -362,10 +362,11 @@
     .sr-cc-tile[data-sr-off="true"] { display: none !important; }
     .sr-cc-tile { width: 100%; }
     /* the oval is narrower here, so the words come down with it */
-    .sr-cc-panel { padding: 0 18px 14px !important; gap: 3px !important; }
-    .sr-cc-name { font-size: 15px !important; letter-spacing: -0.3px !important; }
-    .sr-cc-desc { font-size: 11px !important; line-height: 1.35 !important; max-width: 18ch; }
-    .sr-cc-badge { height: 38px !important; width: 38px !important; }
+    /* the panel has room on a card this size, so the words take it */
+    .sr-cc-panel { padding: 0 16px 20px !important; gap: 6px !important; }
+    .sr-cc-name { font-size: 18px !important; letter-spacing: -0.4px !important; }
+    .sr-cc-desc { font-size: 12.5px !important; line-height: 1.45 !important; max-width: 17ch; }
+    .sr-cc-badge { height: 40px !important; width: 40px !important; }
     .sr-cc-arrow {
       position: absolute; top: 50%; z-index: 4; transform: translateY(-50%);
       display: flex !important; height: 34px; width: 34px; align-items: center;
@@ -374,8 +375,10 @@
       box-shadow: 0 8px 20px -12px rgba(18,38,58,0.8);
     }
     .sr-cc-arrow { height: 30px; width: 30px; }
-    .sr-cc-arrow-l { left: -19px; }
-    .sr-cc-arrow-r { right: -19px; }
+    /* the arrows stand off the oval, out near the edges of the screen */
+    .sr-cc-arrow { height: 32px; width: 32px; }
+    .sr-cc-arrow-l { left: -48px; }
+    .sr-cc-arrow-r { right: -48px; }
   }
   .sr-cc-rail {
     -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 72px, #000 calc(100% - 72px), transparent 100%);
