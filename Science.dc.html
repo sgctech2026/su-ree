@@ -232,6 +232,12 @@
     .sr-inci-table, .sr-inci-actives { order: 4; }
     .sr-inci > div:nth-child(1) > p:nth-of-type(2) { order: 5; }
     .sr-inci > div:nth-child(1) > a { order: 6; align-self: center; }
+    /* a rule and some air between one formula and the next */
+    .sr-inci { padding-bottom: 30px; }
+    .sr-inci + .sr-inci {
+      margin-top: 30px !important; padding-top: 34px;
+      border-top: 1px solid rgba(18,38,58,0.09);
+    }
     .sr-inci > div:nth-child(1) > span {
       margin-left: auto !important; margin-right: auto !important;
       max-width: none !important; align-items: center;
