@@ -302,36 +302,6 @@
     /* the formula names keep their icons here */
     .sr-fm-b svg { display: inline-flex !important; width: 14px; height: 14px; }
     .sr-fm-b { gap: 5px; font-size: 10.5px; padding: 10px 4px; }
-    /* one size on offer: across the card, with the price on a panel */
-    [data-sr-one="true"] .sr-qty {
-      grid-template-columns: auto minmax(0,1fr) auto !important;
-      padding: 14px 10px 14px 32px !important; column-gap: 9px !important;
-    }
-    [data-sr-one="true"] .sr-qty-radio {
-      top: 50% !important; left: 10px !important; transform: translateY(-50%);
-      height: 20px !important; width: 20px !important;
-    }
-    [data-sr-one="true"] .sr-qty-shots {
-      grid-column: 1 !important; grid-row: 1 / -1 !important;
-      height: 76px !important; width: 70px !important; margin: 0 !important;
-    }
-    [data-sr-one="true"] .sr-qty-label {
-      grid-column: 2 !important; grid-row: 1 !important; align-self: end !important;
-      font-size: 17px !important;
-    }
-    [data-sr-one="true"] .sr-qty-sub {
-      grid-column: 2 !important; grid-row: 2 !important; align-self: start !important;
-      text-align: left !important; font-size: 11px !important; padding: 0 !important;
-    }
-    [data-sr-one="true"] .sr-qty-sub::before, [data-sr-one="true"] .sr-qty-sub::after { content: none; }
-    [data-sr-one="true"] .sr-qty-price {
-      grid-column: 3 !important; grid-row: 1 / -1 !important; margin: 0 !important;
-      flex-direction: column; align-items: center; gap: 1px;
-      border-left: 0 !important; border-radius: 12px !important;
-      background: rgba(231,243,255,0.85) !important; padding: 8px 9px !important;
-      font-size: 15.5px !important;
-    }
-    [data-sr-one="true"] .sr-qty-was { font-size: 11.5px !important; }
   }
   .sr-qtys {
     margin-top: 20px; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px;
