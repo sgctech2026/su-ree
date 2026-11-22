@@ -249,6 +249,11 @@
     }
     .sr-grouphead-desc { font-size: 11.5px; color: #6a84a6; line-height: 1.45; }
   }
+  @media (max-width: 760px) {
+    /* the 460px floor under the questions left a hole on a phone */
+    .sr-qapanels { min-height: 0 !important; }
+    .sr-faqgrid { padding-top: 10px !important; gap: 16px !important; }
+  }
 </style>
 </helmet>
 
@@ -287,7 +292,7 @@
   <section data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:transparent; padding:8px 24px 16px; box-sizing:border-box">
     <span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; right:-7%; top:10%; height:240px; width:240px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.75) 0%, rgba(214,233,251,0.6) 32%, rgba(143,186,235,0.26) 62%, rgba(143,186,235,0) 76%)"></span><span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; left:-4%; bottom:16%; height:160px; width:160px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.85) 0%, rgba(231,243,255,0.75) 34%, rgba(183,213,245,0.30) 64%, rgba(183,213,245,0) 76%); animation:sr-float-a 12s ease-in-out .6s infinite"></span>
     <div style="margin:0 auto; width:100%; max-width:1140px">
-      <div class="r-2col" style="display:grid; grid-template-columns:minmax(0,250px) minmax(0,1fr); gap:clamp(24px,4vw,54px); align-items:start; padding-top:28px">
+      <div class="r-2col sr-faqgrid" style="display:grid; grid-template-columns:minmax(0,250px) minmax(0,1fr); gap:clamp(24px,4vw,54px); align-items:start; padding-top:28px">
         <div class="r-stick sr-cats" role="tablist" aria-orientation="vertical" aria-label="Question categories" style="position:sticky; top:106px; display:flex; flex-direction:column; gap:6px">
           <button type="button" role="tab" onClick="{{ qPick0 }}" aria-selected="{{ qSel0 }}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; border-radius:12px; padding:13px 15px; font-size:14px; font-weight:600; letter-spacing:-0.1px; cursor:pointer; font-family:inherit; background: {{ qBg0 }}; color: {{ qFg0 }}; border:0.5px solid {{ qBd0 }}; transition:background 240ms ease, color 240ms ease, border-color 240ms ease; box-sizing:border-box">
             <span class="sr-cat-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8l9 5z"></path><path d="M3 8v8l9 5 9-5V8"></path><path d="M12 13v8"></path></svg></span><span class="sr-cat-long" style="min-width:0">Ordering &amp; delivery</span><span class="sr-cat-short" style="min-width:0">Ordering</span>
@@ -307,7 +312,7 @@
           </button>
         </div>
 
-        <div style="min-width:0; min-height:460px">
+        <div class="sr-qapanels" style="min-width:0; min-height:460px">
         <div role="tabpanel" aria-label="Ordering &amp; delivery" style="display: {{ gShow0 }}">
         <div class="sr-grouphead"><span class="sr-grouphead-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8l9 5z"></path><path d="M3 8v8l9 5 9-5V8"></path><path d="M12 13v8"></path></svg></span><span class="sr-grouphead-words"><span class="sr-grouphead-name">Ordering &amp; delivery</span><span class="sr-grouphead-desc">Delivery times, payment and where we ship.</span></span></div>
         <div class="sr-qalist" style="display:flex; flex-direction:column; gap:14px">
