@@ -220,8 +220,18 @@
       grid-template-columns: minmax(0,1fr) !important; gap: 14px !important;
       margin-top: 18px !important;
     }
-    .sr-inci > div:nth-child(1) { order: 1 !important; text-align: center !important; }
-    .sr-inci > div:nth-child(2) { order: 2 !important; justify-content: center !important; }
+    /* title, then the product, then what is in it: the text column
+       dissolves so its parts can be ordered around the photo */
+    .sr-inci {
+      display: flex !important; flex-direction: column; text-align: center !important;
+    }
+    .sr-inci > div:nth-child(1) { display: contents !important; }
+    .sr-inci > div:nth-child(1) > p:first-child { order: 1; align-self: center; }
+    .sr-inci > div:nth-child(1) > h3 { order: 2; }
+    .sr-inci > div:nth-child(2) { order: 3; justify-content: center !important; }
+    .sr-inci-table, .sr-inci-actives { order: 4; }
+    .sr-inci > div:nth-child(1) > p:nth-of-type(2) { order: 5; }
+    .sr-inci > div:nth-child(1) > a { order: 6; align-self: center; }
     .sr-inci > div:nth-child(1) > span {
       margin-left: auto !important; margin-right: auto !important;
       max-width: none !important; align-items: center;
