@@ -255,11 +255,20 @@
     [data-sr-one="true"] .sr-qty-shots {
       grid-column: 1; grid-row: 1 / -1; height: 112px; width: 150px; margin: 0;
     }
+    /* name and line sit as one block in the middle of the card */
+    [data-sr-one="true"] .sr-qty {
+      grid-template-rows: 1fr 1fr; align-content: stretch; row-gap: 0;
+    }
     [data-sr-one="true"] .sr-qty-label {
       grid-column: 2; grid-row: 1; align-self: end; font-size: 22px;
+      line-height: 1.1;
     }
     [data-sr-one="true"] .sr-qty-sub {
       grid-column: 2; grid-row: 2; align-self: start; font-size: 13px;
+      line-height: 1.3;
+    }
+    [data-sr-one="true"] .sr-qty-shots, [data-sr-one="true"] .sr-qty-price {
+      align-self: center;
     }
     /* the price sits on its own tinted panel, not behind a hairline */
     [data-sr-one="true"] .sr-qty-price {
