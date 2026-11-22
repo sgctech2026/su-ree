@@ -130,7 +130,11 @@
   @media (max-width: 760px) {
     .r-cols { grid-template-columns: minmax(0, 1fr) !important; }
     .r-stick { position: static !important; }
-    .r-wm { display: none !important; }
+    .r-wm {
+      left: 50% !important; right: auto !important;
+      transform: translate(-50%,-50%) !important;
+      font-size: clamp(74px,22vw,132px) !important;
+    }
     .r-ring { max-width: 420px !important; margin: 14px auto 0 !important; }
     .r-chip { font-size: 10px !important; padding: 5px 10px !important; }
     .r-modal { background-image: none !important; background-color: #eef5fd !important; }
