@@ -253,16 +253,23 @@
     }
     [data-sr-one="true"] .sr-qty-radio { left: 16px; top: 50%; transform: translateY(-50%); }
     [data-sr-one="true"] .sr-qty-shots {
-      grid-column: 1; grid-row: 1 / -1; height: 96px; width: 120px; margin: 0;
+      grid-column: 1; grid-row: 1 / -1; height: 112px; width: 150px; margin: 0;
     }
-    [data-sr-one="true"] .sr-qty-label { grid-column: 2; grid-row: 1; align-self: end; }
-    [data-sr-one="true"] .sr-qty-sub { grid-column: 2; grid-row: 2; align-self: start; }
+    [data-sr-one="true"] .sr-qty-label {
+      grid-column: 2; grid-row: 1; align-self: end; font-size: 22px;
+    }
+    [data-sr-one="true"] .sr-qty-sub {
+      grid-column: 2; grid-row: 2; align-self: start; font-size: 13px;
+    }
+    /* the price sits on its own tinted panel, not behind a hairline */
     [data-sr-one="true"] .sr-qty-price {
       grid-column: 3; grid-row: 1 / -1; width: auto; margin: 0;
-      flex-direction: column; align-items: center; gap: 2px;
-      border-radius: 0; background: transparent; border-left: 1px solid #dbe8f7;
-      padding: 4px 6px 4px 18px; font-size: 22px; letter-spacing: -0.8px;
+      flex-direction: column; align-items: center; gap: 1px;
+      border-left: 0; border-radius: 16px;
+      background: rgba(231,243,255,0.9); padding: 14px 22px;
+      font-size: 24px; letter-spacing: -0.9px;
     }
+    [data-sr-one="true"] .sr-qty-was { font-size: 14px; }
   }
   @media (max-width: 560px) {
   }
