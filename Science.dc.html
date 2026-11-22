@@ -219,12 +219,19 @@
     .sr-inci {
       grid-template-columns: minmax(0,1fr) !important; gap: 16px !important;
     }
-    .sr-inci > div:nth-child(1) { order: 2 !important; text-align: left !important; }
+    .sr-inci > div:nth-child(1) { order: 2 !important; text-align: center !important; }
     .sr-inci > div:nth-child(2) { order: 1 !important; justify-content: center !important; }
     .sr-inci > div:nth-child(1) > span {
-      margin-left: 0 !important; max-width: none !important;
+      margin-left: auto !important; margin-right: auto !important;
+      max-width: none !important; align-items: center;
     }
-    .sr-inci > div:nth-child(1) > span > span { flex-direction: row !important; }
+    /* each ingredient line reads as one centred row */
+    .sr-inci > div:nth-child(1) > span > span {
+      flex-direction: row !important; justify-content: center !important;
+      width: 100%;
+    }
+    .sr-inci > div:nth-child(1) > p { margin-left: auto !important; margin-right: auto !important; }
+    .sr-inci > div:nth-child(1) > a { justify-content: center; width: 100%; }
     .sr-inci h3 { font-size: 19px !important; letter-spacing: -0.6px !important; }
     .sr-inci p { font-size: 12px !important; line-height: 1.7 !important; }
     .sr-inci > div > p:first-child { font-size: 9.5px !important; letter-spacing: 2px !important; }
