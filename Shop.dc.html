@@ -613,6 +613,18 @@
     font-style: normal; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 9.5px;
     font-weight: 600; color: #93aec9; letter-spacing: 1.4px; text-transform: uppercase;
   }
+  .sr-br-open {
+    margin-top: 12px; display: block; overflow: hidden; border-radius: 14px;
+    border: 1px solid #e7f0fb; background: #f7fbff;
+  }
+  .sr-br-open img {
+    display: block; width: 100%; height: 190px; object-fit: cover; object-position: top;
+  }
+  .sr-br-openrow {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 11px 12px; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 12.5px;
+    font-weight: 600; color: #2f7bdc; border-top: 1px solid #e7f0fb; background: #ffffff;
+  }
   .sr-br-foot { margin: 14px 2px 0; font-size: 11.5px; color: #8295b4; line-height: 1.6; }
   @media (max-width: 560px) {
     .sr-lab { flex-wrap: wrap; }
@@ -2333,12 +2345,12 @@
       <div class="sr-br-card" style="display: {{ brShow0 }}">
         <p class="sr-br-name">Dual Regenerative Capsule Cream<span class="sr-br-pass">PASS</span></p>
         <p class="sr-br-sub">30 g</p>
-        <div class="sr-br-grid"><span><em>Manufacturer lot</em>{{ brLot0 }}</span><span><em>Batch id</em>{{ brBatch0 }}</span><span><em>Certificate</em>{{ brCert0 }}</span><span><em>Laboratory</em>{{ brLab0 }}</span><span><em>Published</em>{{ brPub0 }}</span><span><em>Valid until</em>{{ brValid0 }}</span></div>
+        <div class="sr-br-grid"><span><em>Manufacturer lot</em>{{ brLot0 }}</span><span><em>Batch id</em>{{ brBatch0 }}</span><span><em>Certificate</em>{{ brCert0 }}</span><span><em>Laboratory</em>{{ brLab0 }}</span><span><em>Published</em>{{ brPub0 }}</span><span><em>Valid until</em>{{ brValid0 }}</span><span><em>Report</em>{{ brReport0 }}</span><span><em>Accreditation</em>ISO/IEC 17025:2017, scope 2208.11</span></div><a class="sr-br-open" href="{{ brFile0 }}" target="_blank" rel="noopener"><img src="{{ brSheet0 }}" alt="Batch verification certificate" loading="lazy" decoding="async" /><span class="sr-br-openrow">Open the certificate<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M9 7h8v8"></path></svg></span></a>
       </div>
       <div class="sr-br-card" style="display: {{ brShow1 }}">
         <p class="sr-br-name">GHK-Cu+ Snap 8 Triple Peptide Renewal Serum<span class="sr-br-pass">PASS</span></p>
         <p class="sr-br-sub">30 ml</p>
-        <div class="sr-br-grid"><span><em>Manufacturer lot</em>{{ brLot1 }}</span><span><em>Batch id</em>{{ brBatch1 }}</span><span><em>Certificate</em>{{ brCert1 }}</span><span><em>Laboratory</em>{{ brLab1 }}</span><span><em>Published</em>{{ brPub1 }}</span><span><em>Valid until</em>{{ brValid1 }}</span></div>
+        <div class="sr-br-grid"><span><em>Manufacturer lot</em>{{ brLot1 }}</span><span><em>Batch id</em>{{ brBatch1 }}</span><span><em>Certificate</em>{{ brCert1 }}</span><span><em>Laboratory</em>{{ brLab1 }}</span><span><em>Published</em>{{ brPub1 }}</span><span><em>Valid until</em>{{ brValid1 }}</span><span><em>Report</em>{{ brReport1 }}</span><span><em>Accreditation</em>ISO/IEC 17025:2017, scope 2208.11</span></div><a class="sr-br-open" href="{{ brFile1 }}" target="_blank" rel="noopener"><img src="{{ brSheet1 }}" alt="Batch verification certificate" loading="lazy" decoding="async" /><span class="sr-br-openrow">Open the certificate<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M9 7h8v8"></path></svg></span></a>
       </div>
       <p class="sr-br-foot">Registered with {{ registryName }}. The testing itself was carried out by an independent third-party laboratory, not by the registry, and the certificate is not a guarantee of regulatory compliance.</p>
     </div>
@@ -2603,7 +2615,7 @@ class Component extends DCLogic {
     const LOT = ["SR-2602-A", "SR-2603-B", "SR-2602-A + SR-2603-B"];
     const BATCH = ["BSL-2026-00125", "BSL-2026-00181", "BSL-2026-00125 + BSL-2026-00181"];
     const PUB = ["31 January 2026", "6 March 2026", "31 January 2026 / 6 March 2026"];
-    const VALID = ["29 January 2027", "4 March 2027", "29 January 2027 / 4 March 2027"];
+    const VALID = ["29 January 2028", "4 March 2028", "29 January 2028 / 4 March 2028"];
     out.lotCode = LOT[vi];
     out.batchId = BATCH[vi];
     out.batchPub = PUB[vi];
@@ -2611,6 +2623,9 @@ class Component extends DCLogic {
     out.labName = "Northfield Bioassay Laboratory";
     // the dialog shows the record for whichever formula is on show
     const CERT = ["BAC-2026-00125", "BAC-2026-00181"];
+    const REPORT = ["NAL-NBL-2026-4401", "NAL-NBL-2026-4403"];
+    const FILE = ["assets/batch-SR-2602-A.pdf", "assets/batch-SR-2603-B.pdf"];
+    const SHEET = ["assets/batch-SR-2602-A.webp", "assets/batch-SR-2603-B.webp"];
     for (let i = 0; i < 2; i++) {
       out["brLot" + i] = LOT[i];
       out["brBatch" + i] = BATCH[i];
@@ -2618,6 +2633,9 @@ class Component extends DCLogic {
       out["brPub" + i] = PUB[i];
       out["brValid" + i] = VALID[i];
       out["brLab" + i] = "Northfield Bioassay Laboratory";
+      out["brReport" + i] = REPORT[i];
+      out["brFile" + i] = FILE[i];
+      out["brSheet" + i] = SHEET[i];
       out["brShow" + i] = (vi === 2 || vi === i) ? "block" : "none";
     }
     out.brOpen = this.state.brOpen ? "flex" : "none";
