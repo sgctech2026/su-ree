@@ -361,6 +361,64 @@
     mask-image: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 46%);
   }
   @media (max-width: 760px) { .sr-nl-art, .sr-nl-wave { display: none; } }
+  .sr-rec-eyebrow {
+    margin: 0; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 11px;
+    font-weight: 500; color: #5f9ad8; letter-spacing: 4.2px;
+  }
+  .sr-rec-h {
+    margin: 16px 0 0; font-family: 'Inter',ui-sans-serif,sans-serif; font-weight: 700;
+    color: #1b3456; font-size: clamp(26px,3vw,40px); line-height: 1.1;
+    letter-spacing: -1.2px;
+  }
+  .sr-rec-lead {
+    margin: 14px 0 0; max-width: 68ch; font-size: 14px; color: #4e648a; line-height: 1.85;
+  }
+  .sr-recs {
+    margin: 34px 0 0; padding: 0; list-style: none; display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px;
+  }
+  .sr-rec {
+    border-radius: 20px; background: #ffffff; border: 1px solid #e7f0fb;
+    box-shadow: 0 14px 34px -28px rgba(18,38,58,0.5); padding: 20px 20px 18px;
+  }
+  .sr-rec-name {
+    margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 9px;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 16px; font-weight: 700;
+    color: #1b3456; letter-spacing: -0.3px;
+  }
+  .sr-rec-pass {
+    border-radius: 9999px; background: #e3f7ec; color: #1c8a52; padding: 3px 10px;
+    font-size: 10px; font-weight: 700; letter-spacing: 1.4px;
+  }
+  .sr-rec-sub { margin: 4px 0 14px; font-size: 12px; color: #8295b4; }
+  .sr-rec-grid {
+    display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px 16px;
+    font-size: 12.5px; color: #1b3456;
+  }
+  .sr-rec-grid > span { display: flex; min-width: 0; flex-direction: column; gap: 2px; }
+  .sr-rec-grid em {
+    font-style: normal; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 9.5px;
+    font-weight: 600; color: #93aec9; letter-spacing: 1.4px; text-transform: uppercase;
+  }
+  .sr-rec-open {
+    margin-top: 16px; display: block; overflow: hidden; border-radius: 14px;
+    border: 1px solid #e7f0fb; background: #f7fbff;
+  }
+  .sr-rec-open img {
+    display: block; width: 100%; height: 170px; object-fit: cover; object-position: top;
+  }
+  .sr-rec-openrow {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 11px 12px; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 12.5px;
+    font-weight: 600; color: #2f7bdc; border-top: 1px solid #e7f0fb; background: #ffffff;
+  }
+  @media (max-width: 860px) {
+    .sr-recs { grid-template-columns: minmax(0,1fr); gap: 16px; }
+  }
+  @media (max-width: 560px) {
+    .sr-rec-grid { grid-template-columns: minmax(0,1fr); gap: 8px; }
+    .sr-rec-open img { height: 140px; }
+  }
 </style>
 </helmet>
 
@@ -535,6 +593,28 @@
           </div>
         </li>
       </ol>
+    </div>
+  </section>
+
+  <section data-sr-reveal="out" style="position:relative; width:100%; overflow:clip; background:linear-gradient(180deg,#ffffff 0%,#f6fafe 40%,#eef6ff 100%); padding:clamp(56px,6vw,92px) 24px clamp(60px,6vw,96px); box-sizing:border-box">
+    <div style="margin:0 auto; width:100%; max-width:1140px">
+      <p class="sr-rec-eyebrow">BATCH RECORDS</p>
+      <h2 class="sr-rec-h">The paper behind the jar.</h2>
+      <p class="sr-rec-lead">Each batch is registered with an independent verification registry before it ships. The certificates below are the ones covering the batches on sale now. The testing itself is carried out by a third-party laboratory, not by the registry.</p>
+      <ul class="sr-recs">
+        <li class="sr-rec">
+          <p class="sr-rec-name">Dual Regenerative Capsule Cream<span class="sr-rec-pass">PASS</span></p>
+          <p class="sr-rec-sub">30 g</p>
+          <div class="sr-rec-grid"><span><em>Manufacturer lot</em>SR-2602-A</span><span><em>Batch id</em>BSL-2026-00125</span><span><em>Certificate</em>BAC-2026-00125</span><span><em>Report</em>NAL-NBL-2026-4401</span><span><em>Published</em>31 January 2026</span><span><em>Valid until</em>29 January 2028</span><span><em>Laboratory</em>Northfield Bioassay Laboratory</span><span><em>Accreditation</em>ISO/IEC 17025:2017, scope 2208.11</span></div>
+          <a class="sr-rec-open" href="assets/batch-SR-2602-A.pdf" target="_blank" rel="noopener"><img src="assets/batch-SR-2602-A.webp" alt="Batch verification certificate for lot SR-2602-A" loading="lazy" decoding="async" /><span class="sr-rec-openrow">Open the certificate<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M9 7h8v8"></path></svg></span></a>
+        </li>
+        <li class="sr-rec">
+          <p class="sr-rec-name">GHK-Cu+ Snap 8 Triple Peptide Renewal Serum<span class="sr-rec-pass">PASS</span></p>
+          <p class="sr-rec-sub">30 ml</p>
+          <div class="sr-rec-grid"><span><em>Manufacturer lot</em>SR-2603-B</span><span><em>Batch id</em>BSL-2026-00181</span><span><em>Certificate</em>BAC-2026-00181</span><span><em>Report</em>NAL-NBL-2026-4403</span><span><em>Published</em>6 March 2026</span><span><em>Valid until</em>4 March 2028</span><span><em>Laboratory</em>Northfield Bioassay Laboratory</span><span><em>Accreditation</em>ISO/IEC 17025:2017, scope 2208.11</span></div>
+          <a class="sr-rec-open" href="assets/batch-SR-2603-B.pdf" target="_blank" rel="noopener"><img src="assets/batch-SR-2603-B.webp" alt="Batch verification certificate for lot SR-2603-B" loading="lazy" decoding="async" /><span class="sr-rec-openrow">Open the certificate<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M9 7h8v8"></path></svg></span></a>
+        </li>
+      </ul>
     </div>
   </section>
 
