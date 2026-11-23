@@ -830,12 +830,32 @@ class Component extends DCLogic {
     rows.forEach((n) => this.stepIO.observe(n));
   }
 
-  componentDidMount() { this.setupReveal(); this.setupSteps(); if (this.onMount) this.onMount(); }
+  componentDidMount() {
+    this.setupReveal();
+    this.setupSteps();
+    if (this.onMount) this.onMount();
+    // the page is drawn after the browser has already tried the hash, so a
+    // link straight to a section has to be honoured once the section exists
+    this.jumpToHash();
+  }
+
+  jumpToHash(attempt = 0) {
+    if (typeof window === "undefined" || !window.location.hash) return;
+    const el = document.getElementById(window.location.hash.slice(1));
+    if (el) {
+      el.scrollIntoView({ block: "start" });
+      return;
+    }
+    if (attempt < 20) {
+      this.hashRetry = setTimeout(() => this.jumpToHash(attempt + 1), 120);
+    }
+  }
   componentWillUnmount() {
     if (this.revealIO) this.revealIO.disconnect();
     if (this.stepIO) this.stepIO.disconnect();
     clearTimeout(this.stepTry);
     clearTimeout(this.revealRetry);
+    clearTimeout(this.hashRetry);
     clearInterval(this.revealSafety);
     if (this.onRevealScroll) { window.removeEventListener("scroll", this.onRevealScroll); window.removeEventListener("resize", this.onRevealScroll); }
   }
