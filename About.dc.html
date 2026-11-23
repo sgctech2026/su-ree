@@ -74,7 +74,8 @@
     .r-orbit { display: none !important; }
     .r-wm { display: none !important; }
     .r-ring { max-width: 300px !important; margin: 10px auto 0 !important; }
-    .r-modalcol { padding: 26px 22px 28px !important; }
+    .r-modalcol { min-height: 0 !important; max-width: 100% !important;
+      padding: 26px 22px 28px !important; }
     .sr-review-scroll { max-width: 100% !important; }
     .sr-marq-tile { flex-basis: 150px !important; }
     .sr-story { flex-basis: 220px !important; }
@@ -195,15 +196,11 @@
   .r-blob.sr-pf-waves, .r-blob.r-wm { display: block !important; }
   .sr-nl-wave {
     position: absolute; right: 0; bottom: -1px; left: 0; z-index: 0;
-    display: block; width: 100%; height: 36%; pointer-events: none;
+    display: block; width: 100%; height: 42%; pointer-events: none;
   }
-  /* the pair stands in the middle of the card, between the words and the
-     field, on the wave at its foot */
   .sr-nl-art {
-    position: relative; z-index: 1; margin: 20px auto 0; width: 100%;
-    max-width: 320px; height: clamp(186px,26vw,248px);
-    display: flex; align-items: flex-end; justify-content: center;
-    pointer-events: none;
+    position: absolute; right: 1%; bottom: 8%; top: 0; z-index: 1; width: 48%;
+    display: flex; align-items: flex-end; justify-content: center; pointer-events: none;
   }
   /* a soft shadow on the water, so the pair has something to stand on */
   .sr-nl-floor {
@@ -214,8 +211,8 @@
     filter: blur(2px);
   }
   .sr-nl-shot {
-    position: relative; z-index: 1; display: block; width: auto; height: 100%;
-    max-width: 100%; object-fit: contain;
+    position: relative; z-index: 1; display: block; width: auto; height: 86%;
+    max-width: 86%; object-fit: contain;
     filter: drop-shadow(0 30px 34px rgba(18,38,58,0.26));
   }
   /* the pair standing on the wave, caught in it */
@@ -226,8 +223,39 @@
     -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 46%);
     mask-image: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 46%);
   }
-  @media (max-width: 560px) {
-    .sr-nl-art { max-width: 250px; height: clamp(148px,42vw,196px); }
+  /* the phone's copy of the pair: in the flow, under the words */
+  .sr-nl-artm { display: none; }
+  @media (max-width: 760px) {
+    /* no room beside the words at this width, so the card stands up */
+    .sr-nl-art { display: none; }
+    .sr-nl-wave { height: 34%; }
+    .r-modal {
+      max-width: 460px !important;
+      background: radial-gradient(110% 80% at 50% 0%, rgba(255,255,255,0.98) 0%,
+                  rgba(255,255,255,0.7) 32%, rgba(255,255,255,0) 66%),
+                  linear-gradient(180deg,#f4faff 0%,#e9f3fd 36%,#dcecfb 70%,#cde3f9 100%)
+                  !important;
+    }
+    .r-modalcol { align-items: center !important; text-align: center !important; }
+    .sr-nlrow { align-self: flex-start; }
+    .sr-nlrow > span { display: none; }
+    .sr-nleye { width: 100%; justify-content: center !important; }
+    .sr-nleye::before {
+      content: ""; flex: 0 1 86px; height: 1px;
+      background: linear-gradient(90deg,rgba(156,196,232,0) 0%,#a8ccf0 100%);
+    }
+    .sr-nlh, .sr-nllead { margin-left: auto !important; margin-right: auto !important; }
+    .sr-nlform { max-width: 100% !important; }
+    .sr-nlstatus { padding-left: 0 !important; }
+    .sr-nl-artm {
+      position: relative; z-index: 1; display: flex; margin: 18px auto 0;
+      width: 100%; max-width: 250px; height: clamp(148px,42vw,196px);
+      align-items: flex-end; justify-content: center; pointer-events: none;
+    }
+    .sr-nl-artm img {
+      display: block; height: 100%; width: auto; max-width: 100%; object-fit: contain;
+      filter: drop-shadow(0 26px 30px rgba(18,38,58,0.26));
+    }
   }
 </style>
 </helmet>
@@ -302,26 +330,29 @@
   </section>
 
   <div role="dialog" aria-modal="true" aria-label="Stay connected" onClick="{{ nlClose }}" style="position:fixed; inset:0; z-index:200; display: {{ nlOpen }}; align-items:center; justify-content:center; padding:24px; background:rgba(13,38,64,0.42); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px)">
-    <div class="r-modal" onClick="{{ nlStop }}" style="position:relative; width:100%; max-width:560px; overflow:hidden; border-radius:30px; border:1px solid rgba(255,255,255,0.9); box-shadow:0 46px 100px -44px rgba(13,38,64,0.8); background:radial-gradient(110% 80% at 50% 0%, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.7) 32%, rgba(255,255,255,0) 66%), linear-gradient(180deg,#f4faff 0%,#e9f3fd 36%,#dcecfb 70%,#cde3f9 100%)">
+    <div class="r-modal" onClick="{{ nlStop }}" style="position:relative; width:100%; max-width:940px; overflow:hidden; border-radius:30px; border:1px solid rgba(255,255,255,0.9); box-shadow:0 46px 100px -44px rgba(13,38,64,0.8); background:radial-gradient(120% 120% at 6% 4%, rgba(255,255,255,0.96) 0%, rgba(255,255,255,0.55) 34%, rgba(255,255,255,0) 62%), linear-gradient(120deg,#eef6ff 0%,#e2eefc 38%,#d4e6fa 68%,#c6ddf7 100%)">
       <svg class="sr-nl-wave" viewBox="0 0 1200 220" preserveAspectRatio="none" aria-hidden="true"><path d="M0,96 C180,30 420,150 660,110 C860,77 1020,20 1200,54 L1200,220 L0,220 Z" fill="rgba(255,255,255,0.42)"></path><path d="M0,118 C190,58 430,168 670,130 C870,99 1025,46 1200,78 L1200,220 L0,220 Z" fill="rgba(188,217,247,0.5)"></path><path d="M0,140 C200,86 430,186 680,150 C880,121 1030,72 1200,100 L1200,220 L0,220 Z" fill="rgba(255,255,255,0.9)"></path></svg>
+      <span class="sr-nl-art" aria-hidden="true"><span class="sr-nl-floor"></span><img class="sr-nl-shot" src="assets/p-duo.webp" alt="" loading="lazy" decoding="async" /><img class="sr-nl-mirror" src="assets/p-duo.webp" alt="" loading="lazy" decoding="async" /></span>
+      <span aria-hidden="true" style="position:absolute; inset:0; pointer-events:none; background:linear-gradient(100deg, rgba(255,255,255,0.97) 0%, rgba(255,255,255,0.93) 34%, rgba(255,255,255,0.72) 50%, rgba(255,255,255,0.12) 64%, rgba(255,255,255,0) 76%)"></span>
       <button type="button" onClick="{{ nlClose }}" aria-label="Close" style="position:absolute; right:16px; top:16px; z-index:2; display:flex; height:34px; width:34px; align-items:center; justify-content:center; border-radius:9999px; border:1px solid rgba(23,70,117,0.1); background:rgba(255,255,255,0.9); color:#1b3456; cursor:pointer; transition:background 200ms" style-hover="background:#ffffff"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
-      <div class="r-modalcol" style="position:relative; z-index:1; width:100%; max-width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:clamp(28px,3.6vw,46px) clamp(24px,3vw,40px) clamp(26px,3.4vw,42px) clamp(28px,4vw,52px); box-sizing:border-box">
-        <div style="align-self:flex-start; display:flex; align-items:center">
+      <div class="r-modalcol" style="position:relative; z-index:1; width:100%; max-width:520px; min-height:clamp(330px,38vw,420px); display:flex; flex-direction:column; justify-content:center; padding:clamp(28px,3.6vw,46px) clamp(24px,3vw,40px) clamp(26px,3.4vw,42px) clamp(28px,4vw,52px); box-sizing:border-box">
+        <div class="sr-nlrow" style="display:flex; align-items:center; gap:18px">
           <img src="assets/logo.webp" alt="su-ree Skin Science" decoding="async" style="display:block; height:40px; width:auto; flex-shrink:0" />
+          <span aria-hidden="true" style="height:38px; width:1px; background:#b7d5f5"></span>
         </div>
 
-        <p style="margin:22px 0 0; display:flex; width:100%; align-items:center; justify-content:center; gap:14px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; font-weight:600; color:#438fe0; letter-spacing:3.4px"><span aria-hidden="true" style="flex:0 1 86px; height:1px; background:linear-gradient(90deg,rgba(156,196,232,0) 0%,#a8ccf0 100%)"></span>STAY CONNECTED<span aria-hidden="true" style="flex:0 1 86px; height:1px; background:linear-gradient(90deg,#a8ccf0 0%,rgba(156,196,232,0) 100%)"></span></p>
-        <p style="margin:14px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:clamp(23px,2.9vw,34px); font-weight:600; color:#1b3456; line-height:1.18; letter-spacing:-1px; max-width:16ch; margin-left:auto; margin-right:auto">Get exclusive updates on new products and <em style="font-style:italic; font-weight:500; color:#438fe0">promotions</em>.</p>
-        <p style="margin:14px auto 0; max-width:38ch; font-size:13.5px; color:#5a7497; line-height:1.7">New batches, restocks and the occasional set price. No more than once a month.</p>
-        <span class="sr-nl-art" aria-hidden="true"><span class="sr-nl-floor"></span><img class="sr-nl-shot" src="assets/p-duo.webp" alt="" loading="lazy" decoding="async" /><img class="sr-nl-mirror" src="assets/p-duo.webp" alt="" loading="lazy" decoding="async" /></span>
-        <form onSubmit="{{ nlSubmit }}" style="margin-top:22px; width:100%; max-width:100%">
+        <p class="sr-nleye" style="margin:24px 0 0; display:flex; align-items:center; gap:14px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11px; font-weight:600; color:#438fe0; letter-spacing:3.4px">STAY CONNECTED<span aria-hidden="true" style="flex:0 1 86px; height:1px; background:linear-gradient(90deg,#a8ccf0 0%,rgba(156,196,232,0) 100%)"></span></p>
+        <p class="sr-nlh" style="margin:14px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:clamp(23px,2.9vw,34px); font-weight:600; color:#1b3456; line-height:1.18; letter-spacing:-1px; max-width:15ch">Get exclusive updates on new products and <em style="font-style:italic; font-weight:500; color:#438fe0">promotions</em>.</p>
+        <p class="sr-nllead" style="margin:14px 0 0; max-width:40ch; font-size:13.5px; color:#5a7497; line-height:1.7">New batches, restocks and the occasional set price. No more than once a month.</p>
+        <span class="sr-nl-artm" aria-hidden="true"><img src="assets/p-duo.webp" alt="" loading="lazy" decoding="async" /></span>
+        <form class="sr-nlform" onSubmit="{{ nlSubmit }}" style="margin-top:24px; width:100%; max-width:430px">
           <div style="display:flex; align-items:center; gap:10px; border-radius:999px; background:#ffffff; border:1px solid rgba(23,70,117,0.12); box-shadow:0 10px 26px -18px rgba(23,70,117,0.5); padding:7px 7px 7px 20px">
             <span aria-hidden="true" style="flex-shrink:0; display:flex; color:#9db6d4"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="3"></rect><path d="m2.5 7 8.6 5.4a2 2 0 0 0 1.8 0L21.5 7"></path></svg></span>
             <label for="sr-nl" style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap">Email address</label>
             <input id="sr-nl" ref="{{ nlRef }}" type="email" name="email" autoComplete="email" placeholder="Enter your email address" style="flex:1; min-width:0; border:none; outline:none; background:transparent; font-family:inherit; font-size:14px; color:#1b3456" />
             <button type="submit" aria-label="Subscribe" style="flex-shrink:0; display:flex; height:42px; width:42px; align-items:center; justify-content:center; border:none; border-radius:9999px; background:linear-gradient(135deg,#5ba0ea 0%,#438fe0 52%,#2d72c4 100%); color:#fff; cursor:pointer; box-shadow:0 10px 22px -10px rgba(47,123,224,0.9); transition:transform 220ms" style-hover="transform:translateY(-1px)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
           </div>
-          <p role="status" style="margin:12px 0 0; font-size:12.5px; color: {{ nlColor }}; min-height:17px">{{ nlMsg }}</p>
+          <p role="status" class="sr-nlstatus" style="margin:12px 0 0; padding-left:20px; font-size:12.5px; color: {{ nlColor }}; min-height:17px">{{ nlMsg }}</p>
         </form>
         <button type="button" onClick="{{ nlClose }}" style="margin-top:4px; padding:6px 0; border:none; background:none; font-family:inherit; font-size:12.5px; color:#8295b4; cursor:pointer; transition:color 200ms" style-hover="color:#1b3456">No thanks</button>
       </div>
