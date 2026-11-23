@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex, nofollow" />
+<title>su-ree · Analytics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap&amp;subset=latin" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0; background: #f6fafe; color: #1b3456;
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { margin: 0 auto; width: 100%; max-width: 1240px; padding: 34px clamp(16px,3vw,32px) 80px; }
+
+  /* the gate */
+  #gate {
+    position: fixed; inset: 0; z-index: 50; display: flex; align-items: center;
+    justify-content: center; padding: 24px;
+    background: linear-gradient(142deg,#f2f8ff 0%,#e9f3fd 34%,#dcebfb 66%,#cce2f9 100%);
+  }
+  .gate-card {
+    width: 100%; max-width: 390px; border-radius: 24px; background: #ffffff;
+    border: 1px solid #e3eefb; padding: 32px 28px 28px;
+    box-shadow: 0 30px 70px -40px rgba(27,52,86,0.45);
+  }
+  .gate-card h1 {
+    margin: 16px 0 0; font-family: 'Jost',sans-serif; font-size: 24px; font-weight: 600;
+    letter-spacing: -0.5px;
+  }
+  .gate-card p { margin: 8px 0 22px; font-size: 13.5px; color: #65799b; line-height: 1.7; }
+  .mark { font-family: 'Jost',sans-serif; font-size: 22px; font-weight: 500; letter-spacing: -0.5px; }
+  .mark small { display: block; font-size: 9.5px; letter-spacing: 3.4px; color: #8aa6c6; font-weight: 500; }
+  input[type="password"], input[type="date"] {
+    width: 100%; border-radius: 12px; border: 1px solid #dde9f7; background: #f8fbff;
+    padding: 13px 15px; font-family: inherit; font-size: 14px; color: #1b3456; outline: none;
+  }
+  input[type="password"]:focus, input[type="date"]:focus { border-color: #8ec0f0; background: #fff; }
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border: 0; cursor: pointer; border-radius: 9999px; padding: 13px 22px;
+    font-family: 'Jost',sans-serif; font-size: 14px; font-weight: 600; color: #fff;
+    background: linear-gradient(135deg,#5ba0ea 0%,#2f85e0 52%,#1f6ec9 100%);
+    box-shadow: 0 16px 30px -18px rgba(31,110,201,0.95);
+  }
+  .btn.block { width: 100%; margin-top: 14px; }
+  .btn.ghost {
+    background: #fff; color: #44587c; border: 1px solid #dde9f7; box-shadow: none;
+    padding: 10px 18px; font-size: 12.5px;
+  }
+  .err { margin: 12px 0 0; font-size: 12.5px; color: #c0392b; min-height: 17px; }
+
+  /* head */
+  .eyebrow {
+    margin: 0; display: flex; align-items: center; gap: 9px;
+    font-family: 'Jost',sans-serif; font-size: 10.5px; font-weight: 600;
+    letter-spacing: 3px; color: #5f9ad8;
+  }
+  .dot { height: 8px; width: 8px; border-radius: 9999px; background: #2f85e0; }
+  h1.title {
+    margin: 12px 0 0; font-family: 'Inter',sans-serif; font-weight: 800;
+    font-size: clamp(30px,4vw,46px); letter-spacing: -1.6px; line-height: 1.04;
+  }
+  h1.title em { font-style: italic; font-weight: 700; color: #2f85e0; }
+  .sub { margin: 8px 0 0; font-size: 13.5px; color: #65799b; }
+  .headrow {
+    display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between;
+    gap: 18px; margin-bottom: 26px;
+  }
+  .ranges { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .chips {
+    display: flex; flex-wrap: wrap; gap: 4px; border-radius: 9999px; background: #ffffff;
+    border: 1px solid #e3eefb; padding: 5px; box-shadow: 0 10px 24px -22px rgba(27,52,86,0.6);
+  }
+  .chip {
+    border: 0; cursor: pointer; border-radius: 9999px; background: transparent;
+    padding: 9px 15px; font-family: 'Jost',sans-serif; font-size: 11.5px; font-weight: 600;
+    letter-spacing: 1.4px; color: #5c7596; transition: background 200ms, color 200ms;
+  }
+  .chip[aria-pressed="true"] {
+    background: linear-gradient(135deg,#5ba0ea 0%,#2f85e0 52%,#1f6ec9 100%); color: #fff;
+  }
+  .custom { display: none; align-items: center; gap: 8px; }
+  .custom.on { display: flex; }
+  .custom input[type="date"] { width: auto; padding: 9px 12px; font-size: 12.5px; }
+  .custom span { font-size: 12px; color: #8aa6c6; }
+
+  /* cards */
+  .grid4 { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 16px; }
+  .grid3 { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
+  .grid6 { display: grid; grid-template-columns: repeat(6,minmax(0,1fr)); gap: 12px; }
+  .card {
+    border-radius: 18px; background: #ffffff; border: 1px solid #e7f0fb;
+    box-shadow: 0 16px 36px -30px rgba(18,38,58,0.55); padding: 20px 20px 18px;
+  }
+  .card.rule { border-top: 3px solid #2f85e0; }
+  .card.rule.b { border-top-color: #f0a500; }
+  .card.rule.c { border-top-color: #e2703a; }
+  .card.rule.d { border-top-color: #1c8a52; }
+  .klabel {
+    margin: 0; display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    font-family: 'Jost',sans-serif; font-size: 10.5px; font-weight: 600; letter-spacing: 2.2px;
+    color: #8aa6c6; text-transform: uppercase;
+  }
+  .kfig {
+    margin: 10px 0 0; font-family: 'Inter',sans-serif; font-size: 44px; font-weight: 300;
+    letter-spacing: -2px; line-height: 1; color: #1b3456;
+  }
+  .kfoot { margin: 10px 0 0; font-size: 11.5px; color: #93aec9; font-style: italic; }
+
+  .panel {
+    margin-top: 20px; border-radius: 22px; background: #ffffff; border: 1px solid #e7f0fb;
+    box-shadow: 0 20px 44px -34px rgba(18,38,58,0.55); padding: 24px clamp(18px,2.4vw,28px) 26px;
+  }
+  .panel-head {
+    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 12px;
+  }
+  .panel-head h2 {
+    margin: 0; font-family: 'Inter',sans-serif; font-size: 21px; font-weight: 700;
+    letter-spacing: -0.6px;
+  }
+  .panel-head .note {
+    font-family: 'Jost',sans-serif; font-size: 10.5px; font-weight: 600; letter-spacing: 2px;
+    color: #a3b8d0; text-transform: uppercase;
+  }
+  .tabs { display: inline-flex; flex-wrap: wrap; gap: 4px; margin: 18px 0 0; border-radius: 9999px;
+    background: #f1f7fe; border: 1px solid #e3eefb; padding: 5px; }
+  .tab {
+    border: 0; cursor: pointer; border-radius: 9999px; background: transparent; padding: 8px 16px;
+    font-family: 'Jost',sans-serif; font-size: 12.5px; font-weight: 600; color: #5c7596;
+  }
+  .tab[aria-pressed="true"] { background: #2f85e0; color: #fff; }
+  .total {
+    margin: 22px 0 16px; display: flex; align-items: baseline; gap: 12px;
+  }
+  .total b { font-family: 'Inter',sans-serif; font-size: 40px; font-weight: 300; letter-spacing: -1.6px; }
+  .total span { font-family: 'Jost',sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 2px; color: #8aa6c6; }
+  .stat {
+    border-radius: 14px; border: 1px solid #e7f0fb; border-top: 3px solid #cfe0f3;
+    padding: 16px 12px; text-align: center; background: #fff;
+  }
+  .stat b { display: block; font-family: 'Inter',sans-serif; font-size: 28px; font-weight: 300; letter-spacing: -1px; }
+  .stat span { display: block; margin-top: 6px; font-family: 'Jost',sans-serif; font-size: 10px;
+    font-weight: 600; letter-spacing: 1.6px; color: #8aa6c6; text-transform: uppercase; }
+
+  .funnel { display: grid; grid-template-columns: 1fr 24px 1fr 24px 1fr 24px 1fr; align-items: center; margin-top: 18px; gap: 0; }
+  .funnel .arrow { text-align: center; color: #b9cde3; font-size: 18px; }
+  .fcell { border-radius: 14px; border: 1px solid #e7f0fb; padding: 16px; text-align: center; }
+  .fcell b { display: block; font-family: 'Inter',sans-serif; font-size: 32px; font-weight: 300; letter-spacing: -1.2px; }
+  .fcell span { display: block; font-family: 'Jost',sans-serif; font-size: 10px; font-weight: 600;
+    letter-spacing: 1.6px; color: #8aa6c6; text-transform: uppercase; }
+  .fcell i { display: block; margin-top: 6px; font-style: normal; font-size: 11.5px; color: #a3b8d0; }
+
+  .rank { margin: 18px 0 0; padding: 0; list-style: none; }
+  .rank li {
+    display: grid; grid-template-columns: 34px minmax(0,1fr) 96px; align-items: center; gap: 14px;
+    padding: 14px 0; border-bottom: 1px solid #eef4fb;
+  }
+  .rank li:last-child { border-bottom: 0; }
+  .rank .no { font-family: 'Jost',sans-serif; font-size: 11px; color: #b9cde3; letter-spacing: 1px; }
+  .rank .nm { display: block; min-width: 0; overflow: hidden; font-size: 14px; color: #1b3456; }
+  .rank .bar { margin-top: 7px; height: 2px; border-radius: 2px; background: #2f85e0; }
+  .rank .val { text-align: right; }
+  .rank .val b { font-family: 'Inter',sans-serif; font-size: 22px; font-weight: 500; letter-spacing: -0.6px; }
+  .rank .val span { display: block; font-family: 'Jost',sans-serif; font-size: 9.5px; letter-spacing: 1.4px; color: #a3b8d0; text-transform: uppercase; }
+
+  table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+  th {
+    text-align: left; font-family: 'Jost',sans-serif; font-size: 10px; font-weight: 600;
+    letter-spacing: 1.8px; color: #a3b8d0; text-transform: uppercase; padding: 0 10px 10px 0;
+    border-bottom: 1px solid #eef4fb;
+  }
+  td { padding: 12px 10px 12px 0; font-size: 13.5px; border-bottom: 1px solid #f3f8fd; }
+  .scroll { max-height: 340px; overflow: auto; }
+  .empty { margin: 14px 0 0; font-size: 13.5px; color: #93aec9; }
+
+  .ribbon {
+    margin-top: 22px; border-radius: 16px; border: 1px solid #fde6b8; background: #fff9ec;
+    padding: 14px 18px; font-size: 13px; color: #8a6418; line-height: 1.7;
+  }
+  .ribbon b { color: #6f4f12; }
+
+  @media (max-width: 1000px) {
+    .grid4 { grid-template-columns: repeat(2,minmax(0,1fr)); }
+    .grid6 { grid-template-columns: repeat(3,minmax(0,1fr)); }
+    .funnel { grid-template-columns: minmax(0,1fr); }
+    .funnel .arrow { transform: rotate(90deg); padding: 6px 0; }
+  }
+  @media (max-width: 620px) {
+    .grid4, .grid3, .grid6 { grid-template-columns: minmax(0,1fr); }
+    .headrow { flex-direction: column; align-items: stretch; }
+    .rank li { grid-template-columns: 26px minmax(0,1fr) 72px; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="gate">
+  <form class="gate-card" id="gateForm">
+    <p class="mark">su-ree<small>SKIN SCIENCE</small></p>
+    <h1>Analytics</h1>
+    <p>This page is for the shop, not for shoppers. Enter the passphrase to go on.</p>
+    <input type="password" id="pw" autocomplete="current-password" placeholder="Passphrase" />
+    <p class="err" id="err"></p>
+    <button class="btn block" type="submit">Open the dashboard</button>
+  </form>
+</div>
+
+<main class="wrap" id="app" hidden>
+  <div class="headrow">
+    <div>
+      <p class="eyebrow"><span class="dot"></span>LIVE · UPDATED ON LOAD</p>
+      <h1 class="title">su-ree <em>Analytics</em></h1>
+      <p class="sub">Site metrics and visitor engagement</p>
+    </div>
+    <div class="ranges">
+      <div class="chips" id="chips">
+        <button class="chip" type="button" data-range="1">24 HOURS</button>
+        <button class="chip" type="button" data-range="7">7 DAYS</button>
+        <button class="chip" type="button" data-range="30">30 DAYS</button>
+        <button class="chip" type="button" data-range="all">ALL TIME</button>
+        <button class="chip" type="button" data-range="custom">CUSTOM</button>
+      </div>
+      <button class="btn ghost" type="button" id="out">LOG OUT</button>
+    </div>
+  </div>
+
+  <div class="custom" id="custom">
+    <input type="date" id="from" /><span>to</span><input type="date" id="to" />
+    <button class="btn ghost" type="button" id="apply">Apply</button>
+  </div>
+
+  <div class="grid4" style="margin-top:18px">
+    <div class="card rule"><p class="klabel">Visitors</p><p class="kfig" id="kVisitors">0</p><p class="kfoot" id="kLoads">0 page loads</p></div>
+    <div class="card rule b"><p class="klabel">Engaged (10s+)</p><p class="kfig" id="kEngaged">0</p><p class="kfoot" id="kEngagedPct">0% of visitors engaged</p></div>
+    <div class="card rule c"><p class="klabel">Added to cart, didn't check out</p><p class="kfig" id="kAband">0</p><p class="kfoot" id="kAbandFoot">0 added · 0 checked out</p></div>
+    <div class="card rule d"><p class="klabel">Checkouts</p><p class="kfig" id="kCheckouts">0</p><p class="kfoot" id="kConv">0% conversion</p></div>
+  </div>
+
+  <section class="panel">
+    <div class="panel-head"><h2>Order status</h2><span class="note">Orders placed on this site</span></div>
+    <div class="tabs" id="otabs">
+      <button class="tab" type="button" data-prod="all">All</button>
+      <button class="tab" type="button" data-prod="cream">Capsule Cream</button>
+      <button class="tab" type="button" data-prod="serum">GHK-Cu Serum</button>
+      <button class="tab" type="button" data-prod="duo">The Duo</button>
+    </div>
+    <p class="total"><b id="oTotal">0</b><span id="oTotalLabel">TOTAL ORDERS</span></p>
+    <div class="grid6">
+      <div class="stat" style="border-top-color:#1c8a52"><b id="sDelivered">0</b><span>Delivered</span></div>
+      <div class="stat" style="border-top-color:#2f85e0"><b id="sShipped">0</b><span>Shipped</span></div>
+      <div class="stat" style="border-top-color:#f0a500"><b id="sConfirmed">0</b><span>Confirmed</span></div>
+      <div class="stat" style="border-top-color:#e2703a"><b id="sNew">0</b><span>New / pending</span></div>
+      <div class="stat" style="border-top-color:#c0392b"><b id="sReturned">0</b><span>Returned</span></div>
+      <div class="stat" style="border-top-color:#8aa6c6"><b id="sCancelled">0</b><span>Cancelled</span></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head"><h2>Purchase funnel</h2><span class="note">First visit to checkout</span></div>
+    <div class="funnel">
+      <div class="fcell"><span>Visitors</span><b id="fVisitors">0</b><i>100%</i></div>
+      <div class="arrow">→</div>
+      <div class="fcell"><span>Add to cart</span><b id="fCart" style="color:#2f85e0">0</b><i id="fCartPct">0%</i></div>
+      <div class="arrow">→</div>
+      <div class="fcell"><span>Abandoned</span><b id="fAband" style="color:#e2703a">0</b><i id="fAbandPct">0%</i></div>
+      <div class="arrow">→</div>
+      <div class="fcell"><span>Checkouts</span><b id="fCheck" style="color:#1c8a52">0</b><i id="fCheckPct">0%</i></div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head"><h2>Pages by visitors</h2><span class="note" id="pagesNote">0 pages tracked</span></div>
+    <ul class="rank" id="pages"></ul>
+    <p class="empty" id="pagesEmpty" hidden>No page views in this range yet.</p>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head"><h2>Section ranking</h2><span class="note">Score = viewers × avg seconds</span></div>
+    <ul class="rank" id="sections"></ul>
+    <p class="empty" id="sectionsEmpty" hidden>No section data yet. Scroll around the site to generate views.</p>
+  </section>
+
+  <div class="grid4" style="margin-top:20px">
+    <div class="card"><p class="klabel">Cart events</p><p class="kfig" id="cEvents">0</p></div>
+    <div class="card"><p class="klabel">Cart devices</p><p class="kfig" id="cDevices">0</p></div>
+    <div class="card"><p class="klabel">Abandoners</p><p class="kfig" id="cAband">0</p></div>
+    <div class="card"><p class="klabel">Checkouts</p><p class="kfig" id="cCheck">0</p></div>
+  </div>
+
+  <section class="panel">
+    <div class="panel-head"><h2>Email subscribers (<span id="subCount">0</span>)</h2>
+      <button class="btn ghost" type="button" id="csv">EXPORT CSV</button></div>
+    <div class="scroll">
+      <table><thead><tr><th>Email</th><th>Source</th><th>Date</th></tr></thead>
+      <tbody id="subs"></tbody></table>
+    </div>
+    <p class="empty" id="subsEmpty" hidden>No sign-ups in this range yet.</p>
+  </section>
+
+  <section class="panel">
+    <div class="panel-head"><h2>Recent checkouts (<span id="coCount">0</span>)</h2><span class="note">Newest first</span></div>
+    <div class="scroll">
+      <table><thead><tr><th>Order</th><th>Total</th><th>Status</th><th>Date</th></tr></thead>
+      <tbody id="orders"></tbody></table>
+    </div>
+    <p class="empty" id="ordersEmpty" hidden>No checkouts in this range yet.</p>
+  </section>
+
+  <p class="ribbon"><b>Where these numbers come from.</b> The site has no server behind it, so every
+  event is recorded in the browser that produced it. This dashboard therefore reports this device,
+  not the whole audience. Wiring it to a hosted store would make the same panels count every visitor
+  — the shape of the data is already the shape a backend would keep.</p>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  var KEY = "sr.an.v1";
+  var PASS = "2e6daf5c3af4c312af70b703c148ffd73c0777395c7e3305395072316552f9d7";
+  var SESSION = "sr.admin.ok";
+
+  /* --- the gate ------------------------------------------------------ */
+  function sha256(text) {
+    var bytes = new TextEncoder().encode(text);
+    return crypto.subtle.digest("SHA-256", bytes).then(function (buf) {
+      return [].map
+        .call(new Uint8Array(buf), function (b) {
+          return b.toString(16).padStart(2, "0");
+        })
+        .join("");
+    });
+  }
+  var gate = document.getElementById("gate");
+  var app = document.getElementById("app");
+  function open() {
+    gate.hidden = true;
+    gate.style.display = "none";
+    app.hidden = false;
+    render();
+  }
+  try {
+    if (sessionStorage.getItem(SESSION) === "1") open();
+  } catch (e) {}
+  document.getElementById("gateForm").addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var pw = document.getElementById("pw").value;
+    sha256(pw).then(function (h) {
+      if (h === PASS) {
+        try { sessionStorage.setItem(SESSION, "1"); } catch (e) {}
+        open();
+      } else {
+        document.getElementById("err").textContent = "That passphrase does not match.";
+      }
+    });
+  });
+  document.getElementById("out").addEventListener("click", function () {
+    try { sessionStorage.removeItem(SESSION); } catch (e) {}
+    location.reload();
+  });
+
+  /* --- the data ------------------------------------------------------ */
+  function db() {
+    try {
+      var raw = localStorage.getItem(KEY);
+      if (raw) return JSON.parse(raw);
+    } catch (e) {}
+    return { d: "", f: Date.now(), e: [], subs: [], orders: [] };
+  }
+
+  var range = { kind: "7", from: 0, to: Infinity };
+  function bounds() {
+    if (range.kind === "all") return [0, Infinity];
+    if (range.kind === "custom") return [range.from, range.to];
+    var days = Number(range.kind);
+    return [Date.now() - days * 86400000, Infinity];
+  }
+  function within(t) {
+    var b = bounds();
+    return t >= b[0] && t <= b[1];
+  }
+
+  function uniq(list, pick) {
+    var seen = {};
+    list.forEach(function (x) {
+      var k = pick(x);
+      if (k) seen[k] = 1;
+    });
+    return Object.keys(seen);
+  }
+  function pct(a, b) {
+    return b ? Math.round((a / b) * 100) : 0;
+  }
+  function set(id, text) {
+    var el = document.getElementById(id);
+    if (el) el.textContent = text;
+  }
+  function when(t) {
+    return new Date(t).toLocaleString();
+  }
+
+  /* --- the panels ---------------------------------------------------- */
+  var prodFilter = "all";
+
+  function render() {
+    var d = db();
+    var ev = (d.e || []).filter(function (x) { return within(x.t); });
+    var by = function (k) { return ev.filter(function (x) { return x.k === k; }); };
+
+    var views = by("view");
+    var visitors = uniq(views, function (x) { return x.dev; }).length;
+    var engaged = uniq(by("eng"), function (x) { return x.dev; }).length;
+    var cartEv = by("cart");
+    var cartDev = uniq(cartEv, function (x) { return x.dev; });
+    var coEv = by("co");
+    var coDev = uniq(coEv, function (x) { return x.dev; });
+    var abandoners = cartDev.filter(function (dev) { return coDev.indexOf(dev) < 0; }).length;
+
+    set("kVisitors", visitors);
+    set("kLoads", views.length.toLocaleString() + " total page loads");
+    set("kEngaged", engaged);
+    set("kEngagedPct", pct(engaged, visitors) + "% of visitors engaged");
+    set("kAband", abandoners);
+    set("kAbandFoot", cartDev.length + " added · " + coDev.length + " checked out");
+    set("kCheckouts", coEv.length);
+    set("kConv", pct(coDev.length, visitors) + "% conversion");
+
+    set("fVisitors", visitors);
+    set("fCart", cartDev.length);
+    set("fCartPct", pct(cartDev.length, visitors) + "%");
+    set("fAband", abandoners);
+    set("fAbandPct", pct(abandoners, visitors) + "%");
+    set("fCheck", coEv.length);
+    set("fCheckPct", pct(coEv.length, visitors) + "%");
+
+    set("cEvents", cartEv.length);
+    set("cDevices", cartDev.length);
+    set("cAband", abandoners);
+    set("cCheck", coEv.length);
+
+    /* orders */
+    var orders = (d.orders || []).filter(function (o) { return within(o.t); });
+    if (prodFilter !== "all") {
+      orders = orders.filter(function (o) {
+        return (o.items || []).some(function (i) {
+          return String(i.k || i).toLowerCase().indexOf(prodFilter) >= 0;
+        });
+      });
+    }
+    var counts = { delivered: 0, shipped: 0, confirmed: 0, new: 0, returned: 0, cancelled: 0 };
+    orders.forEach(function (o) {
+      var s = (o.status || "new").toLowerCase();
+      if (counts[s] === undefined) s = "new";
+      counts[s]++;
+    });
+    set("oTotal", orders.length);
+    set("sDelivered", counts.delivered);
+    set("sShipped", counts.shipped);
+    set("sConfirmed", counts.confirmed);
+    set("sNew", counts["new"]);
+    set("sReturned", counts.returned);
+    set("sCancelled", counts.cancelled);
+
+    /* pages */
+    var pages = {};
+    views.forEach(function (v) {
+      pages[v.p] = pages[v.p] || {};
+      pages[v.p][v.dev] = 1;
+    });
+    var plist = Object.keys(pages)
+      .map(function (p) { return { p: p, n: Object.keys(pages[p]).length }; })
+      .sort(function (a, b) { return b.n - a.n; });
+    var top = plist.length ? plist[0].n : 1;
+    var ul = document.getElementById("pages");
+    ul.innerHTML = plist
+      .map(function (row, i) {
+        var w = Math.max(3, Math.round((row.n / top) * 100));
+        return (
+          '<li><span class="no">' + String(i + 1).padStart(2, "0") + "</span>" +
+          '<span class="nm">' + row.p + '<span class="bar" style="width:' + w + '%"></span></span>' +
+          '<span class="val"><b>' + row.n + "</b><span>visitors</span></span></li>"
+        );
+      })
+      .join("");
+    document.getElementById("pagesEmpty").hidden = plist.length > 0;
+    set("pagesNote", plist.length + " pages tracked");
+
+    /* sections */
+    var secs = {};
+    by("sec").forEach(function (s) {
+      var r = (secs[s.n] = secs[s.n] || { dev: {}, secs: 0, n: 0 });
+      r.dev[s.dev] = 1;
+      r.secs += Number(s.v || 0);
+      r.n++;
+    });
+    var slist = Object.keys(secs)
+      .map(function (name) {
+        var r = secs[name];
+        var viewers = Object.keys(r.dev).length;
+        var avg = r.n ? r.secs / r.n : 0;
+        return { name: name, viewers: viewers, avg: avg, score: Math.round(viewers * avg) };
+      })
+      .sort(function (a, b) { return b.score - a.score; })
+      .slice(0, 12);
+    var stop = slist.length ? slist[0].score : 1;
+    var sul = document.getElementById("sections");
+    sul.innerHTML = slist
+      .map(function (row, i) {
+        var w = Math.max(3, Math.round((row.score / (stop || 1)) * 100));
+        return (
+          '<li><span class="no">' + String(i + 1).padStart(2, "0") + "</span>" +
+          '<span class="nm">' + row.name +
+          '<span class="bar" style="width:' + w + '%;background:#f0a500"></span></span>' +
+          '<span class="val"><b>' + row.score + "</b><span>" +
+          row.viewers + " × " + row.avg.toFixed(1) + "s</span></span></li>"
+        );
+      })
+      .join("");
+    document.getElementById("sectionsEmpty").hidden = slist.length > 0;
+
+    /* subscribers */
+    var subs = (d.subs || [])
+      .filter(function (s) { return within(s.t); })
+      .sort(function (a, b) { return b.t - a.t; });
+    set("subCount", subs.length);
+    document.getElementById("subs").innerHTML = subs
+      .map(function (s) {
+        return "<tr><td>" + s.m + "</td><td>" + (s.src || "—") + "</td><td>" + when(s.t) + "</td></tr>";
+      })
+      .join("");
+    document.getElementById("subsEmpty").hidden = subs.length > 0;
+    window.__subs = subs;
+
+    /* checkouts */
+    var recent = orders.slice().sort(function (a, b) { return b.t - a.t; });
+    set("coCount", recent.length);
+    document.getElementById("orders").innerHTML = recent
+      .map(function (o) {
+        return (
+          "<tr><td>" + o.id + "</td><td>₱" + Number(o.total || 0).toLocaleString() +
+          "</td><td>" + (o.status || "new") + "</td><td>" + when(o.t) + "</td></tr>"
+        );
+      })
+      .join("");
+    document.getElementById("ordersEmpty").hidden = recent.length > 0;
+  }
+
+  /* --- the controls --------------------------------------------------- */
+  var chips = [].slice.call(document.querySelectorAll(".chip"));
+  function markChips() {
+    chips.forEach(function (c) {
+      c.setAttribute("aria-pressed", c.dataset.range === range.kind ? "true" : "false");
+    });
+    document.getElementById("custom").classList.toggle("on", range.kind === "custom");
+  }
+  chips.forEach(function (c) {
+    c.addEventListener("click", function () {
+      var kind = c.dataset.range;
+      if (kind === "custom") {
+        range.kind = "custom";
+        var to = new Date();
+        var from = new Date(Date.now() - 6 * 86400000);
+        var f = document.getElementById("from");
+        var t = document.getElementById("to");
+        if (!f.value) f.value = from.toISOString().slice(0, 10);
+        if (!t.value) t.value = to.toISOString().slice(0, 10);
+        applyCustom();
+      } else {
+        range.kind = kind;
+      }
+      markChips();
+      render();
+    });
+  });
+  function applyCustom() {
+    var f = document.getElementById("from").value;
+    var t = document.getElementById("to").value;
+    range.from = f ? new Date(f + "T00:00:00").getTime() : 0;
+    range.to = t ? new Date(t + "T23:59:59.999").getTime() : Infinity;
+  }
+  document.getElementById("apply").addEventListener("click", function () {
+    range.kind = "custom";
+    applyCustom();
+    markChips();
+    render();
+  });
+
+  document.querySelectorAll(".tab").forEach(function (t) {
+    t.addEventListener("click", function () {
+      prodFilter = t.dataset.prod;
+      document.querySelectorAll(".tab").forEach(function (x) {
+        x.setAttribute("aria-pressed", x === t ? "true" : "false");
+      });
+      render();
+    });
+  });
+  document.querySelector('.tab[data-prod="all"]').setAttribute("aria-pressed", "true");
+
+  document.getElementById("csv").addEventListener("click", function () {
+    var rows = [["email", "source", "date"]].concat(
+      (window.__subs || []).map(function (s) {
+        return [s.m, s.src || "", new Date(s.t).toISOString()];
+      })
+    );
+    var text = rows
+      .map(function (r) {
+        return r
+          .map(function (c) { return '"' + String(c).replace(/"/g, '""') + '"'; })
+          .join(",");
+      })
+      .join("\n");
+    var url = URL.createObjectURL(new Blob([text], { type: "text/csv" }));
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "su-ree-subscribers.csv";
+    a.click();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+  });
+
+  markChips();
+})();
+</script>
+</body>
+</html>
