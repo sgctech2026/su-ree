@@ -746,7 +746,9 @@
     min-height: clamp(420px,41vw,560px);
     display: flex; align-items: center;
     padding: clamp(34px,4.4vw,60px) clamp(26px,4vw,58px);
-    background: #e4f0fd url(assets/cta-podium.webp) right center / cover no-repeat;
+    background: radial-gradient(110% 120% at 4% 6%, rgba(255,255,255,0.95) 0%,
+                rgba(255,255,255,0.5) 36%, rgba(255,255,255,0) 66%),
+                linear-gradient(118deg,#f2f9ff 0%,#e6f1fd 36%,#d8e9fb 66%,#cbe1f9 100%);
     border: 1px solid rgba(255,255,255,0.9);
   }
   /* the scene's left half is pale but not plain: this keeps the type crisp */
@@ -755,7 +757,16 @@
     background: linear-gradient(94deg, rgba(255,255,255,0.88) 0%, rgba(255,255,255,0.72) 34%,
                 rgba(255,255,255,0.3) 52%, rgba(255,255,255,0) 66%);
   }
-  .sr-cta-shot { display: none; }
+  /* the pair stands where the photograph used to be */
+  .sr-cta-shot {
+    position: absolute; right: 3%; bottom: 7%; z-index: 1;
+    display: block; width: auto; height: 74%; max-width: 46%; object-fit: contain;
+    filter: drop-shadow(0 30px 36px rgba(18,38,58,0.26));
+  }
+  .sr-cta-wave {
+    position: absolute; right: 0; bottom: -1px; left: 0; z-index: 0;
+    display: block; width: 100%; height: 38%; pointer-events: none;
+  }
   .sr-cta-copy { position: relative; z-index: 1; min-width: 0; max-width: 50%; }
   .sr-cta-badge {
     display: inline-flex; align-items: center; gap: 9px;
@@ -805,6 +816,7 @@
     .sr-cta-wash { display: none !important; }
     /* the podium shot is the hero's work; here the words carry it alone */
     .sr-cta-shot { display: none !important; }
+    .sr-cta-wave { display: none !important; }
     .sr-cta-copy { text-align: center !important; }
     .sr-cta-copy > div:first-child { justify-content: center !important; }
     .sr-cta-copy h2, .sr-cta-copy p {
@@ -1572,7 +1584,8 @@
   <section data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:#ffffff; padding:clamp(48px,6vw,84px) clamp(16px,4vw,48px); box-sizing:border-box">
     <div class="sr-cta">
       <span class="sr-cta-wash" aria-hidden="true"></span>
-      <img class="sr-cta-shot" src="assets/cta-podium.webp" alt="su-ree GHK-Cu Snap 8 Serum and Dual-Replenishing Capsule Cream with their cartons" loading="lazy" decoding="async" />
+      <svg class="sr-cta-wave" viewBox="0 0 1200 220" preserveAspectRatio="none" aria-hidden="true"><path d="M0,96 C180,30 420,150 660,110 C860,77 1020,20 1200,54 L1200,220 L0,220 Z" fill="rgba(255,255,255,0.42)"></path><path d="M0,118 C190,58 430,168 670,130 C870,99 1025,46 1200,78 L1200,220 L0,220 Z" fill="rgba(188,217,247,0.5)"></path><path d="M0,140 C200,86 430,186 680,150 C880,121 1030,72 1200,100 L1200,220 L0,220 Z" fill="rgba(255,255,255,0.9)"></path></svg>
+      <img class="sr-cta-shot" src="assets/p-duo.webp" alt="su-ree GHK-Cu Snap 8 Serum and Dual-Replenishing Capsule Cream with their cartons" loading="lazy" decoding="async" />
       <div class="sr-cta-copy">
         <div style="display:flex; flex-wrap:wrap; align-items:center; gap:16px">
           <img src="assets/logo.webp" alt="su-ree Skin Science" loading="lazy" decoding="async" style="display:block; flex-shrink:0; height:40px; width:auto" />
