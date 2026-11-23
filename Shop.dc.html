@@ -284,7 +284,8 @@
   .sr-shipbar { display: none; }
   @media (max-width: 560px) {
     /* the head reads from the middle, as the reference draws it */
-    .sr-buycol { text-align: center; }
+    .sr-buycol > p:first-child, .sr-buycol h1, .sr-buycol > p:nth-of-type(2),
+    .sr-rating, .sr-shipbar { text-align: center; }
     .sr-buycol > p:first-child {
       display: flex; align-items: center; justify-content: center; gap: 12px;
     }
