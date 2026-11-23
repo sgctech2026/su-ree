@@ -568,10 +568,9 @@
     .sr-lab-note { font-size: 10.5px; }
   }
   .sr-lab-btn {
-    flex-shrink: 0; display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
-    align-self: center; border-radius: 9999px; padding: 9px 15px;
-    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 12px; font-weight: 600;
-    color: #ffffff; border: 0;
+    flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center;
+    cursor: pointer; align-self: center; height: 38px; width: 38px; padding: 0;
+    border-radius: 9999px; color: #ffffff; border: 0;
     background: linear-gradient(135deg,#5ba0ea 0%,#2f85e0 52%,#1f6ec9 100%);
     box-shadow: 0 10px 22px -14px rgba(47,123,224,0.9);
   }
@@ -628,7 +627,7 @@
   .sr-br-foot { margin: 14px 2px 0; font-size: 11.5px; color: #8295b4; line-height: 1.6; }
   @media (max-width: 560px) {
     .sr-lab { flex-wrap: wrap; }
-    .sr-lab-btn { width: 100%; justify-content: center; }
+    .sr-lab-btn { height: 34px; width: 34px; }
     .sr-br-grid { grid-template-columns: minmax(0,1fr); gap: 8px; }
   }
   .sr-gal { display: flex; gap: 14px; }
@@ -1714,7 +1713,7 @@
               <span class="sr-lab-head">Batch verified by an independent laboratory</span>
               <span class="sr-lab-note">Lot {{ lotCode }} &middot; checked for actives concentration and microbial load before release.</span>
             </span>
-            <button type="button" class="sr-lab-btn" onClick="{{ brShow }}">View result<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
+            <button type="button" class="sr-lab-btn" onClick="{{ brShow }}" aria-label="View the batch result"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
           </div>
           <a href="Science.dc.html" style="margin-top:12px; display:flex; align-items:center; justify-content:center; gap:11px; border-radius:14px; background:linear-gradient(135deg,#1d3a55 0%,#1b3456 52%,#0c1c2c 100%); padding:16px 22px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:13.5px; font-weight:600; color:#fff; letter-spacing:1.4px; box-shadow:0 14px 30px -14px rgba(18,38,58,0.6); transition:transform 220ms, box-shadow 220ms" style-hover="color:#fff; transform:translateY(-2px); box-shadow:0 20px 40px -16px rgba(18,38,58,0.7)">READ THE BATCH REPORT</a>
         </div>
