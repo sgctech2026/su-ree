@@ -670,9 +670,15 @@
   .sr-gal-ring-run {
     stroke: url(#sr-gal-ring-g); stroke-linecap: round;
     stroke-dasharray: 100; stroke-dashoffset: 100;
-    animation: sr-gal-ring-run 4200ms linear infinite;
+    animation: sr-gal-ring-a 4200ms linear infinite;
   }
-  @keyframes sr-gal-ring-run {
+  /* two identical runs: swapping the name is what makes the ring start
+     over the moment a new shot comes up or a thumb is picked */
+  @keyframes sr-gal-ring-a {
+    from { stroke-dashoffset: 100; }
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes sr-gal-ring-b {
     from { stroke-dashoffset: 100; }
     to { stroke-dashoffset: 0; }
   }
@@ -1693,7 +1699,7 @@
               <button type="button" class="sr-gal-arrow" onClick="{{ galFwd }}" aria-label="More shots"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
             </div>
             <div class="sr-gal-main">
-              <svg class="sr-gal-ring" aria-hidden="true"><defs><linearGradient id="sr-gal-ring-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#9fd0f7"></stop><stop offset="46%" stop-color="#6aa9ec"></stop><stop offset="78%" stop-color="#f2a8cb"></stop><stop offset="100%" stop-color="#ff7ab4"></stop></linearGradient></defs><rect class="sr-gal-ring-track" x="1.25" y="1.25" rx="19" ry="19"></rect><rect class="sr-gal-ring-run" x="1.25" y="1.25" rx="19" ry="19" pathLength="100"></rect></svg>
+              <svg class="sr-gal-ring" aria-hidden="true"><defs><linearGradient id="sr-gal-ring-g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#9fd0f7"></stop><stop offset="46%" stop-color="#6aa9ec"></stop><stop offset="78%" stop-color="#f2a8cb"></stop><stop offset="100%" stop-color="#ff7ab4"></stop></linearGradient></defs><rect class="sr-gal-ring-track" x="1.25" y="1.25" rx="19" ry="19"></rect><rect class="sr-gal-ring-run" x="1.25" y="1.25" rx="19" ry="19" pathLength="100" style="animation-name: {{ ringName }}"></rect></svg>
               <img class="sr-gal-shot sr-gal-fit" src="assets/p-duo.webp" alt="su-ree Capsule Cream jar beside the GHK-Cu Serum bottle" loading="lazy" decoding="async" style="opacity: {{ gVis0 }}" />
               <img class="sr-gal-shot sr-gal-fit" src="assets/p-cream.webp" alt="su-ree Capsule Cream jar" loading="lazy" decoding="async" style="opacity: {{ gVis1 }}" />
               <img class="sr-gal-shot sr-gal-fit" src="assets/p-cream-box.webp" alt="su-ree Capsule Cream jar with its carton" loading="lazy" decoding="async" style="opacity: {{ gVis2 }}" />
@@ -2741,9 +2747,20 @@ class Component extends DCLogic {
 
   GAL = 5;
 
+  // a jump from one odd shot to another is still a new shot, so the ring
+  // follows a counter rather than the index itself
+  ringNameFor(at) {
+    if (this.lastGal !== at) {
+      this.lastGal = at;
+      this.ringTick = (this.ringTick || 0) + 1;
+    }
+    return (this.ringTick || 0) % 2 === 0 ? "sr-gal-ring-a" : "sr-gal-ring-b";
+  }
+
   galVals() {
     const at = this.state.gal || 0;
     const out = {
+      ringName: this.ringNameFor(at),
       difMore: this.state.difAll ? "on" : "off",
       difOpen: this.state.difAll ? "true" : "false",
       difLabel: this.state.difAll ? "Show fewer" : "See all six",
