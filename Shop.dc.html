@@ -612,6 +612,23 @@
     font-style: normal; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 9.5px;
     font-weight: 600; color: #93aec9; letter-spacing: 1.4px; text-transform: uppercase;
   }
+  .sr-br-tabs {
+    display: flex; gap: 6px; margin: 0 0 14px; border-radius: 9999px;
+    background: #eef5fd; border: 1px solid #e0edfb; padding: 5px;
+  }
+  .sr-br-tab {
+    flex: 1 1 0; min-width: 0; border: 0; cursor: pointer; border-radius: 9999px;
+    padding: 9px 10px; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 12.5px;
+    font-weight: 600; transition: background 220ms ease, color 220ms ease;
+  }
+  /* a record fits without a scrollbar now, but keep the rail quiet if one shows */
+  .sr-br::-webkit-scrollbar { width: 8px; }
+  .sr-br::-webkit-scrollbar-track { background: transparent; }
+  .sr-br::-webkit-scrollbar-thumb {
+    border-radius: 9999px; background: rgba(127,168,214,0.45);
+    border: 2px solid transparent; background-clip: content-box;
+  }
+  .sr-br { scrollbar-width: thin; scrollbar-color: rgba(127,168,214,0.45) transparent; }
   .sr-br-open {
     margin-top: 12px; display: block; overflow: hidden; border-radius: 14px;
     border: 1px solid #e7f0fb; background: #f7fbff;
@@ -2347,6 +2364,10 @@
       <button type="button" class="sr-pm-x" onClick="{{ brClose }}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
       <p class="sr-br-eyebrow">BATCH RECORD</p>
       <h3 class="sr-br-title">Verified before it shipped</h3>
+      <div class="sr-br-tabs" role="tablist" aria-label="Choose a formula" style="display: {{ brTabsShow }}">
+        <button type="button" role="tab" class="sr-br-tab" onClick="{{ brPick0 }}" aria-selected="{{ brTabSel0 }}" style="background: {{ brTabBg0 }}; color: {{ brTabFg0 }}">Capsule Cream</button>
+        <button type="button" role="tab" class="sr-br-tab" onClick="{{ brPick1 }}" aria-selected="{{ brTabSel1 }}" style="background: {{ brTabBg1 }}; color: {{ brTabFg1 }}">GHK-Cu Serum</button>
+      </div>
       <div class="sr-br-card" style="display: {{ brShow0 }}">
         <p class="sr-br-name">Dual Regenerative Capsule Cream<span class="sr-br-pass">PASS</span></p>
         <p class="sr-br-sub">30 g</p>
@@ -2641,8 +2662,17 @@ class Component extends DCLogic {
       out["brReport" + i] = REPORT[i];
       out["brFile" + i] = FILE[i];
       out["brSheet" + i] = SHEET[i];
-      out["brShow" + i] = (vi === 2 || vi === i) ? "block" : "none";
+      // the duo holds two records; a tab picks which one is on show
+      const pick = vi === 2 ? (this.state.brAt || 0) : vi;
+      out["brShow" + i] = pick === i ? "block" : "none";
+      out["brTabSel" + i] = pick === i ? "true" : "false";
+      out["brTabBg" + i] = pick === i
+        ? "linear-gradient(135deg,#5ba0ea 0%,#2f85e0 52%,#1f6ec9 100%)"
+        : "rgba(255,255,255,0)";
+      out["brTabFg" + i] = pick === i ? "#ffffff" : "#44587c";
+      out["brPick" + i] = () => this.setState({ brAt: i });
     }
+    out.brTabsShow = vi === 2 ? "flex" : "none";
     out.brOpen = this.state.brOpen ? "flex" : "none";
     out.brShow = () => this.setState({ brOpen: true });
     out.brClose = () => this.setState({ brOpen: false });
