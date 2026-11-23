@@ -664,6 +664,21 @@
     color: #ffffff; box-shadow: 0 18px 34px -16px rgba(67,143,224,0.8);
     transition: transform 220ms ease, box-shadow 220ms ease;
   }
+  /* on hover a pink fill grows out of the bottom-left corner and takes
+     the whole pill; the label keeps its place above it */
+  .sr-pf-cta::before {
+    content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background: linear-gradient(42deg,#ff4f9f 0%,#ff79b8 52%,#ffa3cf 100%);
+    transform-origin: 0% 100%; transform: scale(0); opacity: 0;
+    transition: transform 460ms cubic-bezier(0.16,1,0.3,1), opacity 220ms ease;
+  }
+  .sr-pf-cta:hover::before { transform: scale(1.02); opacity: 1; }
+  .sr-pf-cta:hover {
+    box-shadow: 0 18px 34px -16px rgba(255,79,159,0.75);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sr-pf-cta::before { transition: opacity 160ms ease; transform: scale(1.02); }
+  }
   .sr-pf-sheen {
     position: absolute; top: 0; bottom: 0; left: 0; width: 32%; pointer-events: none;
     background: linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.35) 48%,
