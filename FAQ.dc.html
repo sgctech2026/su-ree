@@ -198,16 +198,16 @@
   .r-blob, .sr-orb, .sr-rp-orb, .sr-bgorb { display: none !important; }
   .r-blob.sr-pf-waves, .r-blob.r-wm { display: block !important; }
   .sr-faqtag {
-    margin: 0 0 14px; display: inline-block; font-family: 'Jost',ui-sans-serif,sans-serif;
+    margin: 0 0 10px; display: block; width: 100%; box-sizing: border-box;
+    text-align: center; font-family: 'Jost',ui-sans-serif,sans-serif;
     font-size: 11px; color: #1b3456; background: rgba(255,255,255,0.72);
-    border: 0.5px solid #b7d5f5; border-radius: 9999px; padding: 7px 16px;
+    border: 0.5px solid #b7d5f5; border-radius: 9999px; padding: 9px 16px;
     letter-spacing: 1.6px;
   }
   .sr-cat-short { display: none; }
   @media (max-width: 760px) {
     /* four categories, one row: short names, no tallies */
-    .sr-catcol { position: static !important; }
-    .sr-faqtag { display: block; text-align: center; margin-bottom: 12px; }
+    .sr-faqtag { margin-bottom: 12px; }
     .sr-cats {
       flex-direction: row !important; gap: 6px !important;
     }
@@ -331,7 +331,7 @@
     <span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; right:-7%; top:10%; height:240px; width:240px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.75) 0%, rgba(214,233,251,0.6) 32%, rgba(143,186,235,0.26) 62%, rgba(143,186,235,0) 76%)"></span><span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; left:-4%; bottom:16%; height:160px; width:160px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.85) 0%, rgba(231,243,255,0.75) 34%, rgba(183,213,245,0.30) 64%, rgba(183,213,245,0) 76%); animation:sr-float-a 12s ease-in-out .6s infinite"></span>
     <div style="margin:0 auto; width:100%; max-width:1140px">
       <div class="r-2col sr-faqgrid" style="display:grid; grid-template-columns:minmax(0,250px) minmax(0,1fr); gap:clamp(24px,4vw,54px); align-items:start; padding-top:28px">
-        <div class="r-stick sr-catcol" style="position:sticky; top:106px">
+        <div class="sr-catcol">
           <p class="sr-faqtag">FREQUENTLY ASKED</p>
           <div class="sr-cats" role="tablist" aria-orientation="vertical" aria-label="Question categories" style="display:flex; flex-direction:column; gap:6px">
           <button type="button" role="tab" onClick="{{ qPick0 }}" aria-selected="{{ qSel0 }}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; border-radius:12px; padding:13px 15px; font-size:14px; font-weight:600; letter-spacing:-0.1px; cursor:pointer; font-family:inherit; background: {{ qBg0 }}; color: {{ qFg0 }}; border:0.5px solid {{ qBd0 }}; transition:background 240ms ease, color 240ms ease, border-color 240ms ease; box-sizing:border-box">
