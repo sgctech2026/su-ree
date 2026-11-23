@@ -567,6 +567,58 @@
     .sr-lab-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 5px 10px; font-size: 11px; }
     .sr-lab-note { font-size: 10.5px; }
   }
+  .sr-lab-btn {
+    flex-shrink: 0; display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
+    align-self: center; border-radius: 9999px; padding: 9px 15px;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 12px; font-weight: 600;
+    color: #ffffff; border: 0;
+    background: linear-gradient(135deg,#5ba0ea 0%,#2f85e0 52%,#1f6ec9 100%);
+    box-shadow: 0 10px 22px -14px rgba(47,123,224,0.9);
+  }
+  .sr-br {
+    position: relative; width: 100%; max-width: 560px; max-height: 86vh; overflow: auto;
+    box-sizing: border-box; border-radius: 26px; padding: 26px 24px 24px;
+    background: linear-gradient(140deg,#ffffff 0%,#f8fbff 54%,#eef6ff 100%);
+    border: 1px solid rgba(183,213,245,0.85);
+    box-shadow: 0 40px 90px -40px rgba(13,38,64,0.8);
+  }
+  .sr-br-eyebrow {
+    margin: 0; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 10.5px;
+    font-weight: 600; color: #7fa8d6; letter-spacing: 3.2px;
+  }
+  .sr-br-title {
+    margin: 10px 0 18px; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 23px;
+    font-weight: 700; color: #10253f; letter-spacing: -0.6px;
+  }
+  .sr-br-card {
+    border-radius: 18px; background: #ffffff; border: 1px solid #e7f0fb;
+    padding: 16px 16px 14px; margin-bottom: 12px;
+  }
+  .sr-br-name {
+    margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 9px;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 15px; font-weight: 700;
+    color: #1b3456;
+  }
+  .sr-br-pass {
+    border-radius: 9999px; background: #e3f7ec; color: #1c8a52; padding: 3px 10px;
+    font-size: 10px; font-weight: 700; letter-spacing: 1.4px;
+  }
+  .sr-br-sub { margin: 3px 0 12px; font-size: 12px; color: #8295b4; }
+  .sr-br-grid {
+    display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px 16px;
+    font-size: 12.5px; color: #1b3456;
+  }
+  .sr-br-grid > span { display: flex; min-width: 0; flex-direction: column; gap: 2px; }
+  .sr-br-grid em {
+    font-style: normal; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 9.5px;
+    font-weight: 600; color: #93aec9; letter-spacing: 1.4px; text-transform: uppercase;
+  }
+  .sr-br-foot { margin: 14px 2px 0; font-size: 11.5px; color: #8295b4; line-height: 1.6; }
+  @media (max-width: 560px) {
+    .sr-lab { flex-wrap: wrap; }
+    .sr-lab-btn { width: 100%; justify-content: center; }
+    .sr-br-grid { grid-template-columns: minmax(0,1fr); gap: 8px; }
+  }
   .sr-gal { display: flex; gap: 14px; }
   @media (max-width: 980px) {
     /* stacked, the buy column needs air between it and the batch button */
@@ -1641,10 +1693,10 @@
           <div class="sr-lab">
             <span class="sr-lab-ico" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>
             <span class="sr-lab-words">
-              <span class="sr-lab-head">Batch verified by an independent laboratory<span class="sr-lab-chip">LOT {{ lotCode }}</span></span>
-              <span class="sr-lab-grid"><span><em>Batch</em>{{ batchId }}</span><span><em>Laboratory</em>{{ labName }}</span><span><em>Published</em>{{ batchPub }}</span><span><em>Valid until</em>{{ batchValid }}</span></span>
-              <span class="sr-lab-note">Actives concentration and microbial load, checked before release. Registered with {{ registryName }}.</span>
+              <span class="sr-lab-head">Batch verified by an independent laboratory</span>
+              <span class="sr-lab-note">Lot {{ lotCode }} &middot; checked for actives concentration and microbial load before release.</span>
             </span>
+            <button type="button" class="sr-lab-btn" onClick="{{ brShow }}">View result<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
           </div>
           <a href="Science.dc.html" style="margin-top:12px; display:flex; align-items:center; justify-content:center; gap:11px; border-radius:14px; background:linear-gradient(135deg,#1d3a55 0%,#1b3456 52%,#0c1c2c 100%); padding:16px 22px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:13.5px; font-weight:600; color:#fff; letter-spacing:1.4px; box-shadow:0 14px 30px -14px rgba(18,38,58,0.6); transition:transform 220ms, box-shadow 220ms" style-hover="color:#fff; transform:translateY(-2px); box-shadow:0 20px 40px -16px rgba(18,38,58,0.7)">READ THE BATCH REPORT</a>
         </div>
@@ -2273,6 +2325,24 @@
   </section>
 
 
+  <div role="dialog" aria-modal="true" aria-label="Batch record" onClick="{{ brClose }}" class="sr-pm-wrap sr-br-wrap" style="display: {{ brOpen }}">
+    <div class="sr-br" onClick="{{ pmStop }}">
+      <button type="button" class="sr-pm-x" onClick="{{ brClose }}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+      <p class="sr-br-eyebrow">BATCH RECORD</p>
+      <h3 class="sr-br-title">Verified before it shipped</h3>
+      <div class="sr-br-card" style="display: {{ brShow0 }}">
+        <p class="sr-br-name">Dual Regenerative Capsule Cream<span class="sr-br-pass">PASS</span></p>
+        <p class="sr-br-sub">30 g</p>
+        <div class="sr-br-grid"><span><em>Manufacturer lot</em>{{ brLot0 }}</span><span><em>Batch id</em>{{ brBatch0 }}</span><span><em>Certificate</em>{{ brCert0 }}</span><span><em>Laboratory</em>{{ brLab0 }}</span><span><em>Published</em>{{ brPub0 }}</span><span><em>Valid until</em>{{ brValid0 }}</span></div>
+      </div>
+      <div class="sr-br-card" style="display: {{ brShow1 }}">
+        <p class="sr-br-name">GHK-Cu+ Snap 8 Triple Peptide Renewal Serum<span class="sr-br-pass">PASS</span></p>
+        <p class="sr-br-sub">30 ml</p>
+        <div class="sr-br-grid"><span><em>Manufacturer lot</em>{{ brLot1 }}</span><span><em>Batch id</em>{{ brBatch1 }}</span><span><em>Certificate</em>{{ brCert1 }}</span><span><em>Laboratory</em>{{ brLab1 }}</span><span><em>Published</em>{{ brPub1 }}</span><span><em>Valid until</em>{{ brValid1 }}</span></div>
+      </div>
+      <p class="sr-br-foot">Registered with {{ registryName }}. The testing itself was carried out by an independent third-party laboratory, not by the registry, and the certificate is not a guarantee of regulatory compliance.</p>
+    </div>
+  </div>
   <div role="dialog" aria-modal="true" aria-label="Story" onClick="{{ vClose }}" class="sr-pm-wrap sr-vm-wrap" style="display: {{ vOpen }}">
     <div class="sr-vm" onClick="{{ pmStop }}">
       <button type="button" class="sr-pm-x" onClick="{{ vClose }}" aria-label="Close"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
@@ -2539,6 +2609,20 @@ class Component extends DCLogic {
     out.batchPub = PUB[vi];
     out.batchValid = VALID[vi];
     out.labName = "Northfield Bioassay Laboratory";
+    // the dialog shows the record for whichever formula is on show
+    const CERT = ["BAC-2026-00125", "BAC-2026-00181"];
+    for (let i = 0; i < 2; i++) {
+      out["brLot" + i] = LOT[i];
+      out["brBatch" + i] = BATCH[i];
+      out["brCert" + i] = CERT[i];
+      out["brPub" + i] = PUB[i];
+      out["brValid" + i] = VALID[i];
+      out["brLab" + i] = "Northfield Bioassay Laboratory";
+      out["brShow" + i] = (vi === 2 || vi === i) ? "block" : "none";
+    }
+    out.brOpen = this.state.brOpen ? "flex" : "none";
+    out.brShow = () => this.setState({ brOpen: true });
+    out.brClose = () => this.setState({ brOpen: false });
     out.registryName = "Baseline Analytical";
     // a lone card has the width to read across instead of down
     out.qtyOne = tiers === 1 ? "true" : "false";
