@@ -676,8 +676,11 @@
   .sr-gal-arrow { display: none; }
   .sr-gal-main {
     position: relative; flex: 1; min-width: 0; aspect-ratio: 1 / 1; overflow: clip;
-    border-radius: 20px; border: 0;
+    border-radius: 20px;
+    /* a sky-coloured edge, light enough not to compete with the shot */
+    border: 1.5px solid #cfe4f6;
     background: linear-gradient(168deg,#ffffff 0%,#f2f8ff 38%,#e2eefc 100%);
+    box-shadow: 0 0 0 4px rgba(207,228,246,0.22);
   }
   .sr-gal-shot { position: absolute; transition: opacity 620ms ease; }
   .sr-gal-fit {
