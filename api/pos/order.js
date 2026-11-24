@@ -1,38 +1,18 @@
 /* A checkout on the site becomes an order in Pancake POS.
  *
  * The browser sends what it knows -- who is buying, where it goes, and
- * which of our three choices they picked -- and nothing about POS. The
- * mapping from our keys to Pancake's product and variation ids, and the
- * prices, are read here, so a visitor cannot name a variation or set a
- * price of their own.
+ * which of the three choices at which size -- and nothing about POS.
+ * The product code behind that choice, and the price, are read here, so
+ * a visitor cannot name a product or set a price of their own.
+ *
+ * The shop keeps the pair and the doubles as products in their own
+ * right, each with its own price, so one choice is one line whatever
+ * its size: a double is SR-CREAM2 once, not SR-CREAM twice.
  */
-import { call, catalogue, config, send, allowOrigin, toPos } from "./_client.js";
-
-/** The duo is one jar and one bottle, so it becomes two lines. */
-const LINES = {
-  cream: [{ key: "cream", each: 1 }],
-  serum: [{ key: "serum", each: 1 }],
-  duo: [{ key: "cream", each: 1 }, { key: "serum", each: 1 }]
-};
+import { call, config, lookup, send, allowOrigin, skuFor, toPos } from "./_client.js";
 
 function clean(s, max) {
   return String(s === undefined || s === null ? "" : s).trim().slice(0, max);
-}
-
-/** Their current price, asked of POS rather than taken from the page. */
-async function priceOf(ids) {
-  const seen = {};
-  const data = await call("/shops/{shop}/products/variations", {
-    query: { variation_ids: ids, page_size: 100, page_number: 1 }
-  });
-  for (const v of (data && data.data) || []) {
-    seen[v.id] = {
-      retail_price: v.retail_price,
-      name: (v.product && v.product.name) || v.display_id || "",
-      weight: v.weight || 0
-    };
-  }
-  return seen;
 }
 
 export default async function handler(req, res) {
@@ -41,11 +21,10 @@ export default async function handler(req, res) {
   if (req.method !== "POST") return send(res, 405, { error: "POST only" });
 
   const cfg = config();
-  const skus = catalogue();
-  if (!cfg.ready || !skus) {
+  if (!cfg.ready) {
     return send(res, 503, {
       error: "not_configured",
-      message: "PANCAKE_API_KEY, PANCAKE_SHOP_ID and PANCAKE_SKUS are not set yet."
+      message: "PANCAKE_API_KEY and PANCAKE_SHOP_ID are not set yet."
     });
   }
 
@@ -65,60 +44,48 @@ export default async function handler(req, res) {
     return send(res, 400, { error: "missing", message: "A name and a phone number are needed." });
   }
 
-  // what they are buying, expanded into POS lines
+  // which product code each line is, and how many of it
   const want = Array.isArray(body.items) ? body.items : [];
-  const tally = {};
+  const lines = [];
   for (const row of want) {
-    const parts = LINES[clean(row && row.key, 20)];
-    const qty = Math.max(0, Math.min(99, Math.round(Number(row && row.qty) || 0)));
-    if (!parts || !qty) continue;
-    for (const part of parts) {
-      tally[part.key] = (tally[part.key] || 0) + part.each * qty;
-    }
+    const key = clean(row && row.key, 20);
+    const qty = Math.max(1, Math.min(9, Math.round(Number(row && row.qty) || 1)));
+    const pick = skuFor(key, qty);
+    if (!pick) continue;
+    lines.push({ sku: pick.sku, count: pick.exact ? 1 : qty });
   }
-  const keys = Object.keys(tally);
-  if (!keys.length) return send(res, 400, { error: "empty_cart" });
+  if (!lines.length) return send(res, 400, { error: "empty_cart" });
 
-  const missing = keys.filter((k) => !skus[k] || !skus[k].variation_id);
-  if (missing.length) {
-    return send(res, 503, {
+  let items;
+  try {
+    items = await Promise.all(lines.map(async (line) => {
+      const p = await lookup(line.sku);
+      return {
+        variation_id: p.variation_id,
+        product_id: p.product_id,
+        quantity: line.count,
+        discount_each_product: 0,
+        is_bonus_product: false,
+        is_discount_percent: false,
+        is_wholesale: false,
+        one_time_product: false,
+        variation_info: {
+          name: p.name,
+          retail_price: p.retail_price,
+          weight: p.weight,
+          detail: null,
+          fields: null,
+          display_id: p.sku,
+          product_display_id: p.sku
+        }
+      };
+    }));
+  } catch (e) {
+    return send(res, e.status === 404 ? 503 : 502, {
       error: "unmapped",
-      message: "PANCAKE_SKUS has no variation for: " + missing.join(", ")
+      message: e.message
     });
   }
-
-  let prices = {};
-  try {
-    prices = await priceOf(keys.map((k) => skus[k].variation_id));
-  } catch (e) {
-    // a price we could not read is not a reason to lose the order; POS
-    // prices the line itself when variation_info is thin
-    prices = {};
-  }
-
-  const items = keys.map((k) => {
-    const sku = skus[k];
-    const known = prices[sku.variation_id] || {};
-    return {
-      variation_id: sku.variation_id,
-      product_id: sku.product_id,
-      quantity: tally[k],
-      discount_each_product: 0,
-      is_bonus_product: false,
-      is_discount_percent: false,
-      is_wholesale: false,
-      one_time_product: false,
-      variation_info: {
-        name: known.name || sku.name || k,
-        retail_price: known.retail_price,
-        weight: known.weight || 0,
-        detail: null,
-        fields: null,
-        display_id: null,
-        product_display_id: null
-      }
-    };
-  });
 
   const addr = body.address || {};
   const order = {
@@ -156,7 +123,7 @@ export default async function handler(req, res) {
 
   try {
     const made = await call("/shops/{shop}/orders", { method: "POST", body: order });
-    const placed = made && (made.data || made.order || made);
+    const placed = (made && (made.data || made.order)) || made;
     return send(res, 201, {
       ok: true,
       id: placed && (placed.id || placed.system_id),
@@ -165,10 +132,6 @@ export default async function handler(req, res) {
     });
   } catch (e) {
     const status = e.status === 400 || e.status === 422 ? 400 : 502;
-    return send(res, status, {
-      error: "pos_refused",
-      code: e.code,
-      message: e.message
-    });
+    return send(res, status, { error: "pos_refused", code: e.code, message: e.message });
   }
 }

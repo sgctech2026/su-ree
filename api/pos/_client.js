@@ -19,16 +19,39 @@ export function config() {
   return { key, shop, minor, ready: Boolean(key && shop) };
 }
 
-/** What our site calls a thing, and what POS calls it. */
+/* What the site sells, and the POS product code behind each choice.
+ * The shop keeps a pair and a double as their own products with their
+ * own prices, so a tier is a different code -- not the same code twice. */
+const FALLBACK = {
+  cream: { 1: "SR-CREAM", 2: "SR-CREAM2" },
+  serum: { 1: "SR-SERUM", 2: "SR-SERUM2" },
+  duo: { 1: "SR-DUO" }
+};
+
 export function catalogue() {
   try {
     const raw = process.env.PANCAKE_SKUS;
-    if (!raw) return null;
+    if (!raw) return FALLBACK;
     const map = JSON.parse(raw);
-    return map && typeof map === "object" ? map : null;
+    return map && typeof map === "object" ? map : FALLBACK;
   } catch (e) {
-    return null;
+    return FALLBACK;
   }
+}
+
+/**
+ * The code for one choice at one size. `exact` says whether the shop
+ * keeps that size as its own product -- a double is one SR-CREAM2, not
+ * two SR-CREAM -- or whether we fell back to the single, in which case
+ * the order carries that many of it.
+ */
+export function skuFor(key, qty) {
+  const rows = catalogue()[key];
+  if (!rows) return null;
+  const own = rows[String(qty)];
+  if (own) return { sku: own, exact: true };
+  const single = rows["1"];
+  return single ? { sku: single, exact: false } : null;
 }
 
 function wait(ms) {
@@ -95,6 +118,48 @@ export async function call(path, { method = "GET", body, query, retry } = {}) {
     throw err;
   }
   throw last || new Error("POS unreachable");
+}
+
+/* A product code is readable and stable; the ids an order needs are not.
+ * So the codes are what we keep, and the ids are looked up and held for
+ * as long as the function instance lives. */
+const resolved = new Map();
+
+export async function lookup(sku) {
+  if (resolved.has(sku)) return resolved.get(sku);
+  const data = await call("/shops/{shop}/products/" + encodeURIComponent(sku));
+  const product = (data && (data.data || data.product)) || null;
+  if (!product) throw Object.assign(new Error("POS has no " + sku), { status: 404 });
+
+  const variations = product.variations || [];
+  const v = variations[0] || null;
+  let remain = v && v.remain_quantity;
+  if ((remain === undefined || remain === null) && v) {
+    remain = (v.variations_warehouses || []).reduce(
+      (n, w) => n + Number(w.remain_quantity || 0), 0
+    );
+  }
+
+  const out = {
+    sku,
+    name: product.name || sku,
+    product_id: product.id,
+    variation_id: v && v.id,
+    retail_price: v ? v.retail_price : product.retail_price,
+    weight: (v && v.weight) || 0,
+    remain: Number(remain) || 0
+  };
+  if (!out.variation_id) {
+    throw Object.assign(new Error(sku + " has no variation"), { status: 502 });
+  }
+  resolved.set(sku, out);
+  return out;
+}
+
+/** Stock changes, so it is read fresh rather than taken from the cache. */
+export async function freshStock(sku) {
+  resolved.delete(sku);
+  return lookup(sku);
 }
 
 /** Minor units in, pesos out, and the other way about. */

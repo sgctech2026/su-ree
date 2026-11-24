@@ -1,6 +1,6 @@
 # Connecting su-ree to Pancake POS
 
-Everything on the site's side is built. What is missing is the five values
+Everything on the site's side is built. What is missing are the two values
 only you can get, because they are your shop's. Until they are set, the site
 behaves exactly as it did before: the stock line stays hidden, the dashboard's
 order panel says `POS NOT CONNECTED YET`, and a checkout tells the buyer to
@@ -25,16 +25,27 @@ https://pos.pages.fm/api/v1/shops?api_key=YOUR_KEY
 The answer is `{"shops":[{"id": 1234567, "name": "…"}], "success": true}`.
 The number in `id` is the shop id.
 
-## 3. Get the variation ids for the two products
+## 3. The product codes
 
-```
-https://pos.pages.fm/api/v1/shops/SHOP_ID/products/variations?api_key=YOUR_KEY&page_size=100
-```
+The shop keeps five products, and the site's five prices line up with them
+exactly:
 
-Find the Capsule Cream and the GHK-Cu Serum in the answer. Each needs two
-values: `id` (the variation id) and `product_id`. The Duo is not a third
-product here — the site turns it into one jar and one bottle, so POS counts
-the stock correctly.
+| Choice on the site | POS product |
+| --- | --- |
+| Capsule Cream, 1 jar | `SR-CREAM` |
+| Capsule Cream, 2 jars | `SR-CREAM2` |
+| GHK-Cu Serum, 1 bottle | `SR-SERUM` |
+| GHK-Cu Serum, 2 bottles | `SR-SERUM2` |
+| The Duo | `SR-DUO` |
+
+That mapping is built in, so nothing needs setting for it. The ids an order
+actually needs are looked up from these codes the first time they are wanted
+and held for as long as the function lives. Set `PANCAKE_SKUS` only if the
+codes ever change:
+
+```json
+{"cream":{"1":"SR-CREAM","2":"SR-CREAM2"},"serum":{"1":"SR-SERUM","2":"SR-SERUM2"},"duo":{"1":"SR-DUO"}}
+```
 
 ## 4. Set them in Vercel
 
@@ -45,15 +56,8 @@ for Production (and Preview, if you want the preview URLs to work too):
 | --- | --- |
 | `PANCAKE_API_KEY` | the key from step 1 |
 | `PANCAKE_SHOP_ID` | the number from step 2 |
-| `PANCAKE_SKUS` | the JSON below, with your ids |
 | `ADMIN_TOKEN` | the same passphrase you type at the `/admin` gate |
 | `POS_ALLOWED_ORIGINS` | `https://su-ree.vercel.app` |
-
-`PANCAKE_SKUS`, on one line:
-
-```json
-{"cream":{"variation_id":"…","product_id":"…","name":"Dual Regenerative Capsule Cream"},"serum":{"variation_id":"…","product_id":"…","name":"GHK-Cu+ Snap 8 Serum"}}
-```
 
 Two more, only if they apply:
 
