@@ -213,7 +213,6 @@
       if (/place order|complete order|pay now/.test(low)) {
         var mail = document.querySelector('input[type="email"]');
         if (mail && mail.value) api.subscribe(mail.value, "checkout");
-        api.checkout({ total: money(t) });
         return;
       }
       /* the newsletter sits as an input with a button beside it */

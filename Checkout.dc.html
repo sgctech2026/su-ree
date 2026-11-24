@@ -731,7 +731,8 @@ class Component extends DCLogic {
         return;
       }
       if (typeof window !== "undefined" && window.srTrack) {
-        window.srTrack.checkout({ total: 0, items: [{ k: p.key }] });
+        const paid = p.sell[qty - 1] + shipping;
+        window.srTrack.checkout({ total: paid, items: [{ k: p.key }] });
       }
       this.setState({ placing: false, done: true, say: "" });
     } catch (e) {
