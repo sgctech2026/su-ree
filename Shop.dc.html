@@ -2807,24 +2807,26 @@ class Component extends DCLogic {
   // each variant carries its own run: its cut-outs first, then the cards
   // that explain it. A card is artwork edge to edge, so it sits in less
   // padding than a cut-out, which needs room to cast its shadow.
+  // each variant runs in the order the shop asked for: the product with
+  // its carton, what is in it, the photographed scene, then a customer
   GAL_SETS = [
     [
       { src: "assets/p-cream-box.webp", pad: "6%", alt: "The Capsule Cream with its carton" },
-      { src: "assets/sh-cream-scene.webp", pad: "0", fill: true, alt: "The Capsule Cream open, with a second jar behind it" },
       { src: "assets/sh-cream-info.webp", pad: "0", fill: true, alt: "The Capsule Cream's actives and full ingredients" },
+      { src: "assets/sh-cream-scene.webp", pad: "0", fill: true, alt: "The Capsule Cream open, with a second jar behind it" },
       { src: "assets/sh-cream-say.webp", pad: "0", fill: true, alt: "Angielyn on the Capsule Cream" }
     ],
     [
       { src: "assets/p-serum-box.webp", pad: "6%", alt: "The serum with its carton" },
-      { src: "assets/sh-serum-scene.webp", pad: "0", fill: true, alt: "The GHK-Cu Serum, photographed" },
       { src: "assets/sh-serum-info.webp", pad: "0", fill: true, alt: "The serum's actives, directions and cautions" },
+      { src: "assets/sh-serum-scene.webp", pad: "0", fill: true, alt: "The GHK-Cu Serum, photographed" },
       { src: "assets/sh-serum-say.webp", pad: "0", fill: true, alt: "A customer on the GHK-Cu Serum" }
     ],
     [
       { src: "assets/hero-duo-pack.webp", pad: "6%", alt: "Both formulas with their cartons" },
+      { src: "assets/sh-duo-info.webp", pad: "0", fill: true, alt: "Why su-ree uses three peptides rather than one" },
       { src: "assets/sh-duo-scene.webp", pad: "0", fill: true, alt: "The cream and the serum together" },
-      { src: "assets/sh-duo-peptides.webp", pad: "0", fill: true, alt: "Why su-ree uses three peptides rather than one" },
-      { src: "assets/sh-duo-say.webp", pad: "0", fill: true, alt: "Mika on using both together" }
+      { src: "assets/sh-duo-say.webp", pad: "0", fill: true, alt: "Angielyn on using both together" }
     ]
   ];
 
