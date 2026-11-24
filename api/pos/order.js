@@ -81,6 +81,7 @@ export default async function handler(req, res) {
       };
     }));
   } catch (e) {
+    console.error("POS could not name a product:", e.status, e.message);
     return send(res, e.status === 404 ? 503 : 502, {
       error: "unmapped",
       message: e.message
@@ -121,6 +122,11 @@ export default async function handler(req, res) {
     order.warehouse_id = process.env.PANCAKE_WAREHOUSE_ID;
   }
 
+  // ?dry=1 builds the order and stops, so the whole path up to the write
+  // can be checked without leaving a real order in the shop
+  const dry = req.query && (req.query.dry === "1" || req.query.dry === "true");
+  if (dry) return send(res, 200, { ok: true, dry: true, order });
+
   try {
     const made = await call("/shops/{shop}/orders", { method: "POST", body: order });
     const placed = (made && (made.data || made.order)) || made;
@@ -131,6 +137,8 @@ export default async function handler(req, res) {
       status: placed && placed.status
     });
   } catch (e) {
+    // the logs are where a refusal can be read back afterwards
+    console.error("POS refused an order:", e.status, e.code, e.message);
     const status = e.status === 400 || e.status === 422 ? 400 : 502;
     return send(res, status, { error: "pos_refused", code: e.code, message: e.message });
   }
