@@ -311,10 +311,10 @@
     <p class="empty" id="ordersEmpty" hidden>No checkouts in this range yet.</p>
   </section>
 
-  <p class="ribbon"><b>Where these numbers come from.</b> The site has no server behind it, so every
-  event is recorded in the browser that produced it. This dashboard therefore reports this device,
-  not the whole audience. Wiring it to a hosted store would make the same panels count every visitor
-  — the shape of the data is already the shape a backend would keep.</p>
+  <p class="ribbon"><b>Where these numbers come from.</b> Order status and recent checkouts are
+  read live from Pancake POS. Everything else — visitors, engagement, pages, sections, subscribers —
+  is recorded in the browser that produced it, so those panels report this device rather than the
+  whole audience until that traffic is sent somewhere shared too.</p>
 </main>
 
 <script>
@@ -323,6 +323,7 @@
   var KEY = "sr.an.v1";
   var PASS = "2e6daf5c3af4c312af70b703c148ffd73c0777395c7e3305395072316552f9d7";
   var SESSION = "sr.admin.ok";
+  var TOKEN = "sr.admin.tok";
 
   /* --- the gate ------------------------------------------------------ */
   function sha256(text) {
@@ -351,7 +352,10 @@
     var pw = document.getElementById("pw").value;
     sha256(pw).then(function (h) {
       if (h === PASS) {
-        try { sessionStorage.setItem(SESSION, "1"); } catch (e) {}
+        try {
+          sessionStorage.setItem(SESSION, "1");
+          sessionStorage.setItem(TOKEN, pw);
+        } catch (e) {}
         open();
       } else {
         document.getElementById("err").textContent = "That passphrase does not match.";
@@ -359,7 +363,10 @@
     });
   });
   document.getElementById("out").addEventListener("click", function () {
-    try { sessionStorage.removeItem(SESSION); } catch (e) {}
+    try {
+      sessionStorage.removeItem(SESSION);
+      sessionStorage.removeItem(TOKEN);
+    } catch (e) {}
     location.reload();
   });
 
@@ -442,28 +449,8 @@
     set("cAband", abandoners);
     set("cCheck", coEv.length);
 
-    /* orders */
-    var orders = (d.orders || []).filter(function (o) { return within(o.t); });
-    if (prodFilter !== "all") {
-      orders = orders.filter(function (o) {
-        return (o.items || []).some(function (i) {
-          return String(i.k || i).toLowerCase().indexOf(prodFilter) >= 0;
-        });
-      });
-    }
-    var counts = { delivered: 0, shipped: 0, confirmed: 0, new: 0, returned: 0, cancelled: 0 };
-    orders.forEach(function (o) {
-      var s = (o.status || "new").toLowerCase();
-      if (counts[s] === undefined) s = "new";
-      counts[s]++;
-    });
-    set("oTotal", orders.length);
-    set("sDelivered", counts.delivered);
-    set("sShipped", counts.shipped);
-    set("sConfirmed", counts.confirmed);
-    set("sNew", counts["new"]);
-    set("sReturned", counts.returned);
-    set("sCancelled", counts.cancelled);
+    /* orders: from the shop's POS, not from this browser */
+    loadOrders();
 
     /* pages */
     var pages = {};
@@ -535,18 +522,78 @@
     document.getElementById("subsEmpty").hidden = subs.length > 0;
     window.__subs = subs;
 
-    /* checkouts */
-    var recent = orders.slice().sort(function (a, b) { return b.t - a.t; });
-    set("coCount", recent.length);
-    document.getElementById("orders").innerHTML = recent
-      .map(function (o) {
-        return (
-          "<tr><td>" + o.id + "</td><td>₱" + Number(o.total || 0).toLocaleString() +
-          "</td><td>" + (o.status || "new") + "</td><td>" + when(o.t) + "</td></tr>"
-        );
+  }
+
+  /* --- the shop's orders ---------------------------------------------- */
+  var prodFilterNames = {
+    all: null, cream: "capsule cream", serum: "snap 8", duo: null
+  };
+
+  function note(text) {
+    set("oTotalLabel", text);
+    ["sDelivered", "sShipped", "sConfirmed", "sNew", "sReturned", "sCancelled"]
+      .forEach(function (id) { set(id, "\u2014"); });
+    set("oTotal", "\u2014");
+  }
+
+  var ordersAt = 0;
+  function loadOrders() {
+    var tok = "";
+    try { tok = sessionStorage.getItem(TOKEN) || ""; } catch (e) {}
+    if (!tok) return note("SIGN IN AGAIN TO READ ORDERS");
+
+    var b = bounds();
+    var from = b[0] ? new Date(b[0]).toISOString() : "";
+    var to = b[1] === Infinity ? "" : new Date(b[1]).toISOString();
+    var mine = ++ordersAt;
+
+    fetch("/api/pos/orders?from=" + encodeURIComponent(from) + "&to=" + encodeURIComponent(to), {
+      headers: { "x-admin-token": tok }
+    })
+      .then(function (r) { return r.json().then(function (j) { return { r: r, j: j }; }); })
+      .then(function (res) {
+        if (mine !== ordersAt) return;
+        if (!res.r.ok) {
+          if (res.j && res.j.error === "not_configured") {
+            return note("POS NOT CONNECTED YET");
+          }
+          if (res.r.status === 401) return note("THAT PASSPHRASE IS NOT THE ORDERS TOKEN");
+          return note("POS DID NOT ANSWER");
+        }
+        var d = res.j;
+        var rows = d.recent || [];
+        if (prodFilter !== "all" && prodFilterNames[prodFilter]) {
+          var want = prodFilterNames[prodFilter];
+          rows = rows.filter(function (o) {
+            return (o.items || []).some(function (i) {
+              return String(i.name || "").toLowerCase().indexOf(want) >= 0;
+            });
+          });
+        }
+        set("oTotalLabel", "TOTAL ORDERS IN POS");
+        set("oTotal", d.total || 0);
+        var c = d.counts || {};
+        set("sDelivered", c.delivered || 0);
+        set("sShipped", c.shipped || 0);
+        set("sConfirmed", c.confirmed || 0);
+        set("sNew", c["new"] || 0);
+        set("sReturned", c.returned || 0);
+        set("sCancelled", c.cancelled || 0);
+
+        set("coCount", rows.length);
+        document.getElementById("orders").innerHTML = rows
+          .map(function (o) {
+            return "<tr><td>" + o.id + "</td><td>\u20b1" +
+              Number(o.total || 0).toLocaleString() + "</td><td>" +
+              (o.status || "") + "</td><td>" +
+              (o.at ? new Date(o.at).toLocaleString() : "\u2014") + "</td></tr>";
+          })
+          .join("");
+        document.getElementById("ordersEmpty").hidden = rows.length > 0;
       })
-      .join("");
-    document.getElementById("ordersEmpty").hidden = recent.length > 0;
+      .catch(function () {
+        if (mine === ordersAt) note("POS COULD NOT BE REACHED");
+      });
   }
 
   /* --- the controls --------------------------------------------------- */
