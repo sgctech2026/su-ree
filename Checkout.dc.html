@@ -719,7 +719,7 @@ class Component extends DCLogic {
           note: this.field("srLandmark"),
           shippingFee: shipping,
           items: [{ key: p.key, qty: qty }],
-          address: { line: line, full: full, country_code: "PH" }
+          address: { line: line, full: full }
         })
       });
       const data = await res.json().catch(() => ({}));

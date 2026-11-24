@@ -114,7 +114,8 @@ export default async function handler(req, res) {
       province_id: clean(addr.province_id, 24) || null,
       district_id: clean(addr.district_id, 24) || null,
       commune_id: clean(addr.commune_id, 24) || null,
-      country_code: clean(addr.country_code, 4) || "PH",
+      country_code: clean(addr.country_code, 8)
+        || process.env.PANCAKE_COUNTRY_CODE || null,
       post_code: clean(addr.post_code, 16) || null
     }
   };
