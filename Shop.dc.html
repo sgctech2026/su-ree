@@ -1719,6 +1719,8 @@
               <button type="button" class="sr-gal-th" onClick="{{ gPick3 }}" aria-label="{{ gLabel3 }}" aria-pressed="{{ gSel3 }}" style="display: {{ gHas3 }}; border-color: {{ gBd3 }}; box-shadow: {{ gSh3 }}"><img src="{{ gSrc3 }}" alt="" loading="lazy" decoding="async" style="opacity: {{ gOp3 }}" /></button>
               <button type="button" class="sr-gal-th" onClick="{{ gPick4 }}" aria-label="{{ gLabel4 }}" aria-pressed="{{ gSel4 }}" style="display: {{ gHas4 }}; border-color: {{ gBd4 }}; box-shadow: {{ gSh4 }}"><img src="{{ gSrc4 }}" alt="" loading="lazy" decoding="async" style="opacity: {{ gOp4 }}" /></button>
               <button type="button" class="sr-gal-th" onClick="{{ gPick5 }}" aria-label="{{ gLabel5 }}" aria-pressed="{{ gSel5 }}" style="display: {{ gHas5 }}; border-color: {{ gBd5 }}; box-shadow: {{ gSh5 }}"><img src="{{ gSrc5 }}" alt="" loading="lazy" decoding="async" style="opacity: {{ gOp5 }}" /></button>
+              <button type="button" class="sr-gal-th" onClick="{{ gPick6 }}" aria-label="{{ gLabel6 }}" aria-pressed="{{ gSel6 }}" style="display: {{ gHas6 }}; border-color: {{ gBd6 }}; box-shadow: {{ gSh6 }}"><img src="{{ gSrc6 }}" alt="" loading="lazy" decoding="async" style="opacity: {{ gOp6 }}" /></button>
+              <button type="button" class="sr-gal-th" onClick="{{ gPick7 }}" aria-label="{{ gLabel7 }}" aria-pressed="{{ gSel7 }}" style="display: {{ gHas7 }}; border-color: {{ gBd7 }}; box-shadow: {{ gSh7 }}"><img src="{{ gSrc7 }}" alt="" loading="lazy" decoding="async" style="opacity: {{ gOp7 }}" /></button>
               </div>
               <button type="button" class="sr-gal-arrow" onClick="{{ galFwd }}" aria-label="More shots"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
             </div>
@@ -1729,6 +1731,8 @@
               <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc3 }}" alt="{{ gLabel3 }}" loading="lazy" decoding="async" style="opacity: {{ gVis3 }}; display: {{ gHas3 }}; padding: {{ gPad3 }}; object-fit: {{ gFit3 }}" />
               <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc4 }}" alt="{{ gLabel4 }}" loading="lazy" decoding="async" style="opacity: {{ gVis4 }}; display: {{ gHas4 }}; padding: {{ gPad4 }}; object-fit: {{ gFit4 }}" />
               <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc5 }}" alt="{{ gLabel5 }}" loading="lazy" decoding="async" style="opacity: {{ gVis5 }}; display: {{ gHas5 }}; padding: {{ gPad5 }}; object-fit: {{ gFit5 }}" />
+              <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc6 }}" alt="{{ gLabel6 }}" loading="lazy" decoding="async" style="opacity: {{ gVis6 }}; display: {{ gHas6 }}; padding: {{ gPad6 }}; object-fit: {{ gFit6 }}" />
+              <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc7 }}" alt="{{ gLabel7 }}" loading="lazy" decoding="async" style="opacity: {{ gVis7 }}; display: {{ gHas7 }}; padding: {{ gPad7 }}; object-fit: {{ gFit7 }}" />
             </div>
           </div>
 
@@ -2805,6 +2809,7 @@ class Component extends DCLogic {
       { src: "assets/p-cream.webp", pad: "6%", alt: "su-ree Dual Regenerative Capsule Cream jar" },
       { src: "assets/p-cream-open.webp", pad: "6%", alt: "The Capsule Cream open, showing the capsules" },
       { src: "assets/p-cream-box.webp", pad: "6%", alt: "The Capsule Cream with its carton" },
+      { src: "assets/sh-cream-scene.webp", pad: "0", fill: true, alt: "The Capsule Cream open, with a second jar behind it" },
       { src: "assets/sh-cream-callouts.webp", pad: "0", fill: true, alt: "What the Capsule Cream is for" },
       { src: "assets/sh-cream-info.webp", pad: "0", fill: true, alt: "The Capsule Cream's actives and full ingredients" },
       { src: "assets/sh-cream-say.webp", pad: "0", fill: true, alt: "Angielyn on the Capsule Cream" }
@@ -2813,18 +2818,20 @@ class Component extends DCLogic {
       { src: "assets/p-serum.webp", pad: "6%", alt: "su-ree GHK-Cu+ Snap 8 Triple Peptide Renewal Serum" },
       { src: "assets/p-serum-open.webp", pad: "6%", alt: "The serum with its cap off" },
       { src: "assets/p-serum-box.webp", pad: "6%", alt: "The serum with its carton" },
+      { src: "assets/sh-serum-scene.webp", pad: "0", fill: true, alt: "The GHK-Cu Serum, photographed" },
       { src: "assets/sh-serum-info.webp", pad: "0", fill: true, alt: "The serum's actives, directions and cautions" },
       { src: "assets/sh-serum-say.webp", pad: "0", fill: true, alt: "A customer on the GHK-Cu Serum" }
     ],
     [
       { src: "assets/hero-duo-pack.webp", pad: "6%", alt: "Both formulas with their cartons" },
+      { src: "assets/sh-duo-scene.webp", pad: "0", fill: true, alt: "The cream and the serum together" },
       { src: "assets/sh-duo-paper.webp", pad: "0", fill: true, alt: "Both formulas, photographed together" },
       { src: "assets/sh-duo-peptides.webp", pad: "0", fill: true, alt: "Why su-ree uses three peptides rather than one" },
       { src: "assets/sh-duo-say.webp", pad: "0", fill: true, alt: "Mika on using both together" }
     ]
   ];
 
-  GAL = 6;
+  GAL = 8;
 
   galSet() {
     return this.GAL_SETS[this.state.variant || 0] || this.GAL_SETS[0];
