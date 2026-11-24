@@ -683,7 +683,7 @@
   }
   .sr-gal-shot { position: absolute; transition: opacity 620ms ease; }
   .sr-gal-fit {
-    inset: 6%; height: 88%; width: 88%; object-fit: contain;
+    inset: 0; height: 100%; width: 100%; box-sizing: border-box; object-fit: contain;
     filter: drop-shadow(0 22px 30px rgba(18,38,58,0.22));
   }
   .sr-gal-fill { inset: 0; height: 100%; width: 100%; object-fit: cover; }
@@ -1713,20 +1713,22 @@
             <div class="sr-gal-strip">
               <button type="button" class="sr-gal-arrow" onClick="{{ galBack }}" aria-label="Earlier shots"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
               <div class="sr-gal-thumbs" role="group" aria-label="Product shots" ref="{{ stripRef }}">
-              <button type="button" class="sr-gal-th" onClick="{{ gPick0 }}" aria-label="Show the pair" aria-pressed="{{ gSel0 }}" style="border-color: {{ gBd0 }}; box-shadow: {{ gSh0 }}"><img src="assets/p-duo.webp" alt="su-ree Capsule Cream jar beside the GHK-Cu Serum bottle" loading="lazy" decoding="async" style="opacity: {{ gOp0 }}" /></button>
-              <button type="button" class="sr-gal-th" onClick="{{ gPick1 }}" aria-label="Show the Capsule Cream" aria-pressed="{{ gSel1 }}" style="border-color: {{ gBd1 }}; box-shadow: {{ gSh1 }}"><img src="assets/p-cream.webp" alt="su-ree Capsule Cream jar" loading="lazy" decoding="async" style="opacity: {{ gOp1 }}" /></button>
-              <button type="button" class="sr-gal-th" onClick="{{ gPick2 }}" aria-label="Show the Capsule Cream with its carton" aria-pressed="{{ gSel2 }}" style="border-color: {{ gBd2 }}; box-shadow: {{ gSh2 }}"><img src="assets/p-cream-box.webp" alt="su-ree Capsule Cream jar with its carton" loading="lazy" decoding="async" style="opacity: {{ gOp2 }}" /></button>
-              <button type="button" class="sr-gal-th" onClick="{{ gPick3 }}" aria-label="Show the GHK-Cu Serum" aria-pressed="{{ gSel3 }}" style="border-color: {{ gBd3 }}; box-shadow: {{ gSh3 }}"><img src="assets/p-serum.webp" alt="su-ree GHK-Cu Serum bottle" loading="lazy" decoding="async" style="opacity: {{ gOp3 }}" /></button>
-              <button type="button" class="sr-gal-th" onClick="{{ gPick4 }}" aria-label="Show the GHK-Cu Serum with its carton" aria-pressed="{{ gSel4 }}" style="border-color: {{ gBd4 }}; box-shadow: {{ gSh4 }}"><img src="assets/p-serum-box.webp" alt="su-ree GHK-Cu Serum bottle with its carton" loading="lazy" decoding="async" style="opacity: {{ gOp4 }}" /></button>
+              <button type="button" class="sr-gal-th" onClick="{{ gPick0 }}" aria-label="{{ gLabel0 }}" aria-pressed="{{ gSel0 }}" style="display: {{ gHas0 }}; border-color: {{ gBd0 }}; box-shadow: {{ gSh0 }}"><img src="{{ gSrc0 }}" alt="" loading="lazy" decoding="async" style="opacity: {{ gOp0 }}" /></button>
+              <button type="button" class="sr-gal-th" onClick="{{ gPick1 }}" aria-label="{{ gLabel1 }}" aria-pressed="{{ gSel1 }}" style="display: {{ gHas1 }}; border-color: {{ gBd1 }}; box-shadow: {{ gSh1 }}"><img src="{{ gSrc1 }}" alt="" loading="lazy" decoding="async" style="opacity: {{ gOp1 }}" /></button>
+              <button type="button" class="sr-gal-th" onClick="{{ gPick2 }}" aria-label="{{ gLabel2 }}" aria-pressed="{{ gSel2 }}" style="display: {{ gHas2 }}; border-color: {{ gBd2 }}; box-shadow: {{ gSh2 }}"><img src="{{ gSrc2 }}" alt="" loading="lazy" decoding="async" style="opacity: {{ gOp2 }}" /></button>
+              <button type="button" class="sr-gal-th" onClick="{{ gPick3 }}" aria-label="{{ gLabel3 }}" aria-pressed="{{ gSel3 }}" style="display: {{ gHas3 }}; border-color: {{ gBd3 }}; box-shadow: {{ gSh3 }}"><img src="{{ gSrc3 }}" alt="" loading="lazy" decoding="async" style="opacity: {{ gOp3 }}" /></button>
+              <button type="button" class="sr-gal-th" onClick="{{ gPick4 }}" aria-label="{{ gLabel4 }}" aria-pressed="{{ gSel4 }}" style="display: {{ gHas4 }}; border-color: {{ gBd4 }}; box-shadow: {{ gSh4 }}"><img src="{{ gSrc4 }}" alt="" loading="lazy" decoding="async" style="opacity: {{ gOp4 }}" /></button>
+              <button type="button" class="sr-gal-th" onClick="{{ gPick5 }}" aria-label="{{ gLabel5 }}" aria-pressed="{{ gSel5 }}" style="display: {{ gHas5 }}; border-color: {{ gBd5 }}; box-shadow: {{ gSh5 }}"><img src="{{ gSrc5 }}" alt="" loading="lazy" decoding="async" style="opacity: {{ gOp5 }}" /></button>
               </div>
               <button type="button" class="sr-gal-arrow" onClick="{{ galFwd }}" aria-label="More shots"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
             </div>
             <div class="sr-gal-main">
-              <img class="sr-gal-shot sr-gal-fit" src="assets/p-duo.webp" alt="su-ree Capsule Cream jar beside the GHK-Cu Serum bottle" loading="lazy" decoding="async" style="opacity: {{ gVis0 }}" />
-              <img class="sr-gal-shot sr-gal-fit" src="assets/p-cream.webp" alt="su-ree Capsule Cream jar" loading="lazy" decoding="async" style="opacity: {{ gVis1 }}" />
-              <img class="sr-gal-shot sr-gal-fit" src="assets/p-cream-box.webp" alt="su-ree Capsule Cream jar with its carton" loading="lazy" decoding="async" style="opacity: {{ gVis2 }}" />
-              <img class="sr-gal-shot sr-gal-fit" src="assets/p-serum.webp" alt="su-ree GHK-Cu Serum bottle" loading="lazy" decoding="async" style="opacity: {{ gVis3 }}" />
-              <img class="sr-gal-shot sr-gal-fit" src="assets/p-serum-box.webp" alt="su-ree GHK-Cu Serum bottle with its carton" loading="lazy" decoding="async" style="opacity: {{ gVis4 }}" />
+              <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc0 }}" alt="{{ gLabel0 }}" loading="lazy" decoding="async" style="opacity: {{ gVis0 }}; display: {{ gHas0 }}; padding: {{ gPad0 }}" />
+              <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc1 }}" alt="{{ gLabel1 }}" loading="lazy" decoding="async" style="opacity: {{ gVis1 }}; display: {{ gHas1 }}; padding: {{ gPad1 }}" />
+              <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc2 }}" alt="{{ gLabel2 }}" loading="lazy" decoding="async" style="opacity: {{ gVis2 }}; display: {{ gHas2 }}; padding: {{ gPad2 }}" />
+              <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc3 }}" alt="{{ gLabel3 }}" loading="lazy" decoding="async" style="opacity: {{ gVis3 }}; display: {{ gHas3 }}; padding: {{ gPad3 }}" />
+              <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc4 }}" alt="{{ gLabel4 }}" loading="lazy" decoding="async" style="opacity: {{ gVis4 }}; display: {{ gHas4 }}; padding: {{ gPad4 }}" />
+              <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc5 }}" alt="{{ gLabel5 }}" loading="lazy" decoding="async" style="opacity: {{ gVis5 }}; display: {{ gHas5 }}; padding: {{ gPad5 }}" />
             </div>
           </div>
 
@@ -2600,7 +2602,9 @@ class Component extends DCLogic {
     for (let i = 0; i < this.VARIANTS.length; i++) {
       const on = i === vi;
       out["vPick" + i] = () => {
-        if (this.state.variant !== i) this.setState({ variant: i, shot: 0, tier: 0 });
+        if (this.state.variant === i) return;
+        this.setState({ variant: i, shot: 0, tier: 0, gal: 0 });
+        this.startGalTimer();
       };
       out["vSel" + i] = on ? "true" : "false";
       out["vBg" + i] = on
@@ -2781,7 +2785,36 @@ class Component extends DCLogic {
 
   PICK = { cream: 0, serum: 1, duo: 2 };
 
-  GAL = 5;
+  // each variant carries its own run: its cut-outs first, then the cards
+  // that explain it. A card is artwork edge to edge, so it sits in less
+  // padding than a cut-out, which needs room to cast its shadow.
+  GAL_SETS = [
+    [
+      { src: "assets/p-cream.webp", pad: "6%", alt: "su-ree Dual Regenerative Capsule Cream jar" },
+      { src: "assets/p-cream-open.webp", pad: "6%", alt: "The Capsule Cream open, showing the capsules" },
+      { src: "assets/p-cream-box.webp", pad: "6%", alt: "The Capsule Cream with its carton" },
+      { src: "assets/sh-cream-callouts.webp", pad: "2%", alt: "What the Capsule Cream is for" },
+      { src: "assets/sh-cream-info.webp", pad: "2%", alt: "The Capsule Cream's actives and full ingredients" }
+    ],
+    [
+      { src: "assets/p-serum.webp", pad: "6%", alt: "su-ree GHK-Cu+ Snap 8 Triple Peptide Renewal Serum" },
+      { src: "assets/p-serum-open.webp", pad: "6%", alt: "The serum with its cap off" },
+      { src: "assets/p-serum-box.webp", pad: "6%", alt: "The serum with its carton" },
+      { src: "assets/sh-serum-info.webp", pad: "2%", alt: "The serum's actives, directions and cautions" }
+    ],
+    [
+      { src: "assets/p-duo.webp", pad: "6%", alt: "The Capsule Cream beside the GHK-Cu Serum" },
+      { src: "assets/hero-duo-pack.webp", pad: "6%", alt: "Both formulas with their cartons" },
+      { src: "assets/sh-duo-paper.webp", pad: "2%", alt: "Both formulas, photographed together" },
+      { src: "assets/sh-duo-peptides.webp", pad: "2%", alt: "Why su-ree uses three peptides rather than one" }
+    ]
+  ];
+
+  GAL = 6;
+
+  galSet() {
+    return this.GAL_SETS[this.state.variant || 0] || this.GAL_SETS[0];
+  }
 
   galVals() {
     const at = this.state.gal || 0;
@@ -2805,15 +2838,26 @@ class Component extends DCLogic {
       galHold: () => { this.galPaused = true; },
       galPlay: () => { this.galPaused = false; },
     };
+    const set = this.galSet();
+    const here = Math.min(at, set.length - 1);
     for (let k = 0; k < this.GAL; k++) {
-      const on = k === at;
+      const shot = set[k];
+      const on = k === here;
+      out["gHas" + k] = shot ? "block" : "none";
+      out["gSrc" + k] = shot ? shot.src : "assets/p-duo.webp";
+      out["gPad" + k] = shot ? shot.pad : "6%";
+      out["gLabel" + k] = shot ? shot.alt : "";
       out["gVis" + k] = on ? "1" : "0";
       out["gSel" + k] = on ? "true" : "false";
       out["gBd" + k] = on ? "#438fe0" : "#e7f0fb";
       out["gSh" + k] = on ? "0 8px 20px -10px rgba(47,123,224,0.75)" : "0 0 0 rgba(0,0,0,0)";
       out["gOp" + k] = on ? "1" : "0.62";
       // a click restarts the clock, so the shot you asked for gets a full turn
-      out["gPick" + k] = () => { this.setState({ gal: k }); this.startGalTimer(); };
+      out["gPick" + k] = () => {
+        if (!this.galSet()[k]) return;
+        this.setState({ gal: k });
+        this.startGalTimer();
+      };
     }
     return out;
   }
@@ -2821,7 +2865,10 @@ class Component extends DCLogic {
   startGalTimer() {
     clearInterval(this.galTimer);
     this.galTimer = setInterval(() => {
-      if (!this.galPaused) this.setState({ gal: ((this.state.gal || 0) + 1) % this.GAL });
+      if (this.galPaused) return;
+      // the run is as long as the chosen variant's set, not the slots
+      const n = this.galSet().length;
+      this.setState({ gal: ((this.state.gal || 0) + 1) % n });
     }, 4200);
   }
 
@@ -2843,7 +2890,7 @@ class Component extends DCLogic {
     if (!m) return;
     const i = this.PICK[m[1]];
     if (i === undefined) return;
-    this.setState({ variant: i, shot: 0, formula: i === 1 ? 1 : 0 });
+    this.setState({ variant: i, shot: 0, gal: 0, formula: i === 1 ? 1 : 0 });
   }
 
   componentWillUnmount() { clearInterval(this.galTimer); clearInterval(this.reviewTimer); clearInterval(this.baTimer); if (this.stepIO) this.stepIO.disconnect(); clearTimeout(this.stepTry); if (this.onResize) window.removeEventListener("resize", this.onResize); }
