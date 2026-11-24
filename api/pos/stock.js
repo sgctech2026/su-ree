@@ -20,13 +20,13 @@ export default async function handler(req, res) {
   let answered = 0;
 
   await Promise.all(keys.map(async (key) => {
-    const sku = skuFor(key, 1);
-    if (!sku) {
+    const pick = skuFor(key, 1);
+    if (!pick) {
       out[key] = { remain: null, price: null };
       return;
     }
     try {
-      const p = await freshStock(sku);
+      const p = await freshStock(pick.sku);
       out[key] = { remain: p.remain, price: fromPos(p.retail_price) };
       answered++;
     } catch (e) {
