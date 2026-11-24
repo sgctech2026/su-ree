@@ -1723,12 +1723,12 @@
               <button type="button" class="sr-gal-arrow" onClick="{{ galFwd }}" aria-label="More shots"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
             </div>
             <div class="sr-gal-main">
-              <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc0 }}" alt="{{ gLabel0 }}" loading="lazy" decoding="async" style="opacity: {{ gVis0 }}; display: {{ gHas0 }}; padding: {{ gPad0 }}" />
-              <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc1 }}" alt="{{ gLabel1 }}" loading="lazy" decoding="async" style="opacity: {{ gVis1 }}; display: {{ gHas1 }}; padding: {{ gPad1 }}" />
-              <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc2 }}" alt="{{ gLabel2 }}" loading="lazy" decoding="async" style="opacity: {{ gVis2 }}; display: {{ gHas2 }}; padding: {{ gPad2 }}" />
-              <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc3 }}" alt="{{ gLabel3 }}" loading="lazy" decoding="async" style="opacity: {{ gVis3 }}; display: {{ gHas3 }}; padding: {{ gPad3 }}" />
-              <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc4 }}" alt="{{ gLabel4 }}" loading="lazy" decoding="async" style="opacity: {{ gVis4 }}; display: {{ gHas4 }}; padding: {{ gPad4 }}" />
-              <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc5 }}" alt="{{ gLabel5 }}" loading="lazy" decoding="async" style="opacity: {{ gVis5 }}; display: {{ gHas5 }}; padding: {{ gPad5 }}" />
+              <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc0 }}" alt="{{ gLabel0 }}" loading="lazy" decoding="async" style="opacity: {{ gVis0 }}; display: {{ gHas0 }}; padding: {{ gPad0 }}; object-fit: {{ gFit0 }}" />
+              <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc1 }}" alt="{{ gLabel1 }}" loading="lazy" decoding="async" style="opacity: {{ gVis1 }}; display: {{ gHas1 }}; padding: {{ gPad1 }}; object-fit: {{ gFit1 }}" />
+              <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc2 }}" alt="{{ gLabel2 }}" loading="lazy" decoding="async" style="opacity: {{ gVis2 }}; display: {{ gHas2 }}; padding: {{ gPad2 }}; object-fit: {{ gFit2 }}" />
+              <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc3 }}" alt="{{ gLabel3 }}" loading="lazy" decoding="async" style="opacity: {{ gVis3 }}; display: {{ gHas3 }}; padding: {{ gPad3 }}; object-fit: {{ gFit3 }}" />
+              <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc4 }}" alt="{{ gLabel4 }}" loading="lazy" decoding="async" style="opacity: {{ gVis4 }}; display: {{ gHas4 }}; padding: {{ gPad4 }}; object-fit: {{ gFit4 }}" />
+              <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc5 }}" alt="{{ gLabel5 }}" loading="lazy" decoding="async" style="opacity: {{ gVis5 }}; display: {{ gHas5 }}; padding: {{ gPad5 }}; object-fit: {{ gFit5 }}" />
             </div>
           </div>
 
@@ -2793,20 +2793,20 @@ class Component extends DCLogic {
       { src: "assets/p-cream.webp", pad: "6%", alt: "su-ree Dual Regenerative Capsule Cream jar" },
       { src: "assets/p-cream-open.webp", pad: "6%", alt: "The Capsule Cream open, showing the capsules" },
       { src: "assets/p-cream-box.webp", pad: "6%", alt: "The Capsule Cream with its carton" },
-      { src: "assets/sh-cream-callouts.webp", pad: "2%", alt: "What the Capsule Cream is for" },
-      { src: "assets/sh-cream-info.webp", pad: "2%", alt: "The Capsule Cream's actives and full ingredients" }
+      { src: "assets/sh-cream-callouts.webp", pad: "0", fill: true, alt: "What the Capsule Cream is for" },
+      { src: "assets/sh-cream-info.webp", pad: "0", fill: true, alt: "The Capsule Cream's actives and full ingredients" }
     ],
     [
       { src: "assets/p-serum.webp", pad: "6%", alt: "su-ree GHK-Cu+ Snap 8 Triple Peptide Renewal Serum" },
       { src: "assets/p-serum-open.webp", pad: "6%", alt: "The serum with its cap off" },
       { src: "assets/p-serum-box.webp", pad: "6%", alt: "The serum with its carton" },
-      { src: "assets/sh-serum-info.webp", pad: "2%", alt: "The serum's actives, directions and cautions" }
+      { src: "assets/sh-serum-info.webp", pad: "0", fill: true, alt: "The serum's actives, directions and cautions" }
     ],
     [
       { src: "assets/p-duo.webp", pad: "6%", alt: "The Capsule Cream beside the GHK-Cu Serum" },
       { src: "assets/hero-duo-pack.webp", pad: "6%", alt: "Both formulas with their cartons" },
-      { src: "assets/sh-duo-paper.webp", pad: "2%", alt: "Both formulas, photographed together" },
-      { src: "assets/sh-duo-peptides.webp", pad: "2%", alt: "Why su-ree uses three peptides rather than one" }
+      { src: "assets/sh-duo-paper.webp", pad: "0", fill: true, alt: "Both formulas, photographed together" },
+      { src: "assets/sh-duo-peptides.webp", pad: "0", fill: true, alt: "Why su-ree uses three peptides rather than one" }
     ]
   ];
 
@@ -2846,6 +2846,7 @@ class Component extends DCLogic {
       out["gHas" + k] = shot ? "block" : "none";
       out["gSrc" + k] = shot ? shot.src : "assets/p-duo.webp";
       out["gPad" + k] = shot ? shot.pad : "6%";
+      out["gFit" + k] = shot && shot.fill ? "cover" : "contain";
       out["gLabel" + k] = shot ? shot.alt : "";
       out["gVis" + k] = on ? "1" : "0";
       out["gSel" + k] = on ? "true" : "false";
