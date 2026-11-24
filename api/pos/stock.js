@@ -16,6 +16,7 @@ export default async function handler(req, res) {
 
   const keys = ["cream", "serum", "duo"];
   const out = {};
+  const why = {};
   let answered = 0;
 
   await Promise.all(keys.map(async (key) => {
@@ -30,11 +31,17 @@ export default async function handler(req, res) {
       answered++;
     } catch (e) {
       out[key] = { remain: null, price: null };
+      why[key] = (e && e.message) || "unknown";
     }
   }));
 
   if (!answered) {
-    return send(res, 502, { error: "pos_refused", message: "POS named none of the products." });
+    // POS's own words, so a setup gone wrong says what is wrong
+    return send(res, 502, {
+      error: "pos_refused",
+      message: "POS named none of the products.",
+      why: why
+    });
   }
 
   res.setHeader("cache-control", "public, max-age=60, s-maxage=60, stale-while-revalidate=300");
