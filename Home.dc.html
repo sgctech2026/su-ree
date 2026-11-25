@@ -92,6 +92,69 @@
   a:hover .sr-card-arrow { background: #1b3456; border-color: #1b3456; color: #ffffff; transform: translateX(4px); }
   a:hover .sr-card-arrow-solid { background: #438fe0; border-color: #438fe0; color: #ffffff; transform: translateX(4px); }
   @media (prefers-reduced-motion: reduce) { .sr-card-arrow { transition: none; }   a:hover .sr-card-arrow, a:hover .sr-card-arrow-solid { transform: none; } }
+  /* four blurred blooms over the wash, and a film of grain to break
+     the banding a gradient this wide would otherwise show */
+  .sr-bloom {
+    position: absolute; z-index: 0; display: block; border-radius: 9999px;
+    pointer-events: none; will-change: transform;
+  }
+  .sr-bloom-a {
+    left: -6%; top: -34%; width: 56%; height: 96%;
+    background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.98) 0%,
+                rgba(255,255,255,0.56) 44%, rgba(255,255,255,0) 72%);
+    filter: blur(34px);
+    animation: sr-bloom-a 26s ease-in-out infinite;
+  }
+  .sr-bloom-b {
+    right: -10%; top: -16%; width: 64%; height: 104%;
+    background: radial-gradient(circle at 50% 50%, rgba(116,176,240,0.62) 0%,
+                rgba(132,188,244,0.26) 44%, rgba(150,200,246,0) 72%);
+    filter: blur(46px);
+    animation: sr-bloom-b 31s ease-in-out infinite;
+  }
+  .sr-bloom-c {
+    left: -16%; bottom: -36%; width: 58%; height: 82%;
+    background: radial-gradient(circle at 50% 50%, rgba(168,190,248,0.36) 0%,
+                rgba(176,198,250,0.12) 50%, rgba(182,204,250,0) 74%);
+    filter: blur(58px);
+    animation: sr-bloom-c 37s ease-in-out infinite;
+  }
+  .sr-bloom-d {
+    left: 26%; bottom: -40%; width: 74%; height: 72%;
+    background: radial-gradient(circle at 50% 50%, rgba(206,232,253,0.92) 0%,
+                rgba(214,236,253,0.38) 46%, rgba(222,240,254,0) 72%);
+    filter: blur(42px);
+    animation: sr-bloom-d 29s ease-in-out infinite;
+  }
+  .sr-grain {
+    position: absolute; z-index: 1; inset: 0; display: block;
+    pointer-events: none; opacity: 0.05; mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 200px 200px;
+  }
+  @keyframes sr-bloom-a {
+    0%, 100% { transform: translate3d(0,0,0) scale(1); }
+    50% { transform: translate3d(2.5%,3%,0) scale(1.06); }
+  }
+  @keyframes sr-bloom-b {
+    0%, 100% { transform: translate3d(0,0,0) scale(1); }
+    50% { transform: translate3d(-3%,2.5%,0) scale(1.07); }
+  }
+  @keyframes sr-bloom-c {
+    0%, 100% { transform: translate3d(0,0,0) scale(1); }
+    50% { transform: translate3d(4%,-3%,0) scale(1.08); }
+  }
+  @keyframes sr-bloom-d {
+    0%, 100% { transform: translate3d(0,0,0) scale(1); }
+    50% { transform: translate3d(-2.5%,-2%,0) scale(1.05); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sr-bloom { animation: none !important; }
+  }
+  @media (max-width: 760px) {
+    .sr-bloom-b { right: -26%; width: 86%; }
+    .sr-bloom-c { display: none; }
+    .sr-grain { opacity: 0.04; }
+  }
   @keyframes sr-sheen { 0% { transform: translateX(-160%) skewX(-18deg); } 55%, 100% { transform: translateX(320%) skewX(-18deg); } }
   @keyframes sr-duo-glow {
     0%, 100% { box-shadow: 0 0 0 4px rgba(127,176,230,0.12), 0 0 22px rgba(88,150,220,0.18), 0 16px 40px rgba(18,38,58,0.10); border-color: #a8cbee; }
@@ -1013,10 +1076,16 @@
   </div>
 
   <section style="background:#fff">
-    <div style="position:relative; margin:0; overflow:hidden; background:radial-gradient(86% 70% at 12% 4%, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.62) 38%, rgba(255,255,255,0) 72%), radial-gradient(70% 90% at 96% 42%, rgba(167,208,247,0.55) 0%, rgba(190,221,250,0.28) 42%, rgba(255,255,255,0) 78%), radial-gradient(58% 60% at 64% 108%, rgba(214,235,252,0.85) 0%, rgba(255,255,255,0) 70%), linear-gradient(126deg, #ffffff 0%, #f6fbff 22%, #eaf4fe 46%, #dcedfc 70%, #c9e2fa 100%)">
+    <div style="position:relative; margin:0; overflow:hidden; background:linear-gradient(122deg, #ffffff 0%, #fafdff 14%, #f1f8fe 32%, #e3f1fd 52%, #d2e9fc 72%, #c0dffa 88%, #b4d8f8 100%)">
+
+      <span class="sr-bloom sr-bloom-a" aria-hidden="true"></span>
+      <span class="sr-bloom sr-bloom-b" aria-hidden="true"></span>
+      <span class="sr-bloom sr-bloom-c" aria-hidden="true"></span>
+      <span class="sr-bloom sr-bloom-d" aria-hidden="true"></span>
+      <span class="sr-grain" aria-hidden="true"></span>
 
 
-      <div aria-hidden="true" style="position:absolute; inset:0 0 auto 0; height:150px; background:linear-gradient(180deg, rgba(243,250,255,0.62) 0%, rgba(243,250,255,0.32) 60%, rgba(243,250,255,0) 100%)"></div>
+      <div aria-hidden="true" style="position:absolute; inset:0 0 auto 0; height:210px; background:linear-gradient(180deg, rgba(255,255,255,0.78) 0%, rgba(255,255,255,0.34) 52%, rgba(255,255,255,0) 100%)"></div>
 
 
       <div class="r-pad40 r-heropad" onMouseEnter="{{ holdHero }}" onMouseLeave="{{ playHero }}" style="position:relative; z-index:2; width:100%; padding:112px 40px 182px max(40px, calc((100% - 1120px) / 2)); box-sizing:border-box">
@@ -1025,8 +1094,8 @@
         <div class="r-herocopy">
           <p style="margin:0; display:flex; align-items:center; gap:14px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:12.5px; font-weight:500; color:#4f84bd; letter-spacing:3.4px">SU-REE SKINCARE<span aria-hidden="true" style="height:1px; width:26px; background:rgba(74,127,181,0.5)"></span>THE DUO<span aria-hidden="true" class="r-eyetail" style="flex:0 1 92px; height:1px; background:linear-gradient(90deg,#8fb6dd 0%,rgba(143,182,221,0) 100%)"></span></p>
           <h1 style="margin:16px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; color:#1b3456; font-weight:400">
-            <span class="r-nowrap" style="display:block; font-weight:700; font-size:clamp(38px, 5.9vw, 84px); line-height:1.0; letter-spacing:-2.8px; white-space:nowrap">Skin science</span>
-            <span class="r-nowrap" style="display:block; margin-top:2px; font-weight:700; font-style:italic; font-size:clamp(33px, 5.2vw, 75px); line-height:1.04; letter-spacing:-2.4px; white-space:nowrap; color:#6ba6e8">you can verify.</span>
+            <span class="r-nowrap" style="display:block; font-weight:700; font-size:clamp(27px, 4.1vw, 59px); line-height:1.02; letter-spacing:-1.9px; white-space:nowrap">Verified by science.</span>
+            <span class="r-nowrap" style="display:block; margin-top:4px; font-weight:700; font-style:italic; font-size:clamp(23px, 3.5vw, 51px); line-height:1.08; letter-spacing:-1.5px; white-space:nowrap; color:#6ba6e8">Visible in your mirror.</span>
           </h1>
           <p style="margin:22px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:14.5px; font-weight:400; color:#4a6184; max-width:400px; line-height:1.65">PDRN and GHK-Cu held in separate beads, not pre-mixed into the gel. Every jar carries a lot code that opens its own batch report.</p>
           <a href="Shop.dc.html" style="position:relative; display:inline-flex; overflow:hidden; isolation:isolate; align-items:center; gap:10px; margin-top:30px; border-radius:9999px; background:linear-gradient(135deg,#5ba0ea 0%,#2f85e0 48%,#1f6ec9 100%); padding:16px 34px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:15px; font-weight:600; color:#fff; border-top:0.5px solid rgba(255,255,255,0.3); box-shadow:inset 0 1px 0 rgba(255,255,255,0.3), 0 18px 36px -14px rgba(47,133,224,0.8); transition:transform 220ms, box-shadow 220ms" style-hover="color:#fff; transform:translateY(-1px); box-shadow:inset 0 1px 0 rgba(255,255,255,0.34), 0 24px 44px -16px rgba(47,133,224,0.9)"><span aria-hidden="true" style="position:absolute; top:0; bottom:0; left:0; width:30%; background:linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.42) 48%, rgba(255,255,255,0) 100%); animation:sr-sheen 5.5s ease-in-out 1.2s infinite; pointer-events:none"></span><span aria-hidden="true" style="position:relative; display:inline-flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span><span style="position:relative">Order Now</span></a>
@@ -1726,7 +1795,7 @@
       <div class="r-foot" style="display:grid; grid-template-columns:minmax(0,1.25fr) repeat(3,minmax(0,1fr)) minmax(0,1.2fr); gap:clamp(24px,3.4vw,44px)">
         <div style="min-width:0">
           <p style="margin:0"><img src="assets/logo.webp" alt="su-ree Skin Science" loading="lazy" decoding="async" style="display:block; height:46px; width:auto" /></p>
-          <p style="margin:18px 0 0; max-width:30ch; font-size:13.5px; color:#44587c; line-height:1.75">Skin science you can verify. Science-backed skincare for healthier, more radiant skin.</p>
+          <p style="margin:18px 0 0; max-width:30ch; font-size:13.5px; color:#44587c; line-height:1.75">Verified by science. Visible in your mirror. Skincare for healthier, more radiant skin.</p>
           <div style="margin-top:22px; display:flex; flex-wrap:wrap; gap:10px">
             <span role="img" aria-label="Facebook — link not set yet" style="display:flex; height:38px; width:38px; align-items:center; justify-content:center; border-radius:9999px; background:rgba(255,255,255,0.8); border:1px solid rgba(23,70,117,0.08); color:#438fe0; box-shadow:0 6px 16px -12px rgba(23,70,117,0.6)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></span>
             <span role="img" aria-label="Instagram — link not set yet" style="display:flex; height:38px; width:38px; align-items:center; justify-content:center; border-radius:9999px; background:rgba(255,255,255,0.8); border:1px solid rgba(23,70,117,0.08); color:#438fe0; box-shadow:0 6px 16px -12px rgba(23,70,117,0.6)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><path d="M17.5 6.5h.01"></path></svg></span>
