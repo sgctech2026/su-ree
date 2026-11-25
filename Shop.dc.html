@@ -1026,11 +1026,12 @@
     border-radius: 16px; background: #fdf6e7; border: 1px solid #f3e4c2; padding: 14px 18px;
   }
   .sr-htu-cauthead {
-    display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0; color: #b4821f;
-    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 13px; font-weight: 700;
-    letter-spacing: 2.4px;
+    display: inline-flex; flex-direction: column; align-items: center; gap: 6px;
+    flex-shrink: 0; color: #b4821f;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 12px; font-weight: 700;
+    letter-spacing: 2.2px; line-height: 1;
   }
-  .sr-htu-cautsep { display: block; height: 26px; width: 1px; background: #ecd9ad; }
+  .sr-htu-cautsep { display: block; height: 44px; width: 1px; background: #ecd9ad; }
   .sr-htu-caution p {
     margin: 0; flex: 1; min-width: 200px; font-size: 12.5px; color: #7a6132; line-height: 1.7;
   }
@@ -1054,6 +1055,10 @@
     .sr-htu-ico { flex-shrink: 0; height: 58px !important; width: 58px !important; }
     .sr-htu-steptext { min-width: 0; font-size: 14px !important; }
     .sr-htu-size { right: 14px; top: -13px; font-size: 13px; padding: 7px 16px; }
+    /* the head drops onto its own row here, so the rule beside it has
+       nothing left to divide */
+    .sr-htu-cautsep { display: none !important; }
+    .sr-htu-cauthead { flex-direction: row !important; gap: 10px !important; }
   }
 
   .sr-faqcats { display: flex; flex-wrap: nowrap; gap: 7px; }
