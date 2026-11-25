@@ -479,7 +479,7 @@
   .sr-cc-panel {
     position: absolute; right: 0; bottom: 0; left: 0; height: 48%;
     display: flex; flex-direction: column; align-items: center;
-    justify-content: flex-end; gap: 7px; text-align: center;
+    justify-content: flex-end; gap: 4px; text-align: center;
     /* the oval narrows toward the foot, so the text needs room either side */
     padding: 0 clamp(26px,3.2vw,42px) clamp(16px,2.2vw,26px);
   }
@@ -492,6 +492,7 @@
   }
   .sr-cc-name {
     position: relative; z-index: 1; font-family: 'Jost',ui-sans-serif,sans-serif;
+    display: flex; align-items: flex-end; justify-content: center;
     font-size: clamp(15.5px,1.35vw,18px); font-weight: 700; color: #183456;
     letter-spacing: -0.4px; line-height: 1.2; max-width: 18ch;
     text-wrap: balance; min-height: 2.4em;
