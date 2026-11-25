@@ -43,6 +43,123 @@
   .sr-nav-links { display: flex; }
   @media (min-width: 981px) { .sr-nav-links { display: flex !important; } }
 
+  /* HERE TO HELP: the bubbles on the left at 30, the words at 70 */
+  .sr-help-sec {
+    overflow: clip; position: relative; width: 100%; background: #ffffff;
+    padding: 56px 24px 92px; box-sizing: border-box;
+  }
+  .sr-help {
+    position: relative; z-index: 1; margin: 0 auto; width: 100%; max-width: 1200px;
+    box-sizing: border-box; overflow: hidden;
+    display: grid; grid-template-columns: minmax(0,30fr) minmax(0,70fr);
+    align-items: center; gap: clamp(18px,3vw,52px);
+    border-radius: 30px;
+    background: linear-gradient(142deg,#ffffff 0%,#fafdff 26%,#f1f8fe 54%,
+                #e6f1fc 78%,#dcebfa 100%);
+    border: 1px solid #dcebfa;
+    box-shadow: 0 26px 58px -40px rgba(18,38,58,0.45);
+    padding: clamp(32px,3.6vw,52px) clamp(26px,3.4vw,54px);
+  }
+  .sr-help-curves {
+    position: absolute; right: 0; bottom: 0; left: 0; z-index: 0;
+    width: 100%; height: 48%; pointer-events: none;
+  }
+  .sr-help-art {
+    position: relative; z-index: 1; min-width: 0;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .sr-help-art svg { display: block; width: 100%; max-width: 236px; height: auto; }
+  .sr-hb-a { animation: sr-hb-float-a 7s ease-in-out infinite; transform-origin: 50% 50%; }
+  .sr-hb-b { animation: sr-hb-float-b 8.4s ease-in-out 0.5s infinite; transform-origin: 50% 50%; }
+  @keyframes sr-hb-float-a {
+    0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); }
+  }
+  @keyframes sr-hb-float-b {
+    0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sr-hb-a, .sr-hb-b { animation: none !important; }
+  }
+  /* a hairline between the bubbles and the words, as the reference draws */
+  .sr-help-copy {
+    position: relative; z-index: 1; min-width: 0;
+    padding-left: clamp(18px,2.6vw,40px);
+    border-left: 1px solid rgba(183,213,245,0.8);
+  }
+  .sr-help-eye {
+    margin: 0; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 11px;
+    font-weight: 500; color: #5f9ad8; letter-spacing: 4.2px;
+  }
+  .sr-help-h {
+    margin: 14px 0 0; font-family: 'Jost',ui-sans-serif,sans-serif; font-weight: 600;
+    color: #193354; font-size: clamp(28px,3.4vw,46px); line-height: 1.1;
+    letter-spacing: -1.4px;
+  }
+  .sr-help-h span { display: block; font-weight: 700; }
+  .sr-help-h em { display: block; font-style: normal; font-weight: 400; color: #6ba6e8; }
+  .sr-help-lead {
+    margin: 16px 0 0; max-width: 66ch; font-family: 'Inter',ui-sans-serif,sans-serif;
+    font-size: 15.5px; color: #45618a; line-height: 1.75; text-wrap: pretty;
+  }
+  .sr-help-acts {
+    margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 12px;
+  }
+  .sr-help-cta, .sr-help-alt {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    height: 52px; box-sizing: border-box; border-radius: 9999px; padding: 0 26px;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 15px; font-weight: 600;
+    letter-spacing: -0.1px;
+    transition: transform 260ms ease, box-shadow 260ms ease, background 260ms ease;
+  }
+  .sr-help-cta {
+    background: linear-gradient(135deg,#5ba0ea 0%,#438de0 52%,#2f74c6 100%);
+    color: #ffffff; border: 0;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.28),
+                0 16px 30px -14px rgba(67,141,224,0.85);
+  }
+  .sr-help-cta:hover {
+    color: #ffffff; transform: translateY(-2px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.28),
+                0 22px 40px -14px rgba(67,141,224,0.95);
+  }
+  .sr-help-alt {
+    background: #ffffff; color: #193354; border: 1px solid #cfe2f8;
+    box-shadow: 0 10px 22px -18px rgba(18,38,58,0.6);
+  }
+  .sr-help-alt:hover {
+    color: #193354; background: #f6faff; transform: translateY(-2px);
+    box-shadow: 0 16px 30px -18px rgba(18,38,58,0.7);
+  }
+  .sr-help-cta:focus-visible, .sr-help-alt:focus-visible,
+  .sr-help-mail a:focus-visible { outline: 2px solid #438de0; outline-offset: 3px; }
+  .sr-help-mail {
+    margin: 14px 0 0; font-size: 13px; color: #8295b4;
+  }
+  .sr-help-mail a { color: #45618a; text-decoration: underline; text-underline-offset: 3px; }
+  .sr-help-mail a:hover { color: #193354; }
+  @media (prefers-reduced-motion: reduce) {
+    .sr-help-cta, .sr-help-alt { transition: none; }
+    .sr-help-cta:hover, .sr-help-alt:hover { transform: none; }
+  }
+  @media (max-width: 860px) {
+    /* the bubbles go above the words, and everything reads from the middle */
+    .sr-help {
+      grid-template-columns: minmax(0,1fr); gap: clamp(16px,4vw,24px);
+      text-align: center; border-radius: 26px;
+      padding: clamp(30px,6vw,40px) clamp(20px,5vw,28px) clamp(34px,6vw,44px);
+    }
+    .sr-help-art svg { max-width: 168px; }
+    .sr-help-copy { padding-left: 0; border-left: 0; }
+    .sr-help-lead { margin-left: auto; margin-right: auto; }
+    .sr-help-acts { justify-content: center; }
+    .sr-help-curves { height: 36%; }
+  }
+  @media (max-width: 480px) {
+    .sr-help-acts { flex-direction: column; align-items: stretch; }
+    .sr-help-cta, .sr-help-alt { width: 100%; }
+    .sr-help-art svg { max-width: 142px; }
+  }
+
   @media (min-width: 981px) {
     /* the story runs long and the photograph is square, so the right
        column finishes first; it stays with the words instead, roughly
@@ -334,14 +451,41 @@
 
 
 
-  <section data-sr-reveal="out" style="overflow:clip; position:relative; width:100%; background:#ffffff; padding:56px 24px 92px; box-sizing:border-box">
-    <span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; left:-9%; bottom:16%; height:170px; width:170px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.85) 0%, rgba(231,243,255,0.75) 34%, rgba(183,213,245,0.30) 64%, rgba(183,213,245,0) 76%)"></span><span class="r-blob sr-orb" aria-hidden="true" style="position:absolute; z-index:0; right:-4%; top:16%; height:170px; width:170px; border-radius:9999px; pointer-events:none; background:radial-gradient(circle at 34% 28%, rgba(255,255,255,0.75) 0%, rgba(214,233,251,0.6) 32%, rgba(143,186,235,0.26) 62%, rgba(143,186,235,0) 76%); animation:sr-float-a 13s ease-in-out .9s infinite"></span>
-    <div style="position:relative; z-index:1; margin:0 auto; width:100%; max-width:780px; box-sizing:border-box; text-align:center; border-radius:28px; background:linear-gradient(168deg,#f6fbff 0%,#eaf4fd 52%,#dfeefb 100%); border:1px solid #e3eefb; box-shadow:0 26px 58px -40px rgba(18,38,58,0.55); padding:clamp(34px,4vw,50px) clamp(22px,3vw,40px) clamp(36px,4vw,52px)">
-      <h2 style="margin:0; font-family:'Jost',ui-sans-serif,sans-serif; font-weight:600; color:#1b3456; font-size:clamp(30px,3.6vw,50px); line-height:1.04; letter-spacing:-1.8px">Questions we have not answered yet?</h2>
-      <p style="margin:14px auto 0; max-width:520px; font-size:14px; color:#44587c; line-height:1.8">The FAQ covers shipping, payment and returns. Anything else, our inbox is a real one.</p>
-      <div style="margin-top:26px; display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:12px">
-        <a href="Shop.dc.html" style="display:inline-flex; align-items:center; gap:10px; border-radius:9999px; background:#1b3456; padding:14px 26px; font-size:13.5px; font-weight:600; color:#fff; box-shadow:0 12px 28px rgba(18,38,58,0.22); transition:transform 220ms, box-shadow 220ms" style-hover="color:#fff; transform:translateY(-1px); box-shadow:0 18px 38px rgba(18,38,58,0.3)">See all questions</a>
-        <a href="mailto:hello@su-ree.com" style="display:inline-flex; align-items:center; gap:10px; border-radius:9999px; background:#fff; border:0.5px solid #cfe2f8; padding:14px 24px; font-size:13.5px; font-weight:600; color:#1b3456; transition:transform 220ms, background 220ms" style-hover="color:#1b3456; background:#f4f8fc; transform:translateY(-1px)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3f7fc9" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><path d="M22 6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2z"></path></svg>hello@su-ree.com</a>
+  <section data-sr-reveal="out" class="sr-help-sec">
+    <div class="sr-help">
+      <svg class="sr-help-curves" viewBox="0 0 1200 220" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0,120 C240,56 520,150 800,104 C960,78 1090,46 1200,22 L1200,220 L0,220 Z" fill="url(#sr-help-c1)"></path><path d="M0,170 C260,116 540,196 820,152 C980,127 1100,96 1200,70 L1200,220 L0,220 Z" fill="url(#sr-help-c2)"></path><path d="M0,120 C240,56 520,150 800,104 C960,78 1090,46 1200,22" fill="none" stroke="rgba(255,255,255,0.75)" stroke-width="1.4"></path><defs><linearGradient id="sr-help-c1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#cfe4fa" stop-opacity="0.9"></stop><stop offset="0.74" stop-color="#dcebfa" stop-opacity="0.6"></stop><stop offset="1" stop-color="#f9d4e6" stop-opacity="0.34"></stop></linearGradient><linearGradient id="sr-help-c2" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e4f0fc" stop-opacity="0.85"></stop><stop offset="0.8" stop-color="#eef3fb" stop-opacity="0.6"></stop><stop offset="1" stop-color="#fbd6e7" stop-opacity="0.4"></stop></linearGradient></defs></svg>
+      <div class="sr-help-art" aria-hidden="true">
+        <svg viewBox="0 0 220 210" fill="none" focusable="false">
+          <defs>
+            <linearGradient id="sr-hb-blue" x1="0.18" y1="0" x2="0.82" y2="1"><stop offset="0" stop-color="#9ac8f4"></stop><stop offset="0.52" stop-color="#5a9fe6"></stop><stop offset="1" stop-color="#3b82d4"></stop></linearGradient>
+            <radialGradient id="sr-hb-sheen" cx="0.3" cy="0.24" r="0.62"><stop offset="0" stop-color="#ffffff" stop-opacity="0.72"></stop><stop offset="1" stop-color="#ffffff" stop-opacity="0"></stop></radialGradient>
+            <linearGradient id="sr-hb-pink" x1="0.2" y1="0" x2="0.8" y2="1"><stop offset="0" stop-color="#ffbcd8"></stop><stop offset="1" stop-color="#f568a5"></stop></linearGradient>
+            <radialGradient id="sr-hb-psheen" cx="0.32" cy="0.26" r="0.6"><stop offset="0" stop-color="#ffffff" stop-opacity="0.66"></stop><stop offset="1" stop-color="#ffffff" stop-opacity="0"></stop></radialGradient>
+            <filter id="sr-hb-sh" x="-40%" y="-30%" width="180%" height="180%"><feDropShadow dx="0" dy="14" stdDeviation="13" flood-color="#2f6ea8" flood-opacity="0.3"></feDropShadow></filter>
+          </defs>
+          <g class="sr-hb-a" filter="url(#sr-hb-sh)">
+            <path d="M48,8 H112 A48,48 0 0 1 160,56 V96 A48,48 0 0 1 112,144 H74 C70,162 56,178 32,186 C48,170 54,158 54,144 H48 A48,48 0 0 1 0,96 V56 A48,48 0 0 1 48,8 Z" fill="url(#sr-hb-blue)"></path>
+            <ellipse cx="60" cy="52" rx="46" ry="36" fill="url(#sr-hb-sheen)"></ellipse>
+            <text x="80" y="78" text-anchor="middle" dominant-baseline="central" font-family="Jost, ui-sans-serif, sans-serif" font-size="74" font-weight="700" fill="#ffffff">?</text>
+          </g>
+          <g class="sr-hb-b" filter="url(#sr-hb-sh)">
+            <path d="M128,104 H190 A30,30 0 0 1 220,134 V150 A30,30 0 0 1 190,180 H172 C174,190 180,198 190,204 C172,202 158,192 152,180 H128 A30,30 0 0 1 98,150 V134 A30,30 0 0 1 128,104 Z" fill="url(#sr-hb-pink)"></path>
+            <ellipse cx="140" cy="128" rx="30" ry="18" fill="url(#sr-hb-psheen)"></ellipse>
+            <circle cx="135" cy="143" r="7.5" fill="#ffffff"></circle>
+            <circle cx="159" cy="143" r="7.5" fill="#ffffff"></circle>
+            <circle cx="183" cy="143" r="7.5" fill="#ffffff"></circle>
+          </g>
+        </svg>
+      </div>
+      <div class="sr-help-copy">
+        <p class="sr-help-eye">HERE TO HELP</p>
+        <h2 class="sr-help-h"><span>A little more clarity.</span><em>A little more confidence.</em></h2>
+        <p class="sr-help-lead">From skincare questions to order inquiries, we&#8217;re here to help you make informed choices with confidence.</p>
+        <div class="sr-help-acts">
+          <a class="sr-help-cta" href="FAQ.dc.html">Explore FAQs<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"></path><path d="m12 5 7 7-7 7"></path></svg></a>
+          <a class="sr-help-alt" href="mailto:hello@su-ree.com"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="2.6"></rect><path d="m3 7 9 6 9-6"></path></svg>Contact Us</a>
+        </div>
+        <p class="sr-help-mail">or write to <a href="mailto:hello@su-ree.com">hello@su-ree.com</a></p>
       </div>
     </div>
   </section>
