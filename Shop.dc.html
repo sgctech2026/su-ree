@@ -907,15 +907,24 @@
     background: #eef5fd; border: 1px solid #e0edfb; padding: 5px;
   }
   .sr-htu-tabs > button { flex: 1 1 0; min-width: 0; justify-content: center; }
-  .sr-htu-card { margin-top: 10px !important; }
+  .sr-htu-card { margin-top: 26px !important; }
   .sr-htu-card {
-    position: relative; margin-top: 12px; border-radius: 18px; overflow: hidden;
-    background: linear-gradient(180deg,#ffffff 0%,#f6fbff 100%);
-    border: 1px solid #eaf3fd; box-shadow: 0 10px 26px -20px rgba(18,38,58,0.4);
-    padding: 40px 14px 14px;
+    position: relative; margin-top: 26px; border-radius: 30px; overflow: visible;
+    background: linear-gradient(168deg,#fdfeff 0%,#f8fcff 44%,#f0f7fe 100%);
+    border: 1px solid rgba(226,239,253,0.95);
+    box-shadow: 0 34px 64px -40px rgba(18,59,102,0.52),
+                inset 0 1px 0 rgba(255,255,255,0.95);
+    padding: 44px 16px 44px;
+  }
+  /* the wave along the foot, clipped to the card's own bottom corners */
+  .sr-htu-card::after {
+    content: ""; position: absolute; z-index: 0; right: 1px; bottom: 1px; left: 1px;
+    height: 86px; border-radius: 0 0 29px 29px; pointer-events: none;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 140' preserveAspectRatio='none'%3E%3Cpath d='M0,70 C150,22 320,104 520,80 C720,56 880,2 1060,30 C1130,41 1172,56 1200,66 L1200,140 L0,140 Z' fill='%23e2eefc'/%3E%3Cpath d='M0,96 C170,56 330,124 540,102 C750,80 900,36 1072,60 C1136,69 1174,80 1200,88 L1200,140 L0,140 Z' fill='%23cfe3fa'/%3E%3C/svg%3E") no-repeat center bottom / 100% 100%;
   }
   /* the tabs above already name the formula, so the card only carries
-     the size, resting on its top corner */
+     the size, and it rides the top-right corner rather than sitting
+     inside it */
   .sr-htu-bar { display: contents; }
   .sr-htu-pill { display: none !important; }
   .sr-htu-pill {
@@ -925,30 +934,54 @@
     font-weight: 700; color: #ffffff; letter-spacing: -0.2px; white-space: nowrap;
   }
   .sr-htu-size {
-    position: absolute; right: 14px; top: 14px; z-index: 2;
+    position: absolute; right: 10px; top: -16px; z-index: 3;
     display: inline-flex; align-items: center; border-radius: 9999px;
-    padding: 6px 14px; background: linear-gradient(135deg,#ff7ab4 0%,#f2609e 100%);
-    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 12.5px; font-weight: 600;
-    color: #ffffff; white-space: nowrap;
-    box-shadow: 0 10px 20px -14px rgba(224,96,158,0.95);
+    padding: 9px 22px; background: linear-gradient(135deg,#ff80b7 0%,#f05f9d 100%);
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 15px; font-weight: 700;
+    color: #ffffff; letter-spacing: -0.2px; white-space: nowrap;
+    box-shadow: 0 14px 26px -14px rgba(224,96,158,0.85),
+                inset 0 1px 0 rgba(255,255,255,0.4);
   }
-  .sr-htu-body { margin-top: 0; }
+  .sr-htu-body { position: relative; z-index: 1; margin-top: 0; }
   .sr-htu-steps {
     margin: 0; padding: 0; list-style: none; display: grid;
     grid-template-columns: repeat(3,minmax(0,1fr));
   }
   .sr-htu-step {
     position: relative; display: flex; flex-direction: column; align-items: center;
-    text-align: center; gap: 7px; padding: 0 10px;
+    text-align: center; gap: 12px; padding: 0 clamp(6px,1.2vw,14px);
   }
-  .sr-htu-step + .sr-htu-step { border-left: 1px solid #e7f0fb; }
+  /* the rule between columns stops short of the top and foot, as the
+     reference draws it */
+  .sr-htu-step + .sr-htu-step::before {
+    content: ""; position: absolute; left: 0; top: 4%; bottom: 4%; width: 1px;
+    background: linear-gradient(180deg, rgba(197,221,247,0) 0%,
+                rgba(197,221,247,0.95) 18%, rgba(197,221,247,0.95) 82%,
+                rgba(197,221,247,0) 100%);
+  }
   .sr-htu-num {
-    display: flex; height: 24px; width: 24px; align-items: center; justify-content: center;
-    border-radius: 9999px; background: #e7f3ff; color: #2f7bdc;
+    display: flex; height: 25px; width: 25px; align-items: center; justify-content: center;
+    border-radius: 9999px; background: #e7f3ff; color: #3f8ae2;
     font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 12.5px; font-weight: 700;
   }
-  .sr-htu-ico { display: flex; color: #2f7bdc; }
-  .sr-htu-steptext { font-size: 12.5px; color: #44587c; line-height: 1.5; text-wrap: pretty; }
+  /* each icon sits on a disc, the way the reference holds them */
+  .sr-htu-ico {
+    display: flex; align-items: center; justify-content: center;
+    height: clamp(62px,5.4vw,84px); width: clamp(62px,5.4vw,84px);
+    border-radius: 9999px; color: #2f7bdc;
+    background: radial-gradient(circle at 50% 42%, rgba(255,255,255,0.95) 0%,
+                rgba(226,240,254,0.95) 48%, rgba(213,232,252,0.95) 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
+  }
+  .sr-htu-ico svg {
+    width: clamp(29px,2.5vw,38px) !important; height: clamp(29px,2.5vw,38px) !important;
+    stroke-width: 1.5;
+  }
+  .sr-htu-steptext {
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 14.5px;
+    font-weight: 700; color: #1b3456; line-height: 1.38; letter-spacing: -0.25px;
+    text-wrap: balance;
+  }
   .sr-htu-slash { font-size: 17px; color: #b7d5f5; }
   .sr-htu-notes {
     margin-top: 12px; display: flex; flex-wrap: wrap; align-items: center;
@@ -978,20 +1011,25 @@
   }
   @media (max-width: 680px) {
     .sr-htu-head { grid-template-columns: minmax(0,1fr) !important; }
+    .sr-htu-card { padding: 34px 16px 46px; border-radius: 24px; }
+    .sr-htu-card::after { height: 68px; border-radius: 0 0 23px 23px; }
     .sr-htu-steps { grid-template-columns: minmax(0,1fr) !important; gap: 0; }
     /* each step reads across: number, icon, then the instruction */
     .sr-htu-step {
       flex-direction: row !important; align-items: center; justify-content: flex-start;
-      text-align: left !important; gap: 12px; padding: 11px 2px;
+      text-align: left !important; gap: 14px; padding: 14px 2px;
     }
-    .sr-htu-step + .sr-htu-step {
-      border-left: 0 !important; border-top: 1px solid #e7f0fb;
+    .sr-htu-step + .sr-htu-step::before {
+      left: 0; right: 0; top: 0; bottom: auto; width: auto; height: 1px;
+      background: linear-gradient(90deg, rgba(197,221,247,0) 0%,
+                  rgba(197,221,247,0.95) 12%, rgba(197,221,247,0.95) 88%,
+                  rgba(197,221,247,0) 100%);
     }
     .sr-htu-num { flex-shrink: 0; height: 22px; width: 22px; font-size: 11.5px; }
-    .sr-htu-ico { flex-shrink: 0; }
-    .sr-htu-ico svg { width: 22px !important; height: 22px !important; }
-    .sr-htu-steptext { min-width: 0; font-size: 12.5px; }
-    .sr-htu-size { right: 12px; top: 12px; font-size: 11.5px; padding: 5px 12px; }
+    .sr-htu-ico { flex-shrink: 0; height: 52px !important; width: 52px !important; }
+    .sr-htu-ico svg { width: 26px !important; height: 26px !important; }
+    .sr-htu-steptext { min-width: 0; font-size: 14px !important; }
+    .sr-htu-size { right: 14px; top: -13px; font-size: 13px; padding: 7px 16px; }
   }
 
   .sr-faqcats { display: flex; flex-wrap: nowrap; gap: 7px; }
