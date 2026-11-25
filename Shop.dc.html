@@ -46,6 +46,7 @@
     padding: 0 clamp(14px,3vw,40px); box-sizing: border-box;
   }
   .sr-cf-stage {
+    --sr-cf-x1: 94%; --sr-cf-x2: 176%; --sr-cf-o2: 0.7; --sr-cf-v2: visible;
     position: relative; margin: 0; padding: 0; list-style: none;
     height: clamp(300px,34vw,440px); perspective: 1400px;
     perspective-origin: 50% 50%;
@@ -90,8 +91,17 @@
   .sr-cf-prev { left: clamp(2px,1vw,16px); }
   .sr-cf-next { right: clamp(2px,1vw,16px); }
   @media (max-width: 760px) {
-    .sr-cf-stage { height: clamp(260px,62vw,340px); perspective: 900px; }
-    .sr-cf-card { width: clamp(150px,44vw,200px); }
+    /* the neighbours come in off the edges and the pair behind them
+       goes: there is no room to show it and it only reached the screen */
+    .sr-cf-stage {
+      --sr-cf-x1: 58%; --sr-cf-x2: 118%; --sr-cf-o2: 0; --sr-cf-v2: hidden;
+      height: clamp(250px,58vw,330px); perspective: 900px;
+    }
+    .sr-cf-card { width: clamp(128px,39vw,186px); }
+    .sr-cf { padding: 0 clamp(18px,5vw,30px); }
+    .sr-cf-prev { left: 0; }
+    .sr-cf-next { right: 0; }
+    .sr-cf-arrow { height: 38px; width: 38px; }
   }
   .sr-gal { position: relative; }
   /* past this width there is room beside the column, so the thumbs step
@@ -3274,15 +3284,17 @@ class Component extends DCLogic {
       return { t: "translateX(-50%) translateZ(60px) rotateY(0deg)", o: "1", z: 5, v: "visible", p: "auto" };
     }
     const side = d > 0 ? 1 : -1;
-    const x = away === 1 ? 94 : 176;
+    // how far out each pair stands is a custom property, so the
+    // stylesheet can pull them in where the screen is narrow
+    const x = away === 1 ? "var(--sr-cf-x1)" : "var(--sr-cf-x2)";
     const zBack = away === 1 ? -60 : -190;
     const turn = away === 1 ? 34 : 44;
     return {
-      t: "translateX(calc(-50% + " + side * x + "%)) translateZ(" + zBack +
-         "px) rotateY(" + (-side * turn) + "deg)",
-      o: away === 1 ? "0.95" : "0.7",
+      t: "translateX(calc(-50% " + (side > 0 ? "+ " : "- ") + x + ")) translateZ(" +
+         zBack + "px) rotateY(" + (-side * turn) + "deg)",
+      o: away === 1 ? "0.95" : "var(--sr-cf-o2)",
       z: 5 - away,
-      v: "visible",
+      v: away === 1 ? "visible" : "var(--sr-cf-v2)",
       p: "auto"
     };
   }
