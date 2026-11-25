@@ -460,15 +460,16 @@
   .sr-cc-tile { position: relative; flex: 0 0 262px; margin-right: 20px; }
   .sr-cc-halo {
     position: absolute; inset: 6px; z-index: 0; border-radius: 24px;
-    background: linear-gradient(95deg,#ffb6d5 0%,#ffd4e7 32%,#cfe4fc 68%,#e4f0fd 100%);
-    filter: blur(14px); opacity: 0.85;
+    background: linear-gradient(95deg,#7fb6f0 0%,#a8cef7 34%,#cfe4fc 68%,#e4f0fd 100%);
+    filter: blur(14px); opacity: 0.9;
     transition: transform 250ms ease-out, opacity 250ms ease-out, filter 250ms ease-out;
   }
   .sr-cc-card {
     position: relative; z-index: 1; display: block; width: 100%; aspect-ratio: 4 / 5;
     overflow: hidden; border-radius: 24px; background: #ffffff;
     border: 2px solid #ffffff;
-    box-shadow: 0 14px 30px -22px rgba(94,122,154,0.45);
+    box-shadow: 0 18px 34px -20px rgba(47,123,220,0.5),
+                0 4px 12px -8px rgba(47,123,220,0.28);
     transition: transform 250ms ease-out, box-shadow 250ms ease-out,
                 border-color 250ms ease-out;
   }
@@ -512,7 +513,8 @@
   }
   .sr-cc-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 22px 44px -22px rgba(94,122,154,0.6);
+    box-shadow: 0 28px 50px -20px rgba(47,123,220,0.62),
+                0 6px 16px -8px rgba(47,123,220,0.34);
     border-color: #ffffff;
   }
   .sr-cc-tile:hover .sr-cc-halo {
