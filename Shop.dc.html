@@ -2804,13 +2804,13 @@ class Component extends DCLogic {
     // what POS says is on the shelf, once it has answered
     const stock = this.state.stock && this.state.stock[v.key];
     const left = stock && typeof stock.remain === "number" ? stock.remain : null;
-    out.stockShow = left === null ? "none" : "flex";
-    out.stockFg = left === 0 ? "#c0392b" : left !== null && left <= 10 ? "#b06a00" : "#1c8a52";
+    // plenty on the shelf is not news; the line keeps the two states
+    // a shopper can act on
+    out.stockShow = left === null || left > 10 ? "none" : "flex";
+    out.stockFg = left === 0 ? "#c0392b" : "#b06a00";
     out.stockLabel = left === 0
       ? "Sold out \u2014 message us and we will tell you when the next batch lands"
-      : left !== null && left <= 10
-        ? left + " left in this batch"
-        : "In stock, ships from our warehouse";
+      : left + " left in this batch";
     return out;
   }
 
