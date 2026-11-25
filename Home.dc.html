@@ -388,18 +388,38 @@
     max-width: none !important;
   }
   .sr-cc-track {
-    display: grid !important; grid-template-columns: repeat(3,minmax(0,1fr));
-    gap: clamp(22px,3vw,44px) clamp(16px,2.2vw,32px); animation: none !important;
-    max-width: 960px; margin-left: auto !important; margin-right: auto !important;
+    display: grid !important; grid-template-columns: repeat(4,minmax(0,1fr));
+    gap: clamp(14px,2vw,28px); animation: none !important;
+    max-width: 1180px; margin-left: auto !important; margin-right: auto !important;
   }
   .sr-cc-tile { flex: none !important; margin-right: 0 !important; }
+  /* the ones outside the window are not drawn, at any width */
+  .sr-cc-tile[data-sr-off="true"] { display: none !important; }
   .sr-cc-rail {
     -webkit-mask-image: none !important; mask-image: none !important;
-    overflow: visible !important; margin-top: 10px;
+    overflow: visible !important; flex: 1 1 auto; min-width: 0;
   }
-  @media (max-width: 860px) { .sr-cc-track { grid-template-columns: repeat(2,minmax(0,1fr)); } }
-  .sr-cc-arrow { display: none; }
-  .sr-cc-stage { display: contents; }
+  @media (max-width: 1180px) {
+    .sr-cc-track { grid-template-columns: repeat(3,minmax(0,1fr)); max-width: 900px; }
+  }
+  @media (max-width: 980px) {
+    .sr-cc-track { grid-template-columns: repeat(2,minmax(0,1fr)); max-width: 620px; }
+  }
+  /* the stage carries the arrows outside the rail, so the halo survives */
+  .sr-cc-stage {
+    display: flex; align-items: center; justify-content: center;
+    gap: clamp(6px,1.4vw,20px); margin-top: 10px;
+  }
+  .sr-cc-arrow {
+    flex-shrink: 0; display: flex; height: 46px; width: 46px; align-items: center;
+    justify-content: center; cursor: pointer; border-radius: 9999px;
+    color: #2f7bdc; background: #ffffff; border: 1px solid #dceafa;
+    box-shadow: 0 12px 26px -16px rgba(18,38,58,0.8);
+    transition: background 200ms ease, color 200ms ease, transform 200ms ease;
+  }
+  .sr-cc-arrow:hover { background: #2f85e0; color: #ffffff; }
+  .sr-cc-arrow:focus-visible { outline: 2px solid #438fe0; outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) { .sr-cc-arrow { transition: none; } }
 
   @media (max-width: 620px) {
     /* one concern at a time, and only that one: the rail is as wide as a
@@ -415,8 +435,6 @@
       display: block !important; grid-template-columns: none !important;
       overflow: visible !important; padding: 12px 0 18px !important;
     }
-    /* the others are not drawn, so nothing peeks and nothing is clipped */
-    .sr-cc-tile[data-sr-off="true"] { display: none !important; }
     .sr-cc-tile { width: 100%; }
     /* the oval is narrower here, so the words come down with it */
     /* the panel has room on a card this size, so the words take it */
@@ -428,14 +446,8 @@
     .sr-cc-badge { height: 40px !important; width: 40px !important; }
     .sr-cc-arrow {
       position: absolute; top: 50%; z-index: 4; transform: translateY(-50%);
-      display: flex !important; height: 34px; width: 34px; align-items: center;
-      justify-content: center; cursor: pointer; border-radius: 9999px;
-      color: #2f7bdc; background: rgba(255,255,255,0.92); border: 1px solid #dceafa;
-      box-shadow: 0 8px 20px -12px rgba(18,38,58,0.8);
+      height: 32px; width: 32px; background: rgba(255,255,255,0.92);
     }
-    .sr-cc-arrow { height: 30px; width: 30px; }
-    /* the arrows stand off the oval, out near the edges of the screen */
-    .sr-cc-arrow { height: 32px; width: 32px; }
     .sr-cc-arrow-l { left: -48px; }
     .sr-cc-arrow-r { right: -48px; }
   }
@@ -2009,7 +2021,7 @@ class Component extends DCLogic {
     this.startHeroTimer();
     this.setupReveal();
     this.setupSteps();
-    this.onResize = () => this.setState({ trackW: this.trackEl ? this.trackEl.clientWidth : window.innerWidth });
+    this.onResize = () => this.setState({ trackW: this.trackEl ? this.trackEl.clientWidth : window.innerWidth, ccW: window.innerWidth });
     window.addEventListener("resize", this.onResize);
     this.onResize();
   }
@@ -2019,10 +2031,26 @@ class Component extends DCLogic {
 
   CONCERNS = 6;
 
+  /* how many concerns stand at once, matching the grid in the stylesheet */
+  ccPer() {
+    const w = this.state.ccW || (typeof window === "undefined" ? 1280 : window.innerWidth);
+    if (w <= 620) return 1;
+    if (w <= 980) return 2;
+    if (w <= 1180) return 3;
+    return 4;
+  }
+
   ccNudge(dir) {
     const n = this.CONCERNS;
     const at = ((this.state.cc || 0) + dir % n + n) % n;
     this.setState({ cc: at });
+  }
+
+  /* the window wraps, so the one after the last is the first again */
+  ccOn(i) {
+    const n = this.CONCERNS;
+    const at = (this.state.cc || 0) % n;
+    return ((i - at) % n + n) % n < this.ccPer() ? "false" : "true";
   }
 
   trackRef = (el) => {
@@ -2131,12 +2159,12 @@ class Component extends DCLogic {
       ccRef: this.ccRef,
       ccBack: () => this.ccNudge(-1),
       ccFwd: () => this.ccNudge(1),
-      ccOff0: (this.state.cc || 0) === 0 ? "false" : "true",
-      ccOff1: (this.state.cc || 0) === 1 ? "false" : "true",
-      ccOff2: (this.state.cc || 0) === 2 ? "false" : "true",
-      ccOff3: (this.state.cc || 0) === 3 ? "false" : "true",
-      ccOff4: (this.state.cc || 0) === 4 ? "false" : "true",
-      ccOff5: (this.state.cc || 0) === 5 ? "false" : "true",
+      ccOff0: this.ccOn(0),
+      ccOff1: this.ccOn(1),
+      ccOff2: this.ccOn(2),
+      ccOff3: this.ccOn(3),
+      ccOff4: this.ccOn(4),
+      ccOff5: this.ccOn(5),
       trackH: activeH + 40 + "px",
       quoteSize: (phone ? 14 : ACTIVE_W >= 600 ? 20 : ACTIVE_W >= 480 ? 17 : 15) + "px",
       fullRows: phone ? photoH + "px minmax(0,1fr)" : "100%",
