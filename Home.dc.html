@@ -379,6 +379,109 @@
   .sr-heronext:hover { background: #2f85e0; color: #ffffff; transform: translateX(1px); }
   @media (prefers-reduced-motion: reduce) { .sr-heronext { transition: none !important; } }
 
+  /* Primary CTA, a block of its own between the value proposition and
+     the concerns. It repeats the hero's label rather than inventing a
+     third one. */
+  .sr-pcta {
+    position: relative; width: 100%; box-sizing: border-box;
+    background: #ffffff; padding: 0 24px clamp(30px,4vw,52px);
+  }
+  .sr-pcta-wrap {
+    margin: 0 auto; width: 100%; max-width: 1180px; box-sizing: border-box;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+    gap: clamp(14px,2vw,26px); text-align: center;
+  }
+  .sr-pcta-line {
+    margin: 0; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-size: clamp(15px,1.5vw,18px); font-weight: 500; color: #1b3456;
+    letter-spacing: -0.2px; text-wrap: balance;
+  }
+  .sr-pcta-btn {
+    position: relative; display: inline-flex; align-items: center; gap: 11px;
+    height: 54px; box-sizing: border-box; border-radius: 9999px; padding: 0 28px;
+    background: linear-gradient(135deg,#5ba0ea 0%,#2f85e0 48%,#1f6ec9 100%);
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 15.5px; font-weight: 600;
+    color: #ffffff; letter-spacing: -0.1px;
+    border-top: 0.5px solid rgba(255,255,255,0.3);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3),
+                0 16px 32px -14px rgba(47,133,224,0.85);
+    transition: transform 240ms ease, box-shadow 240ms ease;
+  }
+  .sr-pcta-btn, .sr-pcta-btn:hover { color: #ffffff; }
+  .sr-pcta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3),
+                0 22px 42px -14px rgba(47,133,224,0.95);
+  }
+  .sr-pcta-arrow { display: inline-flex; transition: transform 240ms cubic-bezier(0.16,1,0.3,1); }
+  .sr-pcta-btn:hover .sr-pcta-arrow { transform: translateX(3px); }
+  .sr-pcta-btn:focus-visible { outline: 2px solid #438fe0; outline-offset: 3px; }
+  @media (prefers-reduced-motion: reduce) {
+    .sr-pcta-btn { transition: none; }
+    .sr-pcta-btn:hover, .sr-pcta-btn:hover .sr-pcta-arrow { transform: none; }
+  }
+  @media (max-width: 560px) {
+    .sr-pcta-wrap { flex-direction: column; }
+    .sr-pcta-btn { width: 100%; justify-content: center; }
+  }
+
+  /* Main Value Proposition: why this is worth the attention the hero
+     just asked for. Three columns, under the hero and above the
+     concerns. */
+  .sr-vp {
+    position: relative; width: 100%; box-sizing: border-box;
+    background: linear-gradient(180deg,#ffffff 0%,#f8fbff 52%,#ffffff 100%);
+    padding: clamp(34px,4vw,56px) 24px;
+  }
+  .sr-vp-wrap {
+    margin: 0 auto; width: 100%; max-width: 1180px; box-sizing: border-box;
+    padding: clamp(26px,3vw,38px) clamp(20px,3vw,40px);
+    border-radius: 26px;
+    background: linear-gradient(140deg,#ffffff 0%,#fbfdff 46%,#f3f9fe 100%);
+    border: 1px solid rgba(226,239,253,0.95);
+    box-shadow: 0 22px 48px -38px rgba(27,52,86,0.45);
+  }
+  .sr-vp-grid {
+    margin: 0; padding: 0; list-style: none; display: grid;
+    grid-template-columns: repeat(3,minmax(0,1fr)); gap: clamp(18px,2.4vw,34px);
+  }
+  .sr-vp-col { position: relative; min-width: 0; padding-left: clamp(18px,2.2vw,30px); }
+  .sr-vp-col:first-child { padding-left: 0; }
+  .sr-vp-col + .sr-vp-col::before {
+    content: ""; position: absolute; left: 0; top: 6%; bottom: 6%; width: 1px;
+    background: linear-gradient(180deg, rgba(197,221,247,0) 0%,
+                rgba(197,221,247,0.9) 20%, rgba(197,221,247,0.9) 80%,
+                rgba(197,221,247,0) 100%);
+  }
+  .sr-vp-ico {
+    display: flex; align-items: center; justify-content: center;
+    height: 44px; width: 44px; border-radius: 9999px; color: #2f7bdc;
+    background: radial-gradient(circle at 50% 40%, rgba(255,255,255,0.95) 0%,
+                rgba(226,240,254,0.95) 52%, rgba(213,232,252,0.95) 100%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.9);
+  }
+  .sr-vp-h {
+    margin: 14px 0 0; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-size: clamp(15px,1.35vw,17.5px); font-weight: 700; color: #1b3456;
+    line-height: 1.3; letter-spacing: -0.3px; text-wrap: balance;
+  }
+  .sr-vp-p {
+    margin: 7px 0 0; font-family: 'Inter',ui-sans-serif,sans-serif;
+    font-size: 13.5px; color: #4e648a; line-height: 1.7; text-wrap: pretty;
+  }
+  @media (max-width: 820px) {
+    .sr-vp-grid { grid-template-columns: minmax(0,1fr); gap: 0; }
+    .sr-vp-col { padding-left: 0; padding-top: 18px; }
+    .sr-vp-col:first-child { padding-top: 0; }
+    .sr-vp-col + .sr-vp-col::before {
+      left: 0; right: 0; top: 0; bottom: auto; width: auto; height: 1px;
+      background: linear-gradient(90deg, rgba(197,221,247,0) 0%,
+                  rgba(197,221,247,0.9) 12%, rgba(197,221,247,0.9) 88%,
+                  rgba(197,221,247,0) 100%);
+    }
+    .sr-vp-col + .sr-vp-col { margin-top: 18px; }
+  }
+
   /* the concerns read as one row under a centred heading */
   .sr-cc-head { text-align: center; max-width: 720px; margin: 0 auto; }
   .sr-cc-head br { display: none; }
@@ -1199,6 +1302,148 @@
       filter: drop-shadow(0 26px 30px rgba(18,38,58,0.26));
     }
   }
+
+  /* The offer band: the first thing the page shows, standing above
+     the hero on its own dark ground. */
+  .sr-of {
+    position: relative; isolation: isolate; overflow: clip;
+    background: radial-gradient(118% 92% at 50% -12%, #1e4169 0%, #16314f 40%, #0e2240 76%, #0a1a31 100%);
+    padding: 112px clamp(18px,4vw,40px) clamp(50px,6vw,78px);
+  }
+  .sr-of::before {
+    content: ""; position: absolute; left: -10%; right: -10%; bottom: -38%; height: 72%; z-index: -1;
+    background: radial-gradient(58% 100% at 50% 100%, rgba(67,143,224,0.32) 0%, rgba(67,143,224,0) 72%);
+    pointer-events: none;
+  }
+  .sr-of-wrap { max-width: 1120px; margin: 0 auto; }
+  .sr-of-head { text-align: center; }
+  .sr-of-h {
+    margin: 0; font-family: 'Jost',ui-sans-serif,sans-serif; font-weight: 600;
+    font-size: clamp(32px,4.4vw,58px); line-height: 1.06; letter-spacing: -1.4px;
+    color: #ffffff; text-wrap: balance;
+  }
+  .sr-of-alt { display: block; font-weight: 400; color: #6ba6e8; }
+  .sr-of-offer {
+    margin: 13px 0 0; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-size: clamp(11.5px,1.3vw,13.5px); font-weight: 600; letter-spacing: 1.5px;
+    text-transform: uppercase; color: #ff9ac6;
+  }
+  .sr-of-grid {
+    display: grid; grid-template-columns: minmax(0,0.92fr) minmax(0,1fr);
+    gap: clamp(24px,3.6vw,52px); align-items: stretch; margin-top: clamp(28px,4vw,46px);
+  }
+  @media (max-width: 940px) {
+    .sr-of-grid { grid-template-columns: minmax(0,1fr); align-items: start; }
+  }
+
+  .sr-of-shots {
+    position: relative; border-radius: 22px; overflow: hidden; background: #0a1a31;
+    border: 1px solid rgba(255,255,255,0.10); box-shadow: 0 30px 60px -28px rgba(0,0,0,0.78);
+  }
+  .sr-of-track { display: flex; width: 100%; height: 100%; transition: transform 520ms cubic-bezier(0.16,1,0.3,1); }
+  /* on two columns the photo matches the copy beside it; stacked, it is a square */
+  .sr-of-slide { flex: 0 0 100%; min-width: 0; height: 100%; min-height: 420px; }
+  @media (max-width: 940px) { .sr-of-slide { height: auto; min-height: 0; aspect-ratio: 1 / 1; } }
+  .sr-of-slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .sr-of-tag {
+    position: absolute; left: 14px; top: 14px; z-index: 3; border-radius: 7px;
+    background: rgba(10,26,49,0.88); color: #ffffff; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-size: 10.5px; font-weight: 600; letter-spacing: 1.3px; padding: 6px 10px;
+  }
+  .sr-of-arrow {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; display: flex;
+    height: 36px; width: 36px; align-items: center; justify-content: center; padding: 0;
+    border-radius: 9999px; border: 1px solid rgba(255,255,255,0.24);
+    background: rgba(10,26,49,0.58); color: #ffffff; cursor: pointer;
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+    transition: background 200ms ease, border-color 200ms ease;
+  }
+  .sr-of-arrow:hover { background: #438fe0; border-color: #438fe0; }
+  .sr-of-prev { left: 12px; }
+  .sr-of-next { right: 12px; }
+  .sr-of-dots { position: absolute; left: 0; right: 0; bottom: 13px; z-index: 3; display: flex; justify-content: center; gap: 6px; }
+  .sr-of-dot { height: 5px; border-radius: 9999px; border: none; padding: 0; cursor: pointer; transition: width 260ms ease, background 260ms ease; }
+
+  .sr-of-rh {
+    margin: 0; font-family: 'Jost',ui-sans-serif,sans-serif; font-weight: 600;
+    font-size: clamp(21px,2.5vw,30px); line-height: 1.18; letter-spacing: -0.6px;
+    color: #ffffff; text-wrap: balance;
+  }
+  .sr-of-rp {
+    margin: 11px 0 0; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 14px;
+    font-weight: 400; line-height: 1.6; color: #a9c3e2;
+  }
+  .sr-of-badge {
+    display: inline-flex; align-items: center; gap: 7px; margin-top: 15px; border-radius: 9999px;
+    background: rgba(67,143,224,0.16); border: 1px solid rgba(107,166,232,0.42); padding: 7px 14px;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 12.5px; font-weight: 500; color: #cfe3f8;
+  }
+  .sr-of-social {
+    display: flex; align-items: center; gap: 12px; margin-top: 13px; width: fit-content; max-width: 100%;
+    border-radius: 9999px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+    padding: 8px 16px 8px 10px;
+  }
+  .sr-of-faces { display: flex; flex: 0 0 auto; }
+  .sr-of-faces img { display: block; height: 30px; width: 30px; border-radius: 9999px; object-fit: cover; border: 2px solid #16314f; margin-right: -9px; }
+  .sr-of-faces img:last-child { margin-right: 0; }
+  .sr-of-sline { font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 12.5px; font-weight: 500; color: #c6dcf4; line-height: 1.35; }
+
+  .sr-of-picks {
+    display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 9px; margin-top: 19px;
+    border-radius: 18px; border: 1px solid rgba(107,166,232,0.34); background: rgba(255,255,255,0.045); padding: 11px;
+  }
+  .sr-of-pick {
+    position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;
+    border-radius: 13px; border: 1px solid; padding: 10px 7px 11px; cursor: pointer; min-width: 0;
+    transition: background 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+  }
+  .sr-of-ptag { font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 9.5px; font-weight: 600; letter-spacing: 0.9px; text-transform: uppercase; line-height: 1.3; }
+  .sr-of-pshot { display: flex; align-items: center; justify-content: center; height: 74px; margin: 8px 0 7px; }
+  .sr-of-pshot img { display: block; max-height: 100%; max-width: 100%; width: auto; object-fit: contain; }
+  .sr-of-pprice { font-family: 'Jost',ui-sans-serif,sans-serif; font-size: clamp(14.5px,1.7vw,19px); font-weight: 600; color: #ffffff; letter-spacing: -0.3px; white-space: nowrap; }
+  .sr-of-pwas { font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 11.5px; font-weight: 400; color: #8fb0d4; text-decoration: line-through; margin-left: 5px; }
+  .sr-of-pnote { margin-top: 6px; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 9.5px; font-weight: 500; line-height: 1.32; color: #b6d0ec; }
+  @media (max-width: 400px) {
+    .sr-of-picks { gap: 6px; padding: 8px; }
+    .sr-of-pick { padding: 9px 4px 10px; }
+    .sr-of-pshot { height: 54px; }
+    .sr-of-ptag { font-size: 8.5px; letter-spacing: 0.5px; }
+    .sr-of-pwas { display: block; margin: 2px 0 0; }
+  }
+
+  .sr-of-cta {
+    position: relative; overflow: hidden; box-sizing: border-box; display: flex; align-items: center;
+    justify-content: center; gap: 10px; width: 100%; margin-top: 13px; border-radius: 9999px;
+    background: linear-gradient(135deg,#5ba0ea 0%,#2f85e0 48%,#1f6ec9 100%);
+    padding: 17px 24px; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-size: clamp(13px,1.5vw,15.5px); font-weight: 600; letter-spacing: 0.3px; text-align: center;
+    border-top: 0.5px solid rgba(255,255,255,0.3);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 20px 40px -16px rgba(47,133,224,0.85);
+    transition: transform 220ms ease, box-shadow 220ms ease;
+  }
+  .sr-of-cta, .sr-of-cta:hover { color: #ffffff; }
+  .sr-of-cta:hover { transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.34), 0 26px 48px -18px rgba(47,133,224,0.95); }
+  .sr-of-cta:focus-visible { outline: 2px solid #ffffff; outline-offset: 3px; }
+  .sr-of-cta-ar { display: inline-flex; transition: transform 240ms cubic-bezier(0.16,1,0.3,1); }
+  .sr-of-cta:hover .sr-of-cta-ar { transform: translateX(3px); }
+
+  .sr-of-sub { margin: 13px 0 0; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 13px; font-weight: 400; line-height: 1.6; color: #a9c3e2; }
+  .sr-of-list { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 9px; }
+  .sr-of-li { display: flex; align-items: flex-start; gap: 9px; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 13.5px; font-weight: 400; line-height: 1.45; color: #cfe0f3; }
+  .sr-of-ck { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; height: 17px; width: 17px; border-radius: 9999px; background: rgba(78,196,140,0.18); color: #5fd6a0; margin-top: 1px; }
+  .sr-of-guar {
+    display: flex; align-items: center; justify-content: center; gap: 10px; margin: 19px auto 0;
+    width: fit-content; max-width: 100%; border-radius: 12px; border: 1px solid rgba(107,166,232,0.40);
+    background: linear-gradient(135deg, rgba(67,143,224,0.20), rgba(67,143,224,0.06)); padding: 10px 18px;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 11.5px; font-weight: 600;
+    letter-spacing: 0.9px; text-transform: uppercase; color: #dbe9f9; text-align: center; line-height: 1.35;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sr-of-track { transition: none; }
+    .sr-of-cta { transition: none; }
+    .sr-of-cta:hover { transform: none; }
+    .sr-of-cta:hover .sr-of-cta-ar { transform: none; }
+  }
 </style>
 </helmet>
 
@@ -1229,6 +1474,93 @@
           </div>
         </nav>
   </div>
+
+
+  <section class="sr-of" aria-label="The su-ree routine">
+    <div class="sr-of-wrap">
+
+      <div class="sr-of-head">
+        <h2 class="sr-of-h">Serum in the Morning, Cream at Night<span class="sr-of-alt">The complete <span style="white-space:nowrap">su-ree</span> routine in one set.</span></h2>
+        <p class="sr-of-offer">Take the set and save &#8369;299 &middot; Free shipping over &#8369;1,500 &middot; Cash on delivery nationwide</p>
+      </div>
+
+      <div class="sr-of-grid">
+
+        <div class="sr-of-shots">
+          <span class="sr-of-tag" aria-hidden="true">CASH ON DELIVERY</span>
+          <div class="sr-of-track" style="transform: {{ ofX }}">
+            <div class="sr-of-slide"><img src="assets/sh-duo-scene.webp" alt="The su-ree serum and cream standing together" decoding="async" /></div>
+            <div class="sr-of-slide"><img src="assets/wall-a1.webp" alt="su-ree on a bathroom shelf" loading="lazy" decoding="async" /></div>
+            <div class="sr-of-slide"><img src="assets/sh-cream-scene.webp" alt="The Dual Regenerative Capsule Cream jar, open" loading="lazy" decoding="async" /></div>
+            <div class="sr-of-slide"><img src="assets/wall-a3.webp" alt="su-ree held in the hand" loading="lazy" decoding="async" /></div>
+            <div class="sr-of-slide"><img src="assets/sh-serum-scene.webp" alt="The GHK-Cu+ Snap 8 Serum bottle" loading="lazy" decoding="async" /></div>
+          </div>
+          <button type="button" class="sr-of-arrow sr-of-prev" onClick="{{ ofPrev }}" aria-label="Previous photo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
+          <button type="button" class="sr-of-arrow sr-of-next" onClick="{{ ofNext }}" aria-label="Next photo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
+          <div class="sr-of-dots">
+            <button type="button" class="sr-of-dot" onClick="{{ ofGo0 }}" aria-label="Photo 1" style="width: {{ ofDotW0 }}; background: {{ ofDotBg0 }}"></button>
+            <button type="button" class="sr-of-dot" onClick="{{ ofGo1 }}" aria-label="Photo 2" style="width: {{ ofDotW1 }}; background: {{ ofDotBg1 }}"></button>
+            <button type="button" class="sr-of-dot" onClick="{{ ofGo2 }}" aria-label="Photo 3" style="width: {{ ofDotW2 }}; background: {{ ofDotBg2 }}"></button>
+            <button type="button" class="sr-of-dot" onClick="{{ ofGo3 }}" aria-label="Photo 4" style="width: {{ ofDotW3 }}; background: {{ ofDotBg3 }}"></button>
+            <button type="button" class="sr-of-dot" onClick="{{ ofGo4 }}" aria-label="Photo 5" style="width: {{ ofDotW4 }}; background: {{ ofDotBg4 }}"></button>
+          </div>
+        </div>
+
+        <div>
+          <p class="sr-of-rh">Two actives that never meet until they reach your skin.</p>
+          <p class="sr-of-rp">PDRN and GHK-Cu sit in separate pink and blue beads. The capsule breaks under your fingers, so the dose is whole on the day you use it &mdash; not months earlier in a mixing tank.</p>
+
+          <span class="sr-of-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6fd3a3" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Every jar opens its own batch report</span>
+
+          <div class="sr-of-social">
+            <span class="sr-of-faces" aria-hidden="true">
+              <img src="assets/review-danielle.webp" alt="" loading="lazy" decoding="async" />
+              <img src="assets/review-mikaela.webp" alt="" loading="lazy" decoding="async" />
+              <img src="assets/review-patricia.webp" alt="" loading="lazy" decoding="async" />
+              <img src="assets/review-joanna.webp" alt="" loading="lazy" decoding="async" />
+            </span>
+            <span class="sr-of-sline">Reviewed by people who checked their own lot code first.</span>
+          </div>
+
+          <div class="sr-of-picks" role="group" aria-label="Choose what to order">
+            <button type="button" class="sr-of-pick" onClick="{{ ofTap0 }}" aria-pressed="{{ ofSel0 }}" style="background: {{ ofBg0 }}; border-color: {{ ofBd0 }}; box-shadow: {{ ofSh0 }}">
+              <span class="sr-of-ptag" style="color: {{ ofFg0 }}">Serum only</span>
+              <span class="sr-of-pshot"><img src="assets/p-serum.webp" alt="" loading="lazy" decoding="async" /></span>
+              <span class="sr-of-pprice">&#8369;1,499</span>
+              <span class="sr-of-pnote">30 ml bottle</span>
+            </button>
+            <button type="button" class="sr-of-pick" onClick="{{ ofTap1 }}" aria-pressed="{{ ofSel1 }}" style="background: {{ ofBg1 }}; border-color: {{ ofBd1 }}; box-shadow: {{ ofSh1 }}">
+              <span class="sr-of-ptag" style="color: {{ ofFg1 }}">Complete set</span>
+              <span class="sr-of-pshot"><img src="assets/p-duo.webp" alt="" loading="lazy" decoding="async" /></span>
+              <span class="sr-of-pprice">&#8369;2,899<span class="sr-of-pwas">&#8369;3,198</span></span>
+              <span class="sr-of-pnote">Serum + cream &middot; save &#8369;299</span>
+            </button>
+            <button type="button" class="sr-of-pick" onClick="{{ ofTap2 }}" aria-pressed="{{ ofSel2 }}" style="background: {{ ofBg2 }}; border-color: {{ ofBd2 }}; box-shadow: {{ ofSh2 }}">
+              <span class="sr-of-ptag" style="color: {{ ofFg2 }}">Cream only</span>
+              <span class="sr-of-pshot"><img src="assets/p-cream.webp" alt="" loading="lazy" decoding="async" /></span>
+              <span class="sr-of-pprice">&#8369;1,699</span>
+              <span class="sr-of-pnote">30 g jar</span>
+            </button>
+          </div>
+
+          <a class="sr-of-cta" href="{{ ofHref }}"><span aria-hidden="true" style="position:relative; display:inline-flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span><span style="position:relative">{{ ofCta }}</span><span class="sr-of-cta-ar" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
+
+          <p class="sr-of-sub">One routine, two steps, morning and evening. Nothing else to add.</p>
+
+          <ul class="sr-of-list" role="list">
+            <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Morning: serum on damp skin, then the cream over it</li>
+            <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Evening: the same two steps, nothing else</li>
+            <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Light enough for Philippine humidity, under sunscreen or make-up</li>
+            <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>No fragrance, no essential oils, no alcohol denat.</li>
+            <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Type the lot code on the base and read the assay yourself</li>
+          </ul>
+
+          <p class="sr-of-guar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8fc4f2" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4.5 6v6c0 4.4 3.1 8.2 7.5 9 4.4-0.8 7.5-4.6 7.5-9V6z"></path><path d="m9.2 12.1 1.9 1.9 3.7-3.9"></path></svg>3-day returns on unopened orders</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
 
   <section style="background:#fff">
     <div style="position:relative; margin:0; overflow:hidden; background:linear-gradient(122deg, #ffffff 0%, #fafdff 14%, #f1f8fe 32%, #e3f1fd 52%, #d2e9fc 72%, #c0dffa 88%, #b4d8f8 100%)">
@@ -1382,6 +1714,35 @@
 
   </section>
 
+  <section data-sr-reveal="out" class="sr-vp">
+    <div class="sr-vp-wrap">
+      <ul class="sr-vp-grid" role="list">
+        <li class="sr-vp-col">
+          <span class="sr-vp-ico" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.6" cy="12" r="5.1"></circle><circle cx="15.4" cy="12" r="5.1"></circle></svg></span>
+          <p class="sr-vp-h">Two actives, never pre-mixed</p>
+          <p class="sr-vp-p">PDRN and GHK-Cu sit in separate pink and blue beads. They meet on your skin, not in the jar.</p>
+        </li>
+        <li class="sr-vp-col">
+          <span class="sr-vp-ico" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path><path d="m9.2 14.2 1.9 1.9 3.7-3.7"></path></svg></span>
+          <p class="sr-vp-h">Every jar opens its own batch report</p>
+          <p class="sr-vp-p">Type the lot code printed on the base and you get the assay, the fill date and the facility that made it.</p>
+        </li>
+        <li class="sr-vp-col">
+          <span class="sr-vp-ico" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2 3.6 7.6 12 12l8.4-4.4z"></path><path d="m3.6 13 8.4 4.4 8.4-4.4"></path></svg></span>
+          <p class="sr-vp-h">Two formulas built to work together</p>
+          <p class="sr-vp-p">Serum first on damp skin, then the cream to seal it. Morning and evening.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+
+  <section data-sr-reveal="out" class="sr-pcta">
+    <div class="sr-pcta-wrap">
+      <p class="sr-pcta-line">Start with the one that matches what you want to change.</p>
+      <a class="sr-pcta-btn" href="Shop.dc.html"><span aria-hidden="true" style="display:inline-flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span>Order Now<span class="sr-pcta-arrow" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
+    </div>
+  </section>
 
   <section data-sr-reveal="out" class="sr-cc" style="position:relative; width:100%; background:#ffffff; padding:clamp(56px,7vw,104px) 0 104px">
     <div class="r-pad40 sr-cc-wrap" style="margin:0 auto; width:100%; max-width:1340px; padding:0 40px; box-sizing:border-box">
@@ -2018,7 +2379,7 @@
 
 </main>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;announcementText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Store settings&quot;},&quot;freeShipMin&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:1500,&quot;min&quot;:0,&quot;max&quot;:10000,&quot;step&quot;:50,&quot;tsType&quot;:&quot;number | null&quot;,&quot;section&quot;:&quot;Store settings&quot;},&quot;showSampleRange&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Store settings&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;announcementText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Free shipping over ₱1,500 · Cash on Delivery nationwide&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Store settings&quot;},&quot;freeShipMin&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:1500,&quot;min&quot;:0,&quot;max&quot;:10000,&quot;step&quot;:50,&quot;tsType&quot;:&quot;number | null&quot;,&quot;section&quot;:&quot;Store settings&quot;},&quot;showSampleRange&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Store settings&quot;}}">
 class Component extends DCLogic {
 
   nlVals() {
@@ -2083,7 +2444,9 @@ class Component extends DCLogic {
       window.addEventListener("scroll", this.onNavScroll, { passive: true });
       setTimeout(this.onNavScroll, 0);
     }
-    const on = !!this.state.navScrolled;
+    /* the page now opens on the dark offer band, so the pill stays solid:
+       the navy-on-transparent links were unreadable against it */
+    const on = true;
     return {
       navMax: on ? "1240px" : "1800px",
       navPad: on ? "8px 10px 8px 24px" : "8px 10px 8px 14px",
@@ -2093,7 +2456,7 @@ class Component extends DCLogic {
       navBlur: on ? "blur(16px)" : "blur(0px)"
     };
   }
-  state = { navOpen: false, insidePop: "a", navScrolled: false, hero: 0, inside: 0, review: 1, faq: [false, false, false, false, false] };
+  state = { navOpen: false, insidePop: "a", navScrolled: false, of: 0, ofPick: 1, hero: 0, inside: 0, review: 1, faq: [false, false, false, false, false] };
 
   reviews = [
     { photo: "assets/review-danielle.webp", name: "Danielle Ong", hi: "changed how I shop", place: "Makati", lot: "SR2531C", quote: "“I buy skincare for a living and I have never been able to trace a jar back to its own batch report. That alone changed how I shop.”" },
@@ -2166,13 +2529,58 @@ class Component extends DCLogic {
   componentDidMount() {
     this.startReviewTimer();
     this.startHeroTimer();
+    this.startOfTimer();
     this.setupReveal();
     this.setupSteps();
     this.onResize = () => this.setState({ trackW: this.trackEl ? this.trackEl.clientWidth : window.innerWidth, ccW: window.innerWidth });
     window.addEventListener("resize", this.onResize);
     this.onResize();
   }
-  componentWillUnmount() { clearInterval(this.heroTimer); clearInterval(this.reviewTimer); window.removeEventListener("resize", this.onResize); if (this.revealIO) this.revealIO.disconnect(); if (this.stepIO) this.stepIO.disconnect(); clearTimeout(this.stepTry); clearTimeout(this.revealRetry); clearInterval(this.revealSafety); if (this.onRevealScroll) { window.removeEventListener("scroll", this.onRevealScroll); window.removeEventListener("resize", this.onRevealScroll); } }
+  componentWillUnmount() { clearInterval(this.heroTimer); clearInterval(this.reviewTimer); clearInterval(this.ofTimer); window.removeEventListener("resize", this.onResize); if (this.revealIO) this.revealIO.disconnect(); if (this.stepIO) this.stepIO.disconnect(); clearTimeout(this.stepTry); clearTimeout(this.revealRetry); clearInterval(this.revealSafety); if (this.onRevealScroll) { window.removeEventListener("scroll", this.onRevealScroll); window.removeEventListener("resize", this.onRevealScroll); } }
+
+  /* ── the offer band above the hero ── */
+  OF_SHOTS = 5;
+
+  ofGo(i) {
+    const n = this.OF_SHOTS;
+    this.setState({ of: ((i % n) + n) % n });
+  }
+
+  startOfTimer() {
+    clearInterval(this.ofTimer);
+    this.ofTimer = setInterval(() => this.setState((st) => ({ of: ((st.of || 0) + 1) % this.OF_SHOTS })), 5200);
+  }
+
+  offerVals() {
+    const n = this.OF_SHOTS;
+    const at = (((this.state.of || 0) % n) + n) % n;
+    const out = {
+      ofX: "translateX(-" + (at * 100) + "%)",
+      ofPrev: () => { this.ofGo(at - 1); this.startOfTimer(); },
+      ofNext: () => { this.ofGo(at + 1); this.startOfTimer(); }
+    };
+    for (let i = 0; i < n; i++) {
+      out["ofGo" + i] = () => { this.ofGo(i); this.startOfTimer(); };
+      out["ofDotW" + i] = i === at ? "18px" : "5px";
+      out["ofDotBg" + i] = i === at ? "#6ba6e8" : "rgba(255,255,255,0.38)";
+    }
+
+    /* the three things that can be ordered, priced as the shop prices them */
+    const CTA = ["Order the Serum Now", "Order the Complete Set Now", "Order the Cream Now"];
+    const p = Math.min(2, Math.max(0, this.state.ofPick ?? 1));
+    for (let i = 0; i < 3; i++) {
+      const on = i === p;
+      out["ofTap" + i] = () => { if (this.state.ofPick !== i) this.setState({ ofPick: i }); };
+      out["ofSel" + i] = on ? "true" : "false";
+      out["ofBg" + i] = on ? "rgba(67,143,224,0.22)" : "rgba(255,255,255,0.03)";
+      out["ofBd" + i] = on ? "#6ba6e8" : "rgba(255,255,255,0.14)";
+      out["ofSh" + i] = on ? "0 14px 30px -16px rgba(67,143,224,0.95)" : "0 0 0 rgba(0,0,0,0)";
+      out["ofFg" + i] = on ? "#9fcdf7" : "#8fa9c9";
+    }
+    out.ofCta = CTA[p];
+    out.ofHref = "Shop.dc.html";
+    return out;
+  }
 
   ccRef = (el) => { this.ccEl = el; };
 
@@ -2408,6 +2816,7 @@ class Component extends DCLogic {
     return {
       ...this.navVals(), ...this.navToggleVals(),
       ...this.heroVals(),
+      ...this.offerVals(),
       ...this.insideVals(),
       ...this.nlVals(),
       ...this.reviewVals(),
