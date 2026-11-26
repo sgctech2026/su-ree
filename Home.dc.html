@@ -1444,6 +1444,65 @@
     .sr-com-row { grid-template-columns: minmax(0,1fr); row-gap: 22px; }
     .sr-com-i { border-left: none !important; }
   }
+
+  /* Customer video testimonials. Empty frames until real, consented
+     footage exists: no names, no faces, nothing claimed. */
+  .sr-vt { background: linear-gradient(180deg,#ffffff 0%,#f8fbff 46%,#ffffff 100%); padding: clamp(40px,5vw,76px) clamp(18px,4vw,40px) clamp(44px,5vw,80px); }
+  .sr-vt-wrap { max-width: 1040px; margin: 0 auto; text-align: center; }
+  .sr-vt-eyebrow {
+    margin: 0 0 13px; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-size: clamp(10.5px,1.1vw,11.5px); font-weight: 500; letter-spacing: 4.2px;
+    text-transform: uppercase; color: #9dbfe6;
+  }
+  .sr-vt-h {
+    margin: 0 auto; max-width: 760px; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-weight: 600; font-size: clamp(32px,4.4vw,58px); line-height: 1.08;
+    letter-spacing: -1.4px; color: #1b3456; text-wrap: balance;
+  }
+  .sr-vt-alt { display: block; font-weight: 400; color: #6ba6e8; }
+  .sr-vt-lead {
+    margin: 14px auto 0; max-width: 580px; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-size: clamp(13px,1.4vw,14.5px); font-weight: 400; line-height: 1.65;
+    color: #6d84a6; text-wrap: pretty;
+  }
+  .sr-vt-row {
+    display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: clamp(14px,1.8vw,24px); margin: clamp(28px,3.4vw,44px) auto 0; max-width: 880px;
+  }
+  .sr-vt-card { min-width: 0; text-align: left; }
+  .sr-vt-frame {
+    position: relative; aspect-ratio: 9 / 16; border-radius: 18px; overflow: hidden;
+    background: linear-gradient(162deg,#eaf2fb 0%,#dfeaf7 52%,#e8f1fb 100%);
+    border: 1px dashed rgba(107,166,232,0.55);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .sr-vt-play {
+    display: flex; height: clamp(46px,5vw,58px); width: clamp(46px,5vw,58px);
+    align-items: center; justify-content: center; border-radius: 9999px;
+    background: rgba(255,255,255,0.86); color: #2f85e0;
+    box-shadow: 0 10px 24px -12px rgba(27,52,86,0.4);
+  }
+  .sr-vt-cc {
+    position: absolute; left: 11px; bottom: 11px; border-radius: 6px;
+    background: rgba(27,52,86,0.14); color: #4a6a93; padding: 3px 7px;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 9.5px; font-weight: 600; letter-spacing: 0.9px;
+  }
+  .sr-vt-slot {
+    display: block; margin-top: 11px; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-size: 13px; font-weight: 600; color: #91a6c2; line-height: 1.35;
+  }
+  .sr-vt-sub {
+    display: block; margin-top: 2px; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-size: 11.5px; font-weight: 400; color: #a8b9ce; line-height: 1.4;
+  }
+  /* the third wraps onto its own row rather than being hidden: a
+     placeholder may be dropped, a real testimonial may not */
+  @media (max-width: 720px) {
+    .sr-vt-row { grid-template-columns: repeat(2, minmax(0,1fr)); max-width: 430px; }
+  }
+  @media (max-width: 420px) {
+    .sr-vt-row { grid-template-columns: minmax(0,1fr); max-width: 250px; }
+  }
 </style>
 </helmet>
 
@@ -1996,6 +2055,40 @@
       </svg>
     </div>
 
+  </section>
+
+  <section data-sr-reveal="out" class="sr-vt" aria-label="Customer video testimonials">
+    <div class="sr-vt-wrap">
+      <p class="sr-vt-eyebrow">In their own words</p>
+      <h2 class="sr-vt-h">Real People.<span class="sr-vt-alt">Real Skincare Stories.</span></h2>
+      <p class="sr-vt-lead">Customers filming their own routine and saying what changed. Three places held open until the footage is recorded and the person has agreed to it being shown.</p>
+      <div class="sr-vt-row">
+        <div class="sr-vt-card">
+          <div class="sr-vt-frame">
+            <span class="sr-vt-play" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.4 5.6v12.8l10.4-6.4z"></path></svg></span>
+            <span class="sr-vt-cc" aria-hidden="true">CC</span>
+          </div>
+          <span class="sr-vt-slot">Video one</span>
+          <span class="sr-vt-sub">Customer name &middot; product used</span>
+        </div>
+        <div class="sr-vt-card">
+          <div class="sr-vt-frame">
+            <span class="sr-vt-play" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.4 5.6v12.8l10.4-6.4z"></path></svg></span>
+            <span class="sr-vt-cc" aria-hidden="true">CC</span>
+          </div>
+          <span class="sr-vt-slot">Video two</span>
+          <span class="sr-vt-sub">Customer name &middot; product used</span>
+        </div>
+        <div class="sr-vt-card">
+          <div class="sr-vt-frame">
+            <span class="sr-vt-play" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.4 5.6v12.8l10.4-6.4z"></path></svg></span>
+            <span class="sr-vt-cc" aria-hidden="true">CC</span>
+          </div>
+          <span class="sr-vt-slot">Video three</span>
+          <span class="sr-vt-sub">Customer name &middot; product used</span>
+        </div>
+      </div>
+    </div>
   </section>
 
   <section class="sr-in-sec" data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:linear-gradient(180deg,#fbfbff 0%,#f0f6fb 26%,#e7f3ff 62%,#ffffff 100%); padding-bottom:160px">
