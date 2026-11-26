@@ -1403,6 +1403,47 @@
     .sr-tb-row { grid-template-columns: minmax(0,1fr); row-gap: 16px; }
     .sr-tb-i { border-left: none !important; padding: 0; }
   }
+
+  /* The community figures. Every number is typed in by hand and the
+     whole section stays out of the page until all four are there, so
+     the site never shows a count nobody measured. */
+  .sr-com { background: #ffffff; padding: clamp(40px,5vw,72px) clamp(18px,4vw,40px) clamp(34px,4.4vw,60px); }
+  .sr-com-wrap { max-width: 1120px; margin: 0 auto; text-align: center; }
+  .sr-com-eyebrow {
+    margin: 0 0 13px; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-size: clamp(10.5px,1.1vw,11.5px); font-weight: 500; letter-spacing: 4.2px;
+    text-transform: uppercase; color: #9dbfe6;
+  }
+  .sr-com-h {
+    margin: 0 auto; max-width: 820px; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-weight: 600; font-size: clamp(32px,4.4vw,58px); line-height: 1.08;
+    letter-spacing: -1.4px; color: #1b3456; text-wrap: balance;
+  }
+  .sr-com-alt { display: block; font-weight: 400; color: #6ba6e8; }
+  .sr-com-row {
+    display: grid; grid-template-columns: repeat(4, minmax(0,1fr));
+    margin: clamp(28px,3.4vw,46px) auto 0; max-width: 980px;
+  }
+  .sr-com-i { padding: 4px clamp(10px,1.6vw,22px); min-width: 0; }
+  .sr-com-i + .sr-com-i { border-left: 1px solid rgba(27,52,86,0.10); }
+  .sr-com-n {
+    display: block; font-family: 'Jost',ui-sans-serif,sans-serif; font-weight: 600;
+    font-size: clamp(26px,3.4vw,44px); line-height: 1.1; letter-spacing: -1.2px;
+    color: #1b3456; white-space: nowrap;
+  }
+  .sr-com-l {
+    display: block; margin-top: 7px; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-size: clamp(10.5px,1.1vw,12px); font-weight: 500; letter-spacing: 1.3px;
+    text-transform: uppercase; color: #8295b4; line-height: 1.4;
+  }
+  @media (max-width: 760px) {
+    .sr-com-row { grid-template-columns: repeat(2, minmax(0,1fr)); row-gap: 26px; }
+    .sr-com-i:nth-child(odd) { border-left: none; }
+  }
+  @media (max-width: 380px) {
+    .sr-com-row { grid-template-columns: minmax(0,1fr); row-gap: 22px; }
+    .sr-com-i { border-left: none !important; }
+  }
 </style>
 </helmet>
 
@@ -1734,6 +1775,21 @@
       </div>
     </div>
   </section>
+
+  <sc-if value="{{ hasStats }}" hint-placeholder-val="{{ false }}">
+  <section data-sr-reveal="out" class="sr-com" aria-label="The su-ree community">
+    <div class="sr-com-wrap">
+      <p class="sr-com-eyebrow">The su-ree Community</p>
+      <h2 class="sr-com-h">Growing Together,<span class="sr-com-alt">One Skincare Ritual at a Time.</span></h2>
+    <div class="sr-com-row">
+      <div class="sr-com-i"><span class="sr-com-n">{{ statCustomers }}</span><span class="sr-com-l">Total customers</span></div>
+      <div class="sr-com-i"><span class="sr-com-n">{{ statRating }}</span><span class="sr-com-l">Customer rating</span></div>
+      <div class="sr-com-i"><span class="sr-com-n">{{ statReviews }}</span><span class="sr-com-l">Verified reviews</span></div>
+      <div class="sr-com-i"><span class="sr-com-n">{{ statOrders }}</span><span class="sr-com-l">Orders fulfilled</span></div>
+    </div>
+    </div>
+  </section>
+  </sc-if>
 
   <section data-sr-reveal="out" class="sr-cc" style="position:relative; width:100%; background:#ffffff; padding:clamp(56px,7vw,104px) 0 104px">
     <div class="r-pad40 sr-cc-wrap" style="margin:0 auto; width:100%; max-width:1340px; padding:0 40px; box-sizing:border-box">
@@ -2318,7 +2374,7 @@
 
 </main>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;announcementText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Free shipping over ₱1,500 · Cash on Delivery nationwide&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Store settings&quot;},&quot;freeShipMin&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:1500,&quot;min&quot;:0,&quot;max&quot;:10000,&quot;step&quot;:50,&quot;tsType&quot;:&quot;number | null&quot;,&quot;section&quot;:&quot;Store settings&quot;},&quot;showSampleRange&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Store settings&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;announcementText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Free shipping over ₱1,500 · Cash on Delivery nationwide&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Store settings&quot;},&quot;freeShipMin&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:1500,&quot;min&quot;:0,&quot;max&quot;:10000,&quot;step&quot;:50,&quot;tsType&quot;:&quot;number | null&quot;,&quot;section&quot;:&quot;Store settings&quot;},&quot;statCustomers&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Community figures&quot;},&quot;statRating&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Community figures&quot;},&quot;statReviews&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Community figures&quot;},&quot;statOrders&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Community figures&quot;},&quot;showSampleRange&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Store settings&quot;}}">
 class Component extends DCLogic {
 
   nlVals() {
@@ -2827,6 +2883,10 @@ class Component extends DCLogic {
 
   renderVals() {
     const announcement = (this.props.announcementText ?? "").trim();
+    /* all four or none: a page that shows three real figures and one
+       blank reads as a figure someone forgot, not one nobody has */
+    const stat = (k) => (this.props[k] ?? "").trim();
+    const stats = ["statCustomers", "statRating", "statReviews", "statOrders"].map(stat);
     const rot = (v) => (v ? "rotate(180deg)" : "none");
 
     return {
@@ -2838,6 +2898,9 @@ class Component extends DCLogic {
       ...this.reviewVals(),
       announcement,
       hasAnnouncement: announcement.length > 0,
+      hasStats: stats.every((v) => v.length > 0),
+      statCustomers: stats[0], statRating: stats[1],
+      statReviews: stats[2], statOrders: stats[3],
       f0: this.state.faq[0], f1: this.state.faq[1], f2: this.state.faq[2], f3: this.state.faq[3], f4: this.state.faq[4],
       gr0: this.state.faq[0] ? "1fr" : "0fr",
       gr1: this.state.faq[1] ? "1fr" : "0fr",
