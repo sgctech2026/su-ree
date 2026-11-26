@@ -1304,154 +1304,205 @@
     }
   }
 
-  /* The offer band: the first thing the page shows, standing above
-     the hero on its own dark ground. */
+  /* ───── The offer band ─────
+     Pinned over the hero by .sr-veil-cover; see the rules below it. */
   .sr-of {
-    position: relative; isolation: isolate; overflow: clip;
-    background: radial-gradient(118% 92% at 50% -12%, #1e4169 0%, #16314f 40%, #0e2240 76%, #0a1a31 100%);
-    padding: 112px clamp(18px,4vw,40px) clamp(56px,6vw,86px);
+    position: relative; overflow: clip; box-sizing: border-box;
+    display: flex; align-items: center;
+    /* never shorter than the screen, or the hero shows beneath the cover */
+    min-height: 100svh;
+    padding: clamp(46px,5.4vw,78px) clamp(18px,4vw,40px);
+    background:
+      radial-gradient(64% 52% at 14% -4%, rgba(36,87,128,0.52) 0%, rgba(36,87,128,0) 62%),
+      radial-gradient(60% 48% at 88% 2%, rgba(36,87,128,0.40) 0%, rgba(36,87,128,0) 64%),
+      radial-gradient(86% 54% at 50% 108%, rgba(36,87,128,0.44) 0%, rgba(36,87,128,0) 70%),
+      linear-gradient(168deg, #0d2745 0%, #102d4b 40%, #091d34 78%, #07182c 100%);
   }
-  .sr-of::before {
-    content: ""; position: absolute; left: -10%; right: -10%; bottom: -38%; height: 72%; z-index: -1;
-    background: radial-gradient(58% 100% at 50% 100%, rgba(67,143,224,0.32) 0%, rgba(67,143,224,0) 72%);
-    pointer-events: none;
+  .sr-of-wrap { width: 100%; max-width: 1240px; margin: 0 auto; }
+
+  .sr-of-eyebrow {
+    display: flex; align-items: center; justify-content: center;
+    gap: clamp(12px,2vw,20px); margin: 0 0 14px;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: clamp(10.5px,1.1vw,12.5px);
+    font-weight: 500; letter-spacing: 3.2px; text-transform: uppercase; color: #9cc3ea;
   }
-  .sr-of-wrap { max-width: 1120px; margin: 0 auto; }
-  .sr-of-head { text-align: center; max-width: 780px; margin: 0 auto; }
+  .sr-of-rule { flex: 0 1 clamp(40px,8vw,132px); height: 1px; background: rgba(156,195,234,0.34); }
+  .sr-of-head { text-align: center; max-width: 1120px; margin: 0 auto; }
   .sr-of-h {
     margin: 0; font-family: 'Jost',ui-sans-serif,sans-serif; font-weight: 600;
-    font-size: clamp(32px,4.4vw,58px); line-height: 1.06; letter-spacing: -1.4px;
+    font-size: clamp(30px,4.2vw,56px); line-height: 1.1; letter-spacing: -1.3px;
     color: #ffffff; text-wrap: balance;
   }
-  .sr-of-alt { display: block; font-weight: 400; color: #6ba6e8; }
+  .sr-of-alt { display: block; font-weight: 600; color: #8cc0f0; }
   .sr-of-lead {
-    margin: 16px auto 0; max-width: 620px; font-family: 'Jost',ui-sans-serif,sans-serif;
-    font-size: clamp(13.5px,1.5vw,15px); font-weight: 400; line-height: 1.68; color: #a9c3e2;
-    text-wrap: pretty;
-  }
-  .sr-of-grid {
-    display: grid; grid-template-columns: minmax(0,0.9fr) minmax(0,1fr);
-    gap: clamp(24px,3.6vw,52px); align-items: stretch; margin-top: clamp(28px,4vw,46px);
-  }
-  @media (max-width: 940px) {
-    .sr-of-grid { grid-template-columns: minmax(0,1fr); align-items: start; }
+    margin: 14px auto 0; max-width: 640px; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-size: clamp(13px,1.4vw,14.5px); font-weight: 400; line-height: 1.65;
+    color: #a7c2e0; text-wrap: pretty;
   }
 
+  .sr-of-grid {
+    display: grid; grid-template-columns: minmax(0,40fr) minmax(0,60fr);
+    gap: clamp(26px,2.8vw,40px); align-items: center; margin-top: clamp(26px,3.2vw,42px);
+  }
+
+  /* ── left: the square carousel, with the benefits held over it ── */
   .sr-of-shots {
-    position: relative; border-radius: 22px; overflow: hidden; background: #0a1a31;
-    border: 1px solid rgba(255,255,255,0.10); box-shadow: 0 30px 60px -28px rgba(0,0,0,0.78);
+    position: relative; aspect-ratio: 1 / 1; border-radius: 22px; overflow: hidden;
+    background: #07182c; border: 1px solid rgba(166,200,236,0.18);
   }
-  .sr-of-track { display: flex; width: 100%; transition: transform 520ms cubic-bezier(0.16,1,0.3,1); }
-  .sr-of-slide { flex: 0 0 100%; min-width: 0; aspect-ratio: 1 / 1; }
-  /* beside the copy the photo takes the height of the column, whatever
-     shape the photograph itself happens to be; stacked, it is a square */
-  @media (min-width: 941px) {
-    .sr-of-shots { min-height: 440px; }
-    .sr-of-track { position: absolute; inset: 0; }
-    .sr-of-slide { aspect-ratio: auto; height: 100%; }
+  .sr-of-track { display: flex; width: 100%; height: 100%; transition: transform 560ms cubic-bezier(0.16,1,0.3,1); }
+  .sr-of-slide { flex: 0 0 100%; min-width: 0; height: 100%; }
+  /* every one of these photographs is a portrait with the subject in
+     the middle, so object-position has nothing to shift: a square crop
+     of a portrait keeps the whole width. A small zoom and a nudge move
+     the subject out from under the words instead. */
+  .sr-of-slide img {
+    display: block; width: 100%; height: 100%; object-fit: cover;
+    transform: scale(1.22) translateX(8%); transform-origin: center;
   }
-  .sr-of-slide img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  /* the wash sits under the words and fades out before the face */
+  .sr-of-scrim {
+    position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(97deg,
+      rgba(5,16,30,0.92) 0%, rgba(5,16,30,0.78) 22%,
+      rgba(5,16,30,0.38) 41%, rgba(5,16,30,0.08) 59%, rgba(5,16,30,0) 73%);
+  }
+  .sr-of-list {
+    position: absolute; z-index: 2; left: clamp(16px,5%,28px); right: 47%;
+    top: 50%; transform: translateY(-50%); max-width: 300px;
+    list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(11px,2.2%,17px);
+  }
+  .sr-of-li {
+    display: flex; align-items: flex-start; gap: 10px;
+    font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-size: clamp(11px,1.15vw,14px); font-weight: 500; line-height: 1.32; color: #ffffff;
+  }
+  .sr-of-ck {
+    flex: 0 0 auto; display: flex; align-items: center; justify-content: center;
+    height: clamp(16px,1.6vw,20px); width: clamp(16px,1.6vw,20px); border-radius: 9999px;
+    background: #4e9ae4; color: #ffffff; margin-top: 1px;
+  }
   .sr-of-arrow {
-    position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; display: flex;
-    height: 36px; width: 36px; align-items: center; justify-content: center; padding: 0;
-    border-radius: 9999px; border: 1px solid rgba(255,255,255,0.24);
-    background: rgba(10,26,49,0.58); color: #ffffff; cursor: pointer;
+    position: absolute; bottom: clamp(38px,8%,52px); z-index: 3; display: flex;
+    height: 34px; width: 34px; align-items: center; justify-content: center; padding: 0;
+    border-radius: 9999px; border: 1px solid rgba(255,255,255,0.22);
+    background: rgba(7,24,44,0.62); color: #ffffff; cursor: pointer;
     backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
     transition: background 200ms ease, border-color 200ms ease;
   }
   .sr-of-arrow:hover { background: #438fe0; border-color: #438fe0; }
   .sr-of-prev { left: 12px; }
   .sr-of-next { right: 12px; }
-  .sr-of-dots { position: absolute; left: 0; right: 0; bottom: 13px; z-index: 3; display: flex; justify-content: center; gap: 6px; }
+  .sr-of-dots { position: absolute; left: 0; right: 0; bottom: 15px; z-index: 3; display: flex; justify-content: center; gap: 6px; }
   .sr-of-dot { height: 5px; border-radius: 9999px; border: none; padding: 0; cursor: pointer; transition: width 260ms ease, background 260ms ease; }
 
-  /* what the routine does, in the words the labels are allowed to use */
-  .sr-of-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
-  .sr-of-li { display: flex; align-items: flex-start; gap: 9px; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 13.5px; font-weight: 400; line-height: 1.45; color: #cfe0f3; }
-  .sr-of-ck { flex: 0 0 auto; display: flex; align-items: center; justify-content: center; height: 17px; width: 17px; border-radius: 9999px; background: rgba(78,196,140,0.18); color: #5fd6a0; margin-top: 1px; }
-
+  /* ── right: the three packages ── */
   .sr-of-picks {
-    display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 9px; margin-top: 19px;
-    border-radius: 18px; border: 1px solid rgba(107,166,232,0.34); background: rgba(255,255,255,0.045); padding: 11px;
+    display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: clamp(8px,1vw,14px); padding-top: 15px;
   }
   .sr-of-pick {
     position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;
-    border-radius: 13px; border: 1px solid; padding: 11px 7px 12px; cursor: pointer; min-width: 0;
+    border-radius: 16px; border: 1px solid; padding: 15px 8px 16px; cursor: pointer; min-width: 0;
     transition: background 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
   }
-  .sr-of-pnum { font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 8.5px; font-weight: 500; letter-spacing: 1.1px; text-transform: uppercase; color: #7e99bb; line-height: 1.3; }
-  .sr-of-ptag { margin-top: 2px; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 9.5px; font-weight: 600; letter-spacing: 0.9px; text-transform: uppercase; line-height: 1.3; }
-  .sr-of-pshot { display: flex; align-items: center; justify-content: center; height: 72px; margin: 8px 0 7px; }
+  .sr-of-flag {
+    position: absolute; top: -11px; left: 50%; transform: translateX(-50%);
+    display: inline-flex; align-items: center; gap: 5px; white-space: nowrap;
+    border-radius: 9999px; background: linear-gradient(135deg,#4e9ae4 0%,#2f7fd4 100%);
+    padding: 4px 11px; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-size: 9.5px; font-weight: 600; letter-spacing: 0.9px; text-transform: uppercase; color: #ffffff;
+    box-shadow: 0 6px 16px -8px rgba(47,127,212,0.9);
+  }
+  .sr-of-pnum { font-family: 'Jost',ui-sans-serif,sans-serif; font-size: clamp(8.5px,0.85vw,10px); font-weight: 500; letter-spacing: 1.3px; text-transform: uppercase; color: #7f9cbe; line-height: 1.3; }
+  .sr-of-ptag { margin-top: 2px; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: clamp(9.5px,0.95vw,11.5px); font-weight: 600; letter-spacing: 0.9px; text-transform: uppercase; line-height: 1.3; }
+  .sr-of-pshot { display: flex; align-items: center; justify-content: center; height: clamp(62px,7vw,88px); margin: 10px 0 8px; }
   .sr-of-pshot img { display: block; max-height: 100%; max-width: 100%; width: auto; object-fit: contain; }
-  .sr-of-pname { font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 12.5px; font-weight: 600; color: #ffffff; line-height: 1.3; }
-  .sr-of-psize { margin-top: 1px; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 10px; font-weight: 400; color: #9bb6d6; line-height: 1.3; }
-  .sr-of-pprice { margin-top: 5px; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: clamp(14px,1.6vw,18px); font-weight: 600; color: #ffffff; letter-spacing: -0.3px; white-space: nowrap; }
-  @media (max-width: 400px) {
-    .sr-of-picks { gap: 6px; padding: 8px; }
-    .sr-of-pick { padding: 10px 4px 11px; }
-    .sr-of-pshot { height: 54px; }
-    .sr-of-ptag { font-size: 8.5px; letter-spacing: 0.4px; }
-    .sr-of-pnum { font-size: 8px; letter-spacing: 0.6px; }
-    .sr-of-pname { font-size: 11px; }
-  }
+  .sr-of-pname { font-family: 'Jost',ui-sans-serif,sans-serif; font-size: clamp(12px,1.2vw,14.5px); font-weight: 600; color: #ffffff; line-height: 1.3; }
+  .sr-of-psize { margin-top: 2px; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: clamp(9.5px,0.95vw,11.5px); font-weight: 400; color: #92aecd; line-height: 1.3; }
+  .sr-of-pprice { margin-top: 7px; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: clamp(15px,1.7vw,21px); font-weight: 600; color: #ffffff; letter-spacing: -0.4px; white-space: nowrap; }
 
-  /* how many, what it costs, and what that saves */
+  /* ── the summary: how many, what, and what it costs ── */
   .sr-of-buy {
-    display: grid; gap: 13px; margin-top: 12px; border-radius: 18px;
-    border: 1px solid rgba(107,166,232,0.34); background: rgba(255,255,255,0.045); padding: 14px;
+    display: flex; align-items: center; gap: clamp(10px,1.4vw,18px); flex-wrap: wrap;
+    margin-top: clamp(12px,1.4vw,18px); border-radius: 16px;
+    border: 1px solid rgba(166,200,236,0.20); background: rgba(255,255,255,0.045);
+    padding: 11px clamp(12px,1.4vw,18px);
   }
-  .sr-of-buyrow { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; }
-  .sr-of-qty { display: flex; align-items: center; gap: 2px; flex: 0 0 auto; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.16); background: rgba(10,26,49,0.42); padding: 4px; }
+  .sr-of-qty { display: flex; align-items: center; gap: 2px; flex: 0 0 auto; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.18); background: rgba(7,24,44,0.46); padding: 3px; }
   .sr-of-qbtn {
     display: flex; height: 30px; width: 30px; align-items: center; justify-content: center; padding: 0;
     border: none; border-radius: 9999px; background: transparent; color: #ffffff; cursor: pointer;
     transition: background 180ms ease;
   }
-  .sr-of-qbtn:hover { background: rgba(67,143,224,0.34); }
-  .sr-of-qbtn:disabled { opacity: 0.3; cursor: default; background: transparent; }
-  .sr-of-qn { min-width: 30px; text-align: center; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 15px; font-weight: 600; color: #ffffff; }
-  .sr-of-what { flex: 1 1 180px; min-width: 0; text-align: right; }
-  .sr-of-wname { display: block; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 13px; font-weight: 600; color: #ffffff; line-height: 1.35; }
-  .sr-of-wsub { display: block; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 11.5px; font-weight: 400; color: #9bb6d6; line-height: 1.4; }
-  @media (max-width: 420px) { .sr-of-what { text-align: left; flex-basis: 100%; } }
-  .sr-of-money { display: flex; align-items: baseline; flex-wrap: wrap; gap: 9px; border-top: 1px solid rgba(255,255,255,0.10); padding-top: 12px; }
-  .sr-of-was { font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 14px; font-weight: 400; color: #8fb0d4; text-decoration: line-through; }
-  .sr-of-now { font-family: 'Jost',ui-sans-serif,sans-serif; font-size: clamp(22px,2.8vw,30px); font-weight: 600; color: #ffffff; letter-spacing: -0.8px; }
-  .sr-of-save { margin-left: auto; border-radius: 9999px; background: rgba(255,121,184,0.16); border: 1px solid rgba(255,121,184,0.42); padding: 5px 12px; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 11.5px; font-weight: 600; letter-spacing: 0.4px; color: #ffb9d7; white-space: nowrap; }
+  .sr-of-qbtn:hover { background: rgba(78,154,228,0.34); }
+  .sr-of-qn { min-width: 26px; text-align: center; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 15px; font-weight: 600; color: #ffffff; }
+  .sr-of-what { flex: 1 1 150px; min-width: 0; }
+  .sr-of-wname { display: block; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 13.5px; font-weight: 600; color: #ffffff; line-height: 1.35; }
+  .sr-of-wsub { display: block; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 11.5px; font-weight: 400; color: #92aecd; line-height: 1.4; }
+  .sr-of-money { display: flex; align-items: center; flex: 0 1 auto; gap: clamp(8px,1vw,13px); margin-left: auto; }
+  .sr-of-was { font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 13.5px; font-weight: 400; color: #7f9cbe; text-decoration: line-through; white-space: nowrap; }
+  .sr-of-now { font-family: 'Jost',ui-sans-serif,sans-serif; font-size: clamp(19px,2.1vw,26px); font-weight: 600; color: #ffffff; letter-spacing: -0.7px; white-space: nowrap; }
+  .sr-of-save {
+    border-radius: 9999px; background: linear-gradient(135deg,#ff85ae 0%,#ff6397 100%);
+    padding: 6px 13px; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 11.5px;
+    font-weight: 600; letter-spacing: 0.3px; color: #ffffff; white-space: nowrap;
+  }
 
   .sr-of-cta {
     position: relative; overflow: hidden; box-sizing: border-box; display: flex; align-items: center;
-    justify-content: center; gap: 10px; width: 100%; margin-top: 13px; border-radius: 9999px;
+    justify-content: center; gap: 11px; width: 100%; min-height: 57px;
+    margin-top: clamp(11px,1.3vw,16px); border-radius: 9999px;
     background: linear-gradient(135deg,#5ba0ea 0%,#2f85e0 48%,#1f6ec9 100%);
-    padding: 18px 22px; font-family: 'Jost',ui-sans-serif,sans-serif;
-    font-size: clamp(12.5px,1.4vw,15px); font-weight: 600; letter-spacing: 1.1px; text-align: center;
-    text-transform: uppercase;
-    border-top: 0.5px solid rgba(255,255,255,0.3);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 20px 40px -16px rgba(47,133,224,0.85);
-    transition: transform 220ms ease, box-shadow 220ms ease;
+    padding: 16px 22px; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-size: clamp(13px,1.4vw,15.5px); font-weight: 600; letter-spacing: 1.1px; text-align: center;
+    text-transform: uppercase; border-top: 0.5px solid rgba(255,255,255,0.28);
+    box-shadow: 0 16px 34px -18px rgba(47,133,224,0.9);
+    transition: transform 200ms ease, box-shadow 200ms ease, filter 200ms ease;
   }
   .sr-of-cta, .sr-of-cta:hover { color: #ffffff; }
-  .sr-of-cta:hover { transform: translateY(-1px); box-shadow: inset 0 1px 0 rgba(255,255,255,0.34), 0 26px 48px -18px rgba(47,133,224,0.95); }
+  .sr-of-cta:hover { transform: translateY(-1px); box-shadow: 0 22px 42px -20px rgba(47,133,224,0.95); }
+  .sr-of-cta:active { transform: translateY(0); filter: brightness(0.95); }
   .sr-of-cta:focus-visible { outline: 2px solid #ffffff; outline-offset: 3px; }
   .sr-of-cta-ar { display: inline-flex; transition: transform 240ms cubic-bezier(0.16,1,0.3,1); }
   .sr-of-cta:hover .sr-of-cta-ar { transform: translateX(3px); }
 
   .sr-of-trust {
     display: flex; align-items: center; justify-content: center; flex-wrap: wrap;
-    gap: 7px clamp(12px,2vw,22px); margin: 15px 0 0;
-    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 11.5px; font-weight: 500;
-    letter-spacing: 0.5px; color: #a9c3e2;
+    gap: 8px 0; margin: clamp(12px,1.4vw,17px) 0 0;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: clamp(11px,1.1vw,12.5px);
+    font-weight: 500; letter-spacing: 0.3px; color: #a7c2e0;
   }
-  .sr-of-ti { display: inline-flex; align-items: center; gap: 6px; }
+  .sr-of-ti { display: inline-flex; align-items: center; gap: 7px; padding: 0 clamp(12px,1.6vw,22px); }
+  .sr-of-ti + .sr-of-ti { border-left: 1px solid rgba(166,200,236,0.26); }
+
+  /* ── narrower ── */
+  @media (max-width: 1040px) {
+    .sr-of-grid { grid-template-columns: minmax(0,1fr); gap: 24px; }
+    .sr-of-shots { max-width: 520px; margin: 0 auto; }
+    .sr-of-list { right: 32%; }
+  }
+  @media (max-width: 560px) {
+    .sr-of { padding-left: 16px; padding-right: 16px; }
+    .sr-of-list { right: 40%; gap: 9px; max-width: none; }
+    .sr-of-li { font-size: 11.5px; gap: 8px; }
+    .sr-of-picks { gap: 7px; }
+    .sr-of-pick { padding: 14px 5px 13px; border-radius: 14px; }
+    .sr-of-pshot { height: 56px; }
+    .sr-of-buy { gap: 10px; }
+    .sr-of-what { flex-basis: 100%; order: 3; }
+    .sr-of-money { margin-left: auto; }
+    .sr-of-ti { padding: 0 10px; }
+  }
+  @media (max-width: 380px) {
+    .sr-of-ti + .sr-of-ti { border-left: none; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .sr-of-track, .sr-of-cta { transition: none; }
+    .sr-of-track, .sr-of-cta, .sr-of-pick { transition: none; }
     .sr-of-cta:hover, .sr-of-cta:hover .sr-of-cta-ar { transform: none; }
   }
 
-  /* The offer band lies over the hero like a sheet of paper and lifts
-     away as the page moves; the hero stays pinned underneath until it
-     is whole, and from there the page scrolls as usual.
-     --sr-heroh is the hero's measured height, set from the script. */
   /* The free-shipping strip now travels with the bar as one header.
      On its own at the top of the document it would never be seen: the
      promotion covers the first screen, and by the time that lifts the
@@ -1671,9 +1722,10 @@
     </div>
 
     <div class="sr-veil-cover" ref="{{ coverRef }}">
-    <section class="sr-of" aria-label="The su-ree routine">
+      <section class="sr-of" aria-label="The su-ree routine">
       <div class="sr-of-wrap">
 
+        <p class="sr-of-eyebrow"><span class="sr-of-rule" aria-hidden="true"></span>su-ree Skin Science<span class="sr-of-rule" aria-hidden="true"></span></p>
         <div class="sr-of-head">
           <h2 class="sr-of-h">Your Complete Routine for<span class="sr-of-alt">Smoother, <span style="white-space:nowrap">Healthier-Looking</span> Skin.</span></h2>
           <p class="sr-of-lead">Two thoughtfully formulated skincare essentials designed to complement each other, bringing targeted peptide care and hydration into one simple daily routine.</p>
@@ -1683,14 +1735,25 @@
 
           <div class="sr-of-shots">
             <div class="sr-of-track" style="transform: {{ ofX }}">
-              <div class="sr-of-slide"><img src="assets/sh-duo-scene.webp" alt="The su-ree serum and cream standing together" decoding="async" /></div>
-              <div class="sr-of-slide"><img src="assets/wall-a1.webp" alt="su-ree on a bathroom shelf" loading="lazy" decoding="async" /></div>
-              <div class="sr-of-slide"><img src="assets/sh-cream-scene.webp" alt="The Dual Regenerative Capsule Cream jar, open" loading="lazy" decoding="async" /></div>
+              <div class="sr-of-slide"><img src="assets/wall-a1.webp" alt="su-ree on a bathroom shelf" decoding="async" /></div>
               <div class="sr-of-slide"><img src="assets/wall-a3.webp" alt="su-ree held in the hand" loading="lazy" decoding="async" /></div>
-              <div class="sr-of-slide"><img src="assets/sh-serum-scene.webp" alt="The GHK-Cu+ Snap 8 Serum bottle" loading="lazy" decoding="async" /></div>
+              <div class="sr-of-slide"><img src="assets/wall-a4.webp" alt="su-ree in a morning routine" loading="lazy" decoding="async" /></div>
+              <div class="sr-of-slide"><img src="assets/wall-a5.webp" alt="su-ree beside a window" loading="lazy" decoding="async" /></div>
+              <div class="sr-of-slide"><img src="assets/wall-a2.webp" alt="su-ree on a dresser" loading="lazy" decoding="async" /></div>
             </div>
-            <button type="button" class="sr-of-arrow sr-of-prev" onClick="{{ ofPrev }}" aria-label="Previous photo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
-            <button type="button" class="sr-of-arrow sr-of-next" onClick="{{ ofNext }}" aria-label="Next photo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
+
+            <span class="sr-of-scrim" aria-hidden="true"></span>
+
+            <ul class="sr-of-list" role="list">
+              <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Supports smoother-looking skin</li>
+              <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Helps improve the appearance of fine lines</li>
+              <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Supports skin firmness</li>
+              <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Provides hydration and moisture barrier care</li>
+              <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Simplifies your daily skincare routine</li>
+            </ul>
+
+            <button type="button" class="sr-of-arrow sr-of-prev" onClick="{{ ofPrev }}" aria-label="Previous photo"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
+            <button type="button" class="sr-of-arrow sr-of-next" onClick="{{ ofNext }}" aria-label="Next photo"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
             <div class="sr-of-dots">
               <button type="button" class="sr-of-dot" onClick="{{ ofGo0 }}" aria-label="Photo 1" style="width: {{ ofDotW0 }}; background: {{ ofDotBg0 }}"></button>
               <button type="button" class="sr-of-dot" onClick="{{ ofGo1 }}" aria-label="Photo 2" style="width: {{ ofDotW1 }}; background: {{ ofDotBg1 }}"></button>
@@ -1701,14 +1764,6 @@
           </div>
 
           <div>
-            <ul class="sr-of-list" role="list">
-              <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Supports smoother-looking skin</li>
-              <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Helps improve the appearance of fine lines</li>
-              <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Supports skin firmness</li>
-              <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Provides hydration and moisture barrier care</li>
-              <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Simplifies your daily skincare routine</li>
-            </ul>
-
             <div class="sr-of-picks" role="group" aria-label="Choose a package">
               <button type="button" class="sr-of-pick" onClick="{{ ofTap0 }}" aria-pressed="{{ ofSel0 }}" style="background: {{ ofBg0 }}; border-color: {{ ofBd0 }}; box-shadow: {{ ofSh0 }}">
                 <span class="sr-of-pnum">Package 01</span>
@@ -1727,6 +1782,7 @@
                 <span class="sr-of-pprice">&#8369;1,699</span>
               </button>
               <button type="button" class="sr-of-pick" onClick="{{ ofTap2 }}" aria-pressed="{{ ofSel2 }}" style="background: {{ ofBg2 }}; border-color: {{ ofBd2 }}; box-shadow: {{ ofSh2 }}">
+                <span class="sr-of-flag"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3.6 2.5 5.3 5.8.8-4.2 4.1 1 5.8-5.1-2.8-5.1 2.8 1-5.8L3.7 9.7l5.8-.8z"></path></svg>Best value</span>
                 <span class="sr-of-pnum">Package 03</span>
                 <span class="sr-of-ptag" style="color: {{ ofFg2 }}">Complete care</span>
                 <span class="sr-of-pshot"><img src="assets/p-duo.webp" alt="" loading="lazy" decoding="async" /></span>
@@ -1737,27 +1793,25 @@
             </div>
 
             <div class="sr-of-buy">
-              <div class="sr-of-buyrow">
-                <div class="sr-of-qty" role="group" aria-label="Quantity">
-                  <button type="button" class="sr-of-qbtn" onClick="{{ ofDec }}" aria-label="One fewer" aria-disabled="{{ ofDecOff }}" style="opacity: {{ ofDecOp }}; pointer-events: {{ ofDecPe }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
-                  <span class="sr-of-qn" aria-live="polite">{{ ofQty }}</span>
-                  <button type="button" class="sr-of-qbtn" onClick="{{ ofInc }}" aria-label="One more" aria-disabled="{{ ofIncOff }}" style="opacity: {{ ofIncOp }}; pointer-events: {{ ofIncPe }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></button>
-                </div>
-                <span class="sr-of-what"><span class="sr-of-wname">{{ ofName }}</span><span class="sr-of-wsub">{{ ofWhat }}</span></span>
+              <div class="sr-of-qty" role="group" aria-label="Quantity">
+                <button type="button" class="sr-of-qbtn" onClick="{{ ofDec }}" aria-label="One fewer" aria-disabled="{{ ofDecOff }}" style="opacity: {{ ofDecOp }}; pointer-events: {{ ofDecPe }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+                <span class="sr-of-qn" aria-live="polite">{{ ofQty }}</span>
+                <button type="button" class="sr-of-qbtn" onClick="{{ ofInc }}" aria-label="One more" aria-disabled="{{ ofIncOff }}" style="opacity: {{ ofIncOp }}; pointer-events: {{ ofIncPe }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></button>
               </div>
-              <div class="sr-of-money">
+              <span class="sr-of-what"><span class="sr-of-wname">{{ ofName }}</span><span class="sr-of-wsub">{{ ofWhat }}</span></span>
+              <span class="sr-of-money">
                 <span class="sr-of-was" style="display: {{ ofWasShow }}">{{ ofWas }}</span>
                 <span class="sr-of-now">{{ ofNow }}</span>
                 <span class="sr-of-save" style="display: {{ ofSaveShow }}">{{ ofSave }}</span>
-              </div>
+              </span>
             </div>
 
-            <a class="sr-of-cta" href="Shop.dc.html"><span aria-hidden="true" style="position:relative; display:inline-flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span><span style="position:relative">Shop Your Skincare Routine</span><span class="sr-of-cta-ar" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
+            <a class="sr-of-cta" href="Shop.dc.html"><span aria-hidden="true" style="position:relative; display:inline-flex"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span><span style="position:relative">Shop Your Skincare Routine</span><span class="sr-of-cta-ar" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
 
             <p class="sr-of-trust">
-              <span class="sr-of-ti"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8fc4f2" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10.5" rx="2"></rect><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"></path></svg>Secure Checkout</span>
-              <span class="sr-of-ti"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8fc4f2" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5h11v11h-11z"></path><path d="M13.5 10h4l3 3.2v4.3h-7z"></path><circle cx="6.8" cy="19" r="1.6"></circle><circle cx="16.8" cy="19" r="1.6"></circle></svg>Nationwide Delivery</span>
-              <span class="sr-of-ti"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8fc4f2" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 9.5a8.5 8.5 0 1 1 1 7"></path><path d="M3 4.5v5h5"></path></svg>7-Day Eligible Returns</span>
+              <span class="sr-of-ti"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8cb8e4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10.5" rx="2"></rect><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"></path></svg>Secure Checkout</span>
+              <span class="sr-of-ti"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8cb8e4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5h11v11h-11z"></path><path d="M13.5 10h4l3 3.2v4.3h-7z"></path><circle cx="6.8" cy="19" r="1.6"></circle><circle cx="16.8" cy="19" r="1.6"></circle></svg>Nationwide Delivery</span>
+              <span class="sr-of-ti"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8cb8e4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 9.5a8.5 8.5 0 1 1 1 7"></path><path d="M3 4.5v5h5"></path></svg>7-Day Eligible Returns</span>
             </p>
           </div>
 
@@ -2656,10 +2710,14 @@ class Component extends DCLogic {
       /* a different package starts its own count */
       out["ofTap" + i] = () => { if (this.state.ofPick !== i) this.setState({ ofPick: i, ofQty: 1 }); };
       out["ofSel" + i] = on ? "true" : "false";
-      out["ofBg" + i] = on ? "rgba(67,143,224,0.22)" : "rgba(255,255,255,0.03)";
-      out["ofBd" + i] = on ? "#6ba6e8" : "rgba(255,255,255,0.14)";
-      out["ofSh" + i] = on ? "0 14px 30px -16px rgba(67,143,224,0.95)" : "0 0 0 rgba(0,0,0,0)";
-      out["ofFg" + i] = on ? "#9fcdf7" : "#8fa9c9";
+      out["ofBg" + i] = on
+        ? "linear-gradient(162deg, rgba(78,154,228,0.26) 0%, rgba(47,127,212,0.10) 100%)"
+        : "rgba(255,255,255,0.04)";
+      out["ofBd" + i] = on ? "#6fb2ee" : "rgba(166,200,236,0.22)";
+      out["ofSh" + i] = on
+        ? "0 0 0 1px rgba(111,178,238,0.32), 0 16px 34px -20px rgba(78,154,228,0.85)"
+        : "0 0 0 rgba(0,0,0,0)";
+      out["ofFg" + i] = on ? "#9fcdf7" : "#c4d7ec";
     }
 
     const pack = this.OF_PACKS[p];
