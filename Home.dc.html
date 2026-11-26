@@ -1652,6 +1652,144 @@
     .sr-ba-tag-a { right: 10px; }
     .sr-ba-knob { height: 34px; width: 34px; }
   }
+
+  /* Which routine is right for you: a real table, so a screen reader
+     reads each mark against its feature and its product. */
+  .sr-cmp-sec {
+    position: relative; isolation: isolate; overflow: clip;
+    padding: clamp(46px,5.4vw,84px) clamp(16px,3vw,32px) clamp(50px,6vw,92px);
+    background: linear-gradient(180deg,#ffffff 0%,#f7fafd 18%,#e9f2fb 54%,#f7fafd 84%,#ffffff 100%);
+  }
+  .sr-cmp-sec::before {
+    content: ""; position: absolute; z-index: -1; pointer-events: none;
+    left: 50%; top: 22%; width: 86%; height: 72%; transform: translateX(-50%);
+    background: radial-gradient(54% 48% at 50% 44%, rgba(201,223,245,0.5) 0%, rgba(201,223,245,0) 72%);
+  }
+  .sr-cmp-wrap { max-width: 1280px; margin: 0 auto; }
+
+  .sr-cmp-eyebrow {
+    display: flex; align-items: center; justify-content: center; gap: clamp(12px,2vw,20px);
+    margin: 0 0 14px; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-size: clamp(10.5px,1.1vw,12px); font-weight: 500; letter-spacing: 3.6px;
+    text-transform: uppercase; color: #5f93cd;
+  }
+  .sr-cmp-rule { flex: 0 1 clamp(36px,7vw,120px); height: 1px; background: rgba(95,147,205,0.34); }
+  .sr-cmp-head { text-align: center; max-width: 900px; margin: 0 auto; }
+  .sr-cmp-h {
+    margin: 0; font-family: 'Jost',ui-sans-serif,sans-serif; font-weight: 600;
+    font-size: clamp(32px,4.4vw,58px); line-height: 1.08; letter-spacing: -1.4px;
+    color: #193454; text-wrap: balance;
+  }
+  .sr-cmp-alt { display: block; font-weight: 400; color: #68a5e7; }
+  .sr-cmp-lead {
+    margin: 15px auto 0; max-width: 650px; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-size: clamp(13.5px,1.5vw,15.5px); font-weight: 400; line-height: 1.66;
+    color: #5c7a9e; text-wrap: pretty;
+  }
+
+  .sr-cmp-scroll {
+    margin-top: clamp(28px,3.4vw,46px); overflow-x: auto; overflow-y: visible;
+    border-radius: 24px; border: 1px solid rgba(201,223,245,0.9);
+    background: #ffffff; box-shadow: 0 18px 44px -34px rgba(25,52,84,0.4);
+    -webkit-overflow-scrolling: touch;
+  }
+  .sr-cmp { width: 100%; min-width: 760px; border-collapse: collapse; font-family: 'Jost',ui-sans-serif,sans-serif; }
+  .sr-cmp th, .sr-cmp td { padding: 0; vertical-align: middle; }
+
+  /* the head: a photograph, a name, what it is, how much of it */
+  .sr-cmp thead th { padding: clamp(18px,2vw,26px) clamp(8px,1.2vw,16px); text-align: center; vertical-align: bottom; }
+  .sr-cmp-lead-th {
+    text-align: left !important; padding-left: clamp(18px,2.2vw,30px) !important;
+    font-size: clamp(15px,1.7vw,21px); font-weight: 600; color: #193454; letter-spacing: -0.3px;
+    vertical-align: middle !important;
+  }
+  .sr-cmp-shot { display: flex; align-items: flex-end; justify-content: center; height: clamp(86px,9vw,124px); margin-bottom: 11px; }
+  .sr-cmp-shot img {
+    display: block; max-height: 100%; max-width: 100%; width: auto; object-fit: contain;
+    transition: transform 320ms cubic-bezier(0.16,1,0.3,1);
+  }
+  .sr-cmp-col:hover .sr-cmp-shot img { transform: scale(1.03); }
+  .sr-cmp-name { display: block; font-size: clamp(16px,1.9vw,23px); font-weight: 600; color: #193454; line-height: 1.2; letter-spacing: -0.4px; }
+  .sr-cmp-desc { display: block; margin-top: 4px; font-size: clamp(11.5px,1.2vw,13.5px); font-weight: 400; color: #6d87a8; line-height: 1.35; }
+  .sr-cmp-size {
+    display: inline-block; margin-top: 9px; border-radius: 9999px; padding: 5px 13px;
+    font-size: clamp(11px,1.2vw,13px); font-weight: 600; letter-spacing: 0.2px;
+  }
+  .sr-cmp-size-s { background: #dceafa; color: #1f5f9f; }
+  .sr-cmp-size-c { background: #fbdcea; color: #a8457a; }
+  .sr-cmp-size-d { background: #cfe0fb; color: #1f4f9f; }
+
+  /* the body */
+  .sr-cmp tbody tr:nth-child(odd) { background: #f5f9fd; }
+  .sr-cmp tbody tr { transition: background 240ms ease; }
+  .sr-cmp tbody tr:hover { background: #eaf3fd; }
+  .sr-cmp tbody th {
+    text-align: left; font-weight: 500; font-size: clamp(12.5px,1.4vw,15px); color: #193454;
+    padding: clamp(11px,1.2vw,15px) clamp(10px,1.4vw,18px) clamp(11px,1.2vw,15px) clamp(18px,2.2vw,30px);
+  }
+  .sr-cmp-ft { display: flex; align-items: center; gap: clamp(9px,1.2vw,15px); }
+  .sr-cmp-ico { flex: 0 0 auto; display: flex; color: #4e9ae4; }
+  .sr-cmp tbody td { text-align: center; padding: clamp(11px,1.2vw,15px) clamp(8px,1vw,14px); }
+  .sr-cmp-y {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 23px; width: 23px; border-radius: 9999px; background: #2f85e0; color: #ffffff;
+  }
+  .sr-cmp-n { display: inline-block; width: 15px; height: 2px; border-radius: 2px; background: #b4c4d6; vertical-align: middle; }
+
+  /* the duo column reads as one piece, head to button */
+  .sr-cmp-duo { background: linear-gradient(180deg, rgba(104,165,231,0.13) 0%, rgba(104,165,231,0.07) 100%); }
+  .sr-cmp thead th.sr-cmp-duo { border-top: 1px solid #8fc0ee; border-radius: 18px 18px 0 0; }
+  .sr-cmp tfoot td.sr-cmp-duo { border-bottom: 1px solid #8fc0ee; border-radius: 0 0 18px 18px; }
+  .sr-cmp th.sr-cmp-duo, .sr-cmp td.sr-cmp-duo {
+    box-shadow: inset 1px 0 0 #8fc0ee, inset -1px 0 0 #8fc0ee;
+  }
+
+  /* the buttons ride in the table, so they stay under their column */
+  .sr-cmp tfoot td { padding: clamp(16px,2vw,24px) clamp(8px,1.2vw,16px); text-align: center; }
+  .sr-cmp-cta {
+    display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+    min-height: 46px; width: 100%; max-width: 250px; box-sizing: border-box;
+    border-radius: 9999px; padding: 12px 20px;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: clamp(13px,1.4vw,15.5px);
+    font-weight: 600; letter-spacing: 0.2px;
+    transition: filter 260ms ease, transform 260ms ease, box-shadow 260ms ease;
+  }
+  .sr-cmp-cta, .sr-cmp-cta:hover { color: #ffffff; }
+  .sr-cmp-cta:hover { filter: brightness(1.06); transform: translateY(-1px); }
+  .sr-cmp-cta:focus-visible { outline: 2px solid #193454; outline-offset: 3px; }
+  .sr-cmp-cta-s { background: linear-gradient(135deg,#3f90e2 0%,#1f6ec9 100%); box-shadow: 0 12px 24px -16px rgba(31,110,201,0.9); }
+  .sr-cmp-cta-c { background: linear-gradient(135deg,#f58fb8 0%,#e8699c 100%); box-shadow: 0 12px 24px -16px rgba(232,105,156,0.9); }
+  .sr-cmp-cta-d { background: linear-gradient(135deg,#4e9ae4 0%,#1b63c4 52%,#1552ab 100%); box-shadow: 0 14px 28px -14px rgba(27,99,196,0.95); }
+  .sr-cmp-ar { display: inline-flex; transition: transform 240ms cubic-bezier(0.16,1,0.3,1); }
+  .sr-cmp-cta:hover .sr-cmp-ar { transform: translateX(3px); }
+
+  /* narrow: the feature names stay put while the products slide */
+  .sr-cmp-swipe {
+    display: none; margin: 11px 0 0; text-align: center;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 11.5px; font-weight: 500;
+    letter-spacing: 1.2px; text-transform: uppercase; color: #8aa3c0;
+  }
+  @media (max-width: 860px) {
+    .sr-cmp-swipe { display: block; }
+    .sr-cmp thead th:first-child,
+    .sr-cmp tbody th,
+    .sr-cmp tfoot td:first-child {
+      position: sticky; left: 0; z-index: 3;
+      box-shadow: 1px 0 0 rgba(201,223,245,0.9);
+    }
+    .sr-cmp thead th:first-child, .sr-cmp tfoot td:first-child { background: #ffffff; }
+    .sr-cmp tbody tr:nth-child(odd) th { background: #f5f9fd; }
+    .sr-cmp tbody tr:nth-child(even) th { background: #ffffff; }
+    .sr-cmp tbody tr:hover th { background: #eaf3fd; }
+    .sr-cmp-lead-th { font-size: 14px; }
+  }
+  @media (max-width: 480px) {
+    .sr-cmp { min-width: 640px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sr-cmp-shot img, .sr-cmp tbody tr, .sr-cmp-cta, .sr-cmp-ar { transition: none; }
+    .sr-cmp-col:hover .sr-cmp-shot img, .sr-cmp-cta:hover, .sr-cmp-cta:hover .sr-cmp-ar { transform: none; }
+  }
 </style>
 </helmet>
 
@@ -2409,6 +2547,64 @@
 
     <div style="margin:26px auto 0; display:flex; align-items:center; justify-content:center; gap:20px"><button type="button" onClick="{{ baPrev }}" aria-label="Previous pair" style="display:flex; height:44px; width:44px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; border:0.5px solid #d7e6f8; background:#ffffff; color:#1b3456; cursor:pointer; box-shadow:0 10px 26px -16px rgba(18,38,58,0.7); transition:background 200ms, transform 200ms" style-hover="background:#f4f8fc; transform:translateY(-1px)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button><span style="display:flex; align-items:center; gap:9px"><button type="button" onClick="{{ baPick0 }}" aria-label="Show the first pair" aria-current="{{ baOn0 }}" style="height:7px; width: {{ baW0 }}; border-radius:9999px; border:none; padding:0; cursor:pointer; transition:width 260ms, background 260ms; background: {{ baBg0 }}"></button><button type="button" onClick="{{ baPick1 }}" aria-label="Show the second pair" aria-current="{{ baOn1 }}" style="height:7px; width: {{ baW1 }}; border-radius:9999px; border:none; padding:0; cursor:pointer; transition:width 260ms, background 260ms; background: {{ baBg1 }}"></button></span><button type="button" onClick="{{ baNext }}" aria-label="Next pair" style="display:flex; height:44px; width:44px; flex-shrink:0; align-items:center; justify-content:center; border-radius:9999px; border:0.5px solid #d7e6f8; background:#ffffff; color:#1b3456; cursor:pointer; box-shadow:0 10px 26px -16px rgba(18,38,58,0.7); transition:background 200ms, transform 200ms" style-hover="background:#f4f8fc; transform:translateY(-1px)"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button></div>
     <p style="margin:22px auto 0; max-width:1140px; text-align:center; font-size:11.5px; color:#8295b4">Unretouched photos. Results differ from person to person.</p>
+  </section>
+
+  <section data-sr-reveal="out" class="sr-cmp-sec" aria-label="Which su-ree routine is right for you">
+    <div class="sr-cmp-wrap">
+      <p class="sr-cmp-eyebrow"><span class="sr-cmp-rule" aria-hidden="true"></span>Find your perfect match<span class="sr-cmp-rule" aria-hidden="true"></span></p>
+      <div class="sr-cmp-head">
+        <h2 class="sr-cmp-h">Which <span style="white-space:nowrap">su-ree</span> Routine Is<span class="sr-cmp-alt">Right for You?</span></h2>
+        <p class="sr-cmp-lead">Discover the differences between our two skincare essentials and find the routine that suits your needs.</p>
+      </div>
+
+      <div class="sr-cmp-scroll">
+      <table class="sr-cmp">
+        <colgroup><col style="width:28%" /><col style="width:24%" /><col style="width:24%" /><col style="width:24%" /></colgroup>
+        <thead>
+        <tr>
+        <th scope="col" class="sr-cmp-lead-th">Key Features &amp; Ingredients</th>
+        <th scope="col" class="sr-cmp-col">
+          <span class="sr-cmp-shot"><img src="assets/p-serum.webp" alt="The GHK-Cu+ Snap 8 Serum bottle" loading="lazy" decoding="async" /></span>
+          <span class="sr-cmp-name">The Serum</span>
+          <span class="sr-cmp-desc">Triple Peptide Renewal Serum</span>
+          <span class="sr-cmp-size sr-cmp-size-s">30 mL</span>
+        </th>
+        <th scope="col" class="sr-cmp-col">
+          <span class="sr-cmp-shot"><img src="assets/p-cream.webp" alt="The Dual Regenerative Capsule Cream jar" loading="lazy" decoding="async" /></span>
+          <span class="sr-cmp-name">The Cream</span>
+          <span class="sr-cmp-desc">Dual Regenerative Capsule Cream</span>
+          <span class="sr-cmp-size sr-cmp-size-c">65 g</span>
+        </th>
+        <th scope="col" class="sr-cmp-col sr-cmp-duo">
+          <span class="sr-cmp-shot"><img src="assets/p-duo.webp" alt="The serum and the cream together" loading="lazy" decoding="async" /></span>
+          <span class="sr-cmp-name">The Duo</span>
+          <span class="sr-cmp-desc">Complete Two-Step Routine</span>
+          <span class="sr-cmp-size sr-cmp-size-d">30 mL + 65 g</span>
+        </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr><th scope="row"><span class="sr-cmp-ft"><span class="sr-cmp-ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="8.5" r="2.4"></circle><circle cx="17.4" cy="7" r="2.4"></circle><circle cx="11.6" cy="17" r="2.4"></circle><path d="m8.3 9.1 6.8-1.6"></path><path d="m7.1 10.6 3.4 4.3"></path><path d="m16.4 9.2-3.5 5.8"></path></svg></span>GHK-Cu</span></th><td><span class="sr-cmp-y" role="img" aria-label="Included"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></td><td><span class="sr-cmp-y" role="img" aria-label="Included"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></td><td class="sr-cmp-duo"><span class="sr-cmp-y" role="img" aria-label="Included"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></td></tr>
+        <tr><th scope="row"><span class="sr-cmp-ft"><span class="sr-cmp-ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="12" r="2.2"></circle><circle cx="12" cy="8" r="2.2"></circle><circle cx="19" cy="12" r="2.2"></circle><circle cx="12" cy="16.6" r="2.2"></circle><path d="m6.9 10.9 3.2-1.8"></path><path d="m13.9 9.1 3.2 1.8"></path><path d="M12 10.2v4.2"></path></svg></span>SNAP-8</span></th><td><span class="sr-cmp-y" role="img" aria-label="Included"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></td><td><span class="sr-cmp-n" role="img" aria-label="Not included"></span></td><td class="sr-cmp-duo"><span class="sr-cmp-y" role="img" aria-label="Included"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></td></tr>
+        <tr><th scope="row"><span class="sr-cmp-ft"><span class="sr-cmp-ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="2.3"></circle><circle cx="5" cy="6.5" r="1.8"></circle><circle cx="19" cy="6.5" r="1.8"></circle><circle cx="5" cy="17.5" r="1.8"></circle><circle cx="19" cy="17.5" r="1.8"></circle><path d="m6.4 7.6 4 3"></path><path d="m17.6 7.6-4 3"></path><path d="m6.4 16.4 4-3"></path><path d="m17.6 16.4-4-3"></path></svg></span>Argireline</span></th><td><span class="sr-cmp-y" role="img" aria-label="Included"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></td><td><span class="sr-cmp-n" role="img" aria-label="Not included"></span></td><td class="sr-cmp-duo"><span class="sr-cmp-y" role="img" aria-label="Included"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></td></tr>
+        <tr><th scope="row"><span class="sr-cmp-ft"><span class="sr-cmp-ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3c0 4 10 5 10 9s-10 5-10 9"></path><path d="M17 3c0 4-10 5-10 9s10 5 10 9"></path><path d="M8.4 7.5h7.2"></path><path d="M8.4 16.5h7.2"></path></svg></span>PDRN</span></th><td><span class="sr-cmp-n" role="img" aria-label="Not included"></span></td><td><span class="sr-cmp-y" role="img" aria-label="Included"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></td><td class="sr-cmp-duo"><span class="sr-cmp-y" role="img" aria-label="Included"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></td></tr>
+        <tr><th scope="row"><span class="sr-cmp-ft"><span class="sr-cmp-ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8.4" cy="12" r="4.6"></circle><circle cx="15.6" cy="12" r="4.6"></circle></svg></span>Dual Capsule Technology</span></th><td><span class="sr-cmp-n" role="img" aria-label="Not included"></span></td><td><span class="sr-cmp-y" role="img" aria-label="Included"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></td><td class="sr-cmp-duo"><span class="sr-cmp-y" role="img" aria-label="Included"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></td></tr>
+        <tr><th scope="row"><span class="sr-cmp-ft"><span class="sr-cmp-ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 4c-8 0-13 5-13 11v5"></path><path d="M20 4c0 7-4 11-9 12l-4 1"></path><path d="M15.5 8.5 11 13"></path></svg></span>Lightweight Serum</span></th><td><span class="sr-cmp-y" role="img" aria-label="Included"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></td><td><span class="sr-cmp-n" role="img" aria-label="Not included"></span></td><td class="sr-cmp-duo"><span class="sr-cmp-y" role="img" aria-label="Included"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></td></tr>
+        <tr><th scope="row"><span class="sr-cmp-ft"><span class="sr-cmp-ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.2 6.6 10c-2.2 2.9-1.3 7 2 8.6 2.1 1 4.7 1 6.8 0 3.3-1.6 4.2-5.7 2-8.6z"></path></svg></span>Moisturizing Gel Cream</span></th><td><span class="sr-cmp-n" role="img" aria-label="Not included"></span></td><td><span class="sr-cmp-y" role="img" aria-label="Included"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></td><td class="sr-cmp-duo"><span class="sr-cmp-y" role="img" aria-label="Included"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></td></tr>
+        <tr><th scope="row"><span class="sr-cmp-ft"><span class="sr-cmp-ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.4 3.4 7.6 12 11.8l8.6-4.2z"></path><path d="m3.4 12.4 8.6 4.2 8.6-4.2"></path><path d="m3.4 16.9 8.6 4.2 8.6-4.2"></path></svg></span>Complete Two-Step Routine</span></th><td><span class="sr-cmp-n" role="img" aria-label="Not included"></span></td><td><span class="sr-cmp-n" role="img" aria-label="Not included"></span></td><td class="sr-cmp-duo"><span class="sr-cmp-y" role="img" aria-label="Included"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span></td></tr>
+        </tbody>
+        <tfoot>
+        <tr>
+          <td></td>
+        <td><a class="sr-cmp-cta sr-cmp-cta-s" href="Shop.dc.html?p=serum"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>Shop Serum<span class="sr-cmp-ar" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="m12 5 7 7-7 7"></path></svg></span></a></td>
+        <td><a class="sr-cmp-cta sr-cmp-cta-c" href="Shop.dc.html?p=cream"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>Shop Cream<span class="sr-cmp-ar" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="m12 5 7 7-7 7"></path></svg></span></a></td>
+        <td class="sr-cmp-duo"><a class="sr-cmp-cta sr-cmp-cta-d" href="Shop.dc.html?p=duo"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg>Shop The Duo<span class="sr-cmp-ar" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="m12 5 7 7-7 7"></path></svg></span></a></td>
+        </tr>
+        </tfoot>
+      </table>
+      </div>
+      <p class="sr-cmp-swipe">Swipe to compare &rarr;</p>
+    </div>
   </section>
 
   <section data-sr-reveal="out" style="position:relative; width:100%; overflow:hidden; background:linear-gradient(180deg,#ffffff 0%,#ffffff 22%,#f4f9ff 36%,#e4f0fc 56%,#eaf3fd 78%,#ffffff 100%)">
