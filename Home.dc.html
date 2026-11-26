@@ -1472,6 +1472,40 @@
     .sr-veil-stage { position: static; }
     .sr-veil-cover { position: static; transform: none; z-index: auto; box-shadow: none; }
   }
+
+  /* The four assurances, directly under the hero: one row, hairlines
+     between, nothing else. */
+  .sr-tb { background: #ffffff; padding: clamp(22px,2.6vw,34px) clamp(18px,4vw,40px); }
+  .sr-tb-row {
+    display: grid; grid-template-columns: repeat(4, minmax(0,1fr));
+    max-width: 1180px; margin: 0 auto;
+  }
+  .sr-tb-i {
+    display: flex; align-items: flex-start; gap: 11px; min-width: 0;
+    padding: 2px clamp(14px,1.8vw,26px);
+  }
+  .sr-tb-i + .sr-tb-i { border-left: 1px solid rgba(27,52,86,0.10); }
+  .sr-tb-ico { flex: 0 0 auto; display: flex; color: #438fe0; margin-top: 2px; }
+  /* spans, so they need telling to stack */
+  .sr-tb-t { display: block; min-width: 0; }
+  .sr-tb-h {
+    display: block; margin: 0; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: clamp(12.5px,1.25vw,14px);
+    font-weight: 600; color: #1b3456; line-height: 1.35; letter-spacing: 0.1px;
+  }
+  .sr-tb-p {
+    display: block; margin: 2px 0 0; font-family: 'Jost',ui-sans-serif,sans-serif;
+    font-size: clamp(11.5px,1.1vw,12.5px); font-weight: 400; color: #8295b4; line-height: 1.45;
+  }
+  @media (max-width: 860px) {
+    .sr-tb-row { grid-template-columns: repeat(2, minmax(0,1fr)); row-gap: 20px; }
+    /* with two per row the third opens a new row, so it carries no rule */
+    .sr-tb-i:nth-child(odd) { border-left: none; padding-left: 0; }
+    .sr-tb-i:nth-child(even) { padding-right: 0; }
+  }
+  @media (max-width: 460px) {
+    .sr-tb-row { grid-template-columns: minmax(0,1fr); row-gap: 16px; }
+    .sr-tb-i { border-left: none !important; padding: 0; }
+  }
 </style>
 </helmet>
 
@@ -1730,6 +1764,27 @@
 
     <div class="sr-veil-run" aria-hidden="true"></div>
   </div>
+
+  <section class="sr-tb" aria-label="What every order comes with">
+    <div class="sr-tb-row">
+      <div class="sr-tb-i">
+        <span class="sr-tb-ico" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10.5" width="16" height="10.5" rx="2"></rect><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"></path></svg></span>
+        <span class="sr-tb-t"><span class="sr-tb-h">Secure Checkout</span><span class="sr-tb-p">Shop with confidence.</span></span>
+      </div>
+      <div class="sr-tb-i">
+        <span class="sr-tb-ico" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 6.5h11v11h-11z"></path><path d="M13.5 10h4l3 3.2v4.3h-7z"></path><circle cx="6.8" cy="19" r="1.6"></circle><circle cx="16.8" cy="19" r="1.6"></circle></svg></span>
+        <span class="sr-tb-t"><span class="sr-tb-h">Nationwide Shipping</span><span class="sr-tb-p">Delivered to your doorstep.</span></span>
+      </div>
+      <div class="sr-tb-i">
+        <span class="sr-tb-ico" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path><path d="m9.2 14.2 1.9 1.9 3.7-3.7"></path></svg></span>
+        <span class="sr-tb-t"><span class="sr-tb-h">Batch Transparency</span><span class="sr-tb-p">Accessible product records.</span></span>
+      </div>
+      <div class="sr-tb-i">
+        <span class="sr-tb-ico" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5a8.5 8.5 0 1 1 1 7"></path><path d="M3 4.5v5h5"></path></svg></span>
+        <span class="sr-tb-t"><span class="sr-tb-h">7-Day Returns</span><span class="sr-tb-p">For eligible unopened products.</span></span>
+      </div>
+    </div>
+  </section>
 
   <section data-sr-reveal="out" class="sr-vp">
     <div class="sr-vp-wrap">
