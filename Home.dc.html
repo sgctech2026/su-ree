@@ -216,7 +216,7 @@
   }
   @media (max-width: 980px) {
     /* the hero paints over the dropdown unless the bar owns a higher layer */
-    .sr-navbar { z-index: 120 !important; }
+    .sr-head { z-index: 120 !important; }
     .sr-nav-links { z-index: 121; background: #ffffff !important; }
   }
   @media (max-width: 980px) {
@@ -252,18 +252,19 @@
     svg.r-wave { height: 42px !important; }
   }
   @media (max-width: 980px) {
-    .sr-navbar {
+    .sr-head {
       position: fixed !important;
       top: 0 !important; left: 0 !important; right: 0 !important;
       z-index: 200 !important;
     }
-    main { padding-top: 84px !important; }
+    /* --sr-headh is the header measured from the script */
+    main { padding-top: var(--sr-headh, 98px) !important; }
   }
   @media (max-width: 980px) {
     /* navBg starts fully transparent and only turns white past 24px of
        scroll. On a phone that reads as the bar vanishing, so here it is
        solid from the start -- the bar never changes, it is just there. */
-    .sr-navbar > nav {
+    .sr-head > .sr-navbar > nav {
       background: rgba(255,255,255,0.94) !important;
       border-color: rgba(18,38,58,0.05) !important;
       box-shadow: 0 10px 28px -18px rgba(18,38,58,0.3) !important;
@@ -287,7 +288,7 @@
     img, svg, video, iframe { max-width: 100%; }
     .r-blob { display: none !important; }
     section, header, footer { max-width: 100% !important; }
-    .sr-navbar { max-width: 100%; }
+    .sr-head { max-width: 100%; }
   }
   @media (max-width: 980px) {
     /* the three cards stack and pin, so each one slides over the last.
@@ -1451,36 +1452,47 @@
      away as the page moves; the hero stays pinned underneath until it
      is whole, and from there the page scrolls as usual.
      --sr-heroh is the hero's measured height, set from the script. */
-  /* the room below the cover is a spacer, not a margin or padding: a
-     margin collapses out of the wrapper, and a sticky element is held
-     to its parent content box, which padding is not part of. The hero
-     scrolls away through this spacer once the cover has gone. */
-  .sr-veil { position: relative; --sr-heroh: 760px; }
-  .sr-veil-run { height: var(--sr-heroh); }
+  /* The free-shipping strip now travels with the bar as one header.
+     On its own at the top of the document it would never be seen: the
+     promotion covers the first screen, and by the time that lifts the
+     strip has already scrolled past. */
+  .sr-head { position: sticky; top: 0; z-index: 50; margin: 0 0 -84px; }
+
+  /* The cover is taken out of the flow and pinned to the viewport, so
+     it lies over the sticky header as well as the hero: the promotion
+     is the whole screen and nothing sits on top of it. The script
+     slides it up by --sr-lift, one pixel per pixel scrolled, and the
+     spacer below gives the page that much to scroll through. */
+  .sr-veil { position: relative; --sr-coverh: 900px; --sr-lift: 0px; }
+  .sr-veil-run { height: var(--sr-coverh); }
   .sr-veil-stage { position: sticky; top: 0; z-index: 0; }
   .sr-veil-cover {
-    position: relative; z-index: 2;
-    margin-top: calc(-1 * var(--sr-heroh));
+    position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+    transform: translateY(calc(-1 * var(--sr-lift)));
+    will-change: transform;
     box-shadow: 0 26px 64px -18px rgba(6,16,30,0.6);
   }
+  /* the header is fixed on a phone, so the hero rests under it */
+  @media (max-width: 980px) { .sr-veil-stage { top: var(--sr-headh, 98px); } }
   /* no pinning for anyone who asked the screen to hold still */
   @media (prefers-reduced-motion: reduce) {
     .sr-veil-run { display: none; }
     .sr-veil-stage { position: static; }
-    .sr-veil-cover { margin-top: 0; box-shadow: none; }
+    .sr-veil-cover { position: static; transform: none; z-index: auto; box-shadow: none; }
   }
 </style>
 </helmet>
 
 <main id="top" style="min-height:100vh; background:#fbfbff">
 
+  <div class="sr-head" ref="{{ headRef }}">
   <sc-if value="{{ hasAnnouncement }}" hint-placeholder-val="{{ false }}">
     <div style="width:100%; background:#1b3456">
       <p style="margin:0; padding:8px 20px; text-align:center; font-size:12px; font-weight:400; color:#fff">{{ announcement }}</p>
     </div>
   </sc-if>
 
-  <div class="r-lift sr-navbar" style="position:sticky; top:0; z-index:50; padding:14px 24px; margin:0 0 -84px">
+  <div class="r-lift sr-navbar" style="position:relative; z-index:1; padding:14px 24px; margin:0">
   <nav style="position:relative; display:flex; align-items:center; justify-content:space-between; gap:28px; width:100%; max-width: {{ navMax }}; margin:0 auto; padding: {{ navPad }}; border-radius:9999px; background: {{ navBg }}; border:0.5px solid {{ navBorder }}; box-shadow: {{ navShadow }}; backdrop-filter: {{ navBlur }}; -webkit-backdrop-filter: {{ navBlur }}; transition:max-width 460ms cubic-bezier(0.16,1,0.3,1), padding 460ms cubic-bezier(0.16,1,0.3,1), background 340ms ease, box-shadow 340ms ease, border-color 340ms ease; box-sizing:border-box">
           <button type="button" class="sr-burger" onClick="{{ navToggle }}" aria-label="Menu" aria-expanded="{{ navOpenAria }}" style="flex-shrink:0; display:none; height:40px; width:40px; align-items:center; justify-content:center; border-radius:9999px; border:0.5px solid #d7e6f8; background:rgba(255,255,255,0.9); color:#1b3456; cursor:pointer; padding:0"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16"></path><path d="M4 12h16"></path><path d="M4 17h16"></path></svg></button>
           <a href="Home.dc.html" aria-label="su-ree home" style="flex-shrink:0; display:flex; align-items:center"><img src="assets/logo.webp" alt="su-ree Skin Science" decoding="async" style="display:block; height:34px; width:auto" /></a>
@@ -1499,11 +1511,12 @@
           </div>
         </nav>
   </div>
+  </div>
 
 
 
   <div class="sr-veil" ref="{{ veilRef }}">
-    <div class="sr-veil-stage" ref="{{ stageRef }}">
+    <div class="sr-veil-stage">
     <section style="background:#fff">
       <div style="position:relative; margin:0; overflow:hidden; background:linear-gradient(122deg, #ffffff 0%, #fafdff 14%, #f1f8fe 32%, #e3f1fd 52%, #d2e9fc 72%, #c0dffa 88%, #b4d8f8 100%)">
 
@@ -1657,7 +1670,7 @@
     </section>
     </div>
 
-    <div class="sr-veil-cover">
+    <div class="sr-veil-cover" ref="{{ coverRef }}">
     <section class="sr-of" aria-label="The su-ree routine">
       <div class="sr-of-wrap">
 
@@ -2574,11 +2587,16 @@ class Component extends DCLogic {
     this.startOfTimer();
     this.setupReveal();
     this.setupSteps();
+    this.onVeilScroll = () => {
+      if (this.veilRaf) return;
+      this.veilRaf = requestAnimationFrame(() => { this.veilRaf = 0; this.liftVeil(); });
+    };
+    window.addEventListener("scroll", this.onVeilScroll, { passive: true });
     this.onResize = () => { this.sizeVeil(); this.setState({ trackW: this.trackEl ? this.trackEl.clientWidth : window.innerWidth, ccW: window.innerWidth }); };
     window.addEventListener("resize", this.onResize);
     this.onResize();
   }
-  componentWillUnmount() { clearInterval(this.heroTimer); clearInterval(this.reviewTimer); clearInterval(this.ofTimer); window.removeEventListener("resize", this.onResize); if (this.revealIO) this.revealIO.disconnect(); if (this.veilRO) this.veilRO.disconnect(); if (this.stepIO) this.stepIO.disconnect(); clearTimeout(this.stepTry); clearTimeout(this.revealRetry); clearInterval(this.revealSafety); if (this.onRevealScroll) { window.removeEventListener("scroll", this.onRevealScroll); window.removeEventListener("resize", this.onRevealScroll); } }
+  componentWillUnmount() { clearInterval(this.heroTimer); clearInterval(this.reviewTimer); clearInterval(this.ofTimer); window.removeEventListener("resize", this.onResize); if (this.revealIO) this.revealIO.disconnect(); if (this.veilRO) this.veilRO.disconnect(); if (this.onVeilScroll) window.removeEventListener("scroll", this.onVeilScroll); if (this.veilRaf) cancelAnimationFrame(this.veilRaf); if (this.stepIO) this.stepIO.disconnect(); clearTimeout(this.stepTry); clearTimeout(this.revealRetry); clearInterval(this.revealSafety); if (this.onRevealScroll) { window.removeEventListener("scroll", this.onRevealScroll); window.removeEventListener("resize", this.onRevealScroll); } }
 
   /* ── the offer band above the hero ── */
   OF_SHOTS = 5;
@@ -2670,26 +2688,46 @@ class Component extends DCLogic {
     return out;
   }
 
-  veilRef = (el) => { this.veilEl = el; this.sizeVeil(); };
-  stageRef = (el) => {
-    this.stageEl = el;
-    /* the hero settles as its fonts and photographs arrive, so watch it
-       rather than measuring once */
-    if (el && typeof ResizeObserver !== "undefined" && !this.veilRO) {
-      this.veilRO = new ResizeObserver(() => this.sizeVeil());
-      this.veilRO.observe(el);
-    }
-    this.sizeVeil();
-  };
+  veilRef = (el) => { this.veilEl = el; this.watchVeil(el); this.sizeVeil(); };
+  coverRef = (el) => { this.coverEl = el; this.watchVeil(el); this.sizeVeil(); };
+  headRef = (el) => { this.headEl = el; this.watchVeil(el); this.sizeVeil(); };
 
-  /* the cover is pulled up by exactly the hero's height, so the two
-     overlap however tall the hero turns out to be */
+  /* the three settle as their fonts and photographs arrive, so watch
+     them rather than measuring once */
+  watchVeil(el) {
+    if (!el || typeof ResizeObserver === "undefined") return;
+    if (!this.veilRO) this.veilRO = new ResizeObserver(() => this.sizeVeil());
+    this.veilRO.observe(el);
+  }
+
   sizeVeil() {
-    if (!this.veilEl || !this.stageEl) return;
-    const h = Math.ceil(this.stageEl.getBoundingClientRect().height);
-    if (h && h !== this.veilH) {
-      this.veilH = h;
-      this.veilEl.style.setProperty("--sr-heroh", h + "px");
+    if (this.headEl) {
+      const hh = Math.ceil(this.headEl.getBoundingClientRect().height);
+      if (hh && hh !== this.headH) {
+        this.headH = hh;
+        document.documentElement.style.setProperty("--sr-headh", hh + "px");
+      }
+    }
+    if (!this.veilEl || !this.coverEl) return;
+    const ch = Math.ceil(this.coverEl.getBoundingClientRect().height);
+    if (ch && ch !== this.coverH) {
+      this.coverH = ch;
+      this.veilEl.style.setProperty("--sr-coverh", ch + "px");
+    }
+    this.liftVeil();
+  }
+
+  /* one pixel of lift per pixel scrolled, stopping once the cover has
+     cleared the screen */
+  liftVeil() {
+    if (!this.veilEl || !this.coverH) return;
+    /* measured from the top of the page, not from the wrapper: on a
+       phone the header holds the wrapper down and that head start
+       would read as a stretch of scrolling where nothing moves */
+    const lift = Math.max(0, Math.min(this.coverH, window.scrollY || 0));
+    if (lift !== this.lift) {
+      this.lift = lift;
+      this.veilEl.style.setProperty("--sr-lift", lift + "px");
     }
   }
 
@@ -2823,7 +2861,8 @@ class Component extends DCLogic {
       arrowNext: "calc(50% + " + arrowAt + "px)",
       trackRef: this.trackRef,
       veilRef: this.veilRef,
-      stageRef: this.stageRef,
+      coverRef: this.coverRef,
+      headRef: this.headRef,
       ccRef: this.ccRef,
       ccBack: () => this.ccNudge(-1),
       ccFwd: () => this.ccNudge(1),
