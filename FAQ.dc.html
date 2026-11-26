@@ -199,9 +199,30 @@
   .sr-faqtag {
     margin: 0 0 10px; display: block; width: 100%; box-sizing: border-box;
     text-align: center; font-family: 'Jost',ui-sans-serif,sans-serif;
-    font-size: 11px; color: #1b3456; background: rgba(255,255,255,0.72);
-    border: 0.5px solid #b7d5f5; border-radius: 9999px; padding: 9px 16px;
+    font-size: 11px; font-weight: 600; color: #ffffff; background: #1b3456;
+    border: 0.5px solid #1b3456; border-radius: 9999px; padding: 10px 16px;
     letter-spacing: 1.6px;
+  }
+  /* the four categories, and the pink that opens out of a corner --
+     the same fill the batch-records button uses */
+  .sr-qcat { position: relative; overflow: hidden; isolation: isolate; }
+  .sr-qcat > * { position: relative; z-index: 1; }
+  .sr-qcat::before {
+    content: ""; position: absolute; z-index: 0; pointer-events: none;
+    left: 0; bottom: 0; width: 220%; height: 0; padding-bottom: 220%;
+    border-radius: 9999px;
+    background: radial-gradient(circle at 34% 68%, #ff79b8 0%, #ff4f9f 58%, #f23d90 100%);
+    transform: translate(-50%, 50%) scale(0); transform-origin: 50% 50%;
+    opacity: 0;
+    transition: transform 520ms cubic-bezier(0.22,1,0.36,1), opacity 180ms ease;
+  }
+  .sr-qcat:hover::before { transform: translate(-50%, 50%) scale(1); opacity: 1; }
+  .sr-qcat:hover { color: #ffffff !important; border-color: transparent !important; }
+  .sr-qcat:focus-visible { outline: 2px solid #438fe0; outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) {
+    .sr-qcat::before {
+      transition: opacity 160ms ease; transform: translate(-50%, 50%) scale(1);
+    }
   }
   .sr-cat-short { display: none; }
   @media (max-width: 760px) {
@@ -366,19 +387,19 @@
         <div class="sr-catcol">
           <p class="sr-faqtag">FREQUENTLY ASKED</p>
           <div class="sr-cats" role="tablist" aria-orientation="vertical" aria-label="Question categories" style="display:flex; flex-direction:column; gap:6px">
-          <button type="button" role="tab" onClick="{{ qPick0 }}" aria-selected="{{ qSel0 }}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; border-radius:12px; padding:13px 15px; font-size:14px; font-weight:600; letter-spacing:-0.1px; cursor:pointer; font-family:inherit; background: {{ qBg0 }}; color: {{ qFg0 }}; border:0.5px solid {{ qBd0 }}; transition:background 240ms ease, color 240ms ease, border-color 240ms ease; box-sizing:border-box">
+          <button type="button" role="tab" onClick="{{ qPick0 }}" aria-selected="{{ qSel0 }}" class="sr-qcat" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; border-radius:12px; padding:13px 15px; font-size:14px; font-weight:600; letter-spacing:-0.1px; cursor:pointer; font-family:inherit; background: {{ qBg0 }}; color: {{ qFg0 }}; border:0.5px solid {{ qBd0 }}; transition:background 240ms ease, color 240ms ease, border-color 240ms ease; box-sizing:border-box">
             <span class="sr-cat-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8l9 5z"></path><path d="M3 8v8l9 5 9-5V8"></path><path d="M12 13v8"></path></svg></span><span class="sr-cat-long" style="min-width:0">Ordering &amp; Delivery</span><span class="sr-cat-short" style="min-width:0">Ordering</span>
             <span aria-hidden="true" style="flex-shrink:0; font-size:12px; font-weight:500; opacity:0.65">4</span>
           </button>
-          <button type="button" role="tab" onClick="{{ qPick1 }}" aria-selected="{{ qSel1 }}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; border-radius:12px; padding:13px 15px; font-size:14px; font-weight:600; letter-spacing:-0.1px; cursor:pointer; font-family:inherit; background: {{ qBg1 }}; color: {{ qFg1 }}; border:0.5px solid {{ qBd1 }}; transition:background 240ms ease, color 240ms ease, border-color 240ms ease; box-sizing:border-box">
+          <button type="button" role="tab" onClick="{{ qPick1 }}" aria-selected="{{ qSel1 }}" class="sr-qcat" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; border-radius:12px; padding:13px 15px; font-size:14px; font-weight:600; letter-spacing:-0.1px; cursor:pointer; font-family:inherit; background: {{ qBg1 }}; color: {{ qFg1 }}; border:0.5px solid {{ qBd1 }}; transition:background 240ms ease, color 240ms ease, border-color 240ms ease; box-sizing:border-box">
             <span class="sr-cat-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6"></path><path d="M9.5 6h5l.9 12.3a2 2 0 0 1-2 2.1h-2.8a2 2 0 0 1-2-2.1z"></path><path d="M9 3v3"></path><path d="M15 3v3"></path></svg></span><span class="sr-cat-long" style="min-width:0">The Products</span><span class="sr-cat-short" style="min-width:0">Products</span>
             <span aria-hidden="true" style="flex-shrink:0; font-size:12px; font-weight:500; opacity:0.65">4</span>
           </button>
-          <button type="button" role="tab" onClick="{{ qPick2 }}" aria-selected="{{ qSel2 }}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; border-radius:12px; padding:13px 15px; font-size:14px; font-weight:600; letter-spacing:-0.1px; cursor:pointer; font-family:inherit; background: {{ qBg2 }}; color: {{ qFg2 }}; border:0.5px solid {{ qBd2 }}; transition:background 240ms ease, color 240ms ease, border-color 240ms ease; box-sizing:border-box">
+          <button type="button" role="tab" onClick="{{ qPick2 }}" aria-selected="{{ qSel2 }}" class="sr-qcat" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; border-radius:12px; padding:13px 15px; font-size:14px; font-weight:600; letter-spacing:-0.1px; cursor:pointer; font-family:inherit; background: {{ qBg2 }}; color: {{ qFg2 }}; border:0.5px solid {{ qBd2 }}; transition:background 240ms ease, color 240ms ease, border-color 240ms ease; box-sizing:border-box">
             <span class="sr-cat-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 4.5-9 4.5-9-4.5z"></path><path d="m3 13 9 4.5L21 13"></path></svg></span><span class="sr-cat-long" style="min-width:0">Product Information &amp; Usage</span><span class="sr-cat-short" style="min-width:0">Usage</span>
             <span aria-hidden="true" style="flex-shrink:0; font-size:12px; font-weight:500; opacity:0.65">3</span>
           </button>
-          <button type="button" role="tab" onClick="{{ qPick3 }}" aria-selected="{{ qSel3 }}" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; border-radius:12px; padding:13px 15px; font-size:14px; font-weight:600; letter-spacing:-0.1px; cursor:pointer; font-family:inherit; background: {{ qBg3 }}; color: {{ qFg3 }}; border:0.5px solid {{ qBd3 }}; transition:background 240ms ease, color 240ms ease, border-color 240ms ease; box-sizing:border-box">
+          <button type="button" role="tab" onClick="{{ qPick3 }}" aria-selected="{{ qSel3 }}" class="sr-qcat" style="display:flex; align-items:center; justify-content:space-between; gap:12px; width:100%; text-align:left; border-radius:12px; padding:13px 15px; font-size:14px; font-weight:600; letter-spacing:-0.1px; cursor:pointer; font-family:inherit; background: {{ qBg3 }}; color: {{ qFg3 }}; border:0.5px solid {{ qBd3 }}; transition:background 240ms ease, color 240ms ease, border-color 240ms ease; box-sizing:border-box">
             <span class="sr-cat-ico" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a9 9 0 1 1 1.5 9"></path><path d="M3 4v5h5"></path></svg></span><span class="sr-cat-long" style="min-width:0">Returns &amp; Customer Support</span><span class="sr-cat-short" style="min-width:0">Returns</span>
             <span aria-hidden="true" style="flex-shrink:0; font-size:12px; font-weight:500; opacity:0.65">3</span>
           </button>
@@ -752,9 +773,11 @@ class Component extends DCLogic {
       const on = i === cur;
       out["qPick" + i] = () => { if (this.state.faqCat !== i) this.setState({ faqCat: i }); };
       out["qSel" + i] = on ? "true" : "false";
-      out["qBg" + i] = on ? "#1b3456" : "rgba(255,255,255,0.86)";
-      out["qFg" + i] = on ? "#ffffff" : "#44587c";
-      out["qBd" + i] = on ? "#1b3456" : "#d7e6f8";
+      out["qBg" + i] = on
+        ? "linear-gradient(135deg,#5ba0ea 0%,#2f85e0 52%,#1f6ec9 100%)"
+        : "#e7f3ff";
+      out["qFg" + i] = on ? "#ffffff" : "#2f6ea8";
+      out["qBd" + i] = on ? "transparent" : "#cfe2f8";
       out["gShow" + i] = on ? "block" : "none";
     }
     return out;
