@@ -1346,54 +1346,27 @@
   }
 
   /* ── left: the square carousel, with the benefits held over it ── */
+  /* the shop's own shots: squares that fill the frame, and cartons
+     that do not, so they are fitted whole against their own white */
   .sr-of-shots {
     position: relative; aspect-ratio: 1 / 1; border-radius: 22px; overflow: hidden;
-    background: #07182c; border: 1px solid rgba(166,200,236,0.18);
+    background: #ffffff; border: 1px solid rgba(166,200,236,0.18);
   }
   .sr-of-track { display: flex; width: 100%; height: 100%; transition: transform 560ms cubic-bezier(0.16,1,0.3,1); }
   .sr-of-slide { flex: 0 0 100%; min-width: 0; height: 100%; }
-  /* every one of these photographs is a portrait with the subject in
-     the middle, so object-position has nothing to shift: a square crop
-     of a portrait keeps the whole width. A small zoom and a nudge move
-     the subject out from under the words instead. */
-  .sr-of-slide img {
-    display: block; width: 100%; height: 100%; object-fit: cover;
-    transform: scale(1.22) translateX(8%); transform-origin: center;
-  }
-  /* the wash sits under the words and fades out before the face */
-  .sr-of-scrim {
-    position: absolute; inset: 0; z-index: 1; pointer-events: none;
-    background: linear-gradient(97deg,
-      rgba(5,16,30,0.92) 0%, rgba(5,16,30,0.78) 22%,
-      rgba(5,16,30,0.38) 41%, rgba(5,16,30,0.08) 59%, rgba(5,16,30,0) 73%);
-  }
-  .sr-of-list {
-    position: absolute; z-index: 2; left: clamp(16px,5%,28px); right: 47%;
-    top: 50%; transform: translateY(-50%); max-width: 300px;
-    list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(11px,2.2%,17px);
-  }
-  .sr-of-li {
-    display: flex; align-items: flex-start; gap: 10px;
-    font-family: 'Jost',ui-sans-serif,sans-serif;
-    font-size: clamp(11px,1.15vw,14px); font-weight: 500; line-height: 1.32; color: #ffffff;
-  }
-  .sr-of-ck {
-    flex: 0 0 auto; display: flex; align-items: center; justify-content: center;
-    height: clamp(16px,1.6vw,20px); width: clamp(16px,1.6vw,20px); border-radius: 9999px;
-    background: #4e9ae4; color: #ffffff; margin-top: 1px;
-  }
+  .sr-of-slide img { display: block; width: 100%; height: 100%; object-fit: contain; }
   .sr-of-arrow {
-    position: absolute; bottom: clamp(38px,8%,52px); z-index: 3; display: flex;
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; display: flex;
     height: 34px; width: 34px; align-items: center; justify-content: center; padding: 0;
     border-radius: 9999px; border: 1px solid rgba(255,255,255,0.22);
-    background: rgba(7,24,44,0.62); color: #ffffff; cursor: pointer;
+    background: rgba(7,24,44,0.46); color: #ffffff; cursor: pointer;
     backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
     transition: background 200ms ease, border-color 200ms ease;
   }
   .sr-of-arrow:hover { background: #438fe0; border-color: #438fe0; }
   .sr-of-prev { left: 12px; }
   .sr-of-next { right: 12px; }
-  .sr-of-dots { position: absolute; left: 0; right: 0; bottom: 15px; z-index: 3; display: flex; justify-content: center; gap: 6px; }
+  .sr-of-dots { position: absolute; left: 0; right: 0; bottom: 14px; z-index: 3; display: flex; justify-content: center; gap: 6px; }
   .sr-of-dot { height: 5px; border-radius: 9999px; border: none; padding: 0; cursor: pointer; transition: width 260ms ease, background 260ms ease; }
 
   /* ── right: the three packages ── */
@@ -1480,12 +1453,9 @@
   @media (max-width: 1040px) {
     .sr-of-grid { grid-template-columns: minmax(0,1fr); gap: 24px; }
     .sr-of-shots { max-width: 520px; margin: 0 auto; }
-    .sr-of-list { right: 32%; }
   }
   @media (max-width: 560px) {
     .sr-of { padding-left: 16px; padding-right: 16px; }
-    .sr-of-list { right: 40%; gap: 9px; max-width: none; }
-    .sr-of-li { font-size: 11.5px; gap: 8px; }
     .sr-of-picks { gap: 7px; }
     .sr-of-pick { padding: 14px 5px 13px; border-radius: 14px; }
     .sr-of-pshot { height: 56px; }
@@ -1737,32 +1707,20 @@
 
           <div class="sr-of-shots">
             <div class="sr-of-track" style="transform: {{ ofX }}">
-              <div class="sr-of-slide"><img src="assets/wall-a1.webp" alt="su-ree on a bathroom shelf" decoding="async" /></div>
-              <div class="sr-of-slide"><img src="assets/wall-a3.webp" alt="su-ree held in the hand" loading="lazy" decoding="async" /></div>
-              <div class="sr-of-slide"><img src="assets/wall-a4.webp" alt="su-ree in a morning routine" loading="lazy" decoding="async" /></div>
-              <div class="sr-of-slide"><img src="assets/wall-a5.webp" alt="su-ree beside a window" loading="lazy" decoding="async" /></div>
-              <div class="sr-of-slide"><img src="assets/wall-a2.webp" alt="su-ree on a dresser" loading="lazy" decoding="async" /></div>
-            </div>
+            <div class="sr-of-slide"><img src="{{ ofImg0 }}" alt="{{ ofAlt0 }}" decoding="async" /></div>
+            <div class="sr-of-slide"><img src="{{ ofImg1 }}" alt="{{ ofAlt1 }}" loading="lazy" decoding="async" /></div>
+            <div class="sr-of-slide"><img src="{{ ofImg2 }}" alt="{{ ofAlt2 }}" loading="lazy" decoding="async" /></div>
+            <div class="sr-of-slide"><img src="{{ ofImg3 }}" alt="{{ ofAlt3 }}" loading="lazy" decoding="async" /></div>
+          </div>
 
-            <span class="sr-of-scrim" aria-hidden="true"></span>
-
-            <ul class="sr-of-list" role="list">
-              <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Supports smoother-looking skin</li>
-              <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Helps improve the appearance of fine lines</li>
-              <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Supports skin firmness</li>
-              <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Provides hydration and moisture barrier care</li>
-              <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Simplifies your daily skincare routine</li>
-            </ul>
-
-            <button type="button" class="sr-of-arrow sr-of-prev" onClick="{{ ofPrev }}" aria-label="Previous photo"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
+          <button type="button" class="sr-of-arrow sr-of-prev" onClick="{{ ofPrev }}" aria-label="Previous photo"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
             <button type="button" class="sr-of-arrow sr-of-next" onClick="{{ ofNext }}" aria-label="Next photo"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
             <div class="sr-of-dots">
-              <button type="button" class="sr-of-dot" onClick="{{ ofGo0 }}" aria-label="Photo 1" style="width: {{ ofDotW0 }}; background: {{ ofDotBg0 }}"></button>
-              <button type="button" class="sr-of-dot" onClick="{{ ofGo1 }}" aria-label="Photo 2" style="width: {{ ofDotW1 }}; background: {{ ofDotBg1 }}"></button>
-              <button type="button" class="sr-of-dot" onClick="{{ ofGo2 }}" aria-label="Photo 3" style="width: {{ ofDotW2 }}; background: {{ ofDotBg2 }}"></button>
-              <button type="button" class="sr-of-dot" onClick="{{ ofGo3 }}" aria-label="Photo 4" style="width: {{ ofDotW3 }}; background: {{ ofDotBg3 }}"></button>
-              <button type="button" class="sr-of-dot" onClick="{{ ofGo4 }}" aria-label="Photo 5" style="width: {{ ofDotW4 }}; background: {{ ofDotBg4 }}"></button>
-            </div>
+            <button type="button" class="sr-of-dot" onClick="{{ ofGo0 }}" aria-label="Photo 1" style="width: {{ ofDotW0 }}; background: {{ ofDotBg0 }}"></button>
+            <button type="button" class="sr-of-dot" onClick="{{ ofGo1 }}" aria-label="Photo 2" style="width: {{ ofDotW1 }}; background: {{ ofDotBg1 }}"></button>
+            <button type="button" class="sr-of-dot" onClick="{{ ofGo2 }}" aria-label="Photo 3" style="width: {{ ofDotW2 }}; background: {{ ofDotBg2 }}"></button>
+            <button type="button" class="sr-of-dot" onClick="{{ ofGo3 }}" aria-label="Photo 4" style="width: {{ ofDotW3 }}; background: {{ ofDotBg3 }}"></button>
+          </div>
           </div>
 
           <div>
@@ -2655,7 +2613,30 @@ class Component extends DCLogic {
   componentWillUnmount() { clearInterval(this.heroTimer); clearInterval(this.reviewTimer); clearInterval(this.ofTimer); window.removeEventListener("resize", this.onResize); if (this.revealIO) this.revealIO.disconnect(); if (this.veilRO) this.veilRO.disconnect(); if (this.onVeilScroll) window.removeEventListener("scroll", this.onVeilScroll); if (this.veilRaf) cancelAnimationFrame(this.veilRaf); if (this.stepIO) this.stepIO.disconnect(); clearTimeout(this.stepTry); clearTimeout(this.revealRetry); clearInterval(this.revealSafety); if (this.onRevealScroll) { window.removeEventListener("scroll", this.onRevealScroll); window.removeEventListener("resize", this.onRevealScroll); } }
 
   /* ── the offer band above the hero ── */
-  OF_SHOTS = 5;
+  OF_SHOTS = 4;
+
+  /* the same shots the shop shows, in the shop's own order, listed
+     here by package rather than by the shop's variant order */
+  OF_GALS = [
+    [
+      { src: "assets/p-serum-box.webp", alt: "The serum with its carton" },
+      { src: "assets/sh-serum-info.webp", alt: "The serum's actives, directions and cautions" },
+      { src: "assets/sh-serum-scene.webp", alt: "The GHK-Cu Serum, photographed" },
+      { src: "assets/sh-serum-say.webp", alt: "A customer on the GHK-Cu Serum" }
+    ],
+    [
+      { src: "assets/p-cream-box.webp", alt: "The Capsule Cream with its carton" },
+      { src: "assets/sh-cream-info.webp", alt: "The Capsule Cream's actives and full ingredients" },
+      { src: "assets/sh-cream-scene.webp", alt: "The Capsule Cream open, with a second jar behind it" },
+      { src: "assets/sh-cream-say.webp", alt: "Angielyn on the Capsule Cream" }
+    ],
+    [
+      { src: "assets/hero-duo-pack.webp", alt: "Both formulas with their cartons" },
+      { src: "assets/sh-duo-info.webp", alt: "Why su-ree uses three peptides rather than one" },
+      { src: "assets/sh-duo-scene.webp", alt: "The cream and the serum together" },
+      { src: "assets/sh-duo-say.webp", alt: "Angielyn on using both together" }
+    ]
+  ];
   OF_MAXQ = 3;
 
   /* Every price here is one the shop already charges. A quantity the
@@ -2703,14 +2684,24 @@ class Component extends DCLogic {
     for (let i = 0; i < n; i++) {
       out["ofGo" + i] = () => { this.ofGo(i); this.startOfTimer(); };
       out["ofDotW" + i] = i === at ? "18px" : "5px";
-      out["ofDotBg" + i] = i === at ? "#6ba6e8" : "rgba(255,255,255,0.38)";
+      /* the frame is white now, so white dots were invisible */
+      out["ofDotBg" + i] = i === at ? "#2f85e0" : "rgba(18,38,58,0.22)";
     }
 
     const p = Math.min(2, Math.max(0, this.state.ofPick ?? 2));
+    const gal = this.OF_GALS[p];
+    for (let i = 0; i < n; i++) {
+      out["ofImg" + i] = gal[i].src;
+      out["ofAlt" + i] = gal[i].alt;
+    }
     for (let i = 0; i < 3; i++) {
       const on = i === p;
       /* a different package starts its own count */
-      out["ofTap" + i] = () => { if (this.state.ofPick !== i) this.setState({ ofPick: i, ofQty: 1 }); };
+      out["ofTap" + i] = () => {
+        if (this.state.ofPick === i) return;
+        this.setState({ ofPick: i, ofQty: 1, of: 0 });
+        this.startOfTimer();
+      };
       out["ofSel" + i] = on ? "true" : "false";
       out["ofBg" + i] = on
         ? "linear-gradient(162deg, rgba(78,154,228,0.26) 0%, rgba(47,127,212,0.10) 100%)"
