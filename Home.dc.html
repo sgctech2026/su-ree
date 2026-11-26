@@ -1515,7 +1515,9 @@
      slides it up by --sr-lift, one pixel per pixel scrolled, and the
      spacer below gives the page that much to scroll through. */
   .sr-veil { position: relative; --sr-coverh: 900px; --sr-lift: 0px; }
-  .sr-veil-run { height: var(--sr-coverh); }
+  /* the extra 140px holds the hero whole for a beat once the cover
+     has gone, before the page carries it away */
+  .sr-veil-run { height: calc(var(--sr-coverh) + 140px); }
   .sr-veil-stage { position: sticky; top: 0; z-index: 0; }
   .sr-veil-cover {
     position: fixed; top: 0; left: 0; right: 0; z-index: 300;
@@ -2547,15 +2549,15 @@ class Component extends DCLogic {
     if (!this.onNavScroll) {
       this.onNavScroll = () => {
         const y = window.scrollY || document.documentElement.scrollTop || 0;
-        const on = y > 24;
+        /* measured past the promotion: inside it the bar is hidden
+           anyway, and it should greet the hero at its full width */
+        const on = y > (this.coverH || 0) + 140;
         if (on !== !!this.state.navScrolled) this.setState({ navScrolled: on });
       };
       window.addEventListener("scroll", this.onNavScroll, { passive: true });
       setTimeout(this.onNavScroll, 0);
     }
-    /* the page opens on the dark band again, so the pill stays solid:
-       the navy-on-transparent links were unreadable against it */
-    const on = true;
+    const on = !!this.state.navScrolled;
     return {
       navMax: on ? "1240px" : "1800px",
       navPad: on ? "8px 10px 8px 24px" : "8px 10px 8px 14px",
