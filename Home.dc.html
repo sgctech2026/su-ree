@@ -1308,7 +1308,7 @@
   .sr-of {
     position: relative; isolation: isolate; overflow: clip;
     background: radial-gradient(118% 92% at 50% -12%, #1e4169 0%, #16314f 40%, #0e2240 76%, #0a1a31 100%);
-    padding: 112px clamp(18px,4vw,40px) clamp(50px,6vw,78px);
+    padding: clamp(54px,6vw,86px) clamp(18px,4vw,40px) clamp(50px,6vw,78px);
   }
   .sr-of::before {
     content: ""; position: absolute; left: -10%; right: -10%; bottom: -38%; height: 72%; z-index: -1;
@@ -1478,99 +1478,6 @@
   </div>
 
 
-  <section class="sr-of" aria-label="The su-ree routine">
-    <div class="sr-of-wrap">
-
-      <div class="sr-of-head">
-        <h2 class="sr-of-h">Your Complete Routine for<span class="sr-of-alt">Smoother, <span style="white-space:nowrap">Healthier-Looking</span> Skin.</span></h2>
-        <p class="sr-of-lead">Two thoughtfully formulated skincare essentials designed to complement each other, bringing targeted peptide care and hydration into one simple daily routine.</p>
-      </div>
-
-      <div class="sr-of-grid">
-
-        <div class="sr-of-shots">
-          <div class="sr-of-track" style="transform: {{ ofX }}">
-            <div class="sr-of-slide"><img src="assets/sh-duo-scene.webp" alt="The su-ree serum and cream standing together" decoding="async" /></div>
-            <div class="sr-of-slide"><img src="assets/wall-a1.webp" alt="su-ree on a bathroom shelf" loading="lazy" decoding="async" /></div>
-            <div class="sr-of-slide"><img src="assets/sh-cream-scene.webp" alt="The Dual Regenerative Capsule Cream jar, open" loading="lazy" decoding="async" /></div>
-            <div class="sr-of-slide"><img src="assets/wall-a3.webp" alt="su-ree held in the hand" loading="lazy" decoding="async" /></div>
-            <div class="sr-of-slide"><img src="assets/sh-serum-scene.webp" alt="The GHK-Cu+ Snap 8 Serum bottle" loading="lazy" decoding="async" /></div>
-          </div>
-          <button type="button" class="sr-of-arrow sr-of-prev" onClick="{{ ofPrev }}" aria-label="Previous photo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
-          <button type="button" class="sr-of-arrow sr-of-next" onClick="{{ ofNext }}" aria-label="Next photo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
-          <div class="sr-of-dots">
-            <button type="button" class="sr-of-dot" onClick="{{ ofGo0 }}" aria-label="Photo 1" style="width: {{ ofDotW0 }}; background: {{ ofDotBg0 }}"></button>
-            <button type="button" class="sr-of-dot" onClick="{{ ofGo1 }}" aria-label="Photo 2" style="width: {{ ofDotW1 }}; background: {{ ofDotBg1 }}"></button>
-            <button type="button" class="sr-of-dot" onClick="{{ ofGo2 }}" aria-label="Photo 3" style="width: {{ ofDotW2 }}; background: {{ ofDotBg2 }}"></button>
-            <button type="button" class="sr-of-dot" onClick="{{ ofGo3 }}" aria-label="Photo 4" style="width: {{ ofDotW3 }}; background: {{ ofDotBg3 }}"></button>
-            <button type="button" class="sr-of-dot" onClick="{{ ofGo4 }}" aria-label="Photo 5" style="width: {{ ofDotW4 }}; background: {{ ofDotBg4 }}"></button>
-          </div>
-        </div>
-
-        <div>
-          <ul class="sr-of-list" role="list">
-            <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Supports smoother-looking skin</li>
-            <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Helps improve the appearance of fine lines</li>
-            <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Supports skin firmness</li>
-            <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Provides hydration and moisture barrier care</li>
-            <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Simplifies your daily skincare routine</li>
-          </ul>
-
-          <div class="sr-of-picks" role="group" aria-label="Choose a package">
-            <button type="button" class="sr-of-pick" onClick="{{ ofTap0 }}" aria-pressed="{{ ofSel0 }}" style="background: {{ ofBg0 }}; border-color: {{ ofBd0 }}; box-shadow: {{ ofSh0 }}">
-              <span class="sr-of-pnum">Package 01</span>
-              <span class="sr-of-ptag" style="color: {{ ofFg0 }}">Targeted care</span>
-              <span class="sr-of-pshot"><img src="assets/p-serum.webp" alt="" loading="lazy" decoding="async" /></span>
-              <span class="sr-of-pname">The Serum</span>
-              <span class="sr-of-psize">30 mL</span>
-              <span class="sr-of-pprice">&#8369;1,499</span>
-            </button>
-            <button type="button" class="sr-of-pick" onClick="{{ ofTap1 }}" aria-pressed="{{ ofSel1 }}" style="background: {{ ofBg1 }}; border-color: {{ ofBd1 }}; box-shadow: {{ ofSh1 }}">
-              <span class="sr-of-pnum">Package 02</span>
-              <span class="sr-of-ptag" style="color: {{ ofFg1 }}">Daily care</span>
-              <span class="sr-of-pshot"><img src="assets/p-cream.webp" alt="" loading="lazy" decoding="async" /></span>
-              <span class="sr-of-pname">The Cream</span>
-              <span class="sr-of-psize">65 g</span>
-              <span class="sr-of-pprice">&#8369;1,699</span>
-            </button>
-            <button type="button" class="sr-of-pick" onClick="{{ ofTap2 }}" aria-pressed="{{ ofSel2 }}" style="background: {{ ofBg2 }}; border-color: {{ ofBd2 }}; box-shadow: {{ ofSh2 }}">
-              <span class="sr-of-pnum">Package 03</span>
-              <span class="sr-of-ptag" style="color: {{ ofFg2 }}">Complete care</span>
-              <span class="sr-of-pshot"><img src="assets/p-duo.webp" alt="" loading="lazy" decoding="async" /></span>
-              <span class="sr-of-pname">The Duo</span>
-              <span class="sr-of-psize">30 mL + 65 g</span>
-              <span class="sr-of-pprice">&#8369;2,899</span>
-            </button>
-          </div>
-
-          <div class="sr-of-buy">
-            <div class="sr-of-buyrow">
-              <div class="sr-of-qty" role="group" aria-label="Quantity">
-                <button type="button" class="sr-of-qbtn" onClick="{{ ofDec }}" aria-label="One fewer" aria-disabled="{{ ofDecOff }}" style="opacity: {{ ofDecOp }}; pointer-events: {{ ofDecPe }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
-                <span class="sr-of-qn" aria-live="polite">{{ ofQty }}</span>
-                <button type="button" class="sr-of-qbtn" onClick="{{ ofInc }}" aria-label="One more" aria-disabled="{{ ofIncOff }}" style="opacity: {{ ofIncOp }}; pointer-events: {{ ofIncPe }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></button>
-              </div>
-              <span class="sr-of-what"><span class="sr-of-wname">{{ ofName }}</span><span class="sr-of-wsub">{{ ofWhat }}</span></span>
-            </div>
-            <div class="sr-of-money">
-              <span class="sr-of-was" style="display: {{ ofWasShow }}">{{ ofWas }}</span>
-              <span class="sr-of-now">{{ ofNow }}</span>
-              <span class="sr-of-save" style="display: {{ ofSaveShow }}">{{ ofSave }}</span>
-            </div>
-          </div>
-
-          <a class="sr-of-cta" href="Shop.dc.html"><span aria-hidden="true" style="position:relative; display:inline-flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span><span style="position:relative">Shop Your Skincare Routine</span><span class="sr-of-cta-ar" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
-
-          <p class="sr-of-trust">
-            <span class="sr-of-ti"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8fc4f2" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10.5" rx="2"></rect><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"></path></svg>Secure Checkout</span>
-            <span class="sr-of-ti"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8fc4f2" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5h11v11h-11z"></path><path d="M13.5 10h4l3 3.2v4.3h-7z"></path><circle cx="6.8" cy="19" r="1.6"></circle><circle cx="16.8" cy="19" r="1.6"></circle></svg>Nationwide Delivery</span>
-            <span class="sr-of-ti"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8fc4f2" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 9.5a8.5 8.5 0 1 1 1 7"></path><path d="M3 4.5v5h5"></path></svg>7-Day Eligible Returns</span>
-          </p>
-        </div>
-
-      </div>
-    </div>
-  </section>
 
   <section style="background:#fff">
     <div style="position:relative; margin:0; overflow:hidden; background:linear-gradient(122deg, #ffffff 0%, #fafdff 14%, #f1f8fe 32%, #e3f1fd 52%, #d2e9fc 72%, #c0dffa 88%, #b4d8f8 100%)">
@@ -1722,6 +1629,99 @@
 
       </div>
 
+  </section>
+  <section class="sr-of" aria-label="The su-ree routine">
+    <div class="sr-of-wrap">
+
+      <div class="sr-of-head">
+        <h2 class="sr-of-h">Your Complete Routine for<span class="sr-of-alt">Smoother, <span style="white-space:nowrap">Healthier-Looking</span> Skin.</span></h2>
+        <p class="sr-of-lead">Two thoughtfully formulated skincare essentials designed to complement each other, bringing targeted peptide care and hydration into one simple daily routine.</p>
+      </div>
+
+      <div class="sr-of-grid">
+
+        <div class="sr-of-shots">
+          <div class="sr-of-track" style="transform: {{ ofX }}">
+            <div class="sr-of-slide"><img src="assets/sh-duo-scene.webp" alt="The su-ree serum and cream standing together" decoding="async" /></div>
+            <div class="sr-of-slide"><img src="assets/wall-a1.webp" alt="su-ree on a bathroom shelf" loading="lazy" decoding="async" /></div>
+            <div class="sr-of-slide"><img src="assets/sh-cream-scene.webp" alt="The Dual Regenerative Capsule Cream jar, open" loading="lazy" decoding="async" /></div>
+            <div class="sr-of-slide"><img src="assets/wall-a3.webp" alt="su-ree held in the hand" loading="lazy" decoding="async" /></div>
+            <div class="sr-of-slide"><img src="assets/sh-serum-scene.webp" alt="The GHK-Cu+ Snap 8 Serum bottle" loading="lazy" decoding="async" /></div>
+          </div>
+          <button type="button" class="sr-of-arrow sr-of-prev" onClick="{{ ofPrev }}" aria-label="Previous photo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
+          <button type="button" class="sr-of-arrow sr-of-next" onClick="{{ ofNext }}" aria-label="Next photo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
+          <div class="sr-of-dots">
+            <button type="button" class="sr-of-dot" onClick="{{ ofGo0 }}" aria-label="Photo 1" style="width: {{ ofDotW0 }}; background: {{ ofDotBg0 }}"></button>
+            <button type="button" class="sr-of-dot" onClick="{{ ofGo1 }}" aria-label="Photo 2" style="width: {{ ofDotW1 }}; background: {{ ofDotBg1 }}"></button>
+            <button type="button" class="sr-of-dot" onClick="{{ ofGo2 }}" aria-label="Photo 3" style="width: {{ ofDotW2 }}; background: {{ ofDotBg2 }}"></button>
+            <button type="button" class="sr-of-dot" onClick="{{ ofGo3 }}" aria-label="Photo 4" style="width: {{ ofDotW3 }}; background: {{ ofDotBg3 }}"></button>
+            <button type="button" class="sr-of-dot" onClick="{{ ofGo4 }}" aria-label="Photo 5" style="width: {{ ofDotW4 }}; background: {{ ofDotBg4 }}"></button>
+          </div>
+        </div>
+
+        <div>
+          <ul class="sr-of-list" role="list">
+            <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Supports smoother-looking skin</li>
+            <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Helps improve the appearance of fine lines</li>
+            <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Supports skin firmness</li>
+            <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Provides hydration and moisture barrier care</li>
+            <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Simplifies your daily skincare routine</li>
+          </ul>
+
+          <div class="sr-of-picks" role="group" aria-label="Choose a package">
+            <button type="button" class="sr-of-pick" onClick="{{ ofTap0 }}" aria-pressed="{{ ofSel0 }}" style="background: {{ ofBg0 }}; border-color: {{ ofBd0 }}; box-shadow: {{ ofSh0 }}">
+              <span class="sr-of-pnum">Package 01</span>
+              <span class="sr-of-ptag" style="color: {{ ofFg0 }}">Targeted care</span>
+              <span class="sr-of-pshot"><img src="assets/p-serum.webp" alt="" loading="lazy" decoding="async" /></span>
+              <span class="sr-of-pname">The Serum</span>
+              <span class="sr-of-psize">30 mL</span>
+              <span class="sr-of-pprice">&#8369;1,499</span>
+            </button>
+            <button type="button" class="sr-of-pick" onClick="{{ ofTap1 }}" aria-pressed="{{ ofSel1 }}" style="background: {{ ofBg1 }}; border-color: {{ ofBd1 }}; box-shadow: {{ ofSh1 }}">
+              <span class="sr-of-pnum">Package 02</span>
+              <span class="sr-of-ptag" style="color: {{ ofFg1 }}">Daily care</span>
+              <span class="sr-of-pshot"><img src="assets/p-cream.webp" alt="" loading="lazy" decoding="async" /></span>
+              <span class="sr-of-pname">The Cream</span>
+              <span class="sr-of-psize">65 g</span>
+              <span class="sr-of-pprice">&#8369;1,699</span>
+            </button>
+            <button type="button" class="sr-of-pick" onClick="{{ ofTap2 }}" aria-pressed="{{ ofSel2 }}" style="background: {{ ofBg2 }}; border-color: {{ ofBd2 }}; box-shadow: {{ ofSh2 }}">
+              <span class="sr-of-pnum">Package 03</span>
+              <span class="sr-of-ptag" style="color: {{ ofFg2 }}">Complete care</span>
+              <span class="sr-of-pshot"><img src="assets/p-duo.webp" alt="" loading="lazy" decoding="async" /></span>
+              <span class="sr-of-pname">The Duo</span>
+              <span class="sr-of-psize">30 mL + 65 g</span>
+              <span class="sr-of-pprice">&#8369;2,899</span>
+            </button>
+          </div>
+
+          <div class="sr-of-buy">
+            <div class="sr-of-buyrow">
+              <div class="sr-of-qty" role="group" aria-label="Quantity">
+                <button type="button" class="sr-of-qbtn" onClick="{{ ofDec }}" aria-label="One fewer" aria-disabled="{{ ofDecOff }}" style="opacity: {{ ofDecOp }}; pointer-events: {{ ofDecPe }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+                <span class="sr-of-qn" aria-live="polite">{{ ofQty }}</span>
+                <button type="button" class="sr-of-qbtn" onClick="{{ ofInc }}" aria-label="One more" aria-disabled="{{ ofIncOff }}" style="opacity: {{ ofIncOp }}; pointer-events: {{ ofIncPe }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></button>
+              </div>
+              <span class="sr-of-what"><span class="sr-of-wname">{{ ofName }}</span><span class="sr-of-wsub">{{ ofWhat }}</span></span>
+            </div>
+            <div class="sr-of-money">
+              <span class="sr-of-was" style="display: {{ ofWasShow }}">{{ ofWas }}</span>
+              <span class="sr-of-now">{{ ofNow }}</span>
+              <span class="sr-of-save" style="display: {{ ofSaveShow }}">{{ ofSave }}</span>
+            </div>
+          </div>
+
+          <a class="sr-of-cta" href="Shop.dc.html"><span aria-hidden="true" style="position:relative; display:inline-flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span><span style="position:relative">Shop Your Skincare Routine</span><span class="sr-of-cta-ar" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
+
+          <p class="sr-of-trust">
+            <span class="sr-of-ti"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8fc4f2" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10.5" rx="2"></rect><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"></path></svg>Secure Checkout</span>
+            <span class="sr-of-ti"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8fc4f2" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5h11v11h-11z"></path><path d="M13.5 10h4l3 3.2v4.3h-7z"></path><circle cx="6.8" cy="19" r="1.6"></circle><circle cx="16.8" cy="19" r="1.6"></circle></svg>Nationwide Delivery</span>
+            <span class="sr-of-ti"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8fc4f2" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 9.5a8.5 8.5 0 1 1 1 7"></path><path d="M3 4.5v5h5"></path></svg>7-Day Eligible Returns</span>
+          </p>
+        </div>
+
+      </div>
+    </div>
   </section>
 
   <section data-sr-reveal="out" class="sr-vp">
@@ -2454,9 +2454,7 @@ class Component extends DCLogic {
       window.addEventListener("scroll", this.onNavScroll, { passive: true });
       setTimeout(this.onNavScroll, 0);
     }
-    /* the page now opens on the dark offer band, so the pill stays solid:
-       the navy-on-transparent links were unreadable against it */
-    const on = true;
+    const on = !!this.state.navScrolled;
     return {
       navMax: on ? "1240px" : "1800px",
       navPad: on ? "8px 10px 8px 24px" : "8px 10px 8px 14px",
