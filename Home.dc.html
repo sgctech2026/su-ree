@@ -1308,7 +1308,7 @@
   .sr-of {
     position: relative; isolation: isolate; overflow: clip;
     background: radial-gradient(118% 92% at 50% -12%, #1e4169 0%, #16314f 40%, #0e2240 76%, #0a1a31 100%);
-    padding: clamp(54px,6vw,86px) clamp(18px,4vw,40px) clamp(50px,6vw,78px);
+    padding: 112px clamp(18px,4vw,40px) clamp(56px,6vw,86px);
   }
   .sr-of::before {
     content: ""; position: absolute; left: -10%; right: -10%; bottom: -38%; height: 72%; z-index: -1;
@@ -1446,6 +1446,29 @@
     .sr-of-track, .sr-of-cta { transition: none; }
     .sr-of-cta:hover, .sr-of-cta:hover .sr-of-cta-ar { transform: none; }
   }
+
+  /* The offer band lies over the hero like a sheet of paper and lifts
+     away as the page moves; the hero stays pinned underneath until it
+     is whole, and from there the page scrolls as usual.
+     --sr-heroh is the hero's measured height, set from the script. */
+  /* the room below the cover is a spacer, not a margin or padding: a
+     margin collapses out of the wrapper, and a sticky element is held
+     to its parent content box, which padding is not part of. The hero
+     scrolls away through this spacer once the cover has gone. */
+  .sr-veil { position: relative; --sr-heroh: 760px; }
+  .sr-veil-run { height: var(--sr-heroh); }
+  .sr-veil-stage { position: sticky; top: 0; z-index: 0; }
+  .sr-veil-cover {
+    position: relative; z-index: 2;
+    margin-top: calc(-1 * var(--sr-heroh));
+    box-shadow: 0 26px 64px -18px rgba(6,16,30,0.6);
+  }
+  /* no pinning for anyone who asked the screen to hold still */
+  @media (prefers-reduced-motion: reduce) {
+    .sr-veil-run { display: none; }
+    .sr-veil-stage { position: static; }
+    .sr-veil-cover { margin-top: 0; box-shadow: none; }
+  }
 </style>
 </helmet>
 
@@ -1479,250 +1502,259 @@
 
 
 
-  <section style="background:#fff">
-    <div style="position:relative; margin:0; overflow:hidden; background:linear-gradient(122deg, #ffffff 0%, #fafdff 14%, #f1f8fe 32%, #e3f1fd 52%, #d2e9fc 72%, #c0dffa 88%, #b4d8f8 100%)">
+  <div class="sr-veil" ref="{{ veilRef }}">
+    <div class="sr-veil-stage" ref="{{ stageRef }}">
+    <section style="background:#fff">
+      <div style="position:relative; margin:0; overflow:hidden; background:linear-gradient(122deg, #ffffff 0%, #fafdff 14%, #f1f8fe 32%, #e3f1fd 52%, #d2e9fc 72%, #c0dffa 88%, #b4d8f8 100%)">
 
-      <span class="sr-bloom sr-bloom-a" aria-hidden="true"></span>
-      <span class="sr-bloom sr-bloom-b" aria-hidden="true"></span>
-      <span class="sr-bloom sr-bloom-c" aria-hidden="true"></span>
-      <span class="sr-bloom sr-bloom-d" aria-hidden="true"></span>
-      <span class="sr-grain" aria-hidden="true"></span>
+        <span class="sr-bloom sr-bloom-a" aria-hidden="true"></span>
+        <span class="sr-bloom sr-bloom-b" aria-hidden="true"></span>
+        <span class="sr-bloom sr-bloom-c" aria-hidden="true"></span>
+        <span class="sr-bloom sr-bloom-d" aria-hidden="true"></span>
+        <span class="sr-grain" aria-hidden="true"></span>
 
 
-      <div aria-hidden="true" style="position:absolute; inset:0 0 auto 0; height:210px; background:linear-gradient(180deg, rgba(255,255,255,0.78) 0%, rgba(255,255,255,0.34) 52%, rgba(255,255,255,0) 100%)"></div>
+        <div aria-hidden="true" style="position:absolute; inset:0 0 auto 0; height:210px; background:linear-gradient(180deg, rgba(255,255,255,0.78) 0%, rgba(255,255,255,0.34) 52%, rgba(255,255,255,0) 100%)"></div>
 
 
-      <div class="r-pad40 r-heropad" onMouseEnter="{{ holdHero }}" onMouseLeave="{{ playHero }}" style="position:relative; z-index:2; width:100%; padding:112px 40px 182px max(40px, calc((100% - 1120px) / 2)); box-sizing:border-box">
-      <div style="position:relative; display:grid">
-        <div class="r-2col r-minh" style="position:relative; z-index:1; grid-area:1 / 1 / 2 / 2; display:grid; grid-template-columns:minmax(0,800px) minmax(0,1fr); align-items:center; gap:clamp(28px,4.5vw,76px); min-height:470px; opacity: {{ s0Op }}; visibility: {{ s0Vis }}; transform: {{ s0Tr }}; pointer-events: {{ s0Pe }}; transition:opacity 560ms ease, transform 560ms ease">
-        <div class="r-herocopy">
-          <p style="margin:0; display:flex; align-items:center; gap:14px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:12.5px; font-weight:500; color:#4f84bd; letter-spacing:3.4px">SU-REE SKINCARE<span aria-hidden="true" style="height:1px; width:26px; background:rgba(74,127,181,0.5)"></span>THE DUO<span aria-hidden="true" class="r-eyetail" style="flex:0 1 92px; height:1px; background:linear-gradient(90deg,#8fb6dd 0%,rgba(143,182,221,0) 100%)"></span></p>
-          <h1 style="margin:16px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; color:#1b3456; font-weight:400">
-            <span class="r-nowrap" style="display:block; font-weight:700; font-size:clamp(31px, 5.0vw, 74px); line-height:1.0; letter-spacing:-2.5px; white-space:nowrap">Verified by science.</span>
-            <span class="r-nowrap" style="display:block; margin-top:4px; font-weight:700; font-style:italic; font-size:clamp(27px, 4.3vw, 64px); line-height:1.05; letter-spacing:-2.0px; white-space:nowrap; color:#6ba6e8">Visible in your mirror.</span>
-          </h1>
-          <p style="margin:22px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:14.5px; font-weight:400; color:#4a6184; max-width:400px; line-height:1.65">PDRN and GHK-Cu held in separate beads, not pre-mixed into the gel. Every jar carries a lot code that opens its own batch report.</p>
-          <a href="Shop.dc.html" style="position:relative; display:inline-flex; overflow:hidden; isolation:isolate; align-items:center; gap:10px; margin-top:30px; border-radius:9999px; background:linear-gradient(135deg,#5ba0ea 0%,#2f85e0 48%,#1f6ec9 100%); padding:16px 34px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:15px; font-weight:600; color:#fff; border-top:0.5px solid rgba(255,255,255,0.3); box-shadow:inset 0 1px 0 rgba(255,255,255,0.3), 0 18px 36px -14px rgba(47,133,224,0.8); transition:transform 220ms, box-shadow 220ms" style-hover="color:#fff; transform:translateY(-1px); box-shadow:inset 0 1px 0 rgba(255,255,255,0.34), 0 24px 44px -16px rgba(47,133,224,0.9)"><span aria-hidden="true" style="position:absolute; top:0; bottom:0; left:0; width:30%; background:linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.42) 48%, rgba(255,255,255,0) 100%); animation:sr-sheen 5.5s ease-in-out 1.2s infinite; pointer-events:none"></span><span aria-hidden="true" style="position:relative; display:inline-flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span><span style="position:relative">Order Now</span></a>
-        </div>
-
-                    <div class="r-pull r-ring" style="position:relative; width:100%; max-width:640px; margin:0 auto; justify-self:center; transform:translate(calc(-1 * clamp(0px, 7.6vw, 120px)), clamp(0px, 4.4vw, 68px)); aspect-ratio:1 / 1; display:flex; align-items:center; justify-content:center">
-            <span class="sr-bgorb" aria-hidden="true" style="position:absolute; inset:14%; border-radius:9999px; background:radial-gradient(circle at 50% 50%, rgba(255,255,255,0.95) 0%, rgba(228,241,252,0.7) 52%, rgba(228,241,252,0) 78%)"></span>
-            <span aria-hidden="true" style="position:absolute; inset:7%; border-radius:9999px; border:1px solid rgba(47,123,224,0.22)"></span>
-            <span class="sr-bgorb" aria-hidden="true" style="position:absolute; inset:7%; border-radius:9999px; animation:sr-orbit 9s linear infinite; background:conic-gradient(from 0deg, rgba(47,123,224,0) 0deg, rgba(47,123,224,0) 232deg, rgba(47,123,224,0.55) 330deg, rgba(47,123,224,0) 360deg); -webkit-mask:radial-gradient(circle at 50% 50%, transparent 0 calc(50% - 1.6px), #000 calc(50% - 1.6px) 50%, transparent 50%); mask:radial-gradient(circle at 50% 50%, transparent 0 calc(50% - 1.6px), #000 calc(50% - 1.6px) 50%, transparent 50%)"></span>
-            <span class="r-orbit" aria-hidden="true" style="position:absolute; inset:21%; border-radius:9999px; border:1px dashed rgba(47,123,224,0.16); animation:sr-orbit 64s linear infinite"></span>
-            <span class="r-orbit" aria-hidden="true" style="position:absolute; inset:0; animation:sr-orbit 38s linear infinite">
-              <span style="position:absolute; inset:0; transform:rotate(40deg)"><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%); display:block; height:11px; width:11px; border-radius:9999px; background:linear-gradient(135deg,#6aa9ec 0%,#438fe0 100%); box-shadow:0 0 0 5px rgba(47,123,224,0.12)"></span><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%) translateY(-30px); display:block"><span style="display:block; animation:sr-orbit-rev 38s linear infinite"><span style="display:block; transform:rotate(-40deg)"><span class="r-chip" style="display:inline-block; white-space:nowrap; border-radius:9999px; background:rgba(255,255,255,0.94); border:1px solid rgba(47,123,224,0.2); box-shadow:0 10px 22px -14px rgba(18,59,102,0.75); padding:6px 13px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11.5px; font-weight:600; color:#1b3456; letter-spacing:0.2px">PDRN 2400 mg</span></span></span></span></span>
-              <span style="position:absolute; inset:0; transform:rotate(165deg)"><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%); display:block; height:11px; width:11px; border-radius:9999px; background:linear-gradient(135deg,#6aa9ec 0%,#438fe0 100%); box-shadow:0 0 0 5px rgba(47,123,224,0.12)"></span><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%) translateY(-30px); display:block"><span style="display:block; animation:sr-orbit-rev 38s linear infinite"><span style="display:block; transform:rotate(-165deg)"><span class="r-chip" style="display:inline-block; white-space:nowrap; border-radius:9999px; background:rgba(255,255,255,0.94); border:1px solid rgba(47,123,224,0.2); box-shadow:0 10px 22px -14px rgba(18,59,102,0.75); padding:6px 13px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11.5px; font-weight:600; color:#1b3456; letter-spacing:0.2px">GHK-Cu 2400 mg</span></span></span></span></span>
-              <span style="position:absolute; inset:0; transform:rotate(285deg)"><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%); display:block; height:11px; width:11px; border-radius:9999px; background:linear-gradient(135deg,#6aa9ec 0%,#438fe0 100%); box-shadow:0 0 0 5px rgba(47,123,224,0.12)"></span><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%) translateY(-30px); display:block"><span style="display:block; animation:sr-orbit-rev 38s linear infinite"><span style="display:block; transform:rotate(-285deg)"><span class="r-chip" style="display:inline-block; white-space:nowrap; border-radius:9999px; background:rgba(255,255,255,0.94); border:1px solid rgba(47,123,224,0.2); box-shadow:0 10px 22px -14px rgba(18,59,102,0.75); padding:6px 13px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11.5px; font-weight:600; color:#1b3456; letter-spacing:0.2px">Pink + blue beads</span></span></span></span></span>
-            </span>
-            <img src="assets/hero-duo-pack.webp" alt="su-ree GHK-Cu Serum and Dual-Replenishing Capsule Cream with their cartons" decoding="async" style="position:relative; display:block; width:auto; height:auto; max-width:84%; max-height:58%; object-fit:contain; animation:sr-hero-float 7.5s ease-in-out infinite; filter:drop-shadow(0 22px 30px rgba(18,38,58,0.24))" />
-          </div>
-        </div>
-        <div class="r-2col r-minh" style="position:relative; z-index:1; grid-area:1 / 1 / 2 / 2; display:grid; grid-template-columns:minmax(0,800px) minmax(0,1fr); align-items:center; gap:clamp(28px,4.5vw,76px); min-height:470px; opacity: {{ s1Op }}; visibility: {{ s1Vis }}; transform: {{ s1Tr }}; pointer-events: {{ s1Pe }}; transition:opacity 560ms ease, transform 560ms ease">
-        <div class="r-herocopy">
-          <p style="margin:0; display:flex; align-items:center; gap:14px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:12.5px; font-weight:500; color:#4f84bd; letter-spacing:3.4px">SU-REE SKINCARE<span aria-hidden="true" style="height:1px; width:26px; background:rgba(74,127,181,0.5)"></span>THE CREAM<span aria-hidden="true" class="r-eyetail" style="flex:0 1 92px; height:1px; background:linear-gradient(90deg,#8fb6dd 0%,rgba(143,182,221,0) 100%)"></span></p>
-          <h1 style="margin:16px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; color:#1b3456; font-weight:400">
-            <span class="r-nowrap" style="display:block; font-weight:700; font-size:clamp(38px, 5.9vw, 84px); line-height:1.0; letter-spacing:-2.8px; white-space:nowrap">Dual Regenerative</span>
-            <span class="r-nowrap" style="display:block; margin-top:2px; font-weight:700; font-style:italic; font-size:clamp(33px, 5.2vw, 75px); line-height:1.04; letter-spacing:-2.4px; white-space:nowrap; color:#6ba6e8">Capsule Cream.</span>
-          </h1>
-          <p style="margin:22px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:14.5px; font-weight:400; color:#4a6184; max-width:400px; line-height:1.65">DNA repair, firming and barrier renewal, as printed on the carton. PDRN and GHK-Cu are held in separate beads, not pre-mixed into the gel.</p>
-          <a href="Shop.dc.html?p=cream" style="position:relative; display:inline-flex; overflow:hidden; isolation:isolate; align-items:center; gap:10px; margin-top:30px; border-radius:9999px; background:linear-gradient(135deg,#5ba0ea 0%,#2f85e0 48%,#1f6ec9 100%); padding:16px 34px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:15px; font-weight:600; color:#fff; border-top:0.5px solid rgba(255,255,255,0.3); box-shadow:inset 0 1px 0 rgba(255,255,255,0.3), 0 18px 36px -14px rgba(47,133,224,0.8); transition:transform 220ms, box-shadow 220ms" style-hover="color:#fff; transform:translateY(-1px); box-shadow:inset 0 1px 0 rgba(255,255,255,0.34), 0 24px 44px -16px rgba(47,133,224,0.9)"><span aria-hidden="true" style="position:absolute; top:0; bottom:0; left:0; width:30%; background:linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.42) 48%, rgba(255,255,255,0) 100%); animation:sr-sheen 5.5s ease-in-out 1.2s infinite; pointer-events:none"></span><span aria-hidden="true" style="position:relative; display:inline-flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span><span style="position:relative">Order Now</span></a>
-        </div>
-
-          <div class="r-pull r-ring" style="position:relative; width:100%; max-width:500px; margin:0 auto; justify-self:center; transform:translate(calc(-1 * clamp(0px, 7.6vw, 120px)), clamp(0px, 4.4vw, 68px)); aspect-ratio:1 / 1; display:flex; align-items:center; justify-content:center">
-            <span class="sr-bgorb" aria-hidden="true" style="position:absolute; inset:14%; border-radius:9999px; background:radial-gradient(circle at 50% 50%, rgba(255,255,255,0.95) 0%, rgba(228,241,252,0.7) 52%, rgba(228,241,252,0) 78%)"></span>
-            <span aria-hidden="true" style="position:absolute; inset:7%; border-radius:9999px; border:1px solid rgba(47,123,224,0.22)"></span>
-            <span class="sr-bgorb" aria-hidden="true" style="position:absolute; inset:7%; border-radius:9999px; animation:sr-orbit 9s linear infinite; background:conic-gradient(from 0deg, rgba(47,123,224,0) 0deg, rgba(47,123,224,0) 232deg, rgba(47,123,224,0.55) 330deg, rgba(47,123,224,0) 360deg); -webkit-mask:radial-gradient(circle at 50% 50%, transparent 0 calc(50% - 1.6px), #000 calc(50% - 1.6px) 50%, transparent 50%); mask:radial-gradient(circle at 50% 50%, transparent 0 calc(50% - 1.6px), #000 calc(50% - 1.6px) 50%, transparent 50%)"></span>
-            <span class="r-orbit" aria-hidden="true" style="position:absolute; inset:21%; border-radius:9999px; border:1px dashed rgba(47,123,224,0.16); animation:sr-orbit 64s linear infinite"></span>
-            <span class="r-orbit" aria-hidden="true" style="position:absolute; inset:0; animation:sr-orbit 38s linear infinite">
-              <span style="position:absolute; inset:0; transform:rotate(40deg)"><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%); display:block; height:11px; width:11px; border-radius:9999px; background:linear-gradient(135deg,#6aa9ec 0%,#438fe0 100%); box-shadow:0 0 0 5px rgba(47,123,224,0.12)"></span><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%) translateY(-30px); display:block"><span style="display:block; animation:sr-orbit-rev 38s linear infinite"><span style="display:block; transform:rotate(-40deg)"><span class="r-chip" style="display:inline-block; white-space:nowrap; border-radius:9999px; background:rgba(255,255,255,0.94); border:1px solid rgba(47,123,224,0.2); box-shadow:0 10px 22px -14px rgba(18,59,102,0.75); padding:6px 13px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11.5px; font-weight:600; color:#1b3456; letter-spacing:0.2px">PDRN 2400 mg</span></span></span></span></span>
-              <span style="position:absolute; inset:0; transform:rotate(165deg)"><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%); display:block; height:11px; width:11px; border-radius:9999px; background:linear-gradient(135deg,#6aa9ec 0%,#438fe0 100%); box-shadow:0 0 0 5px rgba(47,123,224,0.12)"></span><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%) translateY(-30px); display:block"><span style="display:block; animation:sr-orbit-rev 38s linear infinite"><span style="display:block; transform:rotate(-165deg)"><span class="r-chip" style="display:inline-block; white-space:nowrap; border-radius:9999px; background:rgba(255,255,255,0.94); border:1px solid rgba(47,123,224,0.2); box-shadow:0 10px 22px -14px rgba(18,59,102,0.75); padding:6px 13px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11.5px; font-weight:600; color:#1b3456; letter-spacing:0.2px">GHK-Cu 2400 mg</span></span></span></span></span>
-              <span style="position:absolute; inset:0; transform:rotate(285deg)"><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%); display:block; height:11px; width:11px; border-radius:9999px; background:linear-gradient(135deg,#6aa9ec 0%,#438fe0 100%); box-shadow:0 0 0 5px rgba(47,123,224,0.12)"></span><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%) translateY(-30px); display:block"><span style="display:block; animation:sr-orbit-rev 38s linear infinite"><span style="display:block; transform:rotate(-285deg)"><span class="r-chip" style="display:inline-block; white-space:nowrap; border-radius:9999px; background:rgba(255,255,255,0.94); border:1px solid rgba(47,123,224,0.2); box-shadow:0 10px 22px -14px rgba(18,59,102,0.75); padding:6px 13px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11.5px; font-weight:600; color:#1b3456; letter-spacing:0.2px">Pink + blue beads</span></span></span></span></span>
-            </span>
-            <img src="assets/p-cream.webp" alt="su-ree Dual Regenerative Capsule Cream jar" decoding="async" style="position:relative; display:block; width:auto; height:auto; max-width:62%; max-height:64%; object-fit:contain; animation:sr-hero-float 7.5s ease-in-out infinite; filter:drop-shadow(0 22px 30px rgba(18,38,58,0.24))" />
-          </div>
-        </div>
-        <div class="r-2col r-minh" style="position:relative; z-index:1; grid-area:1 / 1 / 2 / 2; display:grid; grid-template-columns:minmax(0,800px) minmax(0,1fr); align-items:center; gap:clamp(28px,4.5vw,76px); min-height:470px; opacity: {{ s2Op }}; visibility: {{ s2Vis }}; transform: {{ s2Tr }}; pointer-events: {{ s2Pe }}; transition:opacity 560ms ease, transform 560ms ease">
-        <div class="r-herocopy">
-          <p style="margin:0; display:flex; align-items:center; gap:14px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:12.5px; font-weight:500; color:#4f84bd; letter-spacing:3.4px">SU-REE SKINCARE<span aria-hidden="true" style="height:1px; width:26px; background:rgba(74,127,181,0.5)"></span>THE SERUM<span aria-hidden="true" class="r-eyetail" style="flex:0 1 92px; height:1px; background:linear-gradient(90deg,#8fb6dd 0%,rgba(143,182,221,0) 100%)"></span></p>
-          <h1 style="margin:16px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; color:#1b3456; font-weight:400">
-            <span class="r-nowrap" style="display:block; font-weight:700; font-size:clamp(38px, 5.9vw, 84px); line-height:1.0; letter-spacing:-2.8px; white-space:nowrap">GHK-Cu+</span>
-            <span class="r-nowrap" style="display:block; margin-top:2px; font-weight:700; font-style:italic; font-size:clamp(33px, 5.2vw, 75px); line-height:1.04; letter-spacing:-2.4px; white-space:nowrap; color:#6ba6e8">Snap 8 Serum.</span>
-          </h1>
-          <p style="margin:22px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:14.5px; font-weight:400; color:#4a6184; max-width:400px; line-height:1.65">Fine-line care, deep hydration and barrier support, as printed on the carton. Three peptides in one water-light layer, under the cream.</p>
-          <a href="Shop.dc.html?p=serum" style="position:relative; display:inline-flex; overflow:hidden; isolation:isolate; align-items:center; gap:10px; margin-top:30px; border-radius:9999px; background:linear-gradient(135deg,#5ba0ea 0%,#2f85e0 48%,#1f6ec9 100%); padding:16px 34px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:15px; font-weight:600; color:#fff; border-top:0.5px solid rgba(255,255,255,0.3); box-shadow:inset 0 1px 0 rgba(255,255,255,0.3), 0 18px 36px -14px rgba(47,133,224,0.8); transition:transform 220ms, box-shadow 220ms" style-hover="color:#fff; transform:translateY(-1px); box-shadow:inset 0 1px 0 rgba(255,255,255,0.34), 0 24px 44px -16px rgba(47,133,224,0.9)"><span aria-hidden="true" style="position:absolute; top:0; bottom:0; left:0; width:30%; background:linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.42) 48%, rgba(255,255,255,0) 100%); animation:sr-sheen 5.5s ease-in-out 1.2s infinite; pointer-events:none"></span><span aria-hidden="true" style="position:relative; display:inline-flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span><span style="position:relative">Order Now</span></a>
-        </div>
-
-          <div class="r-pull r-ring" style="position:relative; width:100%; max-width:500px; margin:0 auto; justify-self:center; transform:translate(calc(-1 * clamp(0px, 7.6vw, 120px)), clamp(0px, 4.4vw, 68px)); aspect-ratio:1 / 1; display:flex; align-items:center; justify-content:center">
-            <span class="sr-bgorb" aria-hidden="true" style="position:absolute; inset:14%; border-radius:9999px; background:radial-gradient(circle at 50% 50%, rgba(255,255,255,0.95) 0%, rgba(228,241,252,0.7) 52%, rgba(228,241,252,0) 78%)"></span>
-            <span aria-hidden="true" style="position:absolute; inset:7%; border-radius:9999px; border:1px solid rgba(47,123,224,0.22)"></span>
-            <span class="sr-bgorb" aria-hidden="true" style="position:absolute; inset:7%; border-radius:9999px; animation:sr-orbit 9s linear infinite; background:conic-gradient(from 0deg, rgba(47,123,224,0) 0deg, rgba(47,123,224,0) 232deg, rgba(47,123,224,0.55) 330deg, rgba(47,123,224,0) 360deg); -webkit-mask:radial-gradient(circle at 50% 50%, transparent 0 calc(50% - 1.6px), #000 calc(50% - 1.6px) 50%, transparent 50%); mask:radial-gradient(circle at 50% 50%, transparent 0 calc(50% - 1.6px), #000 calc(50% - 1.6px) 50%, transparent 50%)"></span>
-            <span class="r-orbit" aria-hidden="true" style="position:absolute; inset:21%; border-radius:9999px; border:1px dashed rgba(47,123,224,0.16); animation:sr-orbit 64s linear infinite"></span>
-            <span class="r-orbit" aria-hidden="true" style="position:absolute; inset:0; animation:sr-orbit 38s linear infinite">
-              <span style="position:absolute; inset:0; transform:rotate(40deg)"><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%); display:block; height:11px; width:11px; border-radius:9999px; background:linear-gradient(135deg,#6aa9ec 0%,#438fe0 100%); box-shadow:0 0 0 5px rgba(47,123,224,0.12)"></span><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%) translateY(-30px); display:block"><span style="display:block; animation:sr-orbit-rev 38s linear infinite"><span style="display:block; transform:rotate(-40deg)"><span class="r-chip" style="display:inline-block; white-space:nowrap; border-radius:9999px; background:rgba(255,255,255,0.94); border:1px solid rgba(47,123,224,0.2); box-shadow:0 10px 22px -14px rgba(18,59,102,0.75); padding:6px 13px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11.5px; font-weight:600; color:#1b3456; letter-spacing:0.2px">GHK-Cu 1200 mg</span></span></span></span></span>
-              <span style="position:absolute; inset:0; transform:rotate(165deg)"><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%); display:block; height:11px; width:11px; border-radius:9999px; background:linear-gradient(135deg,#6aa9ec 0%,#438fe0 100%); box-shadow:0 0 0 5px rgba(47,123,224,0.12)"></span><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%) translateY(-30px); display:block"><span style="display:block; animation:sr-orbit-rev 38s linear infinite"><span style="display:block; transform:rotate(-165deg)"><span class="r-chip" style="display:inline-block; white-space:nowrap; border-radius:9999px; background:rgba(255,255,255,0.94); border:1px solid rgba(47,123,224,0.2); box-shadow:0 10px 22px -14px rgba(18,59,102,0.75); padding:6px 13px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11.5px; font-weight:600; color:#1b3456; letter-spacing:0.2px">SNAP-8 10,000 mcg</span></span></span></span></span>
-              <span style="position:absolute; inset:0; transform:rotate(285deg)"><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%); display:block; height:11px; width:11px; border-radius:9999px; background:linear-gradient(135deg,#6aa9ec 0%,#438fe0 100%); box-shadow:0 0 0 5px rgba(47,123,224,0.12)"></span><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%) translateY(-30px); display:block"><span style="display:block; animation:sr-orbit-rev 38s linear infinite"><span style="display:block; transform:rotate(-285deg)"><span class="r-chip" style="display:inline-block; white-space:nowrap; border-radius:9999px; background:rgba(255,255,255,0.94); border:1px solid rgba(47,123,224,0.2); box-shadow:0 10px 22px -14px rgba(18,59,102,0.75); padding:6px 13px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11.5px; font-weight:600; color:#1b3456; letter-spacing:0.2px">Argireline</span></span></span></span></span>
-            </span>
-            <img src="assets/p-serum.webp" alt="su-ree GHK-Cu+ Snap 8 Serum bottle" decoding="async" style="position:relative; display:block; width:auto; height:auto; max-width:42%; max-height:78%; object-fit:contain; animation:sr-hero-float 7.5s ease-in-out infinite; filter:drop-shadow(0 22px 30px rgba(18,38,58,0.24))" />
-          </div>
-        </div>
-      </div>
-
-      </div>
-
-      <div class="r-herodots" style="position:absolute; z-index:3; right:46px; bottom:170px; display:flex; align-items:center; gap:10px; padding:9px 13px; border-radius:9999px; background:rgba(255,255,255,0.62); border:1px solid rgba(255,255,255,0.9); box-shadow:0 12px 30px -18px rgba(18,59,102,0.7); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px)"><button type="button" class="sr-herodot" onClick="{{ go0 }}" aria-label="Show slide 1" aria-current="{{ d0On }}"><span aria-hidden="true" class="sr-dot-fill"></span></button><button type="button" class="sr-herodot" onClick="{{ go1 }}" aria-label="Show slide 2" aria-current="{{ d1On }}"><span aria-hidden="true" class="sr-dot-fill"></span></button><button type="button" class="sr-herodot" onClick="{{ go2 }}" aria-label="Show slide 3" aria-current="{{ d2On }}"><span aria-hidden="true" class="sr-dot-fill"></span></button>
-            <span aria-hidden="true" style="height:16px; width:1px; flex-shrink:0; background:rgba(47,123,224,0.28)"></span>
-            <button type="button" class="sr-heronext" onClick="{{ nextHero }}" aria-label="Next slide"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button></div>
-
-      <div aria-hidden="true" style="position:absolute; z-index:2; right:0; bottom:0; left:0; line-height:0; pointer-events:none">
-        <svg class="r-wave" viewBox="0 0 1440 200" preserveAspectRatio="none" style="display:block; width:100%; height:147px">
-          <defs>
-            <linearGradient id="sr-wave-body" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#ffffff" stop-opacity="0.9"></stop>
-              <stop offset="0.18" stop-color="#b7d5f5" stop-opacity="0.9"></stop>
-              <stop offset="0.6" stop-color="#d7e6f8" stop-opacity="0.6"></stop>
-              <stop offset="1" stop-color="#ffffff" stop-opacity="0"></stop>
-            </linearGradient>
-            <linearGradient id="sr-wave-fade" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stop-color="#b7d5f5" stop-opacity="0.05"></stop>
-              <stop offset="0.4" stop-color="#b7d5f5" stop-opacity="0.3"></stop>
-              <stop offset="0.75" stop-color="#b7d5f5" stop-opacity="0.7"></stop>
-              <stop offset="1" stop-color="#b7d5f5" stop-opacity="0.75"></stop>
-            </linearGradient>
-            <linearGradient id="sr-wave-crest" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stop-color="#ffffff" stop-opacity="0.7"></stop>
-              <stop offset="0.3" stop-color="#ffffff" stop-opacity="1"></stop>
-              <stop offset="0.6" stop-color="#e7f3ff" stop-opacity="0.9"></stop>
-              <stop offset="0.85" stop-color="#ffffff" stop-opacity="1"></stop>
-              <stop offset="1" stop-color="#ffffff" stop-opacity="0.7"></stop>
-            </linearGradient>
-            <filter id="sr-blur-soft" filterUnits="userSpaceOnUse" x="-40" y="-80" width="1520" height="360">
-              <feGaussianBlur stdDeviation="10 16"></feGaussianBlur>
-            </filter>
-            <filter id="sr-blur-mid" filterUnits="userSpaceOnUse" x="-40" y="-80" width="1520" height="360">
-              <feGaussianBlur stdDeviation="3 5"></feGaussianBlur>
-            </filter>
-            <filter id="sr-blur-fine" filterUnits="userSpaceOnUse" x="-40" y="-80" width="1520" height="360">
-              <feGaussianBlur stdDeviation="1 1.6"></feGaussianBlur>
-            </filter>
-          </defs>
-
-          <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42 L1440,200 L0,200 Z" fill="#ffffff"></path>
-
-          <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42" fill="none" stroke="#ffffff" stroke-width="28" stroke-opacity="0.9" transform="translate(0,22)" filter="url(#sr-blur-soft)"></path>
-
-          <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42" fill="none" stroke="url(#sr-wave-fade)" stroke-width="22" transform="translate(0,11)" filter="url(#sr-blur-soft)"></path>
-
-          <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42 L1440,72 C1395,80 1345,94 1290,116 C1180,162 1080,200 940,196 C780,192 660,132 520,92 C330,42 170,44 0,92 Z" fill="url(#sr-wave-body)" filter="url(#sr-blur-fine)"></path>
-
-          <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42" fill="none" stroke="#ffffff" stroke-width="5" stroke-opacity="0.95" transform="translate(0,-1.5)" filter="url(#sr-blur-mid)"></path>
-
-          <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42" fill="none" stroke="url(#sr-wave-crest)" stroke-width="2" filter="url(#sr-blur-fine)"></path>
-          <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42" fill="none" stroke="#ffffff" stroke-width="1"></path>
-
-          <path d="M0,124 C150,86 320,64 520,82" fill="none" stroke="#b7d5f5" stroke-width="5" stroke-opacity="0.5" filter="url(#sr-blur-mid)"></path>
-          <path d="M0,124 C150,86 320,64 520,82" fill="none" stroke="#ffffff" stroke-width="1.4" stroke-opacity="0.9" filter="url(#sr-blur-fine)"></path>
-
-          <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42" fill="none" stroke="#cfe2f8" stroke-width="1" stroke-opacity="0.6" transform="translate(0,24)" filter="url(#sr-blur-fine)"></path>
-        </svg>
-      </div>
-
-      </div>
-
-  </section>
-  <section class="sr-of" aria-label="The su-ree routine">
-    <div class="sr-of-wrap">
-
-      <div class="sr-of-head">
-        <h2 class="sr-of-h">Your Complete Routine for<span class="sr-of-alt">Smoother, <span style="white-space:nowrap">Healthier-Looking</span> Skin.</span></h2>
-        <p class="sr-of-lead">Two thoughtfully formulated skincare essentials designed to complement each other, bringing targeted peptide care and hydration into one simple daily routine.</p>
-      </div>
-
-      <div class="sr-of-grid">
-
-        <div class="sr-of-shots">
-          <div class="sr-of-track" style="transform: {{ ofX }}">
-            <div class="sr-of-slide"><img src="assets/sh-duo-scene.webp" alt="The su-ree serum and cream standing together" decoding="async" /></div>
-            <div class="sr-of-slide"><img src="assets/wall-a1.webp" alt="su-ree on a bathroom shelf" loading="lazy" decoding="async" /></div>
-            <div class="sr-of-slide"><img src="assets/sh-cream-scene.webp" alt="The Dual Regenerative Capsule Cream jar, open" loading="lazy" decoding="async" /></div>
-            <div class="sr-of-slide"><img src="assets/wall-a3.webp" alt="su-ree held in the hand" loading="lazy" decoding="async" /></div>
-            <div class="sr-of-slide"><img src="assets/sh-serum-scene.webp" alt="The GHK-Cu+ Snap 8 Serum bottle" loading="lazy" decoding="async" /></div>
-          </div>
-          <button type="button" class="sr-of-arrow sr-of-prev" onClick="{{ ofPrev }}" aria-label="Previous photo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
-          <button type="button" class="sr-of-arrow sr-of-next" onClick="{{ ofNext }}" aria-label="Next photo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
-          <div class="sr-of-dots">
-            <button type="button" class="sr-of-dot" onClick="{{ ofGo0 }}" aria-label="Photo 1" style="width: {{ ofDotW0 }}; background: {{ ofDotBg0 }}"></button>
-            <button type="button" class="sr-of-dot" onClick="{{ ofGo1 }}" aria-label="Photo 2" style="width: {{ ofDotW1 }}; background: {{ ofDotBg1 }}"></button>
-            <button type="button" class="sr-of-dot" onClick="{{ ofGo2 }}" aria-label="Photo 3" style="width: {{ ofDotW2 }}; background: {{ ofDotBg2 }}"></button>
-            <button type="button" class="sr-of-dot" onClick="{{ ofGo3 }}" aria-label="Photo 4" style="width: {{ ofDotW3 }}; background: {{ ofDotBg3 }}"></button>
-            <button type="button" class="sr-of-dot" onClick="{{ ofGo4 }}" aria-label="Photo 5" style="width: {{ ofDotW4 }}; background: {{ ofDotBg4 }}"></button>
-          </div>
-        </div>
-
-        <div>
-          <ul class="sr-of-list" role="list">
-            <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Supports smoother-looking skin</li>
-            <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Helps improve the appearance of fine lines</li>
-            <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Supports skin firmness</li>
-            <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Provides hydration and moisture barrier care</li>
-            <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Simplifies your daily skincare routine</li>
-          </ul>
-
-          <div class="sr-of-picks" role="group" aria-label="Choose a package">
-            <button type="button" class="sr-of-pick" onClick="{{ ofTap0 }}" aria-pressed="{{ ofSel0 }}" style="background: {{ ofBg0 }}; border-color: {{ ofBd0 }}; box-shadow: {{ ofSh0 }}">
-              <span class="sr-of-pnum">Package 01</span>
-              <span class="sr-of-ptag" style="color: {{ ofFg0 }}">Targeted care</span>
-              <span class="sr-of-pshot"><img src="assets/p-serum.webp" alt="" loading="lazy" decoding="async" /></span>
-              <span class="sr-of-pname">The Serum</span>
-              <span class="sr-of-psize">30 mL</span>
-              <span class="sr-of-pprice">&#8369;1,499</span>
-            </button>
-            <button type="button" class="sr-of-pick" onClick="{{ ofTap1 }}" aria-pressed="{{ ofSel1 }}" style="background: {{ ofBg1 }}; border-color: {{ ofBd1 }}; box-shadow: {{ ofSh1 }}">
-              <span class="sr-of-pnum">Package 02</span>
-              <span class="sr-of-ptag" style="color: {{ ofFg1 }}">Daily care</span>
-              <span class="sr-of-pshot"><img src="assets/p-cream.webp" alt="" loading="lazy" decoding="async" /></span>
-              <span class="sr-of-pname">The Cream</span>
-              <span class="sr-of-psize">65 g</span>
-              <span class="sr-of-pprice">&#8369;1,699</span>
-            </button>
-            <button type="button" class="sr-of-pick" onClick="{{ ofTap2 }}" aria-pressed="{{ ofSel2 }}" style="background: {{ ofBg2 }}; border-color: {{ ofBd2 }}; box-shadow: {{ ofSh2 }}">
-              <span class="sr-of-pnum">Package 03</span>
-              <span class="sr-of-ptag" style="color: {{ ofFg2 }}">Complete care</span>
-              <span class="sr-of-pshot"><img src="assets/p-duo.webp" alt="" loading="lazy" decoding="async" /></span>
-              <span class="sr-of-pname">The Duo</span>
-              <span class="sr-of-psize">30 mL + 65 g</span>
-              <span class="sr-of-pprice">&#8369;2,899</span>
-            </button>
+        <div class="r-pad40 r-heropad" onMouseEnter="{{ holdHero }}" onMouseLeave="{{ playHero }}" style="position:relative; z-index:2; width:100%; padding:112px 40px 182px max(40px, calc((100% - 1120px) / 2)); box-sizing:border-box">
+        <div style="position:relative; display:grid">
+          <div class="r-2col r-minh" style="position:relative; z-index:1; grid-area:1 / 1 / 2 / 2; display:grid; grid-template-columns:minmax(0,800px) minmax(0,1fr); align-items:center; gap:clamp(28px,4.5vw,76px); min-height:470px; opacity: {{ s0Op }}; visibility: {{ s0Vis }}; transform: {{ s0Tr }}; pointer-events: {{ s0Pe }}; transition:opacity 560ms ease, transform 560ms ease">
+          <div class="r-herocopy">
+            <p style="margin:0; display:flex; align-items:center; gap:14px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:12.5px; font-weight:500; color:#4f84bd; letter-spacing:3.4px">SU-REE SKINCARE<span aria-hidden="true" style="height:1px; width:26px; background:rgba(74,127,181,0.5)"></span>THE DUO<span aria-hidden="true" class="r-eyetail" style="flex:0 1 92px; height:1px; background:linear-gradient(90deg,#8fb6dd 0%,rgba(143,182,221,0) 100%)"></span></p>
+            <h1 style="margin:16px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; color:#1b3456; font-weight:400">
+              <span class="r-nowrap" style="display:block; font-weight:700; font-size:clamp(31px, 5.0vw, 74px); line-height:1.0; letter-spacing:-2.5px; white-space:nowrap">Verified by science.</span>
+              <span class="r-nowrap" style="display:block; margin-top:4px; font-weight:700; font-style:italic; font-size:clamp(27px, 4.3vw, 64px); line-height:1.05; letter-spacing:-2.0px; white-space:nowrap; color:#6ba6e8">Visible in your mirror.</span>
+            </h1>
+            <p style="margin:22px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:14.5px; font-weight:400; color:#4a6184; max-width:400px; line-height:1.65">PDRN and GHK-Cu held in separate beads, not pre-mixed into the gel. Every jar carries a lot code that opens its own batch report.</p>
+            <a href="Shop.dc.html" style="position:relative; display:inline-flex; overflow:hidden; isolation:isolate; align-items:center; gap:10px; margin-top:30px; border-radius:9999px; background:linear-gradient(135deg,#5ba0ea 0%,#2f85e0 48%,#1f6ec9 100%); padding:16px 34px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:15px; font-weight:600; color:#fff; border-top:0.5px solid rgba(255,255,255,0.3); box-shadow:inset 0 1px 0 rgba(255,255,255,0.3), 0 18px 36px -14px rgba(47,133,224,0.8); transition:transform 220ms, box-shadow 220ms" style-hover="color:#fff; transform:translateY(-1px); box-shadow:inset 0 1px 0 rgba(255,255,255,0.34), 0 24px 44px -16px rgba(47,133,224,0.9)"><span aria-hidden="true" style="position:absolute; top:0; bottom:0; left:0; width:30%; background:linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.42) 48%, rgba(255,255,255,0) 100%); animation:sr-sheen 5.5s ease-in-out 1.2s infinite; pointer-events:none"></span><span aria-hidden="true" style="position:relative; display:inline-flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span><span style="position:relative">Order Now</span></a>
           </div>
 
-          <div class="sr-of-buy">
-            <div class="sr-of-buyrow">
-              <div class="sr-of-qty" role="group" aria-label="Quantity">
-                <button type="button" class="sr-of-qbtn" onClick="{{ ofDec }}" aria-label="One fewer" aria-disabled="{{ ofDecOff }}" style="opacity: {{ ofDecOp }}; pointer-events: {{ ofDecPe }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
-                <span class="sr-of-qn" aria-live="polite">{{ ofQty }}</span>
-                <button type="button" class="sr-of-qbtn" onClick="{{ ofInc }}" aria-label="One more" aria-disabled="{{ ofIncOff }}" style="opacity: {{ ofIncOp }}; pointer-events: {{ ofIncPe }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></button>
-              </div>
-              <span class="sr-of-what"><span class="sr-of-wname">{{ ofName }}</span><span class="sr-of-wsub">{{ ofWhat }}</span></span>
-            </div>
-            <div class="sr-of-money">
-              <span class="sr-of-was" style="display: {{ ofWasShow }}">{{ ofWas }}</span>
-              <span class="sr-of-now">{{ ofNow }}</span>
-              <span class="sr-of-save" style="display: {{ ofSaveShow }}">{{ ofSave }}</span>
+                      <div class="r-pull r-ring" style="position:relative; width:100%; max-width:640px; margin:0 auto; justify-self:center; transform:translate(calc(-1 * clamp(0px, 7.6vw, 120px)), clamp(0px, 4.4vw, 68px)); aspect-ratio:1 / 1; display:flex; align-items:center; justify-content:center">
+              <span class="sr-bgorb" aria-hidden="true" style="position:absolute; inset:14%; border-radius:9999px; background:radial-gradient(circle at 50% 50%, rgba(255,255,255,0.95) 0%, rgba(228,241,252,0.7) 52%, rgba(228,241,252,0) 78%)"></span>
+              <span aria-hidden="true" style="position:absolute; inset:7%; border-radius:9999px; border:1px solid rgba(47,123,224,0.22)"></span>
+              <span class="sr-bgorb" aria-hidden="true" style="position:absolute; inset:7%; border-radius:9999px; animation:sr-orbit 9s linear infinite; background:conic-gradient(from 0deg, rgba(47,123,224,0) 0deg, rgba(47,123,224,0) 232deg, rgba(47,123,224,0.55) 330deg, rgba(47,123,224,0) 360deg); -webkit-mask:radial-gradient(circle at 50% 50%, transparent 0 calc(50% - 1.6px), #000 calc(50% - 1.6px) 50%, transparent 50%); mask:radial-gradient(circle at 50% 50%, transparent 0 calc(50% - 1.6px), #000 calc(50% - 1.6px) 50%, transparent 50%)"></span>
+              <span class="r-orbit" aria-hidden="true" style="position:absolute; inset:21%; border-radius:9999px; border:1px dashed rgba(47,123,224,0.16); animation:sr-orbit 64s linear infinite"></span>
+              <span class="r-orbit" aria-hidden="true" style="position:absolute; inset:0; animation:sr-orbit 38s linear infinite">
+                <span style="position:absolute; inset:0; transform:rotate(40deg)"><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%); display:block; height:11px; width:11px; border-radius:9999px; background:linear-gradient(135deg,#6aa9ec 0%,#438fe0 100%); box-shadow:0 0 0 5px rgba(47,123,224,0.12)"></span><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%) translateY(-30px); display:block"><span style="display:block; animation:sr-orbit-rev 38s linear infinite"><span style="display:block; transform:rotate(-40deg)"><span class="r-chip" style="display:inline-block; white-space:nowrap; border-radius:9999px; background:rgba(255,255,255,0.94); border:1px solid rgba(47,123,224,0.2); box-shadow:0 10px 22px -14px rgba(18,59,102,0.75); padding:6px 13px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11.5px; font-weight:600; color:#1b3456; letter-spacing:0.2px">PDRN 2400 mg</span></span></span></span></span>
+                <span style="position:absolute; inset:0; transform:rotate(165deg)"><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%); display:block; height:11px; width:11px; border-radius:9999px; background:linear-gradient(135deg,#6aa9ec 0%,#438fe0 100%); box-shadow:0 0 0 5px rgba(47,123,224,0.12)"></span><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%) translateY(-30px); display:block"><span style="display:block; animation:sr-orbit-rev 38s linear infinite"><span style="display:block; transform:rotate(-165deg)"><span class="r-chip" style="display:inline-block; white-space:nowrap; border-radius:9999px; background:rgba(255,255,255,0.94); border:1px solid rgba(47,123,224,0.2); box-shadow:0 10px 22px -14px rgba(18,59,102,0.75); padding:6px 13px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11.5px; font-weight:600; color:#1b3456; letter-spacing:0.2px">GHK-Cu 2400 mg</span></span></span></span></span>
+                <span style="position:absolute; inset:0; transform:rotate(285deg)"><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%); display:block; height:11px; width:11px; border-radius:9999px; background:linear-gradient(135deg,#6aa9ec 0%,#438fe0 100%); box-shadow:0 0 0 5px rgba(47,123,224,0.12)"></span><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%) translateY(-30px); display:block"><span style="display:block; animation:sr-orbit-rev 38s linear infinite"><span style="display:block; transform:rotate(-285deg)"><span class="r-chip" style="display:inline-block; white-space:nowrap; border-radius:9999px; background:rgba(255,255,255,0.94); border:1px solid rgba(47,123,224,0.2); box-shadow:0 10px 22px -14px rgba(18,59,102,0.75); padding:6px 13px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11.5px; font-weight:600; color:#1b3456; letter-spacing:0.2px">Pink + blue beads</span></span></span></span></span>
+              </span>
+              <img src="assets/hero-duo-pack.webp" alt="su-ree GHK-Cu Serum and Dual-Replenishing Capsule Cream with their cartons" decoding="async" style="position:relative; display:block; width:auto; height:auto; max-width:84%; max-height:58%; object-fit:contain; animation:sr-hero-float 7.5s ease-in-out infinite; filter:drop-shadow(0 22px 30px rgba(18,38,58,0.24))" />
             </div>
           </div>
+          <div class="r-2col r-minh" style="position:relative; z-index:1; grid-area:1 / 1 / 2 / 2; display:grid; grid-template-columns:minmax(0,800px) minmax(0,1fr); align-items:center; gap:clamp(28px,4.5vw,76px); min-height:470px; opacity: {{ s1Op }}; visibility: {{ s1Vis }}; transform: {{ s1Tr }}; pointer-events: {{ s1Pe }}; transition:opacity 560ms ease, transform 560ms ease">
+          <div class="r-herocopy">
+            <p style="margin:0; display:flex; align-items:center; gap:14px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:12.5px; font-weight:500; color:#4f84bd; letter-spacing:3.4px">SU-REE SKINCARE<span aria-hidden="true" style="height:1px; width:26px; background:rgba(74,127,181,0.5)"></span>THE CREAM<span aria-hidden="true" class="r-eyetail" style="flex:0 1 92px; height:1px; background:linear-gradient(90deg,#8fb6dd 0%,rgba(143,182,221,0) 100%)"></span></p>
+            <h1 style="margin:16px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; color:#1b3456; font-weight:400">
+              <span class="r-nowrap" style="display:block; font-weight:700; font-size:clamp(38px, 5.9vw, 84px); line-height:1.0; letter-spacing:-2.8px; white-space:nowrap">Dual Regenerative</span>
+              <span class="r-nowrap" style="display:block; margin-top:2px; font-weight:700; font-style:italic; font-size:clamp(33px, 5.2vw, 75px); line-height:1.04; letter-spacing:-2.4px; white-space:nowrap; color:#6ba6e8">Capsule Cream.</span>
+            </h1>
+            <p style="margin:22px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:14.5px; font-weight:400; color:#4a6184; max-width:400px; line-height:1.65">DNA repair, firming and barrier renewal, as printed on the carton. PDRN and GHK-Cu are held in separate beads, not pre-mixed into the gel.</p>
+            <a href="Shop.dc.html?p=cream" style="position:relative; display:inline-flex; overflow:hidden; isolation:isolate; align-items:center; gap:10px; margin-top:30px; border-radius:9999px; background:linear-gradient(135deg,#5ba0ea 0%,#2f85e0 48%,#1f6ec9 100%); padding:16px 34px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:15px; font-weight:600; color:#fff; border-top:0.5px solid rgba(255,255,255,0.3); box-shadow:inset 0 1px 0 rgba(255,255,255,0.3), 0 18px 36px -14px rgba(47,133,224,0.8); transition:transform 220ms, box-shadow 220ms" style-hover="color:#fff; transform:translateY(-1px); box-shadow:inset 0 1px 0 rgba(255,255,255,0.34), 0 24px 44px -16px rgba(47,133,224,0.9)"><span aria-hidden="true" style="position:absolute; top:0; bottom:0; left:0; width:30%; background:linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.42) 48%, rgba(255,255,255,0) 100%); animation:sr-sheen 5.5s ease-in-out 1.2s infinite; pointer-events:none"></span><span aria-hidden="true" style="position:relative; display:inline-flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span><span style="position:relative">Order Now</span></a>
+          </div>
 
-          <a class="sr-of-cta" href="Shop.dc.html"><span aria-hidden="true" style="position:relative; display:inline-flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span><span style="position:relative">Shop Your Skincare Routine</span><span class="sr-of-cta-ar" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
+            <div class="r-pull r-ring" style="position:relative; width:100%; max-width:500px; margin:0 auto; justify-self:center; transform:translate(calc(-1 * clamp(0px, 7.6vw, 120px)), clamp(0px, 4.4vw, 68px)); aspect-ratio:1 / 1; display:flex; align-items:center; justify-content:center">
+              <span class="sr-bgorb" aria-hidden="true" style="position:absolute; inset:14%; border-radius:9999px; background:radial-gradient(circle at 50% 50%, rgba(255,255,255,0.95) 0%, rgba(228,241,252,0.7) 52%, rgba(228,241,252,0) 78%)"></span>
+              <span aria-hidden="true" style="position:absolute; inset:7%; border-radius:9999px; border:1px solid rgba(47,123,224,0.22)"></span>
+              <span class="sr-bgorb" aria-hidden="true" style="position:absolute; inset:7%; border-radius:9999px; animation:sr-orbit 9s linear infinite; background:conic-gradient(from 0deg, rgba(47,123,224,0) 0deg, rgba(47,123,224,0) 232deg, rgba(47,123,224,0.55) 330deg, rgba(47,123,224,0) 360deg); -webkit-mask:radial-gradient(circle at 50% 50%, transparent 0 calc(50% - 1.6px), #000 calc(50% - 1.6px) 50%, transparent 50%); mask:radial-gradient(circle at 50% 50%, transparent 0 calc(50% - 1.6px), #000 calc(50% - 1.6px) 50%, transparent 50%)"></span>
+              <span class="r-orbit" aria-hidden="true" style="position:absolute; inset:21%; border-radius:9999px; border:1px dashed rgba(47,123,224,0.16); animation:sr-orbit 64s linear infinite"></span>
+              <span class="r-orbit" aria-hidden="true" style="position:absolute; inset:0; animation:sr-orbit 38s linear infinite">
+                <span style="position:absolute; inset:0; transform:rotate(40deg)"><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%); display:block; height:11px; width:11px; border-radius:9999px; background:linear-gradient(135deg,#6aa9ec 0%,#438fe0 100%); box-shadow:0 0 0 5px rgba(47,123,224,0.12)"></span><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%) translateY(-30px); display:block"><span style="display:block; animation:sr-orbit-rev 38s linear infinite"><span style="display:block; transform:rotate(-40deg)"><span class="r-chip" style="display:inline-block; white-space:nowrap; border-radius:9999px; background:rgba(255,255,255,0.94); border:1px solid rgba(47,123,224,0.2); box-shadow:0 10px 22px -14px rgba(18,59,102,0.75); padding:6px 13px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11.5px; font-weight:600; color:#1b3456; letter-spacing:0.2px">PDRN 2400 mg</span></span></span></span></span>
+                <span style="position:absolute; inset:0; transform:rotate(165deg)"><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%); display:block; height:11px; width:11px; border-radius:9999px; background:linear-gradient(135deg,#6aa9ec 0%,#438fe0 100%); box-shadow:0 0 0 5px rgba(47,123,224,0.12)"></span><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%) translateY(-30px); display:block"><span style="display:block; animation:sr-orbit-rev 38s linear infinite"><span style="display:block; transform:rotate(-165deg)"><span class="r-chip" style="display:inline-block; white-space:nowrap; border-radius:9999px; background:rgba(255,255,255,0.94); border:1px solid rgba(47,123,224,0.2); box-shadow:0 10px 22px -14px rgba(18,59,102,0.75); padding:6px 13px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11.5px; font-weight:600; color:#1b3456; letter-spacing:0.2px">GHK-Cu 2400 mg</span></span></span></span></span>
+                <span style="position:absolute; inset:0; transform:rotate(285deg)"><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%); display:block; height:11px; width:11px; border-radius:9999px; background:linear-gradient(135deg,#6aa9ec 0%,#438fe0 100%); box-shadow:0 0 0 5px rgba(47,123,224,0.12)"></span><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%) translateY(-30px); display:block"><span style="display:block; animation:sr-orbit-rev 38s linear infinite"><span style="display:block; transform:rotate(-285deg)"><span class="r-chip" style="display:inline-block; white-space:nowrap; border-radius:9999px; background:rgba(255,255,255,0.94); border:1px solid rgba(47,123,224,0.2); box-shadow:0 10px 22px -14px rgba(18,59,102,0.75); padding:6px 13px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11.5px; font-weight:600; color:#1b3456; letter-spacing:0.2px">Pink + blue beads</span></span></span></span></span>
+              </span>
+              <img src="assets/p-cream.webp" alt="su-ree Dual Regenerative Capsule Cream jar" decoding="async" style="position:relative; display:block; width:auto; height:auto; max-width:62%; max-height:64%; object-fit:contain; animation:sr-hero-float 7.5s ease-in-out infinite; filter:drop-shadow(0 22px 30px rgba(18,38,58,0.24))" />
+            </div>
+          </div>
+          <div class="r-2col r-minh" style="position:relative; z-index:1; grid-area:1 / 1 / 2 / 2; display:grid; grid-template-columns:minmax(0,800px) minmax(0,1fr); align-items:center; gap:clamp(28px,4.5vw,76px); min-height:470px; opacity: {{ s2Op }}; visibility: {{ s2Vis }}; transform: {{ s2Tr }}; pointer-events: {{ s2Pe }}; transition:opacity 560ms ease, transform 560ms ease">
+          <div class="r-herocopy">
+            <p style="margin:0; display:flex; align-items:center; gap:14px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:12.5px; font-weight:500; color:#4f84bd; letter-spacing:3.4px">SU-REE SKINCARE<span aria-hidden="true" style="height:1px; width:26px; background:rgba(74,127,181,0.5)"></span>THE SERUM<span aria-hidden="true" class="r-eyetail" style="flex:0 1 92px; height:1px; background:linear-gradient(90deg,#8fb6dd 0%,rgba(143,182,221,0) 100%)"></span></p>
+            <h1 style="margin:16px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; color:#1b3456; font-weight:400">
+              <span class="r-nowrap" style="display:block; font-weight:700; font-size:clamp(38px, 5.9vw, 84px); line-height:1.0; letter-spacing:-2.8px; white-space:nowrap">GHK-Cu+</span>
+              <span class="r-nowrap" style="display:block; margin-top:2px; font-weight:700; font-style:italic; font-size:clamp(33px, 5.2vw, 75px); line-height:1.04; letter-spacing:-2.4px; white-space:nowrap; color:#6ba6e8">Snap 8 Serum.</span>
+            </h1>
+            <p style="margin:22px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:14.5px; font-weight:400; color:#4a6184; max-width:400px; line-height:1.65">Fine-line care, deep hydration and barrier support, as printed on the carton. Three peptides in one water-light layer, under the cream.</p>
+            <a href="Shop.dc.html?p=serum" style="position:relative; display:inline-flex; overflow:hidden; isolation:isolate; align-items:center; gap:10px; margin-top:30px; border-radius:9999px; background:linear-gradient(135deg,#5ba0ea 0%,#2f85e0 48%,#1f6ec9 100%); padding:16px 34px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:15px; font-weight:600; color:#fff; border-top:0.5px solid rgba(255,255,255,0.3); box-shadow:inset 0 1px 0 rgba(255,255,255,0.3), 0 18px 36px -14px rgba(47,133,224,0.8); transition:transform 220ms, box-shadow 220ms" style-hover="color:#fff; transform:translateY(-1px); box-shadow:inset 0 1px 0 rgba(255,255,255,0.34), 0 24px 44px -16px rgba(47,133,224,0.9)"><span aria-hidden="true" style="position:absolute; top:0; bottom:0; left:0; width:30%; background:linear-gradient(100deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.42) 48%, rgba(255,255,255,0) 100%); animation:sr-sheen 5.5s ease-in-out 1.2s infinite; pointer-events:none"></span><span aria-hidden="true" style="position:relative; display:inline-flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span><span style="position:relative">Order Now</span></a>
+          </div>
 
-          <p class="sr-of-trust">
-            <span class="sr-of-ti"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8fc4f2" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10.5" rx="2"></rect><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"></path></svg>Secure Checkout</span>
-            <span class="sr-of-ti"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8fc4f2" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5h11v11h-11z"></path><path d="M13.5 10h4l3 3.2v4.3h-7z"></path><circle cx="6.8" cy="19" r="1.6"></circle><circle cx="16.8" cy="19" r="1.6"></circle></svg>Nationwide Delivery</span>
-            <span class="sr-of-ti"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8fc4f2" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 9.5a8.5 8.5 0 1 1 1 7"></path><path d="M3 4.5v5h5"></path></svg>7-Day Eligible Returns</span>
-          </p>
+            <div class="r-pull r-ring" style="position:relative; width:100%; max-width:500px; margin:0 auto; justify-self:center; transform:translate(calc(-1 * clamp(0px, 7.6vw, 120px)), clamp(0px, 4.4vw, 68px)); aspect-ratio:1 / 1; display:flex; align-items:center; justify-content:center">
+              <span class="sr-bgorb" aria-hidden="true" style="position:absolute; inset:14%; border-radius:9999px; background:radial-gradient(circle at 50% 50%, rgba(255,255,255,0.95) 0%, rgba(228,241,252,0.7) 52%, rgba(228,241,252,0) 78%)"></span>
+              <span aria-hidden="true" style="position:absolute; inset:7%; border-radius:9999px; border:1px solid rgba(47,123,224,0.22)"></span>
+              <span class="sr-bgorb" aria-hidden="true" style="position:absolute; inset:7%; border-radius:9999px; animation:sr-orbit 9s linear infinite; background:conic-gradient(from 0deg, rgba(47,123,224,0) 0deg, rgba(47,123,224,0) 232deg, rgba(47,123,224,0.55) 330deg, rgba(47,123,224,0) 360deg); -webkit-mask:radial-gradient(circle at 50% 50%, transparent 0 calc(50% - 1.6px), #000 calc(50% - 1.6px) 50%, transparent 50%); mask:radial-gradient(circle at 50% 50%, transparent 0 calc(50% - 1.6px), #000 calc(50% - 1.6px) 50%, transparent 50%)"></span>
+              <span class="r-orbit" aria-hidden="true" style="position:absolute; inset:21%; border-radius:9999px; border:1px dashed rgba(47,123,224,0.16); animation:sr-orbit 64s linear infinite"></span>
+              <span class="r-orbit" aria-hidden="true" style="position:absolute; inset:0; animation:sr-orbit 38s linear infinite">
+                <span style="position:absolute; inset:0; transform:rotate(40deg)"><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%); display:block; height:11px; width:11px; border-radius:9999px; background:linear-gradient(135deg,#6aa9ec 0%,#438fe0 100%); box-shadow:0 0 0 5px rgba(47,123,224,0.12)"></span><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%) translateY(-30px); display:block"><span style="display:block; animation:sr-orbit-rev 38s linear infinite"><span style="display:block; transform:rotate(-40deg)"><span class="r-chip" style="display:inline-block; white-space:nowrap; border-radius:9999px; background:rgba(255,255,255,0.94); border:1px solid rgba(47,123,224,0.2); box-shadow:0 10px 22px -14px rgba(18,59,102,0.75); padding:6px 13px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11.5px; font-weight:600; color:#1b3456; letter-spacing:0.2px">GHK-Cu 1200 mg</span></span></span></span></span>
+                <span style="position:absolute; inset:0; transform:rotate(165deg)"><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%); display:block; height:11px; width:11px; border-radius:9999px; background:linear-gradient(135deg,#6aa9ec 0%,#438fe0 100%); box-shadow:0 0 0 5px rgba(47,123,224,0.12)"></span><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%) translateY(-30px); display:block"><span style="display:block; animation:sr-orbit-rev 38s linear infinite"><span style="display:block; transform:rotate(-165deg)"><span class="r-chip" style="display:inline-block; white-space:nowrap; border-radius:9999px; background:rgba(255,255,255,0.94); border:1px solid rgba(47,123,224,0.2); box-shadow:0 10px 22px -14px rgba(18,59,102,0.75); padding:6px 13px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11.5px; font-weight:600; color:#1b3456; letter-spacing:0.2px">SNAP-8 10,000 mcg</span></span></span></span></span>
+                <span style="position:absolute; inset:0; transform:rotate(285deg)"><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%); display:block; height:11px; width:11px; border-radius:9999px; background:linear-gradient(135deg,#6aa9ec 0%,#438fe0 100%); box-shadow:0 0 0 5px rgba(47,123,224,0.12)"></span><span style="position:absolute; left:50%; top:7%; transform:translate(-50%,-50%) translateY(-30px); display:block"><span style="display:block; animation:sr-orbit-rev 38s linear infinite"><span style="display:block; transform:rotate(-285deg)"><span class="r-chip" style="display:inline-block; white-space:nowrap; border-radius:9999px; background:rgba(255,255,255,0.94); border:1px solid rgba(47,123,224,0.2); box-shadow:0 10px 22px -14px rgba(18,59,102,0.75); padding:6px 13px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:11.5px; font-weight:600; color:#1b3456; letter-spacing:0.2px">Argireline</span></span></span></span></span>
+              </span>
+              <img src="assets/p-serum.webp" alt="su-ree GHK-Cu+ Snap 8 Serum bottle" decoding="async" style="position:relative; display:block; width:auto; height:auto; max-width:42%; max-height:78%; object-fit:contain; animation:sr-hero-float 7.5s ease-in-out infinite; filter:drop-shadow(0 22px 30px rgba(18,38,58,0.24))" />
+            </div>
+          </div>
         </div>
 
-      </div>
+        </div>
+
+        <div class="r-herodots" style="position:absolute; z-index:3; right:46px; bottom:170px; display:flex; align-items:center; gap:10px; padding:9px 13px; border-radius:9999px; background:rgba(255,255,255,0.62); border:1px solid rgba(255,255,255,0.9); box-shadow:0 12px 30px -18px rgba(18,59,102,0.7); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px)"><button type="button" class="sr-herodot" onClick="{{ go0 }}" aria-label="Show slide 1" aria-current="{{ d0On }}"><span aria-hidden="true" class="sr-dot-fill"></span></button><button type="button" class="sr-herodot" onClick="{{ go1 }}" aria-label="Show slide 2" aria-current="{{ d1On }}"><span aria-hidden="true" class="sr-dot-fill"></span></button><button type="button" class="sr-herodot" onClick="{{ go2 }}" aria-label="Show slide 3" aria-current="{{ d2On }}"><span aria-hidden="true" class="sr-dot-fill"></span></button>
+              <span aria-hidden="true" style="height:16px; width:1px; flex-shrink:0; background:rgba(47,123,224,0.28)"></span>
+              <button type="button" class="sr-heronext" onClick="{{ nextHero }}" aria-label="Next slide"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button></div>
+
+        <div aria-hidden="true" style="position:absolute; z-index:2; right:0; bottom:0; left:0; line-height:0; pointer-events:none">
+          <svg class="r-wave" viewBox="0 0 1440 200" preserveAspectRatio="none" style="display:block; width:100%; height:147px">
+            <defs>
+              <linearGradient id="sr-wave-body" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ffffff" stop-opacity="0.9"></stop>
+                <stop offset="0.18" stop-color="#b7d5f5" stop-opacity="0.9"></stop>
+                <stop offset="0.6" stop-color="#d7e6f8" stop-opacity="0.6"></stop>
+                <stop offset="1" stop-color="#ffffff" stop-opacity="0"></stop>
+              </linearGradient>
+              <linearGradient id="sr-wave-fade" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#b7d5f5" stop-opacity="0.05"></stop>
+                <stop offset="0.4" stop-color="#b7d5f5" stop-opacity="0.3"></stop>
+                <stop offset="0.75" stop-color="#b7d5f5" stop-opacity="0.7"></stop>
+                <stop offset="1" stop-color="#b7d5f5" stop-opacity="0.75"></stop>
+              </linearGradient>
+              <linearGradient id="sr-wave-crest" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#ffffff" stop-opacity="0.7"></stop>
+                <stop offset="0.3" stop-color="#ffffff" stop-opacity="1"></stop>
+                <stop offset="0.6" stop-color="#e7f3ff" stop-opacity="0.9"></stop>
+                <stop offset="0.85" stop-color="#ffffff" stop-opacity="1"></stop>
+                <stop offset="1" stop-color="#ffffff" stop-opacity="0.7"></stop>
+              </linearGradient>
+              <filter id="sr-blur-soft" filterUnits="userSpaceOnUse" x="-40" y="-80" width="1520" height="360">
+                <feGaussianBlur stdDeviation="10 16"></feGaussianBlur>
+              </filter>
+              <filter id="sr-blur-mid" filterUnits="userSpaceOnUse" x="-40" y="-80" width="1520" height="360">
+                <feGaussianBlur stdDeviation="3 5"></feGaussianBlur>
+              </filter>
+              <filter id="sr-blur-fine" filterUnits="userSpaceOnUse" x="-40" y="-80" width="1520" height="360">
+                <feGaussianBlur stdDeviation="1 1.6"></feGaussianBlur>
+              </filter>
+            </defs>
+
+            <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42 L1440,200 L0,200 Z" fill="#ffffff"></path>
+
+            <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42" fill="none" stroke="#ffffff" stroke-width="28" stroke-opacity="0.9" transform="translate(0,22)" filter="url(#sr-blur-soft)"></path>
+
+            <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42" fill="none" stroke="url(#sr-wave-fade)" stroke-width="22" transform="translate(0,11)" filter="url(#sr-blur-soft)"></path>
+
+            <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42 L1440,72 C1395,80 1345,94 1290,116 C1180,162 1080,200 940,196 C780,192 660,132 520,92 C330,42 170,44 0,92 Z" fill="url(#sr-wave-body)" filter="url(#sr-blur-fine)"></path>
+
+            <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42" fill="none" stroke="#ffffff" stroke-width="5" stroke-opacity="0.95" transform="translate(0,-1.5)" filter="url(#sr-blur-mid)"></path>
+
+            <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42" fill="none" stroke="url(#sr-wave-crest)" stroke-width="2" filter="url(#sr-blur-fine)"></path>
+            <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42" fill="none" stroke="#ffffff" stroke-width="1"></path>
+
+            <path d="M0,124 C150,86 320,64 520,82" fill="none" stroke="#b7d5f5" stroke-width="5" stroke-opacity="0.5" filter="url(#sr-blur-mid)"></path>
+            <path d="M0,124 C150,86 320,64 520,82" fill="none" stroke="#ffffff" stroke-width="1.4" stroke-opacity="0.9" filter="url(#sr-blur-fine)"></path>
+
+            <path d="M0,88 C170,38 330,34 520,82 C660,118 780,170 940,172 C1080,174 1180,134 1290,88 C1345,65 1395,50 1440,42" fill="none" stroke="#cfe2f8" stroke-width="1" stroke-opacity="0.6" transform="translate(0,24)" filter="url(#sr-blur-fine)"></path>
+          </svg>
+        </div>
+
+        </div>
+
+    </section>
     </div>
-  </section>
+
+    <div class="sr-veil-cover">
+    <section class="sr-of" aria-label="The su-ree routine">
+      <div class="sr-of-wrap">
+
+        <div class="sr-of-head">
+          <h2 class="sr-of-h">Your Complete Routine for<span class="sr-of-alt">Smoother, <span style="white-space:nowrap">Healthier-Looking</span> Skin.</span></h2>
+          <p class="sr-of-lead">Two thoughtfully formulated skincare essentials designed to complement each other, bringing targeted peptide care and hydration into one simple daily routine.</p>
+        </div>
+
+        <div class="sr-of-grid">
+
+          <div class="sr-of-shots">
+            <div class="sr-of-track" style="transform: {{ ofX }}">
+              <div class="sr-of-slide"><img src="assets/sh-duo-scene.webp" alt="The su-ree serum and cream standing together" decoding="async" /></div>
+              <div class="sr-of-slide"><img src="assets/wall-a1.webp" alt="su-ree on a bathroom shelf" loading="lazy" decoding="async" /></div>
+              <div class="sr-of-slide"><img src="assets/sh-cream-scene.webp" alt="The Dual Regenerative Capsule Cream jar, open" loading="lazy" decoding="async" /></div>
+              <div class="sr-of-slide"><img src="assets/wall-a3.webp" alt="su-ree held in the hand" loading="lazy" decoding="async" /></div>
+              <div class="sr-of-slide"><img src="assets/sh-serum-scene.webp" alt="The GHK-Cu+ Snap 8 Serum bottle" loading="lazy" decoding="async" /></div>
+            </div>
+            <button type="button" class="sr-of-arrow sr-of-prev" onClick="{{ ofPrev }}" aria-label="Previous photo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
+            <button type="button" class="sr-of-arrow sr-of-next" onClick="{{ ofNext }}" aria-label="Next photo"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
+            <div class="sr-of-dots">
+              <button type="button" class="sr-of-dot" onClick="{{ ofGo0 }}" aria-label="Photo 1" style="width: {{ ofDotW0 }}; background: {{ ofDotBg0 }}"></button>
+              <button type="button" class="sr-of-dot" onClick="{{ ofGo1 }}" aria-label="Photo 2" style="width: {{ ofDotW1 }}; background: {{ ofDotBg1 }}"></button>
+              <button type="button" class="sr-of-dot" onClick="{{ ofGo2 }}" aria-label="Photo 3" style="width: {{ ofDotW2 }}; background: {{ ofDotBg2 }}"></button>
+              <button type="button" class="sr-of-dot" onClick="{{ ofGo3 }}" aria-label="Photo 4" style="width: {{ ofDotW3 }}; background: {{ ofDotBg3 }}"></button>
+              <button type="button" class="sr-of-dot" onClick="{{ ofGo4 }}" aria-label="Photo 5" style="width: {{ ofDotW4 }}; background: {{ ofDotBg4 }}"></button>
+            </div>
+          </div>
+
+          <div>
+            <ul class="sr-of-list" role="list">
+              <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Supports smoother-looking skin</li>
+              <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Helps improve the appearance of fine lines</li>
+              <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Supports skin firmness</li>
+              <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Provides hydration and moisture barrier care</li>
+              <li class="sr-of-li"><span class="sr-of-ck" aria-hidden="true"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>Simplifies your daily skincare routine</li>
+            </ul>
+
+            <div class="sr-of-picks" role="group" aria-label="Choose a package">
+              <button type="button" class="sr-of-pick" onClick="{{ ofTap0 }}" aria-pressed="{{ ofSel0 }}" style="background: {{ ofBg0 }}; border-color: {{ ofBd0 }}; box-shadow: {{ ofSh0 }}">
+                <span class="sr-of-pnum">Package 01</span>
+                <span class="sr-of-ptag" style="color: {{ ofFg0 }}">Targeted care</span>
+                <span class="sr-of-pshot"><img src="assets/p-serum.webp" alt="" loading="lazy" decoding="async" /></span>
+                <span class="sr-of-pname">The Serum</span>
+                <span class="sr-of-psize">30 mL</span>
+                <span class="sr-of-pprice">&#8369;1,499</span>
+              </button>
+              <button type="button" class="sr-of-pick" onClick="{{ ofTap1 }}" aria-pressed="{{ ofSel1 }}" style="background: {{ ofBg1 }}; border-color: {{ ofBd1 }}; box-shadow: {{ ofSh1 }}">
+                <span class="sr-of-pnum">Package 02</span>
+                <span class="sr-of-ptag" style="color: {{ ofFg1 }}">Daily care</span>
+                <span class="sr-of-pshot"><img src="assets/p-cream.webp" alt="" loading="lazy" decoding="async" /></span>
+                <span class="sr-of-pname">The Cream</span>
+                <span class="sr-of-psize">65 g</span>
+                <span class="sr-of-pprice">&#8369;1,699</span>
+              </button>
+              <button type="button" class="sr-of-pick" onClick="{{ ofTap2 }}" aria-pressed="{{ ofSel2 }}" style="background: {{ ofBg2 }}; border-color: {{ ofBd2 }}; box-shadow: {{ ofSh2 }}">
+                <span class="sr-of-pnum">Package 03</span>
+                <span class="sr-of-ptag" style="color: {{ ofFg2 }}">Complete care</span>
+                <span class="sr-of-pshot"><img src="assets/p-duo.webp" alt="" loading="lazy" decoding="async" /></span>
+                <span class="sr-of-pname">The Duo</span>
+                <span class="sr-of-psize">30 mL + 65 g</span>
+                <span class="sr-of-pprice">&#8369;2,899</span>
+              </button>
+            </div>
+
+            <div class="sr-of-buy">
+              <div class="sr-of-buyrow">
+                <div class="sr-of-qty" role="group" aria-label="Quantity">
+                  <button type="button" class="sr-of-qbtn" onClick="{{ ofDec }}" aria-label="One fewer" aria-disabled="{{ ofDecOff }}" style="opacity: {{ ofDecOp }}; pointer-events: {{ ofDecPe }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+                  <span class="sr-of-qn" aria-live="polite">{{ ofQty }}</span>
+                  <button type="button" class="sr-of-qbtn" onClick="{{ ofInc }}" aria-label="One more" aria-disabled="{{ ofIncOff }}" style="opacity: {{ ofIncOp }}; pointer-events: {{ ofIncPe }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></button>
+                </div>
+                <span class="sr-of-what"><span class="sr-of-wname">{{ ofName }}</span><span class="sr-of-wsub">{{ ofWhat }}</span></span>
+              </div>
+              <div class="sr-of-money">
+                <span class="sr-of-was" style="display: {{ ofWasShow }}">{{ ofWas }}</span>
+                <span class="sr-of-now">{{ ofNow }}</span>
+                <span class="sr-of-save" style="display: {{ ofSaveShow }}">{{ ofSave }}</span>
+              </div>
+            </div>
+
+            <a class="sr-of-cta" href="Shop.dc.html"><span aria-hidden="true" style="position:relative; display:inline-flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span><span style="position:relative">Shop Your Skincare Routine</span><span class="sr-of-cta-ar" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
+
+            <p class="sr-of-trust">
+              <span class="sr-of-ti"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8fc4f2" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10.5" rx="2"></rect><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"></path></svg>Secure Checkout</span>
+              <span class="sr-of-ti"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8fc4f2" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5h11v11h-11z"></path><path d="M13.5 10h4l3 3.2v4.3h-7z"></path><circle cx="6.8" cy="19" r="1.6"></circle><circle cx="16.8" cy="19" r="1.6"></circle></svg>Nationwide Delivery</span>
+              <span class="sr-of-ti"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8fc4f2" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 9.5a8.5 8.5 0 1 1 1 7"></path><path d="M3 4.5v5h5"></path></svg>7-Day Eligible Returns</span>
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    </div>
+
+    <div class="sr-veil-run" aria-hidden="true"></div>
+  </div>
 
   <section data-sr-reveal="out" class="sr-vp">
     <div class="sr-vp-wrap">
@@ -2454,7 +2486,9 @@ class Component extends DCLogic {
       window.addEventListener("scroll", this.onNavScroll, { passive: true });
       setTimeout(this.onNavScroll, 0);
     }
-    const on = !!this.state.navScrolled;
+    /* the page opens on the dark band again, so the pill stays solid:
+       the navy-on-transparent links were unreadable against it */
+    const on = true;
     return {
       navMax: on ? "1240px" : "1800px",
       navPad: on ? "8px 10px 8px 24px" : "8px 10px 8px 14px",
@@ -2540,11 +2574,11 @@ class Component extends DCLogic {
     this.startOfTimer();
     this.setupReveal();
     this.setupSteps();
-    this.onResize = () => this.setState({ trackW: this.trackEl ? this.trackEl.clientWidth : window.innerWidth, ccW: window.innerWidth });
+    this.onResize = () => { this.sizeVeil(); this.setState({ trackW: this.trackEl ? this.trackEl.clientWidth : window.innerWidth, ccW: window.innerWidth }); };
     window.addEventListener("resize", this.onResize);
     this.onResize();
   }
-  componentWillUnmount() { clearInterval(this.heroTimer); clearInterval(this.reviewTimer); clearInterval(this.ofTimer); window.removeEventListener("resize", this.onResize); if (this.revealIO) this.revealIO.disconnect(); if (this.stepIO) this.stepIO.disconnect(); clearTimeout(this.stepTry); clearTimeout(this.revealRetry); clearInterval(this.revealSafety); if (this.onRevealScroll) { window.removeEventListener("scroll", this.onRevealScroll); window.removeEventListener("resize", this.onRevealScroll); } }
+  componentWillUnmount() { clearInterval(this.heroTimer); clearInterval(this.reviewTimer); clearInterval(this.ofTimer); window.removeEventListener("resize", this.onResize); if (this.revealIO) this.revealIO.disconnect(); if (this.veilRO) this.veilRO.disconnect(); if (this.stepIO) this.stepIO.disconnect(); clearTimeout(this.stepTry); clearTimeout(this.revealRetry); clearInterval(this.revealSafety); if (this.onRevealScroll) { window.removeEventListener("scroll", this.onRevealScroll); window.removeEventListener("resize", this.onRevealScroll); } }
 
   /* ── the offer band above the hero ── */
   OF_SHOTS = 5;
@@ -2634,6 +2668,29 @@ class Component extends DCLogic {
     out.ofSave = "You save " + this.ofPeso(saved);
     out.ofSaveShow = saved > 0 ? "inline-block" : "none";
     return out;
+  }
+
+  veilRef = (el) => { this.veilEl = el; this.sizeVeil(); };
+  stageRef = (el) => {
+    this.stageEl = el;
+    /* the hero settles as its fonts and photographs arrive, so watch it
+       rather than measuring once */
+    if (el && typeof ResizeObserver !== "undefined" && !this.veilRO) {
+      this.veilRO = new ResizeObserver(() => this.sizeVeil());
+      this.veilRO.observe(el);
+    }
+    this.sizeVeil();
+  };
+
+  /* the cover is pulled up by exactly the hero's height, so the two
+     overlap however tall the hero turns out to be */
+  sizeVeil() {
+    if (!this.veilEl || !this.stageEl) return;
+    const h = Math.ceil(this.stageEl.getBoundingClientRect().height);
+    if (h && h !== this.veilH) {
+      this.veilH = h;
+      this.veilEl.style.setProperty("--sr-heroh", h + "px");
+    }
   }
 
   ccRef = (el) => { this.ccEl = el; };
@@ -2765,6 +2822,8 @@ class Component extends DCLogic {
       arrowPrev: "calc(50% - " + arrowAt + "px)",
       arrowNext: "calc(50% + " + arrowAt + "px)",
       trackRef: this.trackRef,
+      veilRef: this.veilRef,
+      stageRef: this.stageRef,
       ccRef: this.ccRef,
       ccBack: () => this.ccNudge(-1),
       ccFwd: () => this.ccNudge(1),
