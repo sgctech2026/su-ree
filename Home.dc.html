@@ -1465,13 +1465,34 @@
     font-size: clamp(13px,1.4vw,14.5px); font-weight: 400; line-height: 1.65;
     color: #6d84a6; text-wrap: pretty;
   }
-  .sr-vt-row {
-    display: grid; grid-template-columns: repeat(3, minmax(0,1fr));
-    gap: clamp(14px,1.8vw,24px); margin: clamp(28px,3.4vw,44px) auto 0; max-width: 880px;
+  /* a rail, so the places keep working when there are more than three */
+  .sr-vt-rail {
+    display: grid; grid-template-columns: auto minmax(0,1fr) auto; align-items: center;
+    gap: clamp(6px,1.2vw,16px); margin: clamp(28px,3.4vw,44px) auto 0; max-width: 940px;
   }
-  .sr-vt-card { min-width: 0; text-align: left; }
+  .sr-vt-arrow {
+    display: flex; height: 40px; width: 40px; align-items: center; justify-content: center;
+    padding: 0; border-radius: 9999px; border: 1px solid rgba(166,200,236,0.9);
+    background: #ffffff; color: #2f85e0; cursor: pointer;
+    box-shadow: 0 8px 18px -12px rgba(25,52,84,0.4);
+    transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
+  }
+  .sr-vt-arrow:hover { background: #2f85e0; border-color: #2f85e0; color: #ffffff; }
+  .sr-vt-row {
+    display: flex; gap: clamp(12px,1.6vw,20px); min-width: 0;
+    overflow-x: auto; scroll-snap-type: x mandatory;
+    scrollbar-width: none; -ms-overflow-style: none;
+  }
+  .sr-vt-row::-webkit-scrollbar { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .sr-vt-arrow { transition: none; }
+  }
+  .sr-vt-card {
+    flex: 0 0 calc((100% - 2 * clamp(12px,1.6vw,20px)) / 3);
+    min-width: 0; scroll-snap-align: start;
+  }
   .sr-vt-frame {
-    position: relative; aspect-ratio: 9 / 16; border-radius: 18px; overflow: hidden;
+    position: relative; aspect-ratio: 4 / 5; border-radius: 18px; overflow: hidden;
     background: linear-gradient(162deg,#eaf2fb 0%,#dfeaf7 52%,#e8f1fb 100%);
     border: 1px dashed rgba(107,166,232,0.55);
     display: flex; align-items: center; justify-content: center;
@@ -1482,26 +1503,14 @@
     background: rgba(255,255,255,0.86); color: #2f85e0;
     box-shadow: 0 10px 24px -12px rgba(27,52,86,0.4);
   }
-  .sr-vt-cc {
-    position: absolute; left: 11px; bottom: 11px; border-radius: 6px;
-    background: rgba(27,52,86,0.14); color: #4a6a93; padding: 3px 7px;
-    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 9.5px; font-weight: 600; letter-spacing: 0.9px;
-  }
-  .sr-vt-slot {
-    display: block; margin-top: 11px; font-family: 'Jost',ui-sans-serif,sans-serif;
-    font-size: 13px; font-weight: 600; color: #91a6c2; line-height: 1.35;
-  }
-  .sr-vt-sub {
-    display: block; margin-top: 2px; font-family: 'Jost',ui-sans-serif,sans-serif;
-    font-size: 11.5px; font-weight: 400; color: #a8b9ce; line-height: 1.4;
-  }
-  /* the third wraps onto its own row rather than being hidden: a
-     placeholder may be dropped, a real testimonial may not */
+  /* fewer at a time as the rail narrows; the rest are a swipe or an
+     arrow away rather than hidden */
   @media (max-width: 720px) {
-    .sr-vt-row { grid-template-columns: repeat(2, minmax(0,1fr)); max-width: 430px; }
+    .sr-vt-card { flex-basis: calc((100% - clamp(12px,1.6vw,20px)) / 2); }
   }
-  @media (max-width: 420px) {
-    .sr-vt-row { grid-template-columns: minmax(0,1fr); max-width: 250px; }
+  @media (max-width: 460px) {
+    .sr-vt-card { flex-basis: 100%; }
+    .sr-vt-arrow { height: 36px; width: 36px; }
   }
 
   /* The su-ree difference: the product composition beside the five
@@ -2352,31 +2361,14 @@
       <p class="sr-vt-eyebrow">In their own words</p>
       <h2 class="sr-vt-h">Real People.<span class="sr-vt-alt">Real Skincare Stories.</span></h2>
       <p class="sr-vt-lead">Customers filming their own routine and saying what changed. Three places held open until the footage is recorded and the person has agreed to it being shown.</p>
-      <div class="sr-vt-row">
-        <div class="sr-vt-card">
-          <div class="sr-vt-frame">
-            <span class="sr-vt-play" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.4 5.6v12.8l10.4-6.4z"></path></svg></span>
-            <span class="sr-vt-cc" aria-hidden="true">CC</span>
-          </div>
-          <span class="sr-vt-slot">Video one</span>
-          <span class="sr-vt-sub">Customer name &middot; product used</span>
+      <div class="sr-vt-rail">
+        <button type="button" class="sr-vt-arrow" onClick="{{ vtPrev }}" aria-label="Earlier videos"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
+        <div class="sr-vt-row" ref="{{ vtRef }}">
+          <div class="sr-vt-card"><div class="sr-vt-frame"><span class="sr-vt-play" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.4 5.6v12.8l10.4-6.4z"></path></svg></span></div></div>
+          <div class="sr-vt-card"><div class="sr-vt-frame"><span class="sr-vt-play" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.4 5.6v12.8l10.4-6.4z"></path></svg></span></div></div>
+          <div class="sr-vt-card"><div class="sr-vt-frame"><span class="sr-vt-play" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.4 5.6v12.8l10.4-6.4z"></path></svg></span></div></div>
         </div>
-        <div class="sr-vt-card">
-          <div class="sr-vt-frame">
-            <span class="sr-vt-play" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.4 5.6v12.8l10.4-6.4z"></path></svg></span>
-            <span class="sr-vt-cc" aria-hidden="true">CC</span>
-          </div>
-          <span class="sr-vt-slot">Video two</span>
-          <span class="sr-vt-sub">Customer name &middot; product used</span>
-        </div>
-        <div class="sr-vt-card">
-          <div class="sr-vt-frame">
-            <span class="sr-vt-play" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8.4 5.6v12.8l10.4-6.4z"></path></svg></span>
-            <span class="sr-vt-cc" aria-hidden="true">CC</span>
-          </div>
-          <span class="sr-vt-slot">Video three</span>
-          <span class="sr-vt-sub">Customer name &middot; product used</span>
-        </div>
+        <button type="button" class="sr-vt-arrow" onClick="{{ vtNext }}" aria-label="More videos"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
       </div>
     </div>
   </section>
@@ -3080,6 +3072,22 @@ class Component extends DCLogic {
     return out;
   }
 
+  vtRef = (el) => { this.vtEl = el; };
+
+  /* one frame at a time, however many are showing */
+  vtNudge(dir) {
+    const el = this.vtEl;
+    if (!el) return;
+    const card = el.firstElementChild;
+    const step = card ? card.getBoundingClientRect().width + 16 : el.clientWidth;
+    const max = el.scrollWidth - el.clientWidth;
+    /* a plain set, and scroll-snap settles it on the next frame.
+       scroll-behavior: smooth and scrollTo({behavior}) both hand the
+       move to an animation this page cannot be shown to finish, and
+       the rail stayed where it was. */
+    el.scrollLeft = Math.max(0, Math.min(max, el.scrollLeft + dir * step));
+  }
+
   /* ── the offer band above the hero ── */
   OF_MAXQ = 3;
 
@@ -3437,6 +3445,9 @@ class Component extends DCLogic {
       ...this.heroVals(),
       ...this.offerVals(),
       ...this.baVals(),
+      vtRef: this.vtRef,
+      vtPrev: () => this.vtNudge(-1),
+      vtNext: () => this.vtNudge(1),
       ...this.insideVals(),
       ...this.nlVals(),
       ...this.reviewVals(),
