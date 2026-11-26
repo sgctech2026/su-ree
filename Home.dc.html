@@ -1688,7 +1688,9 @@
   }
 
   .sr-cmp-scroll {
-    margin-top: clamp(28px,3.4vw,46px); overflow-x: auto; overflow-y: visible;
+    /* the table fits above 860px, so the scroller -- and the bar the
+       browser draws for it -- only exists below that */
+    margin-top: clamp(28px,3.4vw,46px); overflow: hidden;
     border-radius: 24px; border: 1px solid rgba(201,223,245,0.9);
     background: #ffffff; box-shadow: 0 18px 44px -34px rgba(25,52,84,0.4);
     -webkit-overflow-scrolling: touch;
@@ -1703,7 +1705,7 @@
     font-size: clamp(15px,1.7vw,21px); font-weight: 600; color: #193454; letter-spacing: -0.3px;
     vertical-align: middle !important;
   }
-  .sr-cmp-shot { display: flex; align-items: flex-end; justify-content: center; height: clamp(86px,9vw,124px); margin-bottom: 11px; }
+  .sr-cmp-shot { display: flex; align-items: flex-end; justify-content: center; height: clamp(58px,6vw,84px); margin-bottom: 10px; }
   .sr-cmp-shot img {
     display: block; max-height: 100%; max-width: 100%; width: auto; object-fit: contain;
     transition: transform 320ms cubic-bezier(0.16,1,0.3,1);
@@ -1770,6 +1772,7 @@
     letter-spacing: 1.2px; text-transform: uppercase; color: #8aa3c0;
   }
   @media (max-width: 860px) {
+    .sr-cmp-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .sr-cmp-swipe { display: block; }
     .sr-cmp thead th:first-child,
     .sr-cmp tbody th,
