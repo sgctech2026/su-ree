@@ -1340,34 +1340,7 @@
     color: #a7c2e0; text-wrap: pretty;
   }
 
-  .sr-of-grid {
-    display: grid; grid-template-columns: minmax(0,40fr) minmax(0,60fr);
-    gap: clamp(26px,2.8vw,40px); align-items: center; margin-top: clamp(26px,3.2vw,42px);
-  }
-
-  /* ── left: the square carousel, with the benefits held over it ── */
-  /* the shop's own shots: squares that fill the frame, and cartons
-     that do not, so they are fitted whole against their own white */
-  .sr-of-shots {
-    position: relative; aspect-ratio: 1 / 1; border-radius: 22px; overflow: hidden;
-    background: #ffffff; border: 1px solid rgba(166,200,236,0.18);
-  }
-  .sr-of-track { display: flex; width: 100%; height: 100%; transition: transform 560ms cubic-bezier(0.16,1,0.3,1); }
-  .sr-of-slide { flex: 0 0 100%; min-width: 0; height: 100%; }
-  .sr-of-slide img { display: block; width: 100%; height: 100%; object-fit: contain; }
-  .sr-of-arrow {
-    position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; display: flex;
-    height: 34px; width: 34px; align-items: center; justify-content: center; padding: 0;
-    border-radius: 9999px; border: 1px solid rgba(255,255,255,0.22);
-    background: rgba(7,24,44,0.46); color: #ffffff; cursor: pointer;
-    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-    transition: background 200ms ease, border-color 200ms ease;
-  }
-  .sr-of-arrow:hover { background: #438fe0; border-color: #438fe0; }
-  .sr-of-prev { left: 12px; }
-  .sr-of-next { right: 12px; }
-  .sr-of-dots { position: absolute; left: 0; right: 0; bottom: 14px; z-index: 3; display: flex; justify-content: center; gap: 6px; }
-  .sr-of-dot { height: 5px; border-radius: 9999px; border: none; padding: 0; cursor: pointer; transition: width 260ms ease, background 260ms ease; }
+  .sr-of-buyside { max-width: 860px; margin: clamp(26px,3.2vw,42px) auto 0; }
 
   /* ── right: the three packages ── */
   .sr-of-picks {
@@ -1450,10 +1423,6 @@
   .sr-of-ti + .sr-of-ti { border-left: 1px solid rgba(166,200,236,0.26); }
 
   /* ── narrower ── */
-  @media (max-width: 1040px) {
-    .sr-of-grid { grid-template-columns: minmax(0,1fr); gap: 24px; }
-    .sr-of-shots { max-width: 520px; margin: 0 auto; }
-  }
   @media (max-width: 560px) {
     .sr-of { padding-left: 16px; padding-right: 16px; }
     .sr-of-picks { gap: 7px; }
@@ -1469,7 +1438,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .sr-of-track, .sr-of-cta, .sr-of-pick { transition: none; }
+    .sr-of-cta, .sr-of-pick { transition: none; }
     .sr-of-cta:hover, .sr-of-cta:hover .sr-of-cta-ar { transform: none; }
   }
 
@@ -1703,78 +1672,57 @@
           <p class="sr-of-lead">Two thoughtfully formulated skincare essentials designed to complement each other, bringing targeted peptide care and hydration into one simple daily routine.</p>
         </div>
 
-        <div class="sr-of-grid">
+        <div class="sr-of-buyside">
 
-          <div class="sr-of-shots">
-            <div class="sr-of-track" style="transform: {{ ofX }}">
-            <div class="sr-of-slide"><img src="{{ ofImg0 }}" alt="{{ ofAlt0 }}" decoding="async" /></div>
-            <div class="sr-of-slide"><img src="{{ ofImg1 }}" alt="{{ ofAlt1 }}" loading="lazy" decoding="async" /></div>
-            <div class="sr-of-slide"><img src="{{ ofImg2 }}" alt="{{ ofAlt2 }}" loading="lazy" decoding="async" /></div>
-            <div class="sr-of-slide"><img src="{{ ofImg3 }}" alt="{{ ofAlt3 }}" loading="lazy" decoding="async" /></div>
+        <div class="sr-of-picks" role="group" aria-label="Choose a package">
+            <button type="button" class="sr-of-pick" onClick="{{ ofTap0 }}" aria-pressed="{{ ofSel0 }}" style="background: {{ ofBg0 }}; border-color: {{ ofBd0 }}; box-shadow: {{ ofSh0 }}">
+              <span class="sr-of-pnum">Package 01</span>
+              <span class="sr-of-ptag" style="color: {{ ofFg0 }}">Targeted care</span>
+              <span class="sr-of-pshot"><img src="assets/p-serum.webp" alt="" loading="lazy" decoding="async" /></span>
+              <span class="sr-of-pname">The Serum</span>
+              <span class="sr-of-psize">30 mL</span>
+              <span class="sr-of-pprice">&#8369;1,499</span>
+            </button>
+            <button type="button" class="sr-of-pick" onClick="{{ ofTap1 }}" aria-pressed="{{ ofSel1 }}" style="background: {{ ofBg1 }}; border-color: {{ ofBd1 }}; box-shadow: {{ ofSh1 }}">
+              <span class="sr-of-pnum">Package 02</span>
+              <span class="sr-of-ptag" style="color: {{ ofFg1 }}">Daily care</span>
+              <span class="sr-of-pshot"><img src="assets/p-cream.webp" alt="" loading="lazy" decoding="async" /></span>
+              <span class="sr-of-pname">The Cream</span>
+              <span class="sr-of-psize">65 g</span>
+              <span class="sr-of-pprice">&#8369;1,699</span>
+            </button>
+            <button type="button" class="sr-of-pick" onClick="{{ ofTap2 }}" aria-pressed="{{ ofSel2 }}" style="background: {{ ofBg2 }}; border-color: {{ ofBd2 }}; box-shadow: {{ ofSh2 }}">
+              <span class="sr-of-flag"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3.6 2.5 5.3 5.8.8-4.2 4.1 1 5.8-5.1-2.8-5.1 2.8 1-5.8L3.7 9.7l5.8-.8z"></path></svg>Best value</span>
+              <span class="sr-of-pnum">Package 03</span>
+              <span class="sr-of-ptag" style="color: {{ ofFg2 }}">Complete care</span>
+              <span class="sr-of-pshot"><img src="assets/p-duo.webp" alt="" loading="lazy" decoding="async" /></span>
+              <span class="sr-of-pname">The Duo</span>
+              <span class="sr-of-psize">30 mL + 65 g</span>
+              <span class="sr-of-pprice">&#8369;2,899</span>
+            </button>
           </div>
 
-          <button type="button" class="sr-of-arrow sr-of-prev" onClick="{{ ofPrev }}" aria-label="Previous photo"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
-            <button type="button" class="sr-of-arrow sr-of-next" onClick="{{ ofNext }}" aria-label="Next photo"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
-            <div class="sr-of-dots">
-            <button type="button" class="sr-of-dot" onClick="{{ ofGo0 }}" aria-label="Photo 1" style="width: {{ ofDotW0 }}; background: {{ ofDotBg0 }}"></button>
-            <button type="button" class="sr-of-dot" onClick="{{ ofGo1 }}" aria-label="Photo 2" style="width: {{ ofDotW1 }}; background: {{ ofDotBg1 }}"></button>
-            <button type="button" class="sr-of-dot" onClick="{{ ofGo2 }}" aria-label="Photo 3" style="width: {{ ofDotW2 }}; background: {{ ofDotBg2 }}"></button>
-            <button type="button" class="sr-of-dot" onClick="{{ ofGo3 }}" aria-label="Photo 4" style="width: {{ ofDotW3 }}; background: {{ ofDotBg3 }}"></button>
-          </div>
-          </div>
-
-          <div>
-            <div class="sr-of-picks" role="group" aria-label="Choose a package">
-              <button type="button" class="sr-of-pick" onClick="{{ ofTap0 }}" aria-pressed="{{ ofSel0 }}" style="background: {{ ofBg0 }}; border-color: {{ ofBd0 }}; box-shadow: {{ ofSh0 }}">
-                <span class="sr-of-pnum">Package 01</span>
-                <span class="sr-of-ptag" style="color: {{ ofFg0 }}">Targeted care</span>
-                <span class="sr-of-pshot"><img src="assets/p-serum.webp" alt="" loading="lazy" decoding="async" /></span>
-                <span class="sr-of-pname">The Serum</span>
-                <span class="sr-of-psize">30 mL</span>
-                <span class="sr-of-pprice">&#8369;1,499</span>
-              </button>
-              <button type="button" class="sr-of-pick" onClick="{{ ofTap1 }}" aria-pressed="{{ ofSel1 }}" style="background: {{ ofBg1 }}; border-color: {{ ofBd1 }}; box-shadow: {{ ofSh1 }}">
-                <span class="sr-of-pnum">Package 02</span>
-                <span class="sr-of-ptag" style="color: {{ ofFg1 }}">Daily care</span>
-                <span class="sr-of-pshot"><img src="assets/p-cream.webp" alt="" loading="lazy" decoding="async" /></span>
-                <span class="sr-of-pname">The Cream</span>
-                <span class="sr-of-psize">65 g</span>
-                <span class="sr-of-pprice">&#8369;1,699</span>
-              </button>
-              <button type="button" class="sr-of-pick" onClick="{{ ofTap2 }}" aria-pressed="{{ ofSel2 }}" style="background: {{ ofBg2 }}; border-color: {{ ofBd2 }}; box-shadow: {{ ofSh2 }}">
-                <span class="sr-of-flag"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3.6 2.5 5.3 5.8.8-4.2 4.1 1 5.8-5.1-2.8-5.1 2.8 1-5.8L3.7 9.7l5.8-.8z"></path></svg>Best value</span>
-                <span class="sr-of-pnum">Package 03</span>
-                <span class="sr-of-ptag" style="color: {{ ofFg2 }}">Complete care</span>
-                <span class="sr-of-pshot"><img src="assets/p-duo.webp" alt="" loading="lazy" decoding="async" /></span>
-                <span class="sr-of-pname">The Duo</span>
-                <span class="sr-of-psize">30 mL + 65 g</span>
-                <span class="sr-of-pprice">&#8369;2,899</span>
-              </button>
+          <div class="sr-of-buy">
+            <div class="sr-of-qty" role="group" aria-label="Quantity">
+              <button type="button" class="sr-of-qbtn" onClick="{{ ofDec }}" aria-label="One fewer" aria-disabled="{{ ofDecOff }}" style="opacity: {{ ofDecOp }}; pointer-events: {{ ofDecPe }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+              <span class="sr-of-qn" aria-live="polite">{{ ofQty }}</span>
+              <button type="button" class="sr-of-qbtn" onClick="{{ ofInc }}" aria-label="One more" aria-disabled="{{ ofIncOff }}" style="opacity: {{ ofIncOp }}; pointer-events: {{ ofIncPe }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></button>
             </div>
-
-            <div class="sr-of-buy">
-              <div class="sr-of-qty" role="group" aria-label="Quantity">
-                <button type="button" class="sr-of-qbtn" onClick="{{ ofDec }}" aria-label="One fewer" aria-disabled="{{ ofDecOff }}" style="opacity: {{ ofDecOp }}; pointer-events: {{ ofDecPe }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
-                <span class="sr-of-qn" aria-live="polite">{{ ofQty }}</span>
-                <button type="button" class="sr-of-qbtn" onClick="{{ ofInc }}" aria-label="One more" aria-disabled="{{ ofIncOff }}" style="opacity: {{ ofIncOp }}; pointer-events: {{ ofIncPe }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></button>
-              </div>
-              <span class="sr-of-what"><span class="sr-of-wname">{{ ofName }}</span><span class="sr-of-wsub">{{ ofWhat }}</span></span>
-              <span class="sr-of-money">
-                <span class="sr-of-was" style="display: {{ ofWasShow }}">{{ ofWas }}</span>
-                <span class="sr-of-now">{{ ofNow }}</span>
-                <span class="sr-of-save" style="display: {{ ofSaveShow }}">{{ ofSave }}</span>
-              </span>
-            </div>
-
-            <a class="sr-of-cta" href="Shop.dc.html"><span aria-hidden="true" style="position:relative; display:inline-flex"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span><span style="position:relative">Shop Your Skincare Routine</span><span class="sr-of-cta-ar" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
-
-            <p class="sr-of-trust">
-              <span class="sr-of-ti"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8cb8e4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10.5" rx="2"></rect><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"></path></svg>Secure Checkout</span>
-              <span class="sr-of-ti"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8cb8e4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5h11v11h-11z"></path><path d="M13.5 10h4l3 3.2v4.3h-7z"></path><circle cx="6.8" cy="19" r="1.6"></circle><circle cx="16.8" cy="19" r="1.6"></circle></svg>Nationwide Delivery</span>
-              <span class="sr-of-ti"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8cb8e4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 9.5a8.5 8.5 0 1 1 1 7"></path><path d="M3 4.5v5h5"></path></svg>7-Day Eligible Returns</span>
-            </p>
+            <span class="sr-of-what"><span class="sr-of-wname">{{ ofName }}</span><span class="sr-of-wsub">{{ ofWhat }}</span></span>
+            <span class="sr-of-money">
+              <span class="sr-of-was" style="display: {{ ofWasShow }}">{{ ofWas }}</span>
+              <span class="sr-of-now">{{ ofNow }}</span>
+              <span class="sr-of-save" style="display: {{ ofSaveShow }}">{{ ofSave }}</span>
+            </span>
           </div>
 
+          <a class="sr-of-cta" href="Shop.dc.html"><span aria-hidden="true" style="position:relative; display:inline-flex"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span><span style="position:relative">Shop Your Skincare Routine</span><span class="sr-of-cta-ar" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
+
+          <p class="sr-of-trust">
+            <span class="sr-of-ti"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8cb8e4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10.5" rx="2"></rect><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"></path></svg>Secure Checkout</span>
+            <span class="sr-of-ti"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8cb8e4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5h11v11h-11z"></path><path d="M13.5 10h4l3 3.2v4.3h-7z"></path><circle cx="6.8" cy="19" r="1.6"></circle><circle cx="16.8" cy="19" r="1.6"></circle></svg>Nationwide Delivery</span>
+            <span class="sr-of-ti"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#8cb8e4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 9.5a8.5 8.5 0 1 1 1 7"></path><path d="M3 4.5v5h5"></path></svg>7-Day Eligible Returns</span>
+          </p>
         </div>
       </div>
     </section>
@@ -1787,19 +1735,19 @@
     <div class="sr-vp-wrap">
       <ul class="sr-vp-grid" role="list">
         <li class="sr-vp-col">
-          <span class="sr-vp-ico" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.6" cy="12" r="5.1"></circle><circle cx="15.4" cy="12" r="5.1"></circle></svg></span>
-          <p class="sr-vp-h">Two actives, never pre-mixed</p>
-          <p class="sr-vp-p">PDRN and GHK-Cu sit in separate pink and blue beads. They meet on your skin, not in the jar.</p>
+        <span class="sr-vp-ico" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="8.6" cy="12" r="5.1"></circle><circle cx="15.4" cy="12" r="5.1"></circle></svg></span>
+        <p class="sr-vp-h">Two actives, never pre-mixed</p>
+        <p class="sr-vp-p">PDRN and GHK-Cu sit in separate pink and blue beads. They meet on your skin, not in the jar.</p>
         </li>
         <li class="sr-vp-col">
-          <span class="sr-vp-ico" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path><path d="m9.2 14.2 1.9 1.9 3.7-3.7"></path></svg></span>
-          <p class="sr-vp-h">Every jar opens its own batch report</p>
-          <p class="sr-vp-p">Type the lot code printed on the base and you get the assay, the fill date and the facility that made it.</p>
+        <span class="sr-vp-ico" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path><path d="m9.2 14.2 1.9 1.9 3.7-3.7"></path></svg></span>
+        <p class="sr-vp-h">Every jar opens its own batch report</p>
+        <p class="sr-vp-p">Type the lot code printed on the base and you get the assay, the fill date and the facility that made it.</p>
         </li>
         <li class="sr-vp-col">
-          <span class="sr-vp-ico" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2 3.6 7.6 12 12l8.4-4.4z"></path><path d="m3.6 13 8.4 4.4 8.4-4.4"></path></svg></span>
-          <p class="sr-vp-h">Two formulas built to work together</p>
-          <p class="sr-vp-p">Serum first on damp skin, then the cream to seal it. Morning and evening.</p>
+        <span class="sr-vp-ico" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2 3.6 7.6 12 12l8.4-4.4z"></path><path d="m3.6 13 8.4 4.4 8.4-4.4"></path></svg></span>
+        <p class="sr-vp-h">Two formulas built to work together</p>
+        <p class="sr-vp-p">Serum first on damp skin, then the cream to seal it. Morning and evening.</p>
         </li>
       </ul>
     </div>
@@ -2525,7 +2473,7 @@ class Component extends DCLogic {
       navBlur: on ? "blur(16px)" : "blur(0px)"
     };
   }
-  state = { navOpen: false, insidePop: "a", navScrolled: false, of: 0, ofPick: 2, ofQty: 1, hero: 0, inside: 0, review: 1, faq: [false, false, false, false, false] };
+  state = { navOpen: false, insidePop: "a", navScrolled: false, ofPick: 2, ofQty: 1, hero: 0, inside: 0, review: 1, faq: [false, false, false, false, false] };
 
   reviews = [
     { photo: "assets/review-danielle.webp", name: "Danielle Ong", hi: "changed how I shop", place: "Makati", lot: "SR2531C", quote: "“I buy skincare for a living and I have never been able to trace a jar back to its own batch report. That alone changed how I shop.”" },
@@ -2598,7 +2546,6 @@ class Component extends DCLogic {
   componentDidMount() {
     this.startReviewTimer();
     this.startHeroTimer();
-    this.startOfTimer();
     this.setupReveal();
     this.setupSteps();
     this.onVeilScroll = () => {
@@ -2610,33 +2557,9 @@ class Component extends DCLogic {
     window.addEventListener("resize", this.onResize);
     this.onResize();
   }
-  componentWillUnmount() { clearInterval(this.heroTimer); clearInterval(this.reviewTimer); clearInterval(this.ofTimer); window.removeEventListener("resize", this.onResize); if (this.revealIO) this.revealIO.disconnect(); if (this.veilRO) this.veilRO.disconnect(); if (this.onVeilScroll) window.removeEventListener("scroll", this.onVeilScroll); if (this.veilRaf) cancelAnimationFrame(this.veilRaf); if (this.stepIO) this.stepIO.disconnect(); clearTimeout(this.stepTry); clearTimeout(this.revealRetry); clearInterval(this.revealSafety); if (this.onRevealScroll) { window.removeEventListener("scroll", this.onRevealScroll); window.removeEventListener("resize", this.onRevealScroll); } }
+  componentWillUnmount() { clearInterval(this.heroTimer); clearInterval(this.reviewTimer); window.removeEventListener("resize", this.onResize); if (this.revealIO) this.revealIO.disconnect(); if (this.veilRO) this.veilRO.disconnect(); if (this.onVeilScroll) window.removeEventListener("scroll", this.onVeilScroll); if (this.veilRaf) cancelAnimationFrame(this.veilRaf); if (this.stepIO) this.stepIO.disconnect(); clearTimeout(this.stepTry); clearTimeout(this.revealRetry); clearInterval(this.revealSafety); if (this.onRevealScroll) { window.removeEventListener("scroll", this.onRevealScroll); window.removeEventListener("resize", this.onRevealScroll); } }
 
   /* ── the offer band above the hero ── */
-  OF_SHOTS = 4;
-
-  /* the same shots the shop shows, in the shop's own order, listed
-     here by package rather than by the shop's variant order */
-  OF_GALS = [
-    [
-      { src: "assets/p-serum-box.webp", alt: "The serum with its carton" },
-      { src: "assets/sh-serum-info.webp", alt: "The serum's actives, directions and cautions" },
-      { src: "assets/sh-serum-scene.webp", alt: "The GHK-Cu Serum, photographed" },
-      { src: "assets/sh-serum-say.webp", alt: "A customer on the GHK-Cu Serum" }
-    ],
-    [
-      { src: "assets/p-cream-box.webp", alt: "The Capsule Cream with its carton" },
-      { src: "assets/sh-cream-info.webp", alt: "The Capsule Cream's actives and full ingredients" },
-      { src: "assets/sh-cream-scene.webp", alt: "The Capsule Cream open, with a second jar behind it" },
-      { src: "assets/sh-cream-say.webp", alt: "Angielyn on the Capsule Cream" }
-    ],
-    [
-      { src: "assets/hero-duo-pack.webp", alt: "Both formulas with their cartons" },
-      { src: "assets/sh-duo-info.webp", alt: "Why su-ree uses three peptides rather than one" },
-      { src: "assets/sh-duo-scene.webp", alt: "The cream and the serum together" },
-      { src: "assets/sh-duo-say.webp", alt: "Angielyn on using both together" }
-    ]
-  ];
   OF_MAXQ = 3;
 
   /* Every price here is one the shop already charges. A quantity the
@@ -2663,45 +2586,13 @@ class Component extends DCLogic {
     return { sell, list };
   }
 
-  ofGo(i) {
-    const n = this.OF_SHOTS;
-    this.setState({ of: ((i % n) + n) % n });
-  }
-
-  startOfTimer() {
-    clearInterval(this.ofTimer);
-    this.ofTimer = setInterval(() => this.setState((st) => ({ of: ((st.of || 0) + 1) % this.OF_SHOTS })), 5200);
-  }
-
   offerVals() {
-    const n = this.OF_SHOTS;
-    const at = (((this.state.of || 0) % n) + n) % n;
-    const out = {
-      ofX: "translateX(-" + (at * 100) + "%)",
-      ofPrev: () => { this.ofGo(at - 1); this.startOfTimer(); },
-      ofNext: () => { this.ofGo(at + 1); this.startOfTimer(); }
-    };
-    for (let i = 0; i < n; i++) {
-      out["ofGo" + i] = () => { this.ofGo(i); this.startOfTimer(); };
-      out["ofDotW" + i] = i === at ? "18px" : "5px";
-      /* the frame is white now, so white dots were invisible */
-      out["ofDotBg" + i] = i === at ? "#2f85e0" : "rgba(18,38,58,0.22)";
-    }
-
+    const out = {};
     const p = Math.min(2, Math.max(0, this.state.ofPick ?? 2));
-    const gal = this.OF_GALS[p];
-    for (let i = 0; i < n; i++) {
-      out["ofImg" + i] = gal[i].src;
-      out["ofAlt" + i] = gal[i].alt;
-    }
     for (let i = 0; i < 3; i++) {
       const on = i === p;
       /* a different package starts its own count */
-      out["ofTap" + i] = () => {
-        if (this.state.ofPick === i) return;
-        this.setState({ ofPick: i, ofQty: 1, of: 0 });
-        this.startOfTimer();
-      };
+      out["ofTap" + i] = () => { if (this.state.ofPick !== i) this.setState({ ofPick: i, ofQty: 1 }); };
       out["ofSel" + i] = on ? "true" : "false";
       out["ofBg" + i] = on
         ? "linear-gradient(162deg, rgba(78,154,228,0.26) 0%, rgba(47,127,212,0.10) 100%)"
