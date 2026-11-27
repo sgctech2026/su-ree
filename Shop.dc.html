@@ -574,7 +574,7 @@
   .sr-ba-range::-moz-range-thumb { height: 100%; width: 44px; border: 0; cursor: ew-resize; }
 
   .sr-lab {
-    margin-top: 16px; display: flex; align-items: flex-start; gap: 14px;
+    margin-top: 16px; display: flex; align-items: center; gap: 14px;
     border-radius: 16px; background: #ffffff; border: 0.5px solid #e7f0fb;
     padding: 14px 16px;
   }
@@ -582,9 +582,8 @@
     flex-shrink: 0; display: flex; height: 34px; width: 34px; align-items: center;
     justify-content: center; border-radius: 10px; background: #e7f0fb; color: #438fe0;
   }
-  .sr-lab-words { display: flex; min-width: 0; flex-direction: column; gap: 8px; }
   .sr-lab-head {
-    display: flex; flex-wrap: wrap; align-items: center; gap: 9px;
+    display: flex; min-width: 0; flex-wrap: wrap; align-items: center; gap: 9px;
     font-size: 13px; font-weight: 600; color: #1b3456;
   }
   .sr-lab-chip {
@@ -601,10 +600,8 @@
     font-style: normal; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 9.5px;
     font-weight: 600; color: #93aec9; letter-spacing: 1.4px; text-transform: uppercase;
   }
-  .sr-lab-note { font-size: 11.5px; color: #8295b4; line-height: 1.5; }
   @media (max-width: 560px) {
     .sr-lab-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 5px 10px; font-size: 11px; }
-    .sr-lab-note { font-size: 10.5px; }
   }
   .sr-lab-btn {
     flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center;
@@ -682,7 +679,6 @@
   }
   .sr-br-foot { margin: 14px 2px 0; font-size: 11.5px; color: #8295b4; line-height: 1.6; }
   @media (max-width: 560px) {
-    .sr-lab { flex-wrap: wrap; }
     .sr-lab-btn { height: 34px; width: 34px; }
     .sr-br-grid { grid-template-columns: minmax(0,1fr); gap: 8px; }
   }
@@ -692,13 +688,12 @@
     .sr-buygrid { gap: 46px !important; }
   }
   @media (max-width: 760px) {
-    /* the note is a line of type and a batch code, not a paragraph: on a
-       narrow card the tick moves to the top and the type comes down a size */
-    .sr-lab { align-items: flex-start !important; gap: 11px !important; padding: 12px 14px !important; }
-    .sr-lab > span:first-child { height: 28px !important; width: 28px !important; }
-    .sr-lab > span:first-child svg { width: 13px !important; height: 13px !important; }
-    .sr-lab > span:last-child > span:first-child { font-size: 12px !important; gap: 7px !important; }
-    .sr-lab > span:last-child > span:last-child { font-size: 11px !important; line-height: 1.5 !important; }
+    /* a tick, a line and an arrow: the card comes down a size, it does
+       not break into rows */
+    .sr-lab { gap: 11px !important; padding: 12px 14px !important; }
+    .sr-lab-ico { height: 28px !important; width: 28px !important; }
+    .sr-lab-ico svg { width: 13px !important; height: 13px !important; }
+    .sr-lab-head { font-size: 12px !important; gap: 7px !important; }
   }
   @media (max-width: 980px) {
     .sr-ba-frame { aspect-ratio: 1 / 1 !important; }
@@ -1833,10 +1828,7 @@
 
           <div class="sr-lab">
             <span class="sr-lab-ico" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></span>
-            <span class="sr-lab-words">
-              <span class="sr-lab-head">Batch verified by an independent laboratory</span>
-              <span class="sr-lab-note">Lot {{ lotCode }} &middot; checked for actives concentration and microbial load before release.</span>
-            </span>
+            <span class="sr-lab-head">Batch verified by an independent laboratory</span>
             <button type="button" class="sr-lab-btn" onClick="{{ brShow }}" aria-label="View the batch result"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></button>
           </div>
           <a href="Science.dc.html" style="margin-top:12px; display:flex; align-items:center; justify-content:center; gap:11px; border-radius:14px; background:linear-gradient(135deg,#1d3a55 0%,#1b3456 52%,#0c1c2c 100%); padding:16px 22px; font-family:'Jost',ui-sans-serif,sans-serif; font-size:13.5px; font-weight:600; color:#fff; letter-spacing:1.4px; box-shadow:0 14px 30px -14px rgba(18,38,58,0.6); transition:transform 220ms, box-shadow 220ms" style-hover="color:#fff; transform:translateY(-2px); box-shadow:0 20px 40px -16px rgba(18,38,58,0.7)">READ THE BATCH REPORT</a>
@@ -2744,7 +2736,6 @@ class Component extends DCLogic {
     const BATCH = ["BSL-2026-00125", "BSL-2026-00181", "BSL-2026-00125 + BSL-2026-00181"];
     const PUB = ["31 January 2026", "6 March 2026", "31 January 2026 / 6 March 2026"];
     const VALID = ["29 January 2028", "4 March 2028", "29 January 2028 / 4 March 2028"];
-    out.lotCode = LOT[vi];
     out.batchId = BATCH[vi];
     out.batchPub = PUB[vi];
     out.batchValid = VALID[vi];
