@@ -3125,15 +3125,23 @@ class Component extends DCLogic {
     const phone = TW < 760;
     let ACTIVE_W, SIDE_W, OVERLAP, activeH, sideH, qSize, photoH;
     if (phone) {
-      ACTIVE_W = Math.round(Math.min(304, TW * 0.68));
-      SIDE_W = Math.round(ACTIVE_W * 0.46);
+      // The fan ran off both edges of a phone: the neighbours were cut by the
+      // screen rather than by the composition. Everything is measured back
+      // from a margin instead -- the outermost card ends GUT short of the
+      // edge, and the active card takes whatever is left.
+      const GUT = 14;
       OVERLAP = 6;
+      // half the stack = ACTIVE_W / 2 + SIDE_W - OVERLAP, and SIDE_W is 0.3
+      // of the active card, so the whole thing is 0.8 x ACTIVE_W - OVERLAP
+      ACTIVE_W = Math.round(Math.min(286, (TW / 2 - GUT + OVERLAP) / 0.8));
+      SIDE_W = Math.round(ACTIVE_W * 0.3);
       qSize = 14;
       photoH = Math.round(ACTIVE_W * 0.88);
       const colW = ACTIVE_W - 36;
       const lines = Math.ceil(longest / Math.max(12, Math.floor(colW / (qSize * 0.5))));
       activeH = photoH + Math.round(qSize * 1.55 * lines + 22 + 20 + 30 + 46);
-      sideH = Math.round(Math.min(270, SIDE_W * 1.6));
+      // a sliver this narrow still has to read as a card, not a strip
+      sideH = Math.round(Math.min(270, Math.max(150, SIDE_W * 2.1)));
     } else {
       // usable width: track minus arrow gutters (2 x 64px)
       const tw = Math.max(320, TW - 128);
@@ -3157,7 +3165,7 @@ class Component extends DCLogic {
     // outside the outermost card rather than out at the track edge
     const stackHalf = x1 + SIDE_W / 2;
     const arrowAt = phone
-      ? Math.round(TW / 2 - 24)
+      ? Math.round(TW / 2 - 30)
       : Math.round(Math.min(stackHalf + 34, TW / 2 - 30));
     // Four reviews cannot fan symmetrically with all four on show -- one side
     // always gets two. Keep one card either side of the active one and park the
