@@ -892,9 +892,12 @@
     .sr-pf-ring { display: none !important; }
   }
   @media (max-width: 520px) {
-    .sr-pf-cert { width: min(268px,92%); }
-    .sr-pf-certhead { padding: 13px 15px 11px !important; }
-    .sr-pf-row { padding: 10px 0 !important; }
+    /* On a phone the certificate is a card of small print held against a
+       photograph: it crowds the model and reads as clutter. The claim it
+       makes is already in the words, and the records themselves are a tap
+       away. Only the model stays. */
+    .sr-pf-cert { display: none !important; }
+    .sr-pf-stage { gap: 0 !important; padding-top: clamp(14px,4vw,24px) !important; }
   }
 
   /* 48 for the words, 52 for the pair. The words take the upper row and
