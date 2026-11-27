@@ -1433,8 +1433,11 @@
     .sr-tb-i:nth-child(even) { padding-right: 0; }
   }
   @media (max-width: 460px) {
-    .sr-tb-row { grid-template-columns: minmax(0,1fr); row-gap: 16px; }
-    .sr-tb-i { border-left: none !important; padding: 0; }
+    /* two abreast here as well: four stacked rows pushed the hero's
+       first screen too far down. Only the spacing comes in. */
+    .sr-tb-row { row-gap: 18px; column-gap: 0; }
+    .sr-tb-i { gap: 9px; padding: 2px 11px; }
+    .sr-tb-ico svg { width: 17px; height: 17px; }
   }
 
   /* The community figures. Every number is typed in by hand and the
