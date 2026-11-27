@@ -1232,6 +1232,7 @@
   .sr-of-th img { display: block; width: 100%; height: 100%; object-fit: contain; }
   .sr-of-main {
     position: relative; min-width: 0; aspect-ratio: 1 / 1; overflow: hidden;
+    box-sizing: border-box;
     border-radius: clamp(18px,1.8vw,26px); background: #ffffff;
     border: 1px solid rgba(201,223,245,0.9);
     box-shadow: 0 26px 56px -38px rgba(20,50,92,0.5);
@@ -2145,7 +2146,7 @@
             <button type="button" class="sr-of-th" onClick="{{ ofGo2 }}" aria-label="Shot 3" aria-pressed="{{ ofOn2 }}" style="border-color: {{ ofThBd2 }}; box-shadow: {{ ofThSh2 }}"><img src="{{ ofImg2 }}" alt="" loading="lazy" decoding="async" /></button>
             <button type="button" class="sr-of-th" onClick="{{ ofGo3 }}" aria-label="Shot 4" aria-pressed="{{ ofOn3 }}" style="border-color: {{ ofThBd3 }}; box-shadow: {{ ofThSh3 }}"><img src="{{ ofImg3 }}" alt="" loading="lazy" decoding="async" /></button>
           </div>
-          <div class="sr-of-main"><img src="{{ ofImg }}" alt="{{ ofAlt }}" decoding="async" /></div>
+          <div class="sr-of-main" style="padding: {{ ofPad }}"><img src="{{ ofImg }}" alt="{{ ofAlt }}" decoding="async" /></div>
         </div>
 
         <div class="sr-of-side">
@@ -3203,19 +3204,19 @@ class Component extends DCLogic {
      by the shop's own variant order */
   OF_GALS = [
     [
-      { src: "assets/p-serum-box.webp", alt: "The serum with its carton" },
+      { pad: true, src: "assets/p-serum-box.webp", alt: "The serum with its carton" },
       { src: "assets/sh-serum-info.webp", alt: "The serum's actives, directions and cautions" },
       { src: "assets/sh-serum-scene.webp", alt: "The GHK-Cu Serum, photographed" },
       { src: "assets/sh-serum-say.webp", alt: "A customer on the GHK-Cu Serum" }
     ],
     [
-      { src: "assets/p-cream-box.webp", alt: "The Capsule Cream with its carton" },
+      { pad: true, src: "assets/p-cream-box.webp", alt: "The Capsule Cream with its carton" },
       { src: "assets/sh-cream-info.webp", alt: "The Capsule Cream's actives and full ingredients" },
       { src: "assets/sh-cream-scene.webp", alt: "The Capsule Cream open, with a second jar behind it" },
       { src: "assets/sh-cream-say.webp", alt: "Angielyn on the Capsule Cream" }
     ],
     [
-      { src: "assets/hero-duo-pack.webp", alt: "Both formulas with their cartons" },
+      { pad: true, src: "assets/hero-duo-pack.webp", alt: "Both formulas with their cartons" },
       { src: "assets/sh-duo-info.webp", alt: "Why su-ree uses three peptides rather than one" },
       { src: "assets/sh-duo-scene.webp", alt: "The cream and the serum together" },
       { src: "assets/sh-duo-say.webp", alt: "Angielyn on using both together" }
@@ -3272,6 +3273,9 @@ class Component extends DCLogic {
     const at = Math.min(shots.length - 1, Math.max(0, this.state.ofShot || 0));
     out.ofImg = shots[at].src;
     out.ofAlt = shots[at].alt;
+    /* a carton photographed on white fills the frame corner to corner
+       and reads as oversized; the square graphics are meant to fill it */
+    out.ofPad = shots[at].pad ? "clamp(20px,6%,54px)" : "0px";
     for (let i = 0; i < shots.length; i++) {
       const on = i === at;
       out["ofImg" + i] = shots[i].src;
