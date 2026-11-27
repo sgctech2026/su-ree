@@ -3052,41 +3052,6 @@ class Component extends DCLogic {
     return out;
   }
 
-  nlVals() {
-    const st = this.state.nl || { msg: "", ok: null };
-    if (!this.nlBooted) {
-      this.nlBooted = true;
-      if (typeof window !== "undefined" && window.addEventListener) {
-        window.addEventListener("keydown", (e) => {
-          if (e.key === "Escape" && this.state.nlShow) this.setState({ nlShow: false });
-        });
-      }
-    }
-    return {
-      nlOpen: this.state.nlShow ? "flex" : "none",
-      nlClose: () => { if (this.state.nlShow) this.setState({ nlShow: false }); },
-      nlStop: (e) => { if (e && e.stopPropagation) e.stopPropagation(); },
-      nlRef: (el) => { this.nlInput = el; },
-      nlMsg: st.msg,
-      nlColor: st.ok === null ? "#8295b4" : st.ok ? "#1f7a4d" : "#b4432e",
-      nlSubmit: (e) => {
-        if (e && e.preventDefault) e.preventDefault();
-        const v = ((this.nlInput && this.nlInput.value) || "").trim();
-        if (!v) {
-          this.setState({ nl: { msg: "Enter an email address first.", ok: false } });
-          return;
-        }
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) {
-          this.setState({ nl: { msg: "That does not look like an email address.", ok: false } });
-          return;
-        }
-        this.setState({ nl: { msg: "Thanks \u2014 we will send the next one to " + v + ".", ok: true } });
-        if (this.nlInput) this.nlInput.value = "";
-        setTimeout(() => this.setState({ nlShow: false }), 1800);
-      }
-    };
-  }
-
   REVIEW_SETS = 3;
 
 
@@ -3485,7 +3450,6 @@ class Component extends DCLogic {
       ...this.insideVals(),
       ...this.baVals(),
       ...this.wallVals(),
-      ...this.nlVals(),
       ...this.pmVals(),
       ...this.buyVals(),
       ...this.galVals(),
