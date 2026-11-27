@@ -185,7 +185,7 @@
     .sr-marq-tile { flex-basis: 150px !important; }
     .sr-story { flex-basis: 220px !important; }
     /* the shot takes the first row square, the thumbs the second: four in
-       view, the rest a swipe or an arrow away */
+       view, the rest a swipe away */
     .sr-gal { flex-direction: column !important; }
     .sr-gal-strip {
       display: flex !important; order: 2; align-items: center; gap: 8px;
@@ -1808,8 +1808,7 @@
         <div class="r-stick" style="position:sticky; top:106px; min-width:0">
           <div class="sr-gal" onMouseEnter="{{ galHold }}" onMouseLeave="{{ galPlay }}">
             <div class="sr-gal-strip">
-              <button type="button" class="sr-gal-arrow" onClick="{{ galBack }}" aria-label="Earlier shots"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
-              <div class="sr-gal-thumbs" role="group" aria-label="Product shots" ref="{{ stripRef }}">
+              <div class="sr-gal-thumbs" role="group" aria-label="Product shots">
               <button type="button" class="sr-gal-th" onClick="{{ gPick0 }}" aria-label="{{ gLabel0 }}" aria-pressed="{{ gSel0 }}" style="display: {{ gHas0 }}; border-color: {{ gBd0 }}; box-shadow: {{ gSh0 }}"><img src="{{ gSrc0 }}" alt="" loading="lazy" decoding="async" style="opacity: {{ gOp0 }}" /></button>
               <button type="button" class="sr-gal-th" onClick="{{ gPick1 }}" aria-label="{{ gLabel1 }}" aria-pressed="{{ gSel1 }}" style="display: {{ gHas1 }}; border-color: {{ gBd1 }}; box-shadow: {{ gSh1 }}"><img src="{{ gSrc1 }}" alt="" loading="lazy" decoding="async" style="opacity: {{ gOp1 }}" /></button>
               <button type="button" class="sr-gal-th" onClick="{{ gPick2 }}" aria-label="{{ gLabel2 }}" aria-pressed="{{ gSel2 }}" style="display: {{ gHas2 }}; border-color: {{ gBd2 }}; box-shadow: {{ gSh2 }}"><img src="{{ gSrc2 }}" alt="" loading="lazy" decoding="async" style="opacity: {{ gOp2 }}" /></button>
@@ -1819,7 +1818,6 @@
               <button type="button" class="sr-gal-th" onClick="{{ gPick6 }}" aria-label="{{ gLabel6 }}" aria-pressed="{{ gSel6 }}" style="display: {{ gHas6 }}; border-color: {{ gBd6 }}; box-shadow: {{ gSh6 }}"><img src="{{ gSrc6 }}" alt="" loading="lazy" decoding="async" style="opacity: {{ gOp6 }}" /></button>
               <button type="button" class="sr-gal-th" onClick="{{ gPick7 }}" aria-label="{{ gLabel7 }}" aria-pressed="{{ gSel7 }}" style="display: {{ gHas7 }}; border-color: {{ gBd7 }}; box-shadow: {{ gSh7 }}"><img src="{{ gSrc7 }}" alt="" loading="lazy" decoding="async" style="opacity: {{ gOp7 }}" /></button>
               </div>
-              <button type="button" class="sr-gal-arrow" onClick="{{ galFwd }}" aria-label="More shots"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
             </div>
             <div class="sr-gal-main">
               <img class="sr-gal-shot sr-gal-fit" src="{{ gSrc0 }}" alt="{{ gLabel0 }}" loading="lazy" decoding="async" style="opacity: {{ gVis0 }}; display: {{ gHas0 }}; padding: {{ gPad0 }}; object-fit: {{ gFit0 }}" />
@@ -2929,7 +2927,6 @@ class Component extends DCLogic {
       difLabel: this.state.difAll ? "Show fewer" : "See all six",
       difSpin: this.state.difAll ? "rotate(180deg)" : "none",
       difToggle: () => this.setState((p) => ({ difAll: !p.difAll })),
-      stripRef: this.stripRef,
       vidRef: this.vidRef,
       vOpen: this.state.vidAt >= 0 ? "flex" : "none",
       vClose: () => this.setState({ vidAt: -1 }),
@@ -2938,8 +2935,6 @@ class Component extends DCLogic {
       vTap2: () => this.setState({ vidAt: 2 }),
       vidBack: () => this.nudge(this.vidEl, -1, 1),
       vidFwd: () => this.nudge(this.vidEl, 1, 1),
-      galBack: () => this.nudgeStrip(-1),
-      galFwd: () => this.nudgeStrip(1),
       galHold: () => { this.galPaused = true; },
       galPlay: () => { this.galPaused = false; },
     };
@@ -3101,7 +3096,6 @@ class Component extends DCLogic {
     { photo: "assets/review-joanna.webp", name: "Joanna Cruz", hi: "never pills under sunscreen", place: "Davao City", lot: "SR2588F", quote: "“The serum absorbs in seconds and never pills under sunscreen. Third jar and counting.”" },
   ];
 
-  stripRef = (el) => { this.stripEl = el; };
   vidRef = (el) => { this.vidEl = el; };
 
   nudge(el, dir, each) {
@@ -3111,7 +3105,6 @@ class Component extends DCLogic {
     el.scrollBy({ left: dir * step * each, behavior: "smooth" });
   }
 
-  nudgeStrip(dir) { this.nudge(this.stripEl, dir, 2); }
 
   trackRef = (el) => {
     if (!el || this.trackEl === el) return;
