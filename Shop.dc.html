@@ -1272,7 +1272,17 @@
     .sr-rp-mark { font-size: 40px; right: 14px; top: 2px; }
     .sr-rp-quote { margin-top: 12px !important; }
     .sr-rp-div { margin: 16px 0 12px !important; }
-    .sr-rp-nav { height: 36px !important; width: 36px !important; }
+    /* There is no room beside the stack for arrows, so they used to sit
+       on top of the neighbours' faces. The neighbour is tappable and the
+       dots are right below, so nothing is lost by dropping them. */
+    .sr-rp-nav { display: none !important; }
+    /* a sliver cannot carry a name: it cut every one of them mid-word.
+       What is left is a clean edge of photograph, which is all a hint
+       of the next review needs to be. */
+    .sr-rp-minifoot { display: none !important; }
+    /* 6px of dot, 28px of target */
+    .sr-rp-dot { position: relative; }
+    .sr-rp-dot::after { content: ""; position: absolute; inset: -11px -5px; }
   }
   @media (prefers-reduced-motion: reduce) {
     .sr-rp-nav:hover { transform: translate(-50%,-50%) !important; }
@@ -3197,7 +3207,9 @@ class Component extends DCLogic {
         width: (active ? ACTIVE_W : SIDE_W) + "px",
         height: (active ? activeH : sideH) + "px",
         z: active ? 5 : waiting ? 0 : 3,
-        opacity: active ? 1 : waiting ? 0 : 0.96,
+        // the slivers stand back further on a phone, where they are
+        // closer to the card they flank
+        opacity: active ? 1 : waiting ? 0 : phone ? 0.68 : 0.96,
         filter: active ? "saturate(1)" : "saturate(0.9)",
         cursor: active ? "default" : waiting ? "default" : "pointer",
         events: waiting ? "none" : "auto",
