@@ -1454,12 +1454,13 @@
     font-size: clamp(10px,1.05vw,12px); font-weight: 600; letter-spacing: 1.5px;
     text-transform: uppercase; color: #3f6186; line-height: 1.4;
   }
-  /* the rating card carries the pink of the capsules */
+  /* the rating card goes green: the one figure here that is a verdict
+     rather than a count, and green is how a verdict reads well */
   .sr-com-i-r {
-    background: linear-gradient(180deg, rgba(255,255,255,0.86) 0%, rgba(253,232,242,0.72) 100%);
-    border-color: rgba(246,197,221,0.9);
+    background: linear-gradient(180deg, rgba(255,255,255,0.86) 0%, rgba(223,246,233,0.72) 100%);
+    border-color: rgba(163,221,189,0.9);
   }
-  .sr-com-i-r .sr-com-ico { background: #fbdcea; color: #e2588f; }
+  .sr-com-i-r .sr-com-ico { background: #d8f2e3; color: #2e9c68; }
   .sr-com-stars { display: flex; justify-content: center; gap: 3px; margin-top: 8px; color: #f6b93b; }
   @media (max-width: 760px) {
     .sr-com-row { grid-template-columns: repeat(2, minmax(0,1fr)); }
