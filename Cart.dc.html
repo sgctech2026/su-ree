@@ -851,12 +851,18 @@ class Component extends DCLogic {
       try {
         const u = new URL(document.referrer, window.location.href);
         const here = u.pathname.split("/").pop() || "";
-        /* a page of this site, and not the two this button lives
-           between: going back to the till from the bag it sent you
-           to is a loop, not a way out */
-        if (u.origin === window.location.origin
-            && /\.dc\.html$/i.test(here)
-            && !/^(Cart|Checkout)\.dc\.html$/i.test(here)) {
+        /* Refuse rather than require: the site is served both as
+           Landing.dc.html and as /landing, so a rule that insisted on
+           the file name threw away every tidy URL -- which is the one
+           an advertisement actually sends people to. What is refused
+           is a file that is not a page, the console, and the two
+           pages this button lives between: going back to the till
+           from the bag it sent you to is a loop, not a way out. */
+        const ext = /\.([a-z0-9]+)$/i.exec(here);
+        const bad = (ext && !/^html?$/i.test(ext[1]))
+          || /^(cart|checkout|admin)(\.dc)?\.html?$/i.test(here)
+          || /^(cart|checkout|admin)$/i.test(here);
+        if (u.origin === window.location.origin && !bad) {
           href = u.pathname + u.search + u.hash;
         }
       } catch (e) { /* a referrer we cannot read is one we do not use */ }
