@@ -1825,6 +1825,86 @@
     .sr-cmp-shot img, .sr-cmp tbody tr, .sr-cmp-cta, .sr-cmp-ar { transition: none; }
     .sr-cmp-col:hover .sr-cmp-shot img, .sr-cmp-cta:hover, .sr-cmp-cta:hover .sr-cmp-ar { transform: none; }
   }
+
+  .sr-rec-eyebrow {
+    margin: 0; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 11px;
+    font-weight: 500; color: #5f9ad8; letter-spacing: 4.2px;
+  }
+  .sr-rec-h {
+    margin: 16px 0 0; font-family: 'Inter',ui-sans-serif,sans-serif; font-weight: 700;
+    color: #1b3456; font-size: clamp(30px,3.6vw,50px); line-height: 1.04;
+    letter-spacing: -1.8px;
+  }
+  .sr-rec-lead {
+    margin: 14px 0 0; max-width: none; font-size: 14px; color: #4e648a; line-height: 1.85;
+  }
+  .sr-recs {
+    margin: 34px 0 0; padding: 0; list-style: none; display: grid;
+    grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px;
+  }
+  .sr-rec {
+    border-radius: 20px; background: #ffffff; border: 1px solid #e7f0fb;
+    box-shadow: 0 14px 34px -28px rgba(18,38,58,0.5); padding: 20px 20px 18px;
+  }
+  .sr-rec-name {
+    margin: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 9px;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 16px; font-weight: 700;
+    color: #1b3456; letter-spacing: -0.3px;
+  }
+  .sr-rec-pass {
+    border-radius: 9999px; background: #e3f7ec; color: #1c8a52; padding: 3px 10px;
+    font-size: 10px; font-weight: 700; letter-spacing: 1.4px;
+  }
+  .sr-rec-sub { margin: 4px 0 14px; font-size: 12px; color: #8295b4; }
+  .sr-rec-grid {
+    display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 10px 16px;
+    font-size: 12.5px; color: #1b3456;
+  }
+  .sr-rec-grid > span { display: flex; min-width: 0; flex-direction: column; gap: 2px; }
+  .sr-rec-grid em {
+    font-style: normal; font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 9.5px;
+    font-weight: 600; color: #93aec9; letter-spacing: 1.4px; text-transform: uppercase;
+  }
+  .sr-rec-open { margin-top: 18px; display: inline-block; }
+  .sr-rec-openrow {
+    display: flex; align-items: center; justify-content: center; gap: 9px;
+    border-radius: 9999px; padding: 11px 20px;
+    font-family: 'Jost',ui-sans-serif,sans-serif; font-size: 13px; font-weight: 600;
+    color: #ffffff;
+    background: linear-gradient(135deg,#5ba0ea 0%,#2f85e0 52%,#1f6ec9 100%);
+    box-shadow: 0 12px 26px -16px rgba(47,123,224,0.9);
+  }
+  @media (max-width: 860px) {
+    .sr-recs { grid-template-columns: minmax(0,1fr); gap: 16px; }
+  }
+  @media (max-width: 560px) {
+    .sr-rec-grid { grid-template-columns: minmax(0,1fr); gap: 8px; }
+  }
+
+  /* The batch records, in a dialog. The landing page makes a claim
+     about accessible records; the proof of it should not be a way off
+     the page the advertisement paid for. */
+  .sr-recm {
+    position: fixed; inset: 0; z-index: 400; display: none;
+    align-items: center; justify-content: center; padding: clamp(14px,3vw,34px);
+    background: rgba(13,38,64,0.5);
+    backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  }
+  .sr-recm[data-open="yes"] { display: flex; }
+  .sr-recm-panel {
+    position: relative; width: 100%; max-width: 1120px; max-height: 88vh; overflow-y: auto;
+    border-radius: 24px; background: linear-gradient(180deg,#ffffff 0%,#f7fbff 60%,#ffffff 100%);
+    padding: clamp(24px,3.4vw,46px) clamp(18px,3vw,40px);
+    box-shadow: 0 50px 90px -40px rgba(13,38,64,0.6);
+  }
+  .sr-recm-x {
+    position: absolute; right: 14px; top: 14px; z-index: 2; display: flex;
+    height: 38px; width: 38px; align-items: center; justify-content: center; padding: 0;
+    border-radius: 9999px; border: 1px solid rgba(23,70,117,0.12);
+    background: rgba(255,255,255,0.94); color: #1b3456; cursor: pointer;
+  }
+  .sr-recm-x:hover { background: #ffffff; }
+  @media (prefers-reduced-motion: reduce) { .sr-recm { backdrop-filter: none; } }
 </style>
 </helmet>
 
@@ -2123,7 +2203,7 @@
           <svg class="sr-pf-rule" viewBox="0 0 300 16" fill="none" aria-hidden="true"><path d="M4,12 C78,2 222,2 296,10" stroke="url(#sr-pf-rule-g)" stroke-width="2.6" stroke-linecap="round"></path><defs><linearGradient id="sr-pf-rule-g" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#438fe0" stop-opacity="0"></stop><stop offset="46%" stop-color="#438fe0" stop-opacity="0.85"></stop><stop offset="100%" stop-color="#438fe0" stop-opacity="0"></stop></linearGradient></defs></svg>
           <p class="sr-pf-lead">Thoughtfully formulated skincare, with accessible batch records and laboratory documentation for greater confidence in your daily routine.</p>
           <div style="margin-top:28px; display:flex; flex-wrap:wrap; align-items:center; gap:16px">
-            <a class="sr-pf-cta" href="Science.dc.html#batch-records"><span aria-hidden="true" class="sr-pf-sheen"></span><span style="position:relative">See the batch records</span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position:relative"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></a>
+            <button type="button" class="sr-pf-cta" onClick="{{ recShow }}" style="border:none; cursor:pointer; font:inherit"><span aria-hidden="true" class="sr-pf-sheen"></span><span style="position:relative">See the batch records</span><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position:relative"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg></button>
           </div>
         </div>
 
@@ -2841,6 +2921,31 @@
     </div>
   </footer>
 
+  <div class="sr-recm" data-open="{{ recOpen }}" role="dialog" aria-modal="true"
+       aria-label="Batch records" onClick="{{ recHide }}">
+    <div class="sr-recm-panel" onClick="{{ recStop }}">
+      <button type="button" class="sr-recm-x" onClick="{{ recHide }}" aria-label="Close"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button>
+      <p class="sr-rec-eyebrow">BATCH RECORDS</p>
+      <h2 class="sr-rec-h">The paper behind the jar.</h2>
+      <p class="sr-rec-lead">Each batch is registered with an independent verification registry before it ships. The certificates below are the ones covering the batches on sale now. The testing itself is carried out by a third-party laboratory, not by the registry.</p>
+      <ul class="sr-recs">
+        <li class="sr-rec">
+          <p class="sr-rec-name">Dual Regenerative Capsule Cream<span class="sr-rec-pass">PASS</span></p>
+          <p class="sr-rec-sub">30 g</p>
+          <div class="sr-rec-grid"><span><em>Manufacturer lot</em>SR-2602-A</span><span><em>Batch id</em>BSL-2026-00125</span><span><em>Certificate</em>BAC-2026-00125</span><span><em>Report</em>NAL-NBL-2026-4401</span><span><em>Published</em>31 January 2026</span><span><em>Valid until</em>29 January 2028</span><span><em>Laboratory</em>Northfield Bioassay Laboratory</span><span><em>Accreditation</em>ISO/IEC 17025:2017, scope 2208.11</span></div>
+          <a class="sr-rec-open" href="assets/batch-SR-2602-A.pdf" target="_blank" rel="noopener"><span class="sr-rec-openrow">Open the certificate<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M9 7h8v8"></path></svg></span></a>
+        </li>
+        <li class="sr-rec">
+          <p class="sr-rec-name">GHK-Cu+ Snap 8 Triple Peptide Renewal Serum<span class="sr-rec-pass">PASS</span></p>
+          <p class="sr-rec-sub">30 ml</p>
+          <div class="sr-rec-grid"><span><em>Manufacturer lot</em>SR-2603-B</span><span><em>Batch id</em>BSL-2026-00181</span><span><em>Certificate</em>BAC-2026-00181</span><span><em>Report</em>NAL-NBL-2026-4403</span><span><em>Published</em>6 March 2026</span><span><em>Valid until</em>4 March 2028</span><span><em>Laboratory</em>Northfield Bioassay Laboratory</span><span><em>Accreditation</em>ISO/IEC 17025:2017, scope 2208.11</span></div>
+          <a class="sr-rec-open" href="assets/batch-SR-2603-B.pdf" target="_blank" rel="noopener"><span class="sr-rec-openrow">Open the certificate<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M9 7h8v8"></path></svg></span></a>
+        </li>
+      </ul>
+    </div>
+    </div>
+  </div>
+
 </main>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;announcementText&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Store settings&quot;},&quot;freeShipMin&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:1500,&quot;min&quot;:0,&quot;max&quot;:10000,&quot;step&quot;:50,&quot;tsType&quot;:&quot;number | null&quot;,&quot;section&quot;:&quot;Store settings&quot;},&quot;statCustomers&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;2,500+&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Community figures&quot;},&quot;statRating&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;4.9&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Community figures&quot;},&quot;statReviews&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;1,200+&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Community figures&quot;},&quot;statOrders&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;3,000+&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Community figures&quot;},&quot;showSampleRange&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Store settings&quot;}}">
@@ -3375,6 +3480,22 @@ class Component extends DCLogic {
     return out;
   }
 
+  recVals() {
+    const on = !!this.state.recs;
+    if (!this.recBooted && typeof window !== "undefined") {
+      this.recBooted = true;
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && this.state.recs) this.setState({ recs: false });
+      });
+    }
+    return {
+      recOpen: on ? "yes" : "no",
+      recShow: () => this.setState({ recs: true }),
+      recHide: () => { if (this.state.recs) this.setState({ recs: false }); },
+      recStop: (e) => { if (e && e.stopPropagation) e.stopPropagation(); }
+    };
+  }
+
   renderVals() {
     const announcement = (this.props.announcementText ?? "").trim();
     /* all four or none: a page that shows three real figures and one
@@ -3384,6 +3505,7 @@ class Component extends DCLogic {
     const rot = (v) => (v ? "rotate(180deg)" : "none");
 
     return {
+      ...this.recVals(),
       ...this.navVals(), ...this.navToggleVals(),
       ...this.heroVals(),
       ...this.offerVals(),
