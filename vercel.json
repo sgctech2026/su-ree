@@ -6,6 +6,10 @@
       "destination": "/Home.dc.html"
     },
     {
+      "source": "/landing",
+      "destination": "/Landing.dc.html"
+    },
+    {
       "source": "/shop",
       "destination": "/Shop.dc.html"
     },

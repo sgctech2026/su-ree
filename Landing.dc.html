@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<script src="./track.js" defer></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&amp;display=swap&amp;subset=latin" />
+<style>
+  /* ─────────────────────────────────────────────────────────────
+     su-ree — the advertising landing page.
+
+     Deliberately not the home page. There is no navigation, no
+     newsletter pop-up and no scroll-reveal: someone arriving from an
+     advertisement has one decision to make, and every link that is
+     not the order button is a way of not making it. One offer, one
+     button, repeated; the page is short enough to read in a sitting.
+     ───────────────────────────────────────────────────────────── */
+  *, *::before, *::after { box-sizing: border-box; }
+  section, header, footer { box-sizing: border-box; max-width: 100%; }
+  html, body { margin: 0; padding: 0; max-width: 100%; overflow-x: clip; background: #ffffff; }
+  img, svg { max-width: 100%; }
+  a { text-decoration: none; }
+  button { font: inherit; }
+  .lp { font-family: 'Jost',ui-sans-serif,system-ui,sans-serif; color: #193454; }
+
+  /* ── the strip and the mark ── */
+  .lp-strip {
+    background: #14325c; color: #ffffff; text-align: center;
+    padding: 9px 18px; font-size: 12px; font-weight: 400; letter-spacing: 0.2px;
+  }
+  .lp-bar {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 14px clamp(18px,4vw,40px); max-width: 1180px; margin: 0 auto;
+  }
+  .lp-bar img { display: block; height: 32px; width: auto; }
+  .lp-bar-note {
+    font-size: 12.5px; font-weight: 500; color: #5c7a9e; letter-spacing: 0.2px;
+  }
+
+  /* ── shared pieces ── */
+  .lp-wrap { max-width: 1180px; margin: 0 auto; }
+  .lp-eyebrow {
+    display: flex; align-items: center; justify-content: center; gap: clamp(12px,2vw,20px);
+    margin: 0 0 13px; font-size: clamp(10.5px,1.1vw,12px); font-weight: 600;
+    letter-spacing: 3.6px; text-transform: uppercase; color: #2f85e0;
+  }
+  .lp-rule { flex: 0 1 clamp(32px,6vw,110px); height: 1px; background: rgba(47,133,224,0.36); }
+  .lp-h {
+    margin: 0; font-weight: 600; font-size: clamp(32px,4.4vw,58px); line-height: 1.07;
+    letter-spacing: -1.4px; color: #14325c; text-wrap: balance;
+  }
+  .lp-alt { display: block; font-weight: 400; color: #2f85e0; }
+  .lp-lead {
+    margin: 15px auto 0; max-width: 620px; font-size: clamp(13.5px,1.5vw,15.5px);
+    font-weight: 400; line-height: 1.66; color: #5c7a9e; text-wrap: pretty;
+  }
+  .lp-nowrap { white-space: nowrap; }
+
+  /* ── the button, used everywhere ── */
+  .lp-cta {
+    position: relative; display: inline-flex; align-items: center; justify-content: center;
+    gap: 10px; min-height: 56px; border-radius: 9999px; padding: 15px 30px;
+    background: linear-gradient(135deg,#4e9ae4 0%,#2f85e0 48%,#1f6ec9 100%);
+    font-size: clamp(14px,1.5vw,16px); font-weight: 600; letter-spacing: 0.3px;
+    border-top: 0.5px solid rgba(255,255,255,0.3);
+    box-shadow: 0 18px 36px -18px rgba(31,110,201,0.9);
+    transition: transform 220ms ease, box-shadow 220ms ease, filter 220ms ease;
+  }
+  .lp-cta, .lp-cta:hover { color: #ffffff; }
+  .lp-cta:hover { transform: translateY(-1px); box-shadow: 0 24px 44px -20px rgba(31,110,201,0.95); }
+  .lp-cta:active { transform: translateY(0); filter: brightness(0.96); }
+  .lp-cta:focus-visible { outline: 2px solid #14325c; outline-offset: 3px; }
+  .lp-cta-ar { display: inline-flex; transition: transform 240ms cubic-bezier(0.16,1,0.3,1); }
+  .lp-cta:hover .lp-cta-ar { transform: translateX(3px); }
+  .lp-cta-w { width: 100%; max-width: 420px; }
+
+  /* ── the hero ── */
+  .lp-hero {
+    position: relative; overflow: clip;
+    padding: clamp(26px,3.4vw,46px) clamp(18px,4vw,40px) clamp(40px,5vw,72px);
+    background:
+      radial-gradient(60% 50% at 16% 6%, rgba(201,223,245,0.6) 0%, rgba(201,223,245,0) 64%),
+      radial-gradient(56% 46% at 88% 10%, rgba(226,206,232,0.3) 0%, rgba(226,206,232,0) 66%),
+      linear-gradient(180deg,#ffffff 0%,#f4f9fe 38%,#e8f2fc 76%,#f7fbff 100%);
+  }
+  .lp-hero-grid {
+    display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,0.95fr);
+    gap: clamp(22px,3.4vw,52px); align-items: center;
+  }
+  .lp-hero-h {
+    margin: 0; font-weight: 600; font-size: clamp(30px,4.6vw,56px); line-height: 1.04;
+    letter-spacing: -1.8px; color: #14325c; text-wrap: balance;
+  }
+  .lp-hero-p {
+    margin: 16px 0 0; max-width: 470px; font-size: clamp(13.5px,1.5vw,15.5px);
+    font-weight: 400; line-height: 1.68; color: #4f6c90; text-wrap: pretty;
+  }
+  .lp-price { display: flex; align-items: baseline; flex-wrap: wrap; gap: 11px; margin-top: 22px; }
+  .lp-price-was { font-size: 16px; font-weight: 400; color: #8aa3c0; text-decoration: line-through; }
+  .lp-price-now { font-size: clamp(28px,3.4vw,42px); font-weight: 600; letter-spacing: -1.2px; color: #14325c; }
+  .lp-price-save {
+    border-radius: 9999px; background: linear-gradient(135deg,#ff85ae 0%,#ff6397 100%);
+    color: #ffffff; padding: 6px 13px; font-size: 12px; font-weight: 600; white-space: nowrap;
+  }
+  .lp-hero-cta { margin-top: 20px; }
+  .lp-micro {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 7px 16px; margin: 16px 0 0;
+    font-size: 12.5px; font-weight: 500; color: #5c7a9e;
+  }
+  .lp-micro span { display: inline-flex; align-items: center; gap: 6px; }
+  .lp-hero-art { position: relative; display: flex; align-items: center; justify-content: center; min-width: 0; }
+  .lp-hero-disc {
+    position: absolute; width: 84%; aspect-ratio: 1/1; border-radius: 9999px;
+    background: radial-gradient(circle at 38% 32%, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.3) 42%, rgba(201,223,245,0.26) 68%, rgba(201,223,245,0) 80%);
+  }
+  .lp-hero-art img {
+    position: relative; display: block; width: 100%; max-width: 440px; height: auto;
+    filter: drop-shadow(0 26px 32px rgba(20,50,92,0.2));
+  }
+  @media (max-width: 880px) {
+    .lp-hero-grid { grid-template-columns: minmax(0,1fr); gap: 20px; text-align: center; }
+    .lp-hero-art { order: -1; }
+    .lp-hero-art img { max-width: 300px; }
+    .lp-hero-p { margin-left: auto; margin-right: auto; }
+    .lp-price, .lp-micro { justify-content: center; }
+  }
+
+  /* ── the four assurances ── */
+  .lp-tb { background: #ffffff; padding: clamp(20px,2.4vw,30px) clamp(18px,4vw,40px); }
+  .lp-tb-row { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); max-width: 1120px; margin: 0 auto; }
+  .lp-tb-i { display: flex; align-items: flex-start; gap: 10px; min-width: 0; padding: 2px clamp(12px,1.8vw,24px); }
+  .lp-tb-i + .lp-tb-i { border-left: 1px solid rgba(27,52,86,0.1); }
+  .lp-tb-ico { flex: 0 0 auto; display: flex; color: #2f85e0; margin-top: 2px; }
+  .lp-tb-h { display: block; margin: 0; font-size: clamp(12px,1.25vw,13.5px); font-weight: 600; color: #14325c; line-height: 1.35; }
+  .lp-tb-p { display: block; margin: 2px 0 0; font-size: clamp(11px,1.1vw,12.5px); font-weight: 400; color: #8295b4; line-height: 1.45; }
+  @media (max-width: 860px) {
+    .lp-tb-row { grid-template-columns: repeat(2, minmax(0,1fr)); row-gap: 18px; }
+    .lp-tb-i:nth-child(odd) { border-left: none; padding-left: 0; }
+  }
+  @media (max-width: 440px) {
+    .lp-tb-row { grid-template-columns: minmax(0,1fr); row-gap: 14px; }
+    .lp-tb-i { border-left: none !important; padding: 0; }
+  }
+
+  /* ── three reasons ── */
+  .lp-why { background: linear-gradient(180deg,#ffffff 0%,#f6fafe 50%,#ffffff 100%); padding: clamp(42px,5vw,78px) clamp(18px,4vw,40px); }
+  .lp-why-row { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: clamp(14px,2vw,26px); margin-top: clamp(26px,3.2vw,42px); }
+  .lp-why-c {
+    border-radius: 20px; border: 1px solid rgba(201,223,245,0.9); background: #ffffff;
+    padding: clamp(20px,2.4vw,30px); box-shadow: 0 14px 34px -28px rgba(20,50,92,0.5);
+  }
+  .lp-why-ico {
+    display: flex; align-items: center; justify-content: center; height: 46px; width: 46px;
+    border-radius: 14px; background: #e4effb; color: #2f85e0; margin-bottom: 15px;
+  }
+  .lp-why-h { margin: 0; font-size: clamp(15px,1.7vw,19px); font-weight: 600; color: #14325c; line-height: 1.25; }
+  .lp-why-p { margin: 8px 0 0; font-size: clamp(12.5px,1.35vw,14px); font-weight: 400; color: #6d87a8; line-height: 1.6; }
+  @media (max-width: 820px) { .lp-why-row { grid-template-columns: minmax(0,1fr); } }
+
+  /* ── the offer ── */
+  .lp-offer {
+    padding: clamp(44px,5.2vw,82px) clamp(18px,4vw,40px);
+    background: radial-gradient(70% 60% at 50% 0%, rgba(30,65,105,1) 0%, rgba(16,45,75,1) 46%, rgba(10,26,49,1) 100%);
+  }
+  .lp-offer .lp-h { color: #ffffff; }
+  .lp-offer .lp-alt { color: #8cc0f0; }
+  .lp-offer .lp-lead { color: #a7c2e0; }
+  .lp-offer .lp-eyebrow { color: #7fb3e8; }
+  .lp-offer .lp-rule { background: rgba(127,179,232,0.36); }
+  .lp-offer-in { max-width: 860px; margin: clamp(26px,3.2vw,42px) auto 0; }
+  .lp-picks { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: clamp(8px,1vw,14px); padding-top: 14px; }
+  .lp-pick {
+    position: relative; display: flex; flex-direction: column; align-items: center; text-align: center;
+    border-radius: 16px; border: 1px solid; padding: 15px 8px 16px; cursor: pointer; min-width: 0;
+    transition: background 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+  }
+  .lp-flag {
+    position: absolute; top: -11px; left: 50%; transform: translateX(-50%); white-space: nowrap;
+    display: inline-flex; align-items: center; gap: 5px; border-radius: 9999px;
+    background: linear-gradient(135deg,#4e9ae4 0%,#2f7fd4 100%); padding: 4px 11px;
+    font-size: 9.5px; font-weight: 600; letter-spacing: 0.9px; text-transform: uppercase; color: #ffffff;
+  }
+  .lp-pnum { font-size: clamp(8.5px,0.85vw,10px); font-weight: 500; letter-spacing: 1.3px; text-transform: uppercase; color: #7f9cbe; }
+  .lp-ptag { margin-top: 2px; font-size: clamp(9.5px,0.95vw,11.5px); font-weight: 600; letter-spacing: 0.9px; text-transform: uppercase; }
+  .lp-pshot { display: flex; align-items: center; justify-content: center; height: clamp(56px,6vw,80px); margin: 10px 0 8px; }
+  .lp-pshot img { display: block; max-height: 100%; max-width: 100%; width: auto; object-fit: contain; }
+  .lp-pname { font-size: clamp(12px,1.2vw,14.5px); font-weight: 600; color: #ffffff; line-height: 1.3; }
+  .lp-psize { margin-top: 2px; font-size: clamp(9.5px,0.95vw,11.5px); font-weight: 400; color: #92aecd; }
+  .lp-pprice { margin-top: 6px; font-size: clamp(14px,1.6vw,19px); font-weight: 600; color: #ffffff; letter-spacing: -0.3px; white-space: nowrap; }
+  .lp-buy {
+    display: flex; align-items: center; gap: clamp(10px,1.4vw,18px); flex-wrap: wrap;
+    margin-top: 13px; border-radius: 16px; border: 1px solid rgba(166,200,236,0.2);
+    background: rgba(255,255,255,0.05); padding: 11px clamp(12px,1.4vw,18px);
+  }
+  .lp-qty { display: flex; align-items: center; gap: 2px; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.18); background: rgba(7,24,44,0.46); padding: 3px; }
+  .lp-qbtn { display: flex; height: 30px; width: 30px; align-items: center; justify-content: center; padding: 0; border: none; border-radius: 9999px; background: transparent; color: #fff; cursor: pointer; }
+  .lp-qbtn:hover { background: rgba(78,154,228,0.34); }
+  .lp-qn { min-width: 26px; text-align: center; font-size: 15px; font-weight: 600; color: #ffffff; }
+  .lp-what { flex: 1 1 150px; min-width: 0; }
+  .lp-wname { display: block; font-size: 13.5px; font-weight: 600; color: #ffffff; line-height: 1.35; }
+  .lp-wsub { display: block; font-size: 11.5px; font-weight: 400; color: #92aecd; line-height: 1.4; }
+  .lp-money { display: flex; align-items: center; gap: clamp(8px,1vw,13px); margin-left: auto; }
+  .lp-was { font-size: 13.5px; font-weight: 400; color: #7f9cbe; text-decoration: line-through; white-space: nowrap; }
+  .lp-now { font-size: clamp(19px,2.1vw,26px); font-weight: 600; color: #ffffff; letter-spacing: -0.7px; white-space: nowrap; }
+  .lp-save { border-radius: 9999px; background: linear-gradient(135deg,#ff85ae 0%,#ff6397 100%); padding: 6px 13px; font-size: 11.5px; font-weight: 600; color: #ffffff; white-space: nowrap; }
+  .lp-offer .lp-cta { width: 100%; max-width: none; margin-top: 13px; }
+  .lp-assure {
+    display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px 0;
+    margin: 15px 0 0; font-size: clamp(11px,1.1vw,12.5px); font-weight: 500; color: #a7c2e0;
+  }
+  .lp-assure span { display: inline-flex; align-items: center; gap: 7px; padding: 0 clamp(12px,1.6vw,22px); }
+  .lp-assure span + span { border-left: 1px solid rgba(166,200,236,0.26); }
+  @media (max-width: 560px) {
+    .lp-what { flex-basis: 100%; order: 3; }
+    .lp-pshot { height: 54px; }
+    .lp-assure span { padding: 0 10px; }
+  }
+  @media (max-width: 380px) { .lp-assure span + span { border-left: none; } }
+
+  /* ── what people ask ── */
+  .lp-q { background: #ffffff; padding: clamp(42px,5vw,76px) clamp(18px,4vw,40px); }
+  .lp-q-row { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: clamp(14px,2vw,28px); max-width: 980px; margin: clamp(26px,3.2vw,42px) auto 0; }
+  .lp-q-c { border-radius: 18px; border: 1px solid rgba(201,223,245,0.9); background: #f8fbff; padding: clamp(18px,2vw,26px); }
+  .lp-q-h { margin: 0; font-size: clamp(14px,1.5vw,16.5px); font-weight: 600; color: #14325c; line-height: 1.35; }
+  .lp-q-p { margin: 8px 0 0; font-size: clamp(12.5px,1.35vw,14px); font-weight: 400; color: #6d87a8; line-height: 1.65; }
+  @media (max-width: 760px) { .lp-q-row { grid-template-columns: minmax(0,1fr); } }
+
+  /* ── the last word ── */
+  .lp-end {
+    text-align: center; padding: clamp(44px,5.4vw,84px) clamp(18px,4vw,40px);
+    background: linear-gradient(180deg,#ffffff 0%,#eaf3fd 48%,#dfeefb 100%);
+  }
+  .lp-end .lp-cta { margin-top: 24px; }
+  .lp-foot {
+    background: #14325c; color: #a9c3e2; text-align: center;
+    padding: clamp(24px,3vw,38px) clamp(18px,4vw,40px);
+    font-size: 12.5px; line-height: 1.8;
+  }
+  .lp-foot a { color: #cfe3f8; }
+  .lp-foot a:hover { color: #ffffff; }
+  .lp-foot-links { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 14px; margin: 12px 0 0; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .lp-cta, .lp-cta-ar, .lp-pick { transition: none; }
+    .lp-cta:hover, .lp-cta:hover .lp-cta-ar { transform: none; }
+  }
+</style>
+</helmet>
+<main class="lp">
+
+  <p class="lp-strip">Free shipping over ₱1,500 · Cash on delivery nationwide</p>
+
+  <header class="lp-bar">
+    <img src="assets/logo.webp" alt="su-ree Skin Science" decoding="async" />
+    <span class="lp-bar-note">Cash on delivery · 7-day returns</span>
+  </header>
+
+  <section class="lp-hero">
+    <div class="lp-wrap lp-hero-grid">
+      <div>
+        <h1 class="lp-hero-h">Two actives that never meet until they reach your skin.</h1>
+        <p class="lp-hero-p">PDRN and GHK-Cu sit in separate pink and blue beads. The capsule breaks under your
+        fingers, so the dose is whole on the day you use it &mdash; not months earlier in a mixing tank.</p>
+        <p class="lp-price">
+          <span class="lp-price-was">₱3,198</span>
+          <span class="lp-price-now">₱2,899</span>
+          <span class="lp-price-save">You save ₱299</span>
+        </p>
+        <p class="lp-hero-cta" style="margin:20px 0 0"><a class="lp-cta" href="Cart.dc.html?p=duo&q=1"><span aria-hidden="true" style="display:inline-flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span><span>Order the Duo &mdash; ₱2,899</span><span class="lp-cta-ar" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"></path><path d="m12 5 7 7-7 7"></path></svg></span></a></p>
+        <p class="lp-micro">
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg> Cash on delivery</span>
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg> Free shipping over ₱1,500</span>
+          <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg> 7-day returns</span>
+        </p>
+      </div>
+      <div class="lp-hero-art">
+        <span class="lp-hero-disc" aria-hidden="true"></span>
+        <img src="assets/df-duo.webp" alt="The GHK-Cu+ Snap 8 Serum beside the Dual Regenerative Capsule Cream, open" decoding="async" />
+      </div>
+    </div>
+  </section>
+
+  <section class="lp-tb" aria-label="What every order comes with">
+    <div class="lp-tb-row">
+        <div class="lp-tb-i"><span class="lp-tb-ico" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10.5" rx="2"></rect><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"></path></svg></span><span><span class="lp-tb-h">Secure Checkout</span><span class="lp-tb-p">Shop with confidence.</span></span></div>
+        <div class="lp-tb-i"><span class="lp-tb-ico" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5h11v11h-11z"></path><path d="M13.5 10h4l3 3.2v4.3h-7z"></path><circle cx="6.8" cy="19" r="1.6"></circle><circle cx="16.8" cy="19" r="1.6"></circle></svg></span><span><span class="lp-tb-h">Nationwide Shipping</span><span class="lp-tb-p">Delivered to your doorstep.</span></span></div>
+        <div class="lp-tb-i"><span class="lp-tb-ico" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path><path d="m9.2 14.2 1.9 1.9 3.7-3.7"></path></svg></span><span><span class="lp-tb-h">Batch Transparency</span><span class="lp-tb-p">Accessible product records.</span></span></div>
+        <div class="lp-tb-i"><span class="lp-tb-ico" aria-hidden="true"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 9.5a8.5 8.5 0 1 1 1 7"></path><path d="M3 4.5v5h5"></path></svg></span><span><span class="lp-tb-h">7-Day Returns</span><span class="lp-tb-p">For eligible unopened products.</span></span></div>
+    </div>
+  </section>
+
+  <section class="lp-why">
+    <div class="lp-wrap" style="text-align:center">
+      <p class="lp-eyebrow"><span class="lp-rule" aria-hidden="true"></span>Why it is built this way<span class="lp-rule" aria-hidden="true"></span></p>
+      <h2 class="lp-h">Three things most<span class="lp-alt">skincare will not tell you.</span></h2>
+    </div>
+    <div class="lp-wrap lp-why-row">
+        <div class="lp-why-c"><span class="lp-why-ico" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8.4" cy="12" r="4.6"></circle><circle cx="15.6" cy="12" r="4.6"></circle></svg></span><h3 class="lp-why-h">The actives are kept apart</h3><p class="lp-why-p">PDRN and GHK-Cu sit in separate pink and blue beads and only mix when the capsule breaks under your fingers.</p></div>
+        <div class="lp-why-c"><span class="lp-why-ico" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path><path d="m9.2 14.2 1.9 1.9 3.7-3.7"></path></svg></span><h3 class="lp-why-h">Every jar opens its own record</h3><p class="lp-why-p">Type the lot code printed on the base and you get the assay, the fill date and the facility that made it.</p></div>
+        <div class="lp-why-c"><span class="lp-why-ico" aria-hidden="true"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.4 3.4 7.6 12 11.8l8.6-4.2z"></path><path d="m3.4 12.4 8.6 4.2 8.6-4.2"></path><path d="m3.4 16.9 8.6 4.2 8.6-4.2"></path></svg></span><h3 class="lp-why-h">Two formulas, one routine</h3><p class="lp-why-p">Serum on damp skin, then the cream to seal it. Morning and evening, and nothing else to add.</p></div>
+    </div>
+  </section>
+
+  <section class="lp-offer" id="order">
+    <div class="lp-wrap" style="text-align:center">
+      <p class="lp-eyebrow"><span class="lp-rule" aria-hidden="true"></span>Choose yours<span class="lp-rule" aria-hidden="true"></span></p>
+      <h2 class="lp-h">Start with the one that<span class="lp-alt">matches what you want to change.</span></h2>
+      <p class="lp-lead">Every price here is the price the shop charges. Pick a package, pick how many, and the
+      bag opens with it already in.</p>
+    </div>
+
+    <div class="lp-offer-in">
+      <div class="lp-picks" role="group" aria-label="Choose a package">
+          <button type="button" class="lp-pick" onClick="{{ pkTap0 }}" aria-pressed="{{ pkSel0 }}" style="background: {{ pkBg0 }}; border-color: {{ pkBd0 }}; box-shadow: {{ pkSh0 }}">
+            <span class="lp-pnum">Package 01</span>
+            <span class="lp-ptag" style="color: {{ pkFg0 }}">Targeted care</span>
+            <span class="lp-pshot"><img src="assets/p-serum.webp" alt="" loading="lazy" decoding="async" /></span>
+            <span class="lp-pname">The Serum</span>
+            <span class="lp-psize">30 mL</span>
+            <span class="lp-pprice">₱1,499</span>
+          </button>
+          <button type="button" class="lp-pick" onClick="{{ pkTap1 }}" aria-pressed="{{ pkSel1 }}" style="background: {{ pkBg1 }}; border-color: {{ pkBd1 }}; box-shadow: {{ pkSh1 }}">
+            <span class="lp-pnum">Package 02</span>
+            <span class="lp-ptag" style="color: {{ pkFg1 }}">Daily care</span>
+            <span class="lp-pshot"><img src="assets/p-cream.webp" alt="" loading="lazy" decoding="async" /></span>
+            <span class="lp-pname">The Cream</span>
+            <span class="lp-psize">65 g</span>
+            <span class="lp-pprice">₱1,699</span>
+          </button>
+          <button type="button" class="lp-pick" onClick="{{ pkTap2 }}" aria-pressed="{{ pkSel2 }}" style="background: {{ pkBg2 }}; border-color: {{ pkBd2 }}; box-shadow: {{ pkSh2 }}"><span class="lp-flag"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m12 3.2 2.7 5.6 6.1.8-4.5 4.3 1.1 6.1L12 17.1l-5.4 2.9 1.1-6.1-4.5-4.3 6.1-.8z"></path></svg> Best value</span>
+            <span class="lp-pnum">Package 03</span>
+            <span class="lp-ptag" style="color: {{ pkFg2 }}">Complete care</span>
+            <span class="lp-pshot"><img src="assets/p-duo.webp" alt="" loading="lazy" decoding="async" /></span>
+            <span class="lp-pname">The Duo</span>
+            <span class="lp-psize">30 mL + 65 g</span>
+            <span class="lp-pprice">₱2,899</span>
+          </button>
+      </div>
+
+      <div class="lp-buy">
+        <div class="lp-qty" role="group" aria-label="Quantity">
+          <button type="button" class="lp-qbtn" onClick="{{ pkDec }}" aria-label="One fewer" aria-disabled="{{ pkDecOff }}" style="opacity: {{ pkDecOp }}; pointer-events: {{ pkDecPe }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"></path></svg></button>
+          <span class="lp-qn" aria-live="polite">{{ pkQty }}</span>
+          <button type="button" class="lp-qbtn" onClick="{{ pkInc }}" aria-label="One more" aria-disabled="{{ pkIncOff }}" style="opacity: {{ pkIncOp }}; pointer-events: {{ pkIncPe }}"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg></button>
+        </div>
+        <span class="lp-what"><span class="lp-wname">{{ pkName }}</span><span class="lp-wsub">{{ pkWhat }}</span></span>
+        <span class="lp-money">
+          <span class="lp-was" style="display: {{ pkWasShow }}">{{ pkWas }}</span>
+          <span class="lp-now">{{ pkNow }}</span>
+          <span class="lp-save" style="display: {{ pkSaveShow }}">{{ pkSave }}</span>
+        </span>
+      </div>
+
+      <a class="lp-cta" href="{{ pkHref }}"><span aria-hidden="true" style="display:inline-flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span><span>Add to bag</span><span class="lp-cta-ar" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
+
+      <p class="lp-assure">
+        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10.5" width="16" height="10.5" rx="2"></rect><path d="M8 10.5V7a4 4 0 0 1 8 0v3.5"></path></svg> Secure checkout</span>
+        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6.5h11v11h-11z"></path><path d="M13.5 10h4l3 3.2v4.3h-7z"></path><circle cx="6.8" cy="19" r="1.6"></circle><circle cx="16.8" cy="19" r="1.6"></circle></svg> Nationwide delivery</span>
+        <span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 9.5a8.5 8.5 0 1 1 1 7"></path><path d="M3 4.5v5h5"></path></svg> 7-day eligible returns</span>
+      </p>
+    </div>
+  </section>
+
+  <section class="lp-q">
+    <div class="lp-wrap" style="text-align:center">
+      <p class="lp-eyebrow"><span class="lp-rule" aria-hidden="true"></span>Before you order<span class="lp-rule" aria-hidden="true"></span></p>
+      <h2 class="lp-h">What people ask<span class="lp-alt">before the first jar.</span></h2>
+    </div>
+    <div class="lp-q-row">
+        <div class="lp-q-c"><h3 class="lp-q-h">How soon will I see anything?</h3><p class="lp-q-p">Skin turns over roughly every four weeks, so give it two cycles before judging. Most changes in texture and hydration show before anything else does.</p></div>
+        <div class="lp-q-c"><h3 class="lp-q-h">Can I use it with what I already have?</h3><p class="lp-q-p">Yes. The serum goes on damp skin and the cream over it. Sunscreen still goes on last in the morning. No fragrance, no essential oils, no alcohol denat.</p></div>
+        <div class="lp-q-c"><h3 class="lp-q-h">What if it does not suit me?</h3><p class="lp-q-p">Unopened products can be returned within 7 days of delivery. Send us a message with your order details and we will take it from there.</p></div>
+        <div class="lp-q-c"><h3 class="lp-q-h">How do I pay?</h3><p class="lp-q-p">Cash on delivery anywhere in the Philippines, or at checkout. Shipping is free over ₱1,500.</p></div>
+    </div>
+  </section>
+
+  <section class="lp-end">
+    <div class="lp-wrap">
+      <h2 class="lp-h">Your skin, on a routine<span class="lp-alt">you can actually check.</span></h2>
+      <p class="lp-lead">Two steps, morning and evening. Every jar carries a lot code that opens its own batch report.</p>
+      <a class="lp-cta lp-cta-w" href="#order"><span aria-hidden="true" style="display:inline-flex"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"></circle><circle cx="19" cy="21" r="1"></circle><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"></path></svg></span><span>Choose your routine</span><span class="lp-cta-ar" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13"></path><path d="m12 5 7 7-7 7"></path></svg></span></a>
+      <p class="lp-micro" style="justify-content:center; margin-top:16px">
+        <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg> Cash on delivery</span><span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg> 7-day returns on unopened orders</span>
+      </p>
+    </div>
+  </section>
+
+  <footer class="lp-foot">
+    <p style="margin:0">su-ree Skin Science</p>
+    <p class="lp-foot-links">
+      <a href="FAQ.dc.html">Questions</a>
+      <a href="Shipping.dc.html">Shipping</a>
+      <a href="Returns.dc.html">Returns</a>
+      <a href="Privacy.dc.html">Privacy</a>
+      <a href="Terms.dc.html">Terms</a>
+      <a href="mailto:hello@su-ree.com">Contact</a>
+    </p>
+  </footer>
+
+</main>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { pick: 2, qty: 1 };
+
+  /* The same table the shop sells from, and max is what the cart will
+     actually take: it clamps a quantity to the number of tiers it has
+     a price for, so offering more here would show one total and ring
+     up another. */
+  PACKS = [
+    { key: "serum", max: 2, name: "The Serum", what: "GHK-Cu+ Snap 8 Serum \u00b7 30 mL",
+      packs: [{ n: 2, sell: 2398, list: 2998 }, { n: 1, sell: 1499, list: 1499 }] },
+    { key: "cream", max: 2, name: "The Cream", what: "Dual Regenerative Capsule Cream \u00b7 65 g",
+      packs: [{ n: 2, sell: 2699, list: 3398 }, { n: 1, sell: 1699, list: 1699 }] },
+    { key: "duo", max: 1, name: "The Duo", what: "1 \u00d7 serum + 1 \u00d7 cream \u00b7 30 mL + 65 g",
+      packs: [{ n: 1, sell: 2899, list: 3198 }] }
+  ];
+
+  peso(n) { return "\u20b1" + Math.round(n).toLocaleString("en-US"); }
+
+  /* a quantity with no pack of its own is billed as the best
+     combination of the packs there are */
+  total(p, qty) {
+    let left = qty, sell = 0, list = 0;
+    for (let k = 0; k < p.packs.length; k++) {
+      const pk = p.packs[k];
+      while (left >= pk.n) { sell += pk.sell; list += pk.list; left -= pk.n; }
+    }
+    return { sell, list };
+  }
+
+  renderVals() {
+    const out = {};
+    const p = Math.min(2, Math.max(0, this.state.pick ?? 2));
+    for (let i = 0; i < 3; i++) {
+      const on = i === p;
+      out["pkTap" + i] = () => { if (this.state.pick !== i) this.setState({ pick: i, qty: 1 }); };
+      out["pkSel" + i] = on ? "true" : "false";
+      out["pkBg" + i] = on
+        ? "linear-gradient(162deg, rgba(78,154,228,0.26) 0%, rgba(47,127,212,0.10) 100%)"
+        : "rgba(255,255,255,0.04)";
+      out["pkBd" + i] = on ? "#6fb2ee" : "rgba(166,200,236,0.22)";
+      out["pkSh" + i] = on
+        ? "0 0 0 1px rgba(111,178,238,0.32), 0 16px 34px -20px rgba(78,154,228,0.85)"
+        : "0 0 0 rgba(0,0,0,0)";
+      out["pkFg" + i] = on ? "#9fcdf7" : "#c4d7ec";
+    }
+
+    const pack = this.PACKS[p];
+    const qty = Math.min(pack.max, Math.max(1, this.state.qty || 1));
+    const money = this.total(pack, qty);
+    const saved = money.list - money.sell;
+    const atMin = qty <= 1;
+    const atMax = qty >= pack.max;
+
+    out.pkQty = String(qty);
+    out.pkDec = () => { if (!atMin) this.setState({ qty: qty - 1 }); };
+    out.pkInc = () => { if (!atMax) this.setState({ qty: qty + 1 }); };
+    out.pkDecOff = atMin ? "true" : "false";
+    out.pkIncOff = atMax ? "true" : "false";
+    out.pkDecOp = atMin ? "0.3" : "1";
+    out.pkIncOp = atMax ? "0.3" : "1";
+    out.pkDecPe = atMin ? "none" : "auto";
+    out.pkIncPe = atMax ? "none" : "auto";
+    out.pkName = qty > 1 ? qty + " \u00d7 " + pack.name : pack.name;
+    out.pkWhat = pack.what;
+    out.pkWas = this.peso(money.list);
+    out.pkWasShow = saved > 0 ? "inline" : "none";
+    out.pkNow = this.peso(money.sell);
+    out.pkSave = "You save " + this.peso(saved);
+    out.pkSaveShow = saved > 0 ? "inline-block" : "none";
+    out.pkHref = "Cart.dc.html?p=" + pack.key + "&q=" + qty;
+    return out;
+  }
+}
+</script>
+</body>
+</html>
