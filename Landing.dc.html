@@ -822,8 +822,12 @@
     top: calc(-1 * clamp(40px,4.4vw,64px));
     bottom: calc(-1 * clamp(40px,4.4vw,64px));
     right: calc(-1 * clamp(28px,3.4vw,54px));
-    width: calc(100% + clamp(28px,3.4vw,54px));
+    /* it reaches back past its own column so the picture takes about two
+       thirds of the panel; its left third is under the words, where the
+       mask has already thinned it to nothing */
+    left: -38%;
   }
+  .sr-pf-copy { position: relative; z-index: 2; }
   /* A white panel laid over the photograph would meet the panel's own
      tinted background along a straight line, and that line is the thing
      that reads as a seam. The picture's left edge is dissolved instead,
@@ -831,11 +835,14 @@
      doing there. */
   .sr-pf-model {
     display: block; height: 100%; width: 100%;
-    object-fit: cover; object-position: 50% center;
-    -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.34) 5%,
-                rgba(0,0,0,0.72) 10%, rgba(0,0,0,0.93) 14%, #000 19%);
-            mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.34) 5%,
-                rgba(0,0,0,0.72) 10%, rgba(0,0,0,0.93) 14%, #000 19%);
+    object-fit: cover; object-position: 100% center;
+    /* a long ramp, finishing just before her hair begins */
+    -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.07) 6%,
+                rgba(0,0,0,0.26) 12%, rgba(0,0,0,0.56) 17%, rgba(0,0,0,0.85) 22%,
+                #000 27%);
+            mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.07) 6%,
+                rgba(0,0,0,0.26) 12%, rgba(0,0,0,0.56) 17%, rgba(0,0,0,0.85) 22%,
+                #000 27%);
   }
   @media (max-width: 980px) {
     /* a composition of its own rather than the desktop one squeezed.
@@ -871,7 +878,7 @@
        that needs dissolving is the one facing the words above it */
     .sr-pf-photo {
       position: relative !important; top: auto !important; bottom: auto !important;
-      right: auto !important;
+      right: auto !important; left: auto !important;
       order: 3;
       width: calc(100% + 2 * clamp(20px,5vw,30px)) !important;
       margin: 0 calc(-1 * clamp(20px,5vw,30px)) -1px !important;
