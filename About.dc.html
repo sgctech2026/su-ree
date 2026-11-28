@@ -314,9 +314,12 @@
   }
   /* the lab picture ends in air rather than against a line */
   .sr-labshot { border: 0 !important; }
+  /* it is a photograph now, not a cut-out of two bottles: it is framed
+     rather than dissolved into the page */
   .sr-labshot img {
-    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 44%, rgba(0,0,0,0.45) 74%, rgba(0,0,0,0) 97%);
-    mask-image: linear-gradient(180deg, #000 0%, #000 44%, rgba(0,0,0,0.45) 74%, rgba(0,0,0,0) 97%);
+    border-radius: clamp(18px,2vw,26px);
+    box-shadow: 0 40px 80px -36px rgba(27,52,86,0.45),
+                0 10px 26px -18px rgba(27,52,86,0.28);
   }
   /* the floating circles are gone; the waves and the watermark stay */
   .r-blob, .sr-orb, .sr-rp-orb, .sr-bgorb { display: none !important; }
@@ -443,7 +446,7 @@
         <p style="margin:2px 0 0; font-family:'Jost',ui-sans-serif,sans-serif; font-size:12.5px; font-weight:500; color:#8295b4; letter-spacing:0.2px">Founder, su-ree</p>
       </div>
       <div class="sr-labshot" style="width:100%; background:transparent">
-        <img src="assets/p-duo.webp" alt="su-ree Dual Regenerative Capsule Cream beside the GHK-Cu + SNAP 8 Renewal Serum" width="878" height="1061" loading="lazy" decoding="async" style="display:block; width:76%; height:auto; margin:0 auto" />
+        <img src="assets/story-group.webp" alt="Four su-ree customers together, holding the Dual Regenerative Capsule Cream and the GHK-Cu + SNAP 8 Renewal Serum" width="900" height="1125" loading="lazy" decoding="async" style="display:block; width:100%; height:auto; aspect-ratio:4 / 5; object-fit:cover; margin:0 auto" />
       </div>
     </div>
   </section>
