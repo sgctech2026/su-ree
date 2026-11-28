@@ -810,16 +810,32 @@
   .sr-pf-stage {
     position: relative; min-width: 0; display: flex; align-items: center;
     justify-content: flex-start; min-height: clamp(350px,29vw,460px);
+    align-self: stretch;
   }
-  /* she stands on the panel floor: the pull-down cancels the panel's own
-     bottom padding, and the panel's overflow clips her there */
-  /* she sits further out and a size smaller, so the certificate crosses her
-     shoulder and never her face */
-  .sr-pf-model {
-    position: absolute; right: -6%; z-index: 1; width: auto;
+  /* A cut-out has nothing behind it, and its edge always shows against a
+     gradient. The photograph brings its own studio wall instead: it holds
+     the panel's right half, light blue, and only its left side is
+     dissolved -- into the white the words are set on. The offsets undo the
+     panel's padding so the picture reaches three of its edges. */
+  .sr-pf-photo {
+    position: absolute; z-index: 1; overflow: hidden; pointer-events: none;
+    top: calc(-1 * clamp(40px,4.4vw,64px));
     bottom: calc(-1 * clamp(40px,4.4vw,64px));
-    height: calc(90% + clamp(40px,4.4vw,64px));
-    object-fit: contain; object-position: bottom right; pointer-events: none;
+    right: calc(-1 * clamp(28px,3.4vw,54px));
+    width: calc(100% + clamp(28px,3.4vw,54px));
+  }
+  /* A white panel laid over the photograph would meet the panel's own
+     tinted background along a straight line, and that line is the thing
+     that reads as a seam. The picture's left edge is dissolved instead,
+     so the studio blue thins out into whatever the panel is already
+     doing there. */
+  .sr-pf-model {
+    display: block; height: 100%; width: 100%;
+    object-fit: cover; object-position: 54% center;
+    -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.16) 11%,
+                rgba(0,0,0,0.52) 23%, rgba(0,0,0,0.88) 34%, #000 42%);
+            mask-image: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.16) 11%,
+                rgba(0,0,0,0.52) 23%, rgba(0,0,0,0.88) 34%, #000 42%);
   }
   /* an ellipse lying behind the card and the model, catching a little
      light along its rim */
@@ -892,11 +908,22 @@
       flex: 0 0 auto !important; margin-left: 0 !important;
       width: min(286px,88%); transform: rotate(1.5deg) !important;
     }
+    /* in a column the picture is a band across the panel, and the edge
+       that needs dissolving is the one facing the words above it */
+    .sr-pf-photo {
+      position: relative !important; top: auto !important; bottom: auto !important;
+      right: auto !important;
+      order: 3;
+      width: calc(100% + 2 * clamp(20px,5vw,30px)) !important;
+      margin: 0 calc(-1 * clamp(20px,5vw,30px)) -1px !important;
+      height: clamp(255px,50vw,390px);
+    }
+    .sr-pf-model { object-position: 52% 40% !important; }
     .sr-pf-model {
-      display: block !important; position: relative !important;
-      right: auto !important; bottom: auto !important;
-      width: min(340px,92%) !important; height: auto !important;
-      transform: none !important; margin-bottom: -1px;
+      -webkit-mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 8%,
+                  rgba(0,0,0,0.9) 18%, #000 26%) !important;
+              mask-image: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 8%,
+                  rgba(0,0,0,0.9) 18%, #000 26%) !important;
     }
     /* the ellipse is a desktop device: in a column it rings nothing */
     .sr-pf-ring { display: none !important; }
@@ -1646,8 +1673,7 @@
         </div>
 
         <div class="sr-pf-stage">
-          <span class="sr-pf-ring" aria-hidden="true"></span>
-          <img class="sr-pf-model" src="assets/proof-model.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+          <span class="sr-pf-photo" aria-hidden="true"><img class="sr-pf-model" src="assets/proof-model2.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" /></span>
           <div class="sr-pf-cert">
             <div class="sr-pf-certinner">
               <div class="sr-pf-certhead">
