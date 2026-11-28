@@ -1565,15 +1565,11 @@
   }
   .sr-ad-bar > span:first-child { background: #f6c3da; }
   .sr-ad-bar > span:nth-child(2) { background: #cfe4fc; }
+  /* the photograph fills the frame, cropped to the frame's own 4:5, so
+     nothing has to stand on a white floor */
   .sr-ad-face {
-    position: absolute; left: 50%; bottom: 0; transform: translateX(-50%);
-    height: 92%; width: auto; max-width: 112%; object-fit: contain; object-position: bottom;
-  }
-  .sr-ad-frame::after {
-    content: ""; position: absolute; right: 0; bottom: 0; left: 0; z-index: 1;
-    height: 34%; pointer-events: none;
-    background: linear-gradient(180deg, rgba(255,255,255,0) 0%,
-                rgba(255,255,255,0.72) 46%, rgba(255,255,255,0.96) 78%, #ffffff 100%);
+    position: absolute; inset: 0; height: 100%; width: 100%;
+    object-fit: cover; object-position: center;
   }
   .sr-ad-bub {
     position: absolute; z-index: 3; display: flex; flex-direction: column; align-items: center;
@@ -2472,7 +2468,7 @@
         <span class="sr-ad-glow" aria-hidden="true"></span>
         <div class="sr-ad-frame">
           <span class="sr-ad-bar" aria-hidden="true"><span></span><span></span><span></span></span>
-          <img class="sr-ad-face" src="assets/proof-model.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+          <img class="sr-ad-face" src="assets/finder-model.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" />
         </div>
         <span class="sr-ad-bub sr-ad-b1"><span class="sr-ad-bubimg"><img src="assets/p-cream.webp" alt="su-ree Dual Regenerative Capsule Cream" loading="lazy" decoding="async" /></span><span class="sr-ad-bublabel">CREAM</span></span>
         <span class="sr-ad-bub sr-ad-b2"><span class="sr-ad-bubimg"><img src="assets/p-serum.webp" alt="su-ree GHK-Cu+ Snap 8 Triple Peptide Renewal Serum" loading="lazy" decoding="async" /></span><span class="sr-ad-bublabel">SERUM</span></span>
